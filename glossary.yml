@@ -1,0 +1,36 @@
+API: |
+  <b>Application Programming Interface</b><br/><br/>
+
+  A way for two or more programs to talk to one another. Designed for computer programmers to utilise when writing programs rather than being used by an end user.<br/><br/>
+
+  You will send a request to an API and it will send back a response. For example, you might request data on the postcode EX2 5AA from the postcodes.io API, and it will return a text string containing data like the latitude and longitude.
+BNSSG: |
+  Placeholder
+Coordinate: |
+  Placeholder
+CRS: |
+  Placeholder
+Easting: |
+  Placeholder
+latitude: |
+  Placeholder
+longitude: |
+  Placeholder
+LSOA: |
+  Placeholder
+MSOA: |
+  Placeholder
+Northing: |
+  Placeholder
+OA: |
+  Placeholder
+p-value: |
+  The probability of seeing the observed data, or more extreme data, if the null hypothesis is true.<br/>
+
+  For example, if our null hypothesis is that there is no difference between the effectiveness of drug A and drug B, getting a p value of 0.05 means there is a 5% probability of seeing this data if the null hypothesis (no difference between drug A and B) is true.<br/><br/>
+
+  A p value of 0.001 means there is a 0.1% probability of seeing this data if the null hypothesis is true - meaning it's really very likely that there is a real difference between the two drugs.<br/>
+
+  A p value of 0.4 means there is a 40% probability of seeing this data if the null hypothesis is true - meaning it's really very likely that there is **not** a real difference between the two drugs.
+projection: |
+  Placeholder

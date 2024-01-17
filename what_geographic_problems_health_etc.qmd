@@ -1,0 +1,66 @@
+# Types of Geographic Problems
+```{r, echo = FALSE}
+source("glossary_funcs.R")
+glossary_setup()
+```
+
+```{r, echo = FALSE, results='asis'}
+glossary_setup_style()
+```
+
+For the purpose of this book, we're considering geospatial problems to be ay delivery or service configuration problem that is related to and/or complicated by geography.
+
+These can include
+
+- Routing and Scheduling Problems
+- Location-allocation Problems
+
+| Where? (the 'geographic')              | Predictions (the 'modelling')  |
+|----------------------------------------|--------------------------------|
+| Where to place services…               | … if demand continues to grow? |
+| Where will patients go…                | … if we close these services?  |
+| Where are people with a given disease… | … and how is it spreading?     |
+| Where is the demand…                   | … and is access equitable?     |
+
+
+# Understanding an Area
+
+Talk about disease distributions, IMD, etc.
+
+# Location Optimization Problems
+
+Talk about simple location optimization, competing priorities, etc.
+
+# Routing and Scheduling Problems
+
+If you've ordered an item for delivery in the past few years, you may have found yourself looking at a link sent to you by a delivery company, showing you where your delivery driver is and how many stops there are until they arrive with you.
+
+Delivery drivers can have hundreds of parcels to deliver in a day, and companies have tens of thousands of packages to coordinate delivering. They want to keep fuel costs down and use as few vehicles as possible - so optimizing the route of each vehicle is crucial.
+
+Now, while health systems certainly have inventory and delivery problems, there are other kinds of resources that are often travelling - nurses.
+
+Community nursing is a huge part of the NHS. In acute (physical) trusts, nurses may be visiting the homes of clients to change dressings, conduct health checks, administer medication, and more.
+
+
+```{mermaid}
+flowchart LR
+    id1{{"Beryl can’t do leg dressing changes for patients at the moment because she has a bad back"}}
+
+    id2{{"Mr H only wants male nurses for the catheter change"}}
+
+    id3{{"We need two nurses for that visit"}}
+
+    id4{{"There are roadworks on Quarry lane for the next three weeks so it’s taking 20 minutes extra to get between visits"}}
+
+    id5{{"Matt hasn’t done his insulin pump training yet"}}
+```
+
+
+Community transport problems are another class of routing problem in the NHS.
+Patients are sometimes unable to get themselves to crucial appointments by driving or public transport, meaning transport vehicles are necessary to ensure they can attend critical appointements such as dialysis.
+
+[PUT IN COVID DIALYSIS TRANSPORT EXAMPLE]
+
+In other situations, such as mental health trusts, there may be a requirement to securely transport patients from their home to a ward for inpatient treatment, or between wards with different levels of security or treatment intensity.
+
+This is before we start to consider things such as paramedic cars and ambulances, where the location and movement of vehicles is crucial.

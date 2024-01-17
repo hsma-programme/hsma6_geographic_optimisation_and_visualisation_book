@@ -1,0 +1,38 @@
+# Welcome!
+
+```{r, echo = FALSE}
+source("glossary_funcs.R")
+glossary_setup()
+```
+
+```{r, echo = FALSE, results='asis'}
+glossary_setup_style()
+```
+
+Welcome to this HSMA book on *Geographic Modelling & Visualisation*.
+<div class="tenor-gif-embed" data-postid="13892258" data-share-method="host" data-aspect-ratio="1.5625" data-width="30%"><a href="https://tenor.com/view/lost-kermit-map-where-am-i-gif-13892258">Lost Kermit GIF</a>from <a href="https://tenor.com/search/lost-gifs">Lost GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+This book accompanies module 3 of the 15 month [HSMA programme](https://sites.google.com/nihr.ac.uk/hsma/home).
+
+It is aimed at people with some experience of Python who want to be able to work with geographic data.
+
+It is particularly aimed at people in the UK working in the National Health Service (NHS), policing, social care, public health or local government.
+
+We will cover topics including:
+
+- principles and terminology needed when working with geographical data and maps
+- creating maps using a free and open source software package (QGIS)
+- working with geographic data in Python using the Geopandas library
+- creating static maps in Python with matplotlib
+- creating interactive maps in Python with Folium, Leaflet and Kepler
+- interacting with travel time `r glossary("API", "APIs")`
+- visualising travel times to sites across regions
+- optimizing the locations of facilities to minimize travel time across a region
+- optimizing the locations of facilities to maximize perfo
+
+
+
+```{r, echo = FALSE}
+glossary_table(TRUE)
+glossary_reset()
+```

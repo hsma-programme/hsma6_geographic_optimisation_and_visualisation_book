@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "HSMA - Geographic Modelling and Visualisation",
+    "section": "",
+    "text": "Preface"
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Welcome!",
+    "section": "",
+    "text": "Welcome to this HSMA book on Geographic Modelling & Visualisation.\n\nLost Kermit GIFfrom Lost GIFs\n\n\nThis book accompanies module 3 of the 15 month HSMA programme.\nIt is aimed at people with some experience of Python who want to be able to work with geographic data.\nIt is particularly aimed at people in the UK working in the National Health Service (NHS), policing, social care, public health or local government.\nWe will cover topics including:\n\nprinciples and terminology needed when working with geographical data and maps\ncreating maps using a free and open source software package (QGIS)\nworking with geographic data in Python using the Geopandas library\ncreating static maps in Python with matplotlib\ncreating interactive maps in Python with Folium, Leaflet and Kepler\ninteracting with travel time APIs\nvisualising travel times to sites across regions\noptimizing the locations of facilities to minimize travel time across a region\noptimizing the locations of facilities to maximize perfo\n\n\n\n\n\n\n\n\n\n\nterm\ndefinition\n\n\n\n\nAPI\nApplication Programming Interface\n\nA way for two or more programs to talk to one another. Designed for computer programmers to utilise when writing programs rather than being used by an end user.\n\nYou will send a request to an API and it will send back a response. For example, you might request data on the postcode EX2 5AA from the postcodes.io API, and it will return a text string containing data like the latitude and longitude."
+  },
+  {
+    "objectID": "what_geographic_problems_health_etc.html",
+    "href": "what_geographic_problems_health_etc.html",
+    "title": "2  Types of Geographic Problems",
+    "section": "",
+    "text": "For the purpose of this book, we’re considering geospatial problems to be ay delivery or service configuration problem that is related to and/or complicated by geography.\nThese can include\n\nRouting and Scheduling Problems\nLocation-allocation Problems\n\n\n\n\n\n\n\n\nWhere? (the ‘geographic’)\nPredictions (the ‘modelling’)\n\n\n\n\nWhere to place services…\n… if demand continues to grow?\n\n\nWhere will patients go…\n… if we close these services?\n\n\nWhere are people with a given disease…\n… and how is it spreading?\n\n\nWhere is the demand…\n… and is access equitable?\n\n\n\n\n3 Routing and Scheduling Problems\nIf you’ve ordered an item for delivery in the past few years, you may have found yourself looking at a link sent to you by a delivery company, showing you where your delivery driver is and how many stops there are until they arrive with you.\nDelivery drivers can have hundreds of parcels to deliver in a day, and companies have tens of thousands of packages to coordinate delivering. They want to keep fuel costs down and use as few vehicles as possible - so optimizing the route of each vehicle is crucial.\nNow, while\n\n\n\n\nflowchart LR\n    id1{{\"Beryl can’t do leg dressing changes for patients at the moment because she has a bad back\"}}\n\n    id2(\"Mr H only wants male nurses for the catheter change\")\n\n    id3{{\"We need two nurses for that visit\"}}\n\n    id4({\"There are roadworks on Quarry lane for the next three weeks so it’s taking 20 minutes extra to get between visits\"})\n\n    id5{{\"Matt hasn’t done his insulin pump training yet\"}}"
+  }
+]

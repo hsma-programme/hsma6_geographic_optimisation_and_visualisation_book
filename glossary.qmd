@@ -1,0 +1,17 @@
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+library(glossary)
+glossary_style(color = "purple",
+               text_decoration = "underline",
+               def_bg = "#333",
+               def_color = "white")
+```
+
+```{r, echo = FALSE}
+glossary_path("glossary.yml")
+glossary_popup("hover")
+```
+```{r}
+glossary_table()
+
+```
