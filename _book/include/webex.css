@@ -4,6 +4,7 @@
   --correct: #59935B;
   --correct_alpha: #c0edc2;
   --highlight: #467AAC;
+  --feedback: #5eb3d4;
 }
 
 .webex-check {}
@@ -118,3 +119,6 @@ input.webex-solveme.webex-correct,
   margin: 1em 0;
 }
 
+.feedback {
+  color: var(--feedback);
+}

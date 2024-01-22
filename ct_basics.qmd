@@ -8,3 +8,7 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+
+
+## Latitude and longitude

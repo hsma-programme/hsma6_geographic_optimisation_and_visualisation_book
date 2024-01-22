@@ -31,24 +31,88 @@ b_func = function() {
 /* check answers */
 check_func = function() {
   console.log("webex: check answers");
+  console.log(document.getElementsByClassName("webex-check"));
 
   var cl = this.parentElement.classList;
   if (cl.contains('unchecked')) {
     cl.remove("unchecked");
     this.innerHTML = "Hide Answers";
+
+    check_answer_box_nodelist = this.parentNode.childNodes
+    console.log(check_answer_box_nodelist)
+    for (let i = 0; i < check_answer_box_nodelist.length; i++) {
+      var cl_inner = check_answer_box_nodelist[i].classList;
+      console.log("Nodelist", i, ":", cl_inner);
+      if (typeof cl_inner !== "undefined")
+        {
+          if (cl_inner.contains("feedback")) {
+            {/* console.log(cl_inner.contains("feedback")) */}
+            {/* console.log(check_answer_box_nodelist[i].style.display) */}
+            check_answer_box_nodelist[i].style.display = "block"
+          }
+        }
+
+      }
+
   } else {
     cl.add("unchecked");
     this.innerHTML = "Show Answers";
+
+    check_answer_box_nodelist = this.parentNode.childNodes
+    console.log(check_answer_box_nodelist)
+    for (let i = 0; i < check_answer_box_nodelist.length; i++) {
+      var cl_inner = check_answer_box_nodelist[i].classList;
+      console.log("Nodelist", i, ":", cl_inner);
+      if (typeof cl_inner !== "undefined")
+        {
+          if (cl_inner.contains("feedback")) {
+            {/* console.log(cl_inner.contains("feedback")) */}
+            {/* console.log(check_answer_box_nodelist[i].style.display) */}
+            check_answer_box_nodelist[i].style.display = "none"
+          }
+        }
+
+      }
+
   }
+
 }
 
 /* function for checking solveme answers */
 solveme_func = function(e) {
   console.log("webex: check solveme");
+  {/* console.log(e) */}
+  {/* console.log(this) */}
 
   var real_answers = JSON.parse(this.dataset.answer);
   var my_answer = this.value;
   var cl = this.classList;
+
+  var feedback = (this.getAttribute("feedback"))
+
+  if (document.getElementById('feedbackDiv'+this.id) === null){
+
+    var feedbackDiv = document.createElement("p");
+    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
+    feedbackDiv.setAttribute("class", "feedback");
+
+  } else {
+
+    var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
+    feedbackDiv.innerHTML = "";
+
+  }
+
+  // Check if inside a 'check answers' box - if so and if answer box is
+  // currently unchecked, ensure feedback is hidden
+  if (this.parentElement.parentElement.classList.contains("unchecked")) {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "none"
+  } else {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "block"
+  }
+
   if (cl.contains("ignorecase")) {
     my_answer = my_answer.toLowerCase();
   }
@@ -65,6 +129,8 @@ solveme_func = function(e) {
   } else {
     cl.add("webex-incorrect");
     cl.remove("webex-correct");
+    feedbackDiv.innerHTML = feedback;
+  	this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
   }
 
   // match numeric answers within a specified tolerance
@@ -75,6 +141,8 @@ solveme_func = function(e) {
       cl.add("webex-correct");
     } else {
       cl.remove("webex-correct");
+      feedbackDiv.innerHTML = feedback;
+  	  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
     }
   }
 
@@ -94,6 +162,33 @@ select_func = function(e) {
   console.log("webex: check select");
 
   var cl = this.classList
+  var feedback = (this[this.selectedIndex].getAttribute("feedback"))
+
+  if (document.getElementById('feedbackDiv'+this.id) === null){
+
+    var feedbackDiv = document.createElement("p");
+    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
+    feedbackDiv.setAttribute("class", "feedback");
+
+  } else {
+
+    var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
+    feedbackDiv.innerHTML = "";
+
+  }
+
+  feedbackDiv.innerHTML = feedback;
+  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
+
+  // Check if inside a 'check answers' box - if so and if answer box is
+  // currently unchecked, ensure feedback is hidden
+  if (this.parentElement.parentElement.classList.contains("unchecked")) {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "none"
+  } else {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "block"
+  }
 
   /* add style */
   cl.remove("webex-incorrect");
@@ -114,6 +209,36 @@ radiogroups_func = function(e) {
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
   var cl = checked_button.parentElement.classList;
   var labels = checked_button.parentElement.parentElement.children;
+  var feedback = (checked_button.getAttribute("feedback"))
+  if (feedback !== null & feedback !== "<b></b>") { feedback = feedback + "</br></br>" }
+
+  if (document.getElementById('feedbackDiv'+this.id) === null){
+
+    var feedbackDiv = document.createElement("div");
+    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
+    feedbackDiv.setAttribute("class", "feedback");
+
+  } else {
+
+      var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
+      feedbackDiv.innerHTML = "";
+
+  }
+
+  const currentDiv = document.getElementById(this);
+  feedbackDiv.innerHTML = feedback;
+  this.insertAdjacentElement('afterend', feedbackDiv);
+
+    // Check if inside a 'check answers' box - if so and if answer box is
+  // currently unchecked, ensure feedback is hidden
+  if (this.parentElement.classList.contains("unchecked")) {
+      {/* console.log(this.parentElement.parentElement.classList); */}
+      feedbackDiv.style.display = "none"
+    } else {
+      {/* console.log(this.parentElement.parentElement.classList); */}
+      feedbackDiv.style.display = "block"
+    }
+
 
   /* get rid of styles */
   for (i = 0; i < labels.length; i++) {
@@ -146,11 +271,17 @@ window.onload = function() {
   console.log("check:", check_sections.length);
   for (var i = 0; i < check_sections.length; i++) {
     check_sections[i].classList.add("unchecked");
+    console.log(check_sections[i])
 
     let btn = document.createElement("button");
     btn.innerHTML = "Show Answers";
     btn.classList.add("webex-check-button");
+    // check_func removes the 'unchecked' class from box
+    // and updates the button text
+    // subsequently recheck all possible question funcs
+    // to ensure feedback gets shown or hidden as appropriate
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
     let spn = document.createElement("span");

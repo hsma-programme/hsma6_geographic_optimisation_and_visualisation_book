@@ -4,13 +4,29 @@ API: |
   A way for two or more programs to talk to one another. Designed for computer programmers to utilise when writing programs rather than being used by an end user.<br/><br/>
 
   You will send a request to an API and it will send back a response. For example, you might request data on the postcode EX2 5AA from the postcodes.io API, and it will return a text string containing data like the latitude and longitude.
-BNSSG: |
+BNG: |
+  Placeholder
+Cartesian: |
   Placeholder
 Coordinate: |
   Placeholder
 CRS: |
   Placeholder
+csv: |
+  Placeholder
+delimited: |
+  Placeholder
 Easting: |
+  Placeholder
+Euclidean distance: |
+  Placeholder
+flat file: |
+  Placeholder
+geoJSON: |
+  Placeholder
+geopackage: |
+  Placeholder
+Hamming distance: |
   Placeholder
 latitude: |
   Placeholder
@@ -18,11 +34,19 @@ longitude: |
   Placeholder
 LSOA: |
   Placeholder
+Manhattan distance: |
+  Placeholder
+Minowski distance: |
+  Placeholder
 MSOA: |
   Placeholder
 Northing: |
   Placeholder
 OA: |
+  Placeholder
+optimisation: |
+  Placeholder
+OSGB: |
   Placeholder
 p-value: |
   The probability of seeing the observed data, or more extreme data, if the null hypothesis is true.<br/>
@@ -32,5 +56,11 @@ p-value: |
   A p value of 0.001 means there is a 0.1% probability of seeing this data if the null hypothesis is true - meaning it's really very likely that there is a real difference between the two drugs.<br/>
 
   A p value of 0.4 means there is a 40% probability of seeing this data if the null hypothesis is true - meaning it's really very likely that there is **not** a real difference between the two drugs.
+pareto front: |
+  Placeholder
+polygon: |
+  Placeholder
 projection: |
+  Placeholder
+shapefile: |
   Placeholder

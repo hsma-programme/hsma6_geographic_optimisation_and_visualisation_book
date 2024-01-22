@@ -23,15 +23,19 @@ These can include
 | Where is the demand…                   | … and is access equitable?     |
 
 
-# Understanding an Area
+## Simple Mapping Problems - Understanding the Geographical Distribution of a Variable
 
 Talk about disease distributions, IMD, etc.
 
-# Location Optimization Problems
+```{python}
+
+```
+
+## Location Optimization (Facility Location) Problems
 
 Talk about simple location optimization, competing priorities, etc.
 
-# Routing and Scheduling Problems
+## Routing and Scheduling Problems
 
 If you've ordered an item for delivery in the past few years, you may have found yourself looking at a link sent to you by a delivery company, showing you where your delivery driver is and how many stops there are until they arrive with you.
 
