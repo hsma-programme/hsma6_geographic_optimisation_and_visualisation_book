@@ -68,5 +68,68 @@
     "title": "3  Types of Geographic Problems",
     "section": "3.3 Routing and Scheduling Problems",
     "text": "3.3 Routing and Scheduling Problems\nIf you’ve ordered an item for delivery in the past few years, you may have found yourself looking at a link sent to you by a delivery company, showing you where your delivery driver is and how many stops there are until they arrive with you.\nDelivery drivers can have hundreds of parcels to deliver in a day, and companies have tens of thousands of packages to coordinate delivering. They want to keep fuel costs down and use as few vehicles as possible - so optimizing the route of each vehicle is crucial.\nNow, while health systems certainly have inventory and delivery problems, there are other kinds of resources that are often travelling - nurses.\nCommunity nursing is a huge part of the NHS. In acute (physical) trusts, nurses may be visiting the homes of clients to change dressings, conduct health checks, administer medication, and more.\n\n\n\n\nflowchart LR\n    id1{{\"Beryl can’t do leg dressing changes for patients at the moment because she has a bad back\"}}\n\n    id2{{\"Mr H only wants male nurses for the catheter change\"}}\n\n    id3{{\"We need two nurses for that visit\"}}\n\n    id4{{\"There are roadworks on Quarry lane for the next three weeks so it’s taking 20 minutes extra to get between visits\"}}\n\n    id5{{\"Matt hasn’t done his insulin pump training yet\"}}\n\n\n\n\n\nCommunity transport problems are another class of routing problem in the NHS. Patients are sometimes unable to get themselves to crucial appointments by driving or public transport, meaning transport vehicles are necessary to ensure they can attend critical appointements such as dialysis.\n[PUT IN COVID DIALYSIS TRANSPORT EXAMPLE]\nIn other situations, such as mental health trusts, there may be a requirement to securely transport patients from their home to a ward for inpatient treatment, or between wards with different levels of security or treatment intensity.\nThis is before we start to consider things such as paramedic cars and ambulances, where the location and movement of vehicles is crucial."
+  },
+  {
+    "objectID": "ct_crs.html",
+    "href": "ct_crs.html",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "",
+    "text": "5 References and Further Reading"
+  },
+  {
+    "objectID": "ct_crs.html#projections",
+    "href": "ct_crs.html#projections",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "4.1 Projections",
+    "text": "4.1 Projections\nIn summary, different projections are valuable for different reasons - but they can distort the sizes of countries quite significantly. Just how big these distortions are might surprise you…\nFor example, let’s look at Greenland and Africa on the world map you are probably familiar with.\nThis map uses the Mercator projection. Now, when our primary requirement for maps was trying to sail ships across the ocean, this map was fantastic. It allowed navigators to set a single constant bearing and get to where they needed to go, rather than constantly adjusting and risking huge errors if they made a single mistake along the way.\nActually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - it does give you a realistic idea of\nHowever, it has the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.\nCountries far from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than\n\n\n\n\n\n\nClick here to show an animation demonstrating the impact of the Mercator Projection on the relative size of different countries\n\n\n\n\n\n\n\n\nRelative Size of Countries - Mercator Projection Distortion\n\n\nBy Jakub Nowosad - Own Work;, CC BY-SA 4.0, Link2\n\n\n\n\n4.1.1 Optional Exercise 1\nA great way to get your head around the impact of the Mercator projection on our understanding of the world is to use the website the true size of.\nTry the following out. Do the results surprise you? Does this change your sense of our world? Click ‘clear map’ after each exercise to get back to a blank map, or right click on the coloured shape of the country to remove it - Search for Russia and drag it onto the North of Africa. - Search for the United Kingdom and drag it onto Greenland. - Search for Canada and drag it onto Brazil.\n\n\n\n\n\n\nClick here to view the website without leaving the book!\n\n\n\n\n\n\n\n\n\n\n\n4.1.2 Optional Exercise 2\nYou can play around with some different projections at the metrocosm website.\nYou will notice that there are a large number of purple dots all over the maps on that website. Why are they there?\nOn a globe, all of those purple dots would be the same size. They are a good way of understanding how different projections distort the size or shape of different parts of the world.\nLook at each projection.\n\n\n\n\n\n\nClick here to view the website without leaving the book!"
+  },
+  {
+    "objectID": "ct_crs.html#coordinate-reference-systems",
+    "href": "ct_crs.html#coordinate-reference-systems",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "4.2 Coordinate Reference Systems",
+    "text": "4.2 Coordinate Reference Systems\nThe next thing to understand is how we divide the world up so we can all talk about it using the same language and find the same point on the map.\nOne of the most common ways to do this is with latitude and longitude.\n\n4.2.1 Latitude and longitude\nLatitude looks at how far a point is from the equator - you can also think of it as how close a point is to the North or South Pole.\nLines of latitude run parallel with the equator.\n3\nLatitude has a value of 0 at the equator.\n‘Above’ the equator - towards the North Pole - latitude gradually gets bigger, written as, for example, 70N, reaching a maximum of 90 North at the North pole.\n‘Below’ the equator - towards the South Pole - latitude gradually gets bigger, but this time it is written as, for example, 45S reaching a maximum of 90 South at the South pole.\nHowever - when you are using latitude on a computer, latitude South of the equator is often entered as a negative number instead.\nLongitude is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.\n4\nLongitude has a value of 0 at the Prime Meridian (Greenwich).\nEast of the Prime Meridian, longitude gradually gets bigger and is written as, for example, 60E, reaching a maximum of 180 on directly the opposite side of Earth.\nWest of the Prime Meridian, longitude gradually gets bigger but this time it is written as, for example, 30W, reaching a maximum of 180 on directly the opposite side of Earth.\nHowever - when you are using longitude on a computer, a longitude to the West of Greenwich is often entered as a negative number instead.\n\n4.2.1.1 How do lines of latitude and longitude appear on different projections?\nAs it’s the projection you’re still going to commonly see (and probably use for most of the maps you create), let’s go back to the Mercator map projection.\n\n\n4.2.1.2 Exercise: Getting Comfortable with Latitude and Longitude\nIt’s helpful to get a bit of a feeling for how latitude and longitude is written, as you’ll be dealing with it quite a lot in the datasets we will use later in this book.\nSo let’s work through a couple of questions.\n\nQuestion 1\n\n\n\nWhat are the correct coordinates for St Luke’s?\n\n\n\n -3.51, -50.722 -50.722, 3.51 50.722, -3.51 50.722, 3.51 -3.51, 50.722\n\nThe UK government provides the following guidelines on the usage of coordinate reference systems:\n\n\nuse British or Irish National Grid for data related to the UK and Northern Ireland\nuse ETRS89 (EPSG::4258) for Europe\nuse WGS84 for worldwide geographic location points\n\n\n\nYou can also combine these standards and/or add other CRS to meet your organisation’s requirements, for example, when you need greater accuracy for precision engineering decisions."
+  },
+  {
+    "objectID": "ct_crs.html#the-british-national-grid",
+    "href": "ct_crs.html#the-british-national-grid",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "4.3 The British National Grid",
+    "text": "4.3 The British National Grid"
+  },
+  {
+    "objectID": "ct_crs.html#further-reading",
+    "href": "ct_crs.html#further-reading",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "5.1 Further Reading",
+    "text": "5.1 Further Reading\n\n5.1.1 Understanding the size of countries\nhttps://mapfight.xyz/\nhttps://www.thetruesize.com/\n\n\n5.1.2 Coordinate Reference Systems\nA gentle Introduction to GIS - Coordinate Reference Systems"
+  },
+  {
+    "objectID": "ct_crs.html#references",
+    "href": "ct_crs.html#references",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "5.2 References",
+    "text": "5.2 References\nhttps://www.vox.com/"
+  },
+  {
+    "objectID": "ct_crs.html#latitude-and-longitude",
+    "href": "ct_crs.html#latitude-and-longitude",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "4.2 Latitude and longitude",
+    "text": "4.2 Latitude and longitude\nThe next thing to understand is how we divide the world up.\nAs it’s the projection you’re still going to commonly see, let’s go back to the Mercator map projection."
+  },
+  {
+    "objectID": "concepts_and_terms.html",
+    "href": "concepts_and_terms.html",
+    "title": "Geographical Concepts and Terminology",
+    "section": "",
+    "text": "Before you get started with making your own maps, it’s helpful to understand a few key concepts and terms."
+  },
+  {
+    "objectID": "ct_crs.html#footnotes",
+    "href": "ct_crs.html#footnotes",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "",
+    "text": "Video Credit - Vox, Terms of Licence Use↩︎\nBy Jakub Nowosad - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=73955926↩︎\nDjexplo, CC0, via Wikimedia Commons↩︎\nDjexplo, CC0, via Wikimedia Commons↩︎"
   }
 ]

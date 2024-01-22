@@ -11,9 +11,7 @@ book:
   - what_geographic_problems_health_etc.qmd
   - part: concepts_and_terms.qmd
     chapters:
-    - ct_basics.qmd
     - ct_crs.qmd
-    - ct_projections.qmd
     - ct_filetypes.qmd
   - part: introduction_mapping_with_qgis.qmd
     chapters:

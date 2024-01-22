@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 6&nbsp; Geographic Data Filetypes</title>
+<title>HSMA - Geographic Modelling and Visualisation - 5&nbsp; Geographic Data Filetypes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./introduction_mapping_with_qgis.html" rel="next">
-<link href="./ct_projections.html" rel="prev">
+<link href="./ct_crs.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -91,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./concepts_and_terms.html">Geographical Concepts and Terminology</a></li><li class="breadcrumb-item"><a href="./ct_filetypes.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./concepts_and_terms.html">Geographical Concepts and Terminology</a></li><li class="breadcrumb-item"><a href="./ct_filetypes.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -130,8 +130,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./webexercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Webexercises</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./what_geographic_problems_health_etc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Types of Geographic Problems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Types of Geographic Problems</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -145,26 +151,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ct_basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Geographical Concepts and Terminology</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ct_crs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Coordinate Reference Systems</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ct_projections.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Projections</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ct_filetypes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span></a>
   </div>
 </li>
       </ul>
@@ -181,43 +175,43 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_point_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_choropleth.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_filtering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Filtering Data in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Filtering Data in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_print_layouts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Print Layouts in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Print Layouts in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">qgis_python.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">qgis_python.html</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_extensions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Extensions in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Extensions in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercises - QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Exercises - QGIS</span></span></a>
   </div>
 </li>
       </ul>
@@ -234,31 +228,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas_matplotlib.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Static Maps with Matplotlib</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Static Maps with Matplotlib</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas_leaflet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Interactive Maps with Leaflet and Folium</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Interactive Maps with Leaflet and Folium</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas_kepler.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Interactive Maps with Kepler</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Interactive Maps with Kepler</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_mapping_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Exercises - Mapping in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Exercises - Mapping in Python</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,31 +269,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_working_with_lsoa_travel_time_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Working with Precalculated Travel Time Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Working with Precalculated Travel Time Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_mapping_travel_times_qgis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualising Travel Times in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visualising Travel Times in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_mapping_travel_times_python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Visualising Travel Times in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualising Travel Times in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_travel_time_apis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Using Travel Time APIs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Using Travel Time APIs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_travel_time_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Exercises - Travel Time</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Exercises - Travel Time</span></span></a>
   </div>
 </li>
       </ul>
@@ -316,31 +310,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_limits_of_computation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Limits of Brute Force Computation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Limits of Brute Force Computation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_bruteforce_solutions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Brute Force Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Brute Force Solutions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_evolutionary_algorithms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Evolutionary Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Evolutionary Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_genetic_algorithms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Genetic Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Genetic Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_facility_location_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Facility Location Exercises</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Facility Location Exercises</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,19 +351,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tsvrp_travelling_salesman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Travelling Salesperson Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">The Travelling Salesperson Problem</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tsvrp_vehicle_routing_problem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Vehicle Routing Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Vehicle Routing Problem</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tsvrp_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Exercises - Travelling Salesman and VRP</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Exercises - Travelling Salesman and VRP</span></span></a>
   </div>
 </li>
       </ul>
@@ -377,7 +371,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources_additional_reading.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Resources and Additional Reading</span></span></a>
   </div>
 </li>
     </ul>
@@ -393,7 +393,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></h1>
 </div>
 
 
@@ -484,24 +484,88 @@ b_func = function() {
 /* check answers */
 check_func = function() {
   console.log("webex: check answers");
+  console.log(document.getElementsByClassName("webex-check"));
 
   var cl = this.parentElement.classList;
   if (cl.contains('unchecked')) {
     cl.remove("unchecked");
     this.innerHTML = "Hide Answers";
+
+    check_answer_box_nodelist = this.parentNode.childNodes
+    console.log(check_answer_box_nodelist)
+    for (let i = 0; i < check_answer_box_nodelist.length; i++) {
+      var cl_inner = check_answer_box_nodelist[i].classList;
+      console.log("Nodelist", i, ":", cl_inner);
+      if (typeof cl_inner !== "undefined")
+        {
+          if (cl_inner.contains("feedback")) {
+            {/* console.log(cl_inner.contains("feedback")) */}
+            {/* console.log(check_answer_box_nodelist[i].style.display) */}
+            check_answer_box_nodelist[i].style.display = "block"
+          }
+        }
+
+      }
+
   } else {
     cl.add("unchecked");
     this.innerHTML = "Show Answers";
+
+    check_answer_box_nodelist = this.parentNode.childNodes
+    console.log(check_answer_box_nodelist)
+    for (let i = 0; i < check_answer_box_nodelist.length; i++) {
+      var cl_inner = check_answer_box_nodelist[i].classList;
+      console.log("Nodelist", i, ":", cl_inner);
+      if (typeof cl_inner !== "undefined")
+        {
+          if (cl_inner.contains("feedback")) {
+            {/* console.log(cl_inner.contains("feedback")) */}
+            {/* console.log(check_answer_box_nodelist[i].style.display) */}
+            check_answer_box_nodelist[i].style.display = "none"
+          }
+        }
+
+      }
+
   }
+
 }
 
 /* function for checking solveme answers */
 solveme_func = function(e) {
   console.log("webex: check solveme");
+  {/* console.log(e) */}
+  {/* console.log(this) */}
 
   var real_answers = JSON.parse(this.dataset.answer);
   var my_answer = this.value;
   var cl = this.classList;
+
+  var feedback = (this.getAttribute("feedback"))
+
+  if (document.getElementById('feedbackDiv'+this.id) === null){
+
+    var feedbackDiv = document.createElement("p");
+    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
+    feedbackDiv.setAttribute("class", "feedback");
+
+  } else {
+
+    var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
+    feedbackDiv.innerHTML = "";
+
+  }
+
+  // Check if inside a 'check answers' box - if so and if answer box is
+  // currently unchecked, ensure feedback is hidden
+  if (this.parentElement.parentElement.classList.contains("unchecked")) {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "none"
+  } else {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "block"
+  }
+
   if (cl.contains("ignorecase")) {
     my_answer = my_answer.toLowerCase();
   }
@@ -518,6 +582,8 @@ solveme_func = function(e) {
   } else {
     cl.add("webex-incorrect");
     cl.remove("webex-correct");
+    feedbackDiv.innerHTML = feedback;
+  	this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
   }
 
   // match numeric answers within a specified tolerance
@@ -528,6 +594,8 @@ solveme_func = function(e) {
       cl.add("webex-correct");
     } else {
       cl.remove("webex-correct");
+      feedbackDiv.innerHTML = feedback;
+  	  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
     }
   }
 
@@ -547,6 +615,33 @@ select_func = function(e) {
   console.log("webex: check select");
 
   var cl = this.classList
+  var feedback = (this[this.selectedIndex].getAttribute("feedback"))
+
+  if (document.getElementById('feedbackDiv'+this.id) === null){
+
+    var feedbackDiv = document.createElement("p");
+    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
+    feedbackDiv.setAttribute("class", "feedback");
+
+  } else {
+
+    var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
+    feedbackDiv.innerHTML = "";
+
+  }
+
+  feedbackDiv.innerHTML = feedback;
+  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
+
+  // Check if inside a 'check answers' box - if so and if answer box is
+  // currently unchecked, ensure feedback is hidden
+  if (this.parentElement.parentElement.classList.contains("unchecked")) {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "none"
+  } else {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "block"
+  }
 
   /* add style */
   cl.remove("webex-incorrect");
@@ -567,6 +662,36 @@ radiogroups_func = function(e) {
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
   var cl = checked_button.parentElement.classList;
   var labels = checked_button.parentElement.parentElement.children;
+  var feedback = (checked_button.getAttribute("feedback"))
+  if (feedback !== null & feedback !== "<b></b>") { feedback = feedback + "</br></br>" }
+
+  if (document.getElementById('feedbackDiv'+this.id) === null){
+
+    var feedbackDiv = document.createElement("div");
+    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
+    feedbackDiv.setAttribute("class", "feedback");
+
+  } else {
+
+      var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
+      feedbackDiv.innerHTML = "";
+
+  }
+
+  const currentDiv = document.getElementById(this);
+  feedbackDiv.innerHTML = feedback;
+  this.insertAdjacentElement('afterend', feedbackDiv);
+
+    // Check if inside a 'check answers' box - if so and if answer box is
+  // currently unchecked, ensure feedback is hidden
+  if (this.parentElement.classList.contains("unchecked")) {
+      {/* console.log(this.parentElement.parentElement.classList); */}
+      feedbackDiv.style.display = "none"
+    } else {
+      {/* console.log(this.parentElement.parentElement.classList); */}
+      feedbackDiv.style.display = "block"
+    }
+
 
   /* get rid of styles */
   for (i = 0; i < labels.length; i++) {
@@ -599,11 +724,17 @@ window.onload = function() {
   console.log("check:", check_sections.length);
   for (var i = 0; i < check_sections.length; i++) {
     check_sections[i].classList.add("unchecked");
+    console.log(check_sections[i])
 
     let btn = document.createElement("button");
     btn.innerHTML = "Show Answers";
     btn.classList.add("webex-check-button");
+    // check_func removes the 'unchecked' class from box
+    // and updates the button text
+    // subsequently recheck all possible question funcs
+    // to ensure feedback gets shown or hidden as appropriate
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
     let spn = document.createElement("span");
@@ -1007,8 +1138,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ct_projections.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Projections</span></span>
+      <a href="./ct_crs.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

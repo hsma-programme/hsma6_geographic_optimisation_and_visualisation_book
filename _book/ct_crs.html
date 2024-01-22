@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 4&nbsp; Coordinate Reference Systems</title>
+<title>HSMA - Geographic Modelling and Visualisation - 4&nbsp; Projections and Coordinate Reference Systems</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ct_projections.html" rel="next">
-<link href="./ct_basics.html" rel="prev">
+<link href="./ct_filetypes.html" rel="next">
+<link href="./concepts_and_terms.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -91,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./concepts_and_terms.html">Geographical Concepts and Terminology</a></li><li class="breadcrumb-item"><a href="./ct_crs.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Coordinate Reference Systems</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./concepts_and_terms.html">Geographical Concepts and Terminology</a></li><li class="breadcrumb-item"><a href="./ct_crs.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -130,8 +130,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./webexercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Webexercises</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./what_geographic_problems_health_etc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Types of Geographic Problems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Types of Geographic Problems</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -145,20 +151,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ct_basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Geographical Concepts and Terminology</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ct_crs.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Coordinate Reference Systems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ct_projections.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Projections</span></span></a>
+  <a href="./ct_filetypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span></a>
   </div>
 </li>
       </ul>
@@ -374,20 +374,50 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources_additional_reading.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Resources and Additional Reading</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#projections" id="toc-projections" class="nav-link active" data-scroll-target="#projections"><span class="header-section-number">4.1</span> Projections</a>
+  <ul class="collapse">
+  <li><a href="#optional-exercise-1" id="toc-optional-exercise-1" class="nav-link" data-scroll-target="#optional-exercise-1"><span class="header-section-number">4.1.1</span> Optional Exercise 1</a></li>
+  <li><a href="#optional-exercise-2" id="toc-optional-exercise-2" class="nav-link" data-scroll-target="#optional-exercise-2"><span class="header-section-number">4.1.2</span> Optional Exercise 2</a></li>
+  </ul></li>
+  <li><a href="#coordinate-reference-systems" id="toc-coordinate-reference-systems" class="nav-link" data-scroll-target="#coordinate-reference-systems"><span class="header-section-number">4.2</span> Coordinate Reference Systems</a>
+  <ul class="collapse">
+  <li><a href="#latitude-and-longitude" id="toc-latitude-and-longitude" class="nav-link" data-scroll-target="#latitude-and-longitude"><span class="header-section-number">4.2.1</span> Latitude and longitude</a></li>
+  </ul></li>
+  <li><a href="#the-british-national-grid" id="toc-the-british-national-grid" class="nav-link" data-scroll-target="#the-british-national-grid"><span class="header-section-number">4.3</span> The British National Grid</a></li>
+  <li><a href="#references-and-further-reading" id="toc-references-and-further-reading" class="nav-link" data-scroll-target="#references-and-further-reading"><span class="header-section-number">5</span> References and Further Reading</a>
+  <ul class="collapse">
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">5.1</span> Further Reading</a>
+  <ul class="collapse">
+  <li><a href="#understanding-the-size-of-countries" id="toc-understanding-the-size-of-countries" class="nav-link" data-scroll-target="#understanding-the-size-of-countries"><span class="header-section-number">5.1.1</span> Understanding the size of countries</a></li>
+  <li><a href="#coordinate-reference-systems-1" id="toc-coordinate-reference-systems-1" class="nav-link" data-scroll-target="#coordinate-reference-systems-1"><span class="header-section-number">5.1.2</span> Coordinate Reference Systems</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Coordinate Reference Systems</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></h1>
 </div>
 
 
@@ -441,8 +471,170 @@ a.glossary:active .def::after {
   border-color: #333 transparent transparent transparent;
 }
 </style>
+<p>Every map ever created is <strong>wrong</strong>.</p>
+<p>A bold claim - but a true one! There is no way to take a spherical object like Earth and translate it to a flat object without compromising in some way.</p>
+<p>The following video from Vox<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is a great introduction to this concept, and gives you a nice overview of common <a class="glossary" title="Placeholder">projections</a> - different ways that people have tried to get around this problem over the years.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kIID5FDi2JQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<section id="projections" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="projections"><span class="header-section-number">4.1</span> Projections</h2>
+<p>In summary, different projections are valuable for different reasons - but they can distort the sizes of countries quite significantly. Just how big these distortions are might surprise you…</p>
+<p>For example, let’s look at Greenland and Africa on the world map you are probably familiar with.</p>
+<p>This map uses the Mercator projection. Now, when our primary requirement for maps was trying to sail ships across the ocean, this map was fantastic. It allowed navigators to set a single constant bearing and get to where they needed to go, rather than constantly adjusting and risking huge errors if they made a single mistake along the way.</p>
+<p>Actually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - it does give you a realistic idea of</p>
+<p>However, it has the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.</p>
+<p>Countries <strong>far</strong> from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click here to show an animation demonstrating the impact of the Mercator Projection on the relative size of different countries
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\worlds_animate_jakub_nowosad_cc_by_sa_4_0.gif" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Relative Size of Countries - Mercator Projection Distortion</figcaption>
+</figure>
+</div>
+<p>By Jakub Nowosad - Own Work;, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=73955926">Link</a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+</div>
+</div>
+</div>
+<section id="optional-exercise-1" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="optional-exercise-1"><span class="header-section-number">4.1.1</span> Optional Exercise 1</h3>
+<p>A great way to get your head around the impact of the Mercator projection on our understanding of the world is to use the website <a href="https://www.thetruesize.com/">the true size of</a>.</p>
+<p>Try the following out. Do the results surprise you? Does this change your sense of our world? <em>Click ‘clear map’ after each exercise to get back to a blank map, or right click on the coloured shape of the country to remove it</em> - Search for Russia and drag it onto the North of Africa. - Search for the United Kingdom and drag it onto Greenland. - Search for Canada and drag it onto Brazil.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click here to view the website without leaving the book!
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<iframe width="780" height="700" src="https://www.thetruesize.com/" title="Metrocosm"></iframe>
+</div>
+</div>
+</div>
+</section>
+<section id="optional-exercise-2" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="optional-exercise-2"><span class="header-section-number">4.1.2</span> Optional Exercise 2</h3>
+<p>You can play around with some different projections at the <a href="http://metrocosm.com/compare-map-projections.html">metrocosm website</a>.</p>
+<p>You will notice that there are a large number of purple dots all over the maps on that website. Why are they there?</p>
+<p>On a globe, all of those purple dots would be the same size. They are a good way of understanding how different projections distort the size or shape of different parts of the world.</p>
+<p>Look at each projection.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click here to view the website without leaving the book!
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<iframe width="780" height="550" src="http://metrocosm.com/compare-map-projections.html" title="Metrocosm"></iframe>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="coordinate-reference-systems" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="coordinate-reference-systems"><span class="header-section-number">4.2</span> Coordinate Reference Systems</h2>
+<p>The next thing to understand is how we divide the world up so we can all talk about it using the same language and find the same point on the map.</p>
+<p>One of the most common ways to do this is with <a class="glossary" title="Placeholder">latitude</a> and <a class="glossary" title="Placeholder">longitude</a>.</p>
+<section id="latitude-and-longitude" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="latitude-and-longitude"><span class="header-section-number">4.2.1</span> Latitude and longitude</h3>
+<p><strong>Latitude</strong> looks at how far a point is from the equator - you can also think of it as how close a point is to the North or South Pole.</p>
+<p>Lines of latitude run parallel with the equator.</p>
+<p><img src="images\crs_projections_latitude.png" class="img-fluid" alt="Latitude"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>Latitude has a value of 0 at the equator.</p>
+<p>‘Above’ the equator - towards the North Pole - latitude gradually gets bigger, written as, for example, 70N, reaching a maximum of 90 North at the North pole.</p>
+<p>‘Below’ the equator - towards the South Pole - latitude gradually gets bigger, but this time it is written as, for example, 45S reaching a maximum of 90 South at the South pole.</p>
+<p><strong>However</strong> - when you are using latitude on a computer, latitude South of the equator is often entered as a negative number instead.</p>
+<p><strong>Longitude</strong> is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.</p>
+<p><img src="images\crs_projections_longitude.png" class="img-fluid" alt="Longitude"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>Longitude has a value of 0 at the Prime Meridian (Greenwich).</p>
+<p>East of the Prime Meridian, longitude gradually gets bigger and is written as, for example, 60E, reaching a maximum of 180 on directly the opposite side of Earth.</p>
+<p>West of the Prime Meridian, longitude gradually gets bigger but this time it is written as, for example, 30W, reaching a maximum of 180 on directly the opposite side of Earth.</p>
+<p><strong>However</strong> - when you are using longitude on a computer, a longitude to the West of Greenwich is often entered as a negative number instead.</p>
+<section id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections" class="level4" data-number="4.2.1.1">
+<h4 data-number="4.2.1.1" class="anchored" data-anchor-id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections"><span class="header-section-number">4.2.1.1</span> How do lines of latitude and longitude appear on different projections?</h4>
+<p>As it’s the projection you’re still going to commonly see (and probably use for most of the maps you create), let’s go back to the Mercator map projection.</p>
+</section>
+<section id="exercise-getting-comfortable-with-latitude-and-longitude" class="level4" data-number="4.2.1.2">
+<h4 data-number="4.2.1.2" class="anchored" data-anchor-id="exercise-getting-comfortable-with-latitude-and-longitude"><span class="header-section-number">4.2.1.2</span> Exercise: Getting Comfortable with Latitude and Longitude</h4>
+<p>It’s helpful to get a bit of a feeling for how latitude and longitude is written, as you’ll be dealing with it quite a lot in the datasets we will use later in this book.</p>
+<p>So let’s work through a couple of questions.</p>
+<section id="question-1" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h5>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\crs_projections_q_st_lukes.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">What are the correct coordinates for St Luke’s?</figcaption>
+</figure>
+</div>
+<div id="radio_EXQFGDEFKO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="" feedback="<b>Not quite - we're above the equator (towards the North Pole), so the latitude will be positive. Also latitude will be written first - and because we're so close to the Prime Meridian, we'd expect latitude to be the smaller number here (quite close to zero). Have another go!</b>"> <span>-3.51, -50.722</span></label><label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="" feedback="<b></b>"> <span>-50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="answer" feedback="<b>Correct! Well done.</b>"> <span>50.722, -3.51</span></label><label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="" feedback="<b></b>"> <span>50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="" feedback="<b></b>"> <span>-3.51, 50.722</span></label>
+</div>
+<p>The UK government provides the following guidelines on the usage of coordinate reference systems:</p>
+<blockquote class="blockquote">
+<ul>
+<li>use British or Irish National Grid for data related to the UK and Northern Ireland</li>
+<li>use ETRS89 (EPSG::4258) for Europe</li>
+<li>use WGS84 for worldwide geographic location points</li>
+</ul>
+</blockquote>
+<blockquote class="blockquote">
+<p>You can also combine these standards and/or add other CRS to meet your organisation’s requirements, for example, when you need greater accuracy for precision engineering decisions.</p>
+</blockquote>
+</section>
+</section>
+</section>
+</section>
+<section id="the-british-national-grid" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="the-british-national-grid"><span class="header-section-number">4.3</span> The British National Grid</h2>
+</section>
+<section id="references-and-further-reading" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> References and Further Reading</h1>
+<section id="further-reading" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">5.1</span> Further Reading</h2>
+<section id="understanding-the-size-of-countries" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="understanding-the-size-of-countries"><span class="header-section-number">5.1.1</span> Understanding the size of countries</h3>
+<p><a href="https://mapfight.xyz/">https://mapfight.xyz/</a></p>
+<p><a href="https://www.thetruesize.com/">https://www.thetruesize.com/</a></p>
+</section>
+<section id="coordinate-reference-systems-1" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="coordinate-reference-systems-1"><span class="header-section-number">5.1.2</span> Coordinate Reference Systems</h3>
+<p><a href="https://docs.qgis.org/3.28/en/docs/gentle_gis_introduction/coordinate_reference_systems.html">A gentle Introduction to GIS - Coordinate Reference Systems</a></p>
+</section>
+</section>
+</section>
+<section id="references" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> References</h1>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Video Credit - Vox, <a href="https://www.voxmedia.com/pages/licensing">Terms of Licence Use</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>By Jakub Nowosad - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=73955926<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script>
@@ -478,24 +670,88 @@ b_func = function() {
 /* check answers */
 check_func = function() {
   console.log("webex: check answers");
+  console.log(document.getElementsByClassName("webex-check"));
 
   var cl = this.parentElement.classList;
   if (cl.contains('unchecked')) {
     cl.remove("unchecked");
     this.innerHTML = "Hide Answers";
+
+    check_answer_box_nodelist = this.parentNode.childNodes
+    console.log(check_answer_box_nodelist)
+    for (let i = 0; i < check_answer_box_nodelist.length; i++) {
+      var cl_inner = check_answer_box_nodelist[i].classList;
+      console.log("Nodelist", i, ":", cl_inner);
+      if (typeof cl_inner !== "undefined")
+        {
+          if (cl_inner.contains("feedback")) {
+            {/* console.log(cl_inner.contains("feedback")) */}
+            {/* console.log(check_answer_box_nodelist[i].style.display) */}
+            check_answer_box_nodelist[i].style.display = "block"
+          }
+        }
+
+      }
+
   } else {
     cl.add("unchecked");
     this.innerHTML = "Show Answers";
+
+    check_answer_box_nodelist = this.parentNode.childNodes
+    console.log(check_answer_box_nodelist)
+    for (let i = 0; i < check_answer_box_nodelist.length; i++) {
+      var cl_inner = check_answer_box_nodelist[i].classList;
+      console.log("Nodelist", i, ":", cl_inner);
+      if (typeof cl_inner !== "undefined")
+        {
+          if (cl_inner.contains("feedback")) {
+            {/* console.log(cl_inner.contains("feedback")) */}
+            {/* console.log(check_answer_box_nodelist[i].style.display) */}
+            check_answer_box_nodelist[i].style.display = "none"
+          }
+        }
+
+      }
+
   }
+
 }
 
 /* function for checking solveme answers */
 solveme_func = function(e) {
   console.log("webex: check solveme");
+  {/* console.log(e) */}
+  {/* console.log(this) */}
 
   var real_answers = JSON.parse(this.dataset.answer);
   var my_answer = this.value;
   var cl = this.classList;
+
+  var feedback = (this.getAttribute("feedback"))
+
+  if (document.getElementById('feedbackDiv'+this.id) === null){
+
+    var feedbackDiv = document.createElement("p");
+    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
+    feedbackDiv.setAttribute("class", "feedback");
+
+  } else {
+
+    var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
+    feedbackDiv.innerHTML = "";
+
+  }
+
+  // Check if inside a 'check answers' box - if so and if answer box is
+  // currently unchecked, ensure feedback is hidden
+  if (this.parentElement.parentElement.classList.contains("unchecked")) {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "none"
+  } else {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "block"
+  }
+
   if (cl.contains("ignorecase")) {
     my_answer = my_answer.toLowerCase();
   }
@@ -512,6 +768,8 @@ solveme_func = function(e) {
   } else {
     cl.add("webex-incorrect");
     cl.remove("webex-correct");
+    feedbackDiv.innerHTML = feedback;
+  	this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
   }
 
   // match numeric answers within a specified tolerance
@@ -522,6 +780,8 @@ solveme_func = function(e) {
       cl.add("webex-correct");
     } else {
       cl.remove("webex-correct");
+      feedbackDiv.innerHTML = feedback;
+  	  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
     }
   }
 
@@ -541,6 +801,33 @@ select_func = function(e) {
   console.log("webex: check select");
 
   var cl = this.classList
+  var feedback = (this[this.selectedIndex].getAttribute("feedback"))
+
+  if (document.getElementById('feedbackDiv'+this.id) === null){
+
+    var feedbackDiv = document.createElement("p");
+    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
+    feedbackDiv.setAttribute("class", "feedback");
+
+  } else {
+
+    var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
+    feedbackDiv.innerHTML = "";
+
+  }
+
+  feedbackDiv.innerHTML = feedback;
+  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
+
+  // Check if inside a 'check answers' box - if so and if answer box is
+  // currently unchecked, ensure feedback is hidden
+  if (this.parentElement.parentElement.classList.contains("unchecked")) {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "none"
+  } else {
+    {/* console.log(this.parentElement.parentElement.classList); */}
+    feedbackDiv.style.display = "block"
+  }
 
   /* add style */
   cl.remove("webex-incorrect");
@@ -561,6 +848,36 @@ radiogroups_func = function(e) {
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
   var cl = checked_button.parentElement.classList;
   var labels = checked_button.parentElement.parentElement.children;
+  var feedback = (checked_button.getAttribute("feedback"))
+  if (feedback !== null & feedback !== "<b></b>") { feedback = feedback + "</br></br>" }
+
+  if (document.getElementById('feedbackDiv'+this.id) === null){
+
+    var feedbackDiv = document.createElement("div");
+    feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
+    feedbackDiv.setAttribute("class", "feedback");
+
+  } else {
+
+      var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
+      feedbackDiv.innerHTML = "";
+
+  }
+
+  const currentDiv = document.getElementById(this);
+  feedbackDiv.innerHTML = feedback;
+  this.insertAdjacentElement('afterend', feedbackDiv);
+
+    // Check if inside a 'check answers' box - if so and if answer box is
+  // currently unchecked, ensure feedback is hidden
+  if (this.parentElement.classList.contains("unchecked")) {
+      {/* console.log(this.parentElement.parentElement.classList); */}
+      feedbackDiv.style.display = "none"
+    } else {
+      {/* console.log(this.parentElement.parentElement.classList); */}
+      feedbackDiv.style.display = "block"
+    }
+
 
   /* get rid of styles */
   for (i = 0; i < labels.length; i++) {
@@ -593,11 +910,17 @@ window.onload = function() {
   console.log("check:", check_sections.length);
   for (var i = 0; i < check_sections.length; i++) {
     check_sections[i].classList.add("unchecked");
+    console.log(check_sections[i])
 
     let btn = document.createElement("button");
     btn.innerHTML = "Show Answers";
     btn.classList.add("webex-check-button");
+    // check_func removes the 'unchecked' class from box
+    // and updates the button text
+    // subsequently recheck all possible question funcs
+    // to ensure feedback gets shown or hidden as appropriate
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
     let spn = document.createElement("span");
@@ -1001,13 +1324,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ct_basics.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Geographical Concepts and Terminology</span></span>
+      <a href="./concepts_and_terms.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Geographical Concepts and Terminology</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ct_projections.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Projections</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ct_filetypes.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -8,3 +8,5 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+Before you get started with making your own maps, it's helpful to understand a few key concepts and terms.
