@@ -8,3 +8,13 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+Small-scale problems in health can be supported with a combination of simple mapping and analysis!
+
+You probably already have some very useful data in your organisation.
+
+- Where are service users located?
+    - What is the relative rate of users in different areas?
+    - How does this interact with e.g. deprivation?
+
+- Where are your services located?

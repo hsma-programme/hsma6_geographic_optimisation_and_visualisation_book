@@ -8,3 +8,8 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+
+
+
+When working with geometry filetypes, they can define the boundaries of an area by storing a series of latitude and longitude pairs within them. This defines a `r glossary(polygon)`.
