@@ -399,13 +399,15 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#latitude-and-longitude" id="toc-latitude-and-longitude" class="nav-link" data-scroll-target="#latitude-and-longitude"><span class="header-section-number">4.2.1</span> Latitude and longitude</a></li>
   </ul></li>
-  <li><a href="#the-british-national-grid" id="toc-the-british-national-grid" class="nav-link" data-scroll-target="#the-british-national-grid"><span class="header-section-number">4.3</span> The British National Grid</a></li>
+  <li><a href="#what-coordinate-reference-systems-are-in-use-in-the-uk" id="toc-what-coordinate-reference-systems-are-in-use-in-the-uk" class="nav-link" data-scroll-target="#what-coordinate-reference-systems-are-in-use-in-the-uk"><span class="header-section-number">4.3</span> What coordinate reference systems are in use in the UK?</a></li>
+  <li><a href="#the-british-national-grid" id="toc-the-british-national-grid" class="nav-link" data-scroll-target="#the-british-national-grid"><span class="header-section-number">4.4</span> The British National Grid</a></li>
   <li><a href="#references-and-further-reading" id="toc-references-and-further-reading" class="nav-link" data-scroll-target="#references-and-further-reading"><span class="header-section-number">5</span> References and Further Reading</a>
   <ul class="collapse">
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">5.1</span> Further Reading</a>
   <ul class="collapse">
   <li><a href="#understanding-the-size-of-countries" id="toc-understanding-the-size-of-countries" class="nav-link" data-scroll-target="#understanding-the-size-of-countries"><span class="header-section-number">5.1.1</span> Understanding the size of countries</a></li>
-  <li><a href="#coordinate-reference-systems-1" id="toc-coordinate-reference-systems-1" class="nav-link" data-scroll-target="#coordinate-reference-systems-1"><span class="header-section-number">5.1.2</span> Coordinate Reference Systems</a></li>
+  <li><a href="#projections-1" id="toc-projections-1" class="nav-link" data-scroll-target="#projections-1"><span class="header-section-number">5.1.2</span> Projections</a></li>
+  <li><a href="#coordinate-reference-systems-1" id="toc-coordinate-reference-systems-1" class="nav-link" data-scroll-target="#coordinate-reference-systems-1"><span class="header-section-number">5.1.3</span> Coordinate Reference Systems</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
@@ -480,9 +482,9 @@ a.glossary:active .def::after {
 <p>In summary, different projections are valuable for different reasons - but they can distort the sizes of countries quite significantly. Just how big these distortions are might surprise you…</p>
 <p>For example, let’s look at Greenland and Africa on the world map you are probably familiar with.</p>
 <p>This map uses the Mercator projection. Now, when our primary requirement for maps was trying to sail ships across the ocean, this map was fantastic. It allowed navigators to set a single constant bearing and get to where they needed to go, rather than constantly adjusting and risking huge errors if they made a single mistake along the way.</p>
-<p>Actually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - it does give you a realistic idea of</p>
-<p>However, it has the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.</p>
-<p>Countries <strong>far</strong> from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than</p>
+<p>Actually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - in fact, a special variant of the Mercator projection, known as Web Mercator (a.k.a. WGS 84 Web Mercator, WGS 84/Pseudo-Mercator, EPSG:3857) is used by almost every major web mapping service, such as Bing, OpenStreetMap, and others - so it’s worth knowing about as you’ll use it a lot when you’re making interactive maps later in the course.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>However, all versions of the Mercator projection have the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.</p>
+<p>Countries <strong>far</strong> from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than they are in reality. If you don’t know it’s happening, it can be quite a surprise to learn that certain countries really aren’t as big as you might have thought!</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -501,7 +503,7 @@ Click here to show an animation demonstrating the impact of the Mercator Project
 <figcaption class="figure-caption">Relative Size of Countries - Mercator Projection Distortion</figcaption>
 </figure>
 </div>
-<p>By Jakub Nowosad - Own Work;, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=73955926">Link</a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>By Jakub Nowosad - Own Work;, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=73955926">Link</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 </div>
 </div>
 </div>
@@ -558,36 +560,123 @@ Click here to view the website without leaving the book!
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="latitude-and-longitude"><span class="header-section-number">4.2.1</span> Latitude and longitude</h3>
 <p><strong>Latitude</strong> looks at how far a point is from the equator - you can also think of it as how close a point is to the North or South Pole.</p>
 <p>Lines of latitude run parallel with the equator.</p>
-<p><img src="images\crs_projections_latitude.png" class="img-fluid" alt="Latitude"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p><img src="images\crs_projections_latitude.png" class="img-fluid" alt="Latitude"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>Latitude has a value of 0 at the equator.</p>
 <p>‘Above’ the equator - towards the North Pole - latitude gradually gets bigger, written as, for example, 70N, reaching a maximum of 90 North at the North pole.</p>
 <p>‘Below’ the equator - towards the South Pole - latitude gradually gets bigger, but this time it is written as, for example, 45S reaching a maximum of 90 South at the South pole.</p>
 <p><strong>However</strong> - when you are using latitude on a computer, latitude South of the equator is often entered as a negative number instead.</p>
 <p><strong>Longitude</strong> is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.</p>
-<p><img src="images\crs_projections_longitude.png" class="img-fluid" alt="Longitude"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p><img src="images\crs_projections_longitude.png" class="img-fluid" alt="Longitude"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <p>Longitude has a value of 0 at the Prime Meridian (Greenwich).</p>
 <p>East of the Prime Meridian, longitude gradually gets bigger and is written as, for example, 60E, reaching a maximum of 180 on directly the opposite side of Earth.</p>
 <p>West of the Prime Meridian, longitude gradually gets bigger but this time it is written as, for example, 30W, reaching a maximum of 180 on directly the opposite side of Earth.</p>
 <p><strong>However</strong> - when you are using longitude on a computer, a longitude to the West of Greenwich is often entered as a negative number instead.</p>
-<section id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections" class="level4" data-number="4.2.1.1">
-<h4 data-number="4.2.1.1" class="anchored" data-anchor-id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections"><span class="header-section-number">4.2.1.1</span> How do lines of latitude and longitude appear on different projections?</h4>
-<p>As it’s the projection you’re still going to commonly see (and probably use for most of the maps you create), let’s go back to the Mercator map projection.</p>
+<section id="writing-coordinate-pairs" class="level4" data-number="4.2.1.1">
+<h4 data-number="4.2.1.1" class="anchored" data-anchor-id="writing-coordinate-pairs"><span class="header-section-number">4.2.1.1</span> Writing coordinate pairs</h4>
+<p>Any point in the world can be identified by providing a figure for both latitude and longitude.</p>
+<p>However - it’s important to write them in the correct order, else you will end up somewhere very different!</p>
+<p>Now, just to be confusing… it’s the opposite way around to a standard graph.</p>
+<p>If you cast your mind back to school, you might remember being taught about writing a coordinate pair for a standard graph.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\crs_projections_cartesian_grid_comparison.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">A cartesian coordinate plane</figcaption>
+</figure>
+</div>
+<p>When we write this, we write the position of the horizontal point (x) first, and then the vertical (y) point - so we write coordinates as (x, y). So for the graph above, this means the coordinates are (2, 5). You might have been taught to remember this as going ‘along the corridor, then up the stairs’.</p>
+<p>Now… it’s the opposite for latitude and longitude!</p>
+<p>Let’s say we have a latitude (the position vertically in relation to the equator - sort of equivalent to our y value above) of 7, and a longitude (the position horizontally in relation to the prime meridian - sort of equivalent to our x value above) of 15.</p>
+<p>We’d write this as (7, 15) - <em>not</em> (15, 7) as you might have expected!</p>
+<p>So just remember - it’s the opposite order to a graph!</p>
 </section>
-<section id="exercise-getting-comfortable-with-latitude-and-longitude" class="level4" data-number="4.2.1.2">
-<h4 data-number="4.2.1.2" class="anchored" data-anchor-id="exercise-getting-comfortable-with-latitude-and-longitude"><span class="header-section-number">4.2.1.2</span> Exercise: Getting Comfortable with Latitude and Longitude</h4>
+<section id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections" class="level4" data-number="4.2.1.2">
+<h4 data-number="4.2.1.2" class="anchored" data-anchor-id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections"><span class="header-section-number">4.2.1.2</span> How do lines of latitude and longitude appear on different projections?</h4>
+<section id="mercator-projection" class="level5" data-number="4.2.1.2.1">
+<h5 data-number="4.2.1.2.1" class="anchored" data-anchor-id="mercator-projection"><span class="header-section-number">4.2.1.2.1</span> Mercator Projection</h5>
+<p>As it’s the projection you’re still going to commonly see (and probably use for most of the maps you create), let’s go back to the Mercator map projection.</p>
+<p>The lines of latitude and longitude are the white grid that’s overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\Mercator_projection_Square.JPG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Mercator Projection</figcaption>
+</figure>
+</div>
+<p>All of the lines of longitude (running top to bottom) are parallel to each other - that is they stay the same distance apart the whole time.</p>
+<p>All of the lines of latitude (running left to right) are also parallel to each other.</p>
+<p>The lines of latitude and longitude are at perfect right angles (also known as perpendicular) to each other.</p>
+<p>Here, each horizontal line represents a distance of 15 degrees north or south.</p>
+<p>However - if you look at the top of the map, you will notice that the lines get further and further apart - even though the gaps still represent 15 degrees.</p>
+<p>Remember what we said before about the Mercator projection making countries further from the equator appear bigger than they are? Well this is it in action!</p>
+</section>
+<section id="gall-peters-projection" class="level5" data-number="4.2.1.2.2">
+<h5 data-number="4.2.1.2.2" class="anchored" data-anchor-id="gall-peters-projection"><span class="header-section-number">4.2.1.2.2</span> Gall-Peters Projection</h5>
+<p>In the Gall-Peters projection, the sizes of</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\Gall–Peters_projection_SW.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gall-Peters Projection</figcaption>
+</figure>
+</div>
+<p>Gall-Peters maps are UNESCOs preferred map, and are quite common in UK schools.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+</section>
+<section id="winkel-tripel" class="level5" data-number="4.2.1.2.3">
+<h5 data-number="4.2.1.2.3" class="anchored" data-anchor-id="winkel-tripel"><span class="header-section-number">4.2.1.2.3</span> Winkel Tripel</h5>
+<p>Finally, let’s look at the lines on the Winkel tripel projection.</p>
+<p>Nowadays, it’s generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It’s used in a lot of textbooks and it’s the preferred projection for world maps made by the National Geographic Society.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\Winkel_triple_projection_SW.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Winkel Tripel Projection</figcaption>
+</figure>
+</div>
+<p>But notice that the lines of latitude and longitude are no longer straight!</p>
+</section>
+</section>
+<section id="exercise-getting-comfortable-with-latitude-and-longitude" class="level4" data-number="4.2.1.3">
+<h4 data-number="4.2.1.3" class="anchored" data-anchor-id="exercise-getting-comfortable-with-latitude-and-longitude"><span class="header-section-number">4.2.1.3</span> Exercise: Getting Comfortable with Latitude and Longitude</h4>
 <p>It’s helpful to get a bit of a feeling for how latitude and longitude is written, as you’ll be dealing with it quite a lot in the datasets we will use later in this book.</p>
 <p>So let’s work through a couple of questions.</p>
 <section id="question-1" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h5>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
+<p><img src="images\crs_projections_q_national_park_brazil.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">What are the correct coordinates for this national park in Brazil?</figcaption>
+</figure>
+</div>
+<div id="radio_VOFJQJILNR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VOFJQJILNR" value="" feedback="<b>Not quite! You've correctly identified that the latitude - the first number in the coordinate pair - is negative, as we are below the equator. However, as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>-20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_VOFJQJILNR" value="" feedback="<b>Almost! You've the latitude - the first number in the coordinate pair - should be negative, as we are below the equator. However, you've got the second part of the coordinate pair (the longitude) correct - as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair is negative too.</b>"> <span>20.655, -49.205</span></label><label><input type="radio" autocomplete="off" name="radio_VOFJQJILNR" value="" feedback="<b>Try again! The first number in the coordinate pair - the latitude - should be negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_VOFJQJILNR" value="answer" feedback="<b>Correct!</b>"> <span>-20.655, -49.205</span></label>
+</div>
+</section>
+<section id="question-2" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h5>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\crs_projections_q_national_park_japan.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">What are the correct coordinates for this national park in Japan?</figcaption>
+</figure>
+</div>
+<div id="radio_QBEBSGGFYM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QBEBSGGFYM" value="" feedback="<b></b>"> <span>-35.943, -138.764</span></label><label><input type="radio" autocomplete="off" name="radio_QBEBSGGFYM" value="answer" feedback="<b></b>"> <span>35.943, 138.764</span></label><label><input type="radio" autocomplete="off" name="radio_QBEBSGGFYM" value="" feedback="<b></b>"> <span>138.764, 35.943</span></label><label><input type="radio" autocomplete="off" name="radio_QBEBSGGFYM" value="" feedback="<b></b>"> <span>35.943, -138.764</span></label>
+</div>
+</section>
+<section id="question-3" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h5>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="images\crs_projections_q_st_lukes.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">What are the correct coordinates for St Luke’s?</figcaption>
 </figure>
 </div>
-<div id="radio_EXQFGDEFKO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="" feedback="<b>Not quite - we're above the equator (towards the North Pole), so the latitude will be positive. Also latitude will be written first - and because we're so close to the Prime Meridian, we'd expect latitude to be the smaller number here (quite close to zero). Have another go!</b>"> <span>-3.51, -50.722</span></label><label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="" feedback="<b></b>"> <span>-50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="answer" feedback="<b>Correct! Well done.</b>"> <span>50.722, -3.51</span></label><label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="" feedback="<b></b>"> <span>50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_EXQFGDEFKO" value="" feedback="<b></b>"> <span>-3.51, 50.722</span></label>
+<div id="radio_HECQWLBMLX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HECQWLBMLX" value="" feedback="<b>Not quite - we're above the equator (towards the North Pole), so the latitude will be positive. Also latitude will be written first - and because we're so close to the Prime Meridian, we'd expect latitude to be the smaller number here (quite close to zero). Have another go!</b>"> <span>-3.51, -50.722</span></label><label><input type="radio" autocomplete="off" name="radio_HECQWLBMLX" value="" feedback="<b></b>"> <span>-50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_HECQWLBMLX" value="answer" feedback="<b>Correct! Well done.</b>"> <span>50.722, -3.51</span></label><label><input type="radio" autocomplete="off" name="radio_HECQWLBMLX" value="" feedback="<b></b>"> <span>50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_HECQWLBMLX" value="" feedback="<b></b>"> <span>-3.51, 50.722</span></label>
 </div>
+</section>
+</section>
+</section>
+</section>
+<section id="what-coordinate-reference-systems-are-in-use-in-the-uk" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="what-coordinate-reference-systems-are-in-use-in-the-uk"><span class="header-section-number">4.3</span> What coordinate reference systems are in use in the UK?</h2>
 <p>The UK government provides the following guidelines on the usage of coordinate reference systems:</p>
 <blockquote class="blockquote">
 <ul>
@@ -600,11 +689,8 @@ Click here to view the website without leaving the book!
 <p>You can also combine these standards and/or add other CRS to meet your organisation’s requirements, for example, when you need greater accuracy for precision engineering decisions.</p>
 </blockquote>
 </section>
-</section>
-</section>
-</section>
-<section id="the-british-national-grid" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="the-british-national-grid"><span class="header-section-number">4.3</span> The British National Grid</h2>
+<section id="the-british-national-grid" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="the-british-national-grid"><span class="header-section-number">4.4</span> The British National Grid</h2>
 </section>
 <section id="references-and-further-reading" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> References and Further Reading</h1>
@@ -615,8 +701,12 @@ Click here to view the website without leaving the book!
 <p><a href="https://mapfight.xyz/">https://mapfight.xyz/</a></p>
 <p><a href="https://www.thetruesize.com/">https://www.thetruesize.com/</a></p>
 </section>
-<section id="coordinate-reference-systems-1" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="coordinate-reference-systems-1"><span class="header-section-number">5.1.2</span> Coordinate Reference Systems</h3>
+<section id="projections-1" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="projections-1"><span class="header-section-number">5.1.2</span> Projections</h3>
+<p><a href="https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/mercator-its-not-hip-to-be-square/">A discussion of alternatives to Web Mercator - while it’s geared towards options available in ArcGis, it’s a great demonstration of some options</a></p>
+</section>
+<section id="coordinate-reference-systems-1" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="coordinate-reference-systems-1"><span class="header-section-number">5.1.3</span> Coordinate Reference Systems</h3>
 <p><a href="https://docs.qgis.org/3.28/en/docs/gentle_gis_introduction/coordinate_reference_systems.html">A gentle Introduction to GIS - Coordinate Reference Systems</a></p>
 </section>
 </section>
@@ -630,9 +720,12 @@ Click here to view the website without leaving the book!
 <hr>
 <ol>
 <li id="fn1"><p>Video Credit - Vox, <a href="https://www.voxmedia.com/pages/licensing">Terms of Licence Use</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>By Jakub Nowosad - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=73955926<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://en.wikipedia.org/wiki/Web_Mercator_projection<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>By Jakub Nowosad - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=73955926<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p><a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Higgins, Hannah B. The Grid Book. Cambridge, Massachusetts: MIT Press, 2009. ISBN 9780262512404 p.94. “Embroiled in controversy from the start, the map is nonetheless widely used in the British school system and is promoted by the United Nations Educational and Scientific Cultural Organization (UNESCO) because of its ability to communicate visually the actual relative sizes of the various regions of the planet.”, via Wikipedia - https://en.wikipedia.org/wiki/Gall%E2%80%93Peters_projection<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>https://en.wikipedia.org/wiki/Winkel_tripel_projection<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

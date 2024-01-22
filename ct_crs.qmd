@@ -27,13 +27,11 @@ For example, let's look at Greenland and Africa on the world map you are probabl
 This map uses the Mercator projection.
 Now, when our primary requirement for maps was trying to sail ships across the ocean, this map was fantastic. It allowed navigators to set a single constant bearing and get to where they needed to go, rather than constantly adjusting and risking huge errors if they made a single mistake along the way.
 
-Actually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - it does give you a realistic idea of
+Actually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - in fact, a special variant of the Mercator projection, known as Web Mercator (a.k.a. WGS 84 Web Mercator, WGS 84/Pseudo-Mercator, EPSG:3857) is used by almost every major web mapping service, such as Bing, OpenStreetMap, and others - so it's worth knowing about as you'll use it a lot when you're making interactive maps later in the course.^[https://en.wikipedia.org/wiki/Web_Mercator_projection]
 
+However, all versions of the Mercator projection have the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.
 
-
-However, it has the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.
-
-Countries **far** from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than
+Countries **far** from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than they are in reality. If you don't know it's happening, it can be quite a surprise to learn that certain countries really aren't as big as you might have thought!
 
 ::: {.callout-note appearance="simple" collapse="true"}
 ### Click here to show an animation demonstrating the impact of the Mercator Projection on the relative size of different countries
@@ -142,9 +140,11 @@ So just remember - it's the opposite order to a graph!
 
 #### How do lines of latitude and longitude appear on different projections?
 
+##### Mercator Projection
+
 As it's the projection you're still going to commonly see (and probably use for most of the maps you create), let's go back to the Mercator map projection.
 
-The lines of latitude and longitude are the white grid that's overlaid on the map. Notice that they're totally straight!
+The lines of latitude and longitude are the white grid that's overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!
 
 ![Mercator Projection](images\Mercator_projection_Square.JPG)
 
@@ -156,8 +156,27 @@ The lines of latitude and longitude are at perfect right angles (also known as p
 
 Here, each horizontal line represents a distance of 15 degrees north or south.
 
-However - if you look at the top of the map, you will notice that the
+However - if you look at the top of the map, you will notice that the lines get further and further apart - even though the gaps still represent 15 degrees.
 
+Remember what we said before about the Mercator projection making countries further from the equator appear bigger than they are? Well this is it in action!
+
+##### Gall-Peters Projection
+
+In the Gall-Peters projection, the sizes of
+
+![Gall-Peters Projection](images\Gall–Peters_projection_SW.jpg)
+
+Gall-Peters maps are UNESCOs preferred map, and are quite common in UK schools.^[Higgins, Hannah B. The Grid Book. Cambridge, Massachusetts: MIT Press, 2009. ISBN 9780262512404 p.94. "Embroiled in controversy from the start, the map is nonetheless widely used in the British school system and is promoted by the United Nations Educational and Scientific Cultural Organization (UNESCO) because of its ability to communicate visually the actual relative sizes of the various regions of the planet.", via Wikipedia - https://en.wikipedia.org/wiki/Gall%E2%80%93Peters_projection]
+
+##### Winkel Tripel
+
+Finally, let's look at the lines on the Winkel tripel projection.
+
+Nowadays, it's generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It's used in a lot of textbooks and it's the preferred projection for world maps made by the National Geographic Society.^[https://en.wikipedia.org/wiki/Winkel_tripel_projection]
+
+![Winkel Tripel Projection](images\Winkel_triple_projection_SW.jpg)
+
+But notice that the lines of latitude and longitude are no longer straight!
 
 #### Exercise: Getting Comfortable with Latitude and Longitude
 
@@ -167,24 +186,24 @@ So let's work through a couple of questions.
 
 ##### Question 1 {.unnumbered}
 
-![What are the correct coordinates for this restaurant in Colombia?](images\crs_projections_q_restaurant.png)
+![What are the correct coordinates for this national park in Brazil?](images\crs_projections_q_national_park_brazil.png)
 
 ```{r echo = FALSE}
-opts_restaurant <- c(
-    "-19.059, 44.2",
-   "19.059, -44.2",
-   "19.059, 44.2",
-   answer="-19.059, -44.2"
+opts_brazil <- c(
+    "-20.655, 49.205",
+   "20.655, -49.205",
+   "20.655, 49.205",
+   answer="-20.655, -49.205"
 )
 
-feedback_restaurant <- c(
-    "",
-    "",
-    "",
-    "")
+feedback_brazil <- c(
+    "Not quite! You've correctly identified that the latitude - the first number in the coordinate pair - is negative, as we are below the equator. However, as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.",
+    "Almost! You've the latitude - the first number in the coordinate pair - should be negative, as we are below the equator. However, you've got the second part of the coordinate pair (the longitude) correct - as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair is negative too.",
+    "Try again! The first number in the coordinate pair - the latitude - should be negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.",
+    "Correct! The first number in the coordinate pair - the latitude - is negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.")
 ```
 
-`r longmcq(opts_restaurant, feedback_restaurant)`
+`r longmcq(opts_brazil, feedback_brazil)`
 
 
 ##### Question 2 {.unnumbered}
@@ -200,19 +219,19 @@ opts_japan <- c(
 )
 
 feedback_japan <- c(
-    "",
-    "",
-    "",
-    "")
+    "Try again! The first number in the coordinate pair - the latitude - should be positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.",
+    "Correct! The first number in the coordinate pair - the latitude - is positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.",
+    "Almost! Have another look at the order of the numbers. Remember that unlike a graph, where we write the horizontal coordinate and then the vertical coordinate, when we are working with maps we write the latitude - the vertical coordinate - first, and then we write the longitude - the horizontal coordinate - second. Latitude only goes up to a maximum of 90 degrees, but the first number here is 138! However, you're right that both of the coordinates here are positive - we are above the equator and to the right of the prime meridian.",
+    "Almost! You've correctly spotted that the first number in the coordinate pair - the latitude - should be positive, as we are above the equator. However, as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - should be positive too.")
 ```
 
 `r longmcq(opts_japan, feedback_japan)`
 
-
-
 ##### Question 3 {.unnumbered}
 
 ![What are the correct coordinates for St Luke's?](images\crs_projections_q_st_lukes.png)
+
+*St Luke's is part of the University of Exeter and is home to the PenCHORD team, who write the HSMA course!*
 
 ```{r echo = FALSE}
 opts_stlukes <- c(
@@ -225,10 +244,10 @@ opts_stlukes <- c(
 
 feedback_stlukes <- c(
     "Not quite - we're above the equator (towards the North Pole), so the latitude will be positive. Also latitude will be written first - and because we're so close to the Prime Meridian, we'd expect latitude to be the smaller number here (quite close to zero). Have another go!",
-    "",
-    "Correct! Well done.",
-    "",
-    "")
+    "I'm afraid that's not quite right! Remember, we're above the equator, so the first coordinate - the latitude - will be positive. Then as we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - the longitude will be negative.",
+    "Correct! Well done. The latitude is positive because we're above the equator, and the longitude is a small negative number as we are just to the left of the prime meridian.",
+    "Not quite! You're correct that the first coordinate - the latitude - will be positive as we're above the equator. However, notice that we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - so the longitude will be negative.",
+    "Almost! Have a think about the size of the numbers. Remember that latitude - the distance from the equator - is written first, and goes from 0 at the equator to +- 180 at the poles. We're quite a long way up here, so we'd expect our figure for latitude to be a fairly large positive number. Then our longitude figure will be a fairly small negative number as we're only just to the left of the prime meridian (the vertical line that goes through Greenwich in London, England).")
 ```
 
 `r longmcq(opts_stlukes, feedback_stlukes)`
@@ -260,6 +279,8 @@ The UK government provides the following guidelines on the usage of coordinate r
 
 [https://www.thetruesize.com/](https://www.thetruesize.com/)
 
+### Projections
+[A discussion of alternatives to Web Mercator - while it's geared towards options available in ArcGis, it's a great demonstration of some options](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/mercator-its-not-hip-to-be-square/)
 
 ### Coordinate Reference Systems
 
