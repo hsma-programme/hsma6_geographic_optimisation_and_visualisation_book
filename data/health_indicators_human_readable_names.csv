@@ -1,0 +1,32 @@
+Variable,Description
+area_num,Community area ID
+shape_area,Polygon area
+shape_len,Shape length
+comm_area,Community area name
+BirthRate,"Births per 1,000 residents"
+Gener_Rate,"General fertility rate per 1,000 females 15-44"
+LowBi_ight,Percentageage of live births with low birth weight
+Prena_ster,Percentage of live births who had prenatal care beginning in first trimester
+Prete_rths,Preterm births as percentage of live births
+TeenB_Rate,"Teen birth rate per 1,000 females age 15-19"
+Assau_cide,"Assault(homicide) per 100,000 people, age adjusted."
+Breas_ales,"Breast cancer deaths per 100,000 females, age adjusted."
+Cance_ites,"Cancer deaths per 100,000 people, age adjusted."
+Color_ncer,"Colorectal cancer deaths per 100,000 people, age adjusted."
+Diabe_ated,"Diabetes-related deaths per 100,000 people, age adjusted."
+Firea_ated,"Firearm related deaths per 1000,000 people, age adjusted."
+Infan_Rate,"Infant mortality rate per 1,000 live births"
+LungCancer,"Lung cancer deaths per 100,000 people, age adjusted."
+Prost_ales,"Prostate cancer deaths per 100,000 males, age adjusted."
+Strok_ease,"Stroke deaths per 100,000 people, age adjusted."
+Child_ning,"Childhood blood lead level screening per 1,000 children age 0-6 years"
+Chil_ing_1,Childhood lead poisoning per 100
+Gonor_ales,"Gonorrhea in females, per 100,000 females age 15-44"
+Gono_les_1,"Gonorrhea in females, per 100,000 females age 15-44"
+Tuber_osis,"Tuberculosis per 100,000 people"
+Below_evel,Percentage of households below poverty level
+Crowd_sing,Percentage of occupied housing units
+Dependency,Percentage of persons aged less than 16 or more than 64 years
+NoHig_loma,Percentage of persons age 25 or higher without high school diploma
+PerCa_come,"Percapita income, 2011 adjusted dollars"
+Unemp_ment,Unemployment as a percentage of persons aged 16 or older
