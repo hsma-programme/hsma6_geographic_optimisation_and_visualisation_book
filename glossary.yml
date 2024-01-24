@@ -4,9 +4,13 @@ API: |
   A way for two or more programs to talk to one another. Designed for computer programmers to utilise when writing programs rather than being used by an end user.<br/><br/>
 
   You will send a request to an API and it will send back a response. For example, you might request data on the postcode EX2 5AA from the postcodes.io API, and it will return a text string containing data like the latitude and longitude.
+basemap: |
+  Placeholder
 BNG: |
   Placeholder
 Cartesian: |
+  Placeholder
+contextily: |
   Placeholder
 Coordinate: |
   Placeholder
@@ -22,19 +26,31 @@ Euclidean distance: |
   Placeholder
 flat file: |
   Placeholder
+function: |
+  Placeholder
 geoJSON: |
   Placeholder
 geopackage: |
   Placeholder
+geopandas: |
+  Placeholder
 Hamming distance: |
   Placeholder
 latitude: |
+  Placeholder
+leaflet: |
+  Placeholder
+library: |
   Placeholder
 longitude: |
   Placeholder
 LSOA: |
   Placeholder
 Manhattan distance: |
+  Placeholder
+metadata: |
+  Placeholder
+method: |
   Placeholder
 Minowski distance: |
   Placeholder
@@ -43,6 +59,8 @@ MSOA: |
 Northing: |
   Placeholder
 OA: |
+  Placeholder
+OpenStreetMap: |
   Placeholder
 optimisation: |
   Placeholder
