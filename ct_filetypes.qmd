@@ -12,4 +12,4 @@ glossary_setup_style()
 
 
 
-When working with geometry filetypes, they can define the boundaries of an area by storing a series of latitude and longitude pairs within them. This defines a `r glossary(polygon)`.
+When working with geometry filetypes, they can define the boundaries of an area by storing a series of latitude and longitude pairs within them. This defines a `r glossary("polygon")`.

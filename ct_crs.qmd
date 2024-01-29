@@ -118,7 +118,7 @@ West of the Prime Meridian, longitude gradually gets bigger but this time it is 
 
 The image below gives you a quick reference to how different points may be written.
 
-![](images\crs_projections_cartesian_grid_comparison.png)
+![](images\crs_projections_lat_long_cartesian.png)
 
 #### Writing coordinate pairs
 
@@ -145,13 +145,13 @@ So just remember - it's the opposite order to a graph!
 
 #### How do lines of latitude and longitude appear on different projections?
 
-##### Mercator Projection
+##### Mercator Projection {.unnumbered}
 
 As it's the projection you're still going to commonly see (and probably use for most of the maps you create), let's go back to the Mercator map projection.
 
 The lines of latitude and longitude are the white grid that's overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!
 
-![Mercator Projection](images\Mercator_projection_Square.JPG){.lightbox width=600}
+![](images\Mercator_projection_Square.JPG){.lightbox width=600}
 
 All of the lines of longitude (running top to bottom) are parallel to each other - that is they stay the same distance apart the whole time.
 
@@ -165,21 +165,27 @@ However - if you look at the top of the map, you will notice that the lines get 
 
 Remember what we said before about the Mercator projection making countries further from the equator appear bigger than they are? Well this is it in action!
 
-##### Gall-Peters Projection
+##### Gall-Peters Projection {.unnumbered}
 
-In the Gall-Peters projection, the sizes of
+In the Gall-Peters projection, the sizes of each rectangle made by the latitude and longitude lines are quite different to the Mercator proejction.
 
-![Gall-Peters Projection](images\Gall–Peters_projection_SW.jpg){.lightbox width=600}
+The rectangles are tall near the equator and get shorter as you go towards the North and South Poles.
+
+![](images\Gall–Peters_projection_SW.jpg){.lightbox width=600}
+
+However, like the Mercator projection, the lines of latitude are parallel to each other, and the same is true of the lines of longitude.
+
+This means that the map can still be used to navigate with a constant bearing - unlike a projection where these lines are curved.
 
 Gall-Peters maps are UNESCOs preferred map, and are quite common in UK schools.^[Higgins, Hannah B. The Grid Book. Cambridge, Massachusetts: MIT Press, 2009. ISBN 9780262512404 p.94. "Embroiled in controversy from the start, the map is nonetheless widely used in the British school system and is promoted by the United Nations Educational and Scientific Cultural Organization (UNESCO) because of its ability to communicate visually the actual relative sizes of the various regions of the planet.", via Wikipedia - https://en.wikipedia.org/wiki/Gall%E2%80%93Peters_projection]
 
-##### Winkel Tripel
+##### Winkel Tripel {.unnumbered}
 
 Finally, let's look at the lines on the Winkel tripel projection.
 
 Nowadays, it's generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It's used in a lot of textbooks and it's the preferred projection for world maps made by the National Geographic Society.^[https://en.wikipedia.org/wiki/Winkel_tripel_projection]
 
-![Winkel Tripel Projection](images\Winkel_triple_projection_SW.jpg){.lightbox width=600}
+![](images\Winkel_triple_projection_SW.jpg){.lightbox width=600}
 
 But notice that the lines of latitude and longitude are no longer straight!
 
@@ -188,6 +194,10 @@ But notice that the lines of latitude and longitude are no longer straight!
 It's helpful to get a bit of a feeling for how latitude and longitude is written, as you'll be dealing with it quite a lot in the datasets we will use later in this book.
 
 So let's work through a couple of questions.
+
+In each of the questions below
+- the dotted line running vertically (from the top to the bottom of the image) is the **prime meridian** - the line that runs through Greenwich in London, England and is a longitude of 0.
+- the dotted line running horizontally (from the left to the right of the image) is the **equator** - the line that is a latitude of 0.
 
 ##### Question 1 {.unnumbered}
 
