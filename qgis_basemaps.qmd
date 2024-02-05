@@ -47,11 +47,40 @@ The licencing text you need to include is this:
 
 You can stop reading here and move onto [the next chapter now @sec-qgis-point] if you like! There you will learn about importing a dataset of points.
 
-However, if you're interested in learning about an alternate, less 'busy' looking basemap, or if you want to use a different basemap to the default one provided by QGIS, then you can carry on to the sections below.
+However, if you want to use a different basemap to the default one provided by QGIS or are interested in learning about an alternate, less 'busy' looking basemap, then you can carry on to the sections below.
 
 :::
 
 ---
+
+## Using different basemap providers
+
+By default, QGIS only offers OpenStreetMap basemap tiles.
+
+However, you can easily load in additional tiles.
+
+::: {.callout-warning}
+Make sure to appropriately credit the providers of any basemap services you use when sharing your maps, even internally!
+:::
+
+To add new basemaps, right click on 'XYZ Tiles' in the Browser and select 'New Connection...'.
+
+![](images/qgis_new_connection.png)
+
+Here, you can give your new map tiles any name you like.
+
+![](images/qgis_xyz_connection_dialog.png)
+
+Under the URL setting, enter one of the following URLS^https://astro-geo-gis.com/liaison/qgis-tutorials/customizing-map-tiles-in-qgis/
+
+```
+Google Maps: http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}
+
+Google Hybrid (Satellite + Roads): https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}
+```
+
+More tiles can be obtained by some careful searching! But note that many tiles will require a `r glossary("API")` key and may require payment to use, so you will likely want to stick to the default OpenStreetMaps in most cases.
+
 
 ## Loading in a basic world map instead
 
@@ -196,5 +225,3 @@ Single Color = Blue
 You now have a a nice plain UK map to work from!
 
 ![](images/qgis_plain_uk_Map.png)
-
-## Using different basemap providers
