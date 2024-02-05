@@ -1,0 +1,40 @@
+# An Introduction to Spatial Analysis with GeoDa
+
+```{r, echo = FALSE}
+source("glossary_funcs.R")
+glossary_setup()
+```
+
+```{r, echo = FALSE, results='asis'}
+glossary_setup_style()
+```
+
+Now, you've got lots of fantastic maps that show some very interesting things - but how can you dig deeper into what these maps are telling you, and confirm that the variation you are seeing is statistically significant?
+
+This is where the GeoDa toolkit comes in.
+
+GeoDa isn't meant to replace QGIS or creating maps in Python - but it can enhance your outputs from either by allowing you to do more advanced analysis.
+
+You can watch the video below to get an overview of the capabilities of GeoDa.
+
+{{< video https://www.youtube.com/watch?v=--8vhhmpgdM >}}
+
+
+GeoDa is available both as a standalone programme and as a library for both [Python](https://github.com/GeoDaCenter/pygeoda) and [R](https://github.com/GeoDaCenter/rgeoda).
+
+What is special about GeoDa?
+
+>"\[Geoda\] helps researchers and analysts translate data into insights by adding spatial statistical tests to simple map visualization...
+>
+> ... Since we are prone to 'patternicity' or overdetection of patterns, statistical tests help differentiate clusters that are real from those that are not."
+> - [The University of Chicago Center for Spatial Data Science](https://spatial.uchicago.edu/geoda)^[The University of Chicago Center for Spatial Data Science](https://spatial.uchicago.edu/geoda)
+
+
+The HSMA course does not cover GeoDa at present (though HSMA 7 may be updated to include it!), but you can work through the two GeoDa workbooks created by the GeoDa team if you want to learn how to use it.
+
+[Book 1](https://lanselin.github.io/introbook_vol1/)
+[Book 2](https://lanselin.github.io/introbook_vol2/)
+
+There is also a [great cheatsheet available on the geoda website](http://geodacenter.github.io/cheatsheet.html) and the GeoDa [Youtube channel](https://www.youtube.com/@GeoDaCenter) provides lots of prerecorded lectures.
+
+# References

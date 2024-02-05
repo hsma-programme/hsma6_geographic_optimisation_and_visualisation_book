@@ -26,6 +26,8 @@ Euclidean distance: |
   Placeholder
 flat file: |
   Placeholder
+FOSS: |
+  Placeholder
 function: |
   Placeholder
 geoJSON: |
@@ -34,6 +36,10 @@ geopackage: |
   Placeholder
 geopandas: |
   Placeholder
+GIS: |
+  Acronym that stands for 'Geographic Information System'.
+  According to the Ordanance Survey, it is "software that blends the power of a map with the power of a database to allow people to create, manage and analyse information, particularly information about location."
+  Reference: https://www.ordnancesurvey.co.uk/business-government/tools-support/gis/what-is-gis
 Hamming distance: |
   Placeholder
 latitude: |
@@ -43,6 +49,8 @@ leaflet: |
 library: |
   Placeholder
 longitude: |
+  Placeholder
+LISA: |
   Placeholder
 LSOA: |
   Placeholder
@@ -82,5 +90,9 @@ projection: |
   Placeholder
 shapefile: |
   Placeholder
+spatial autocorrelation: |
+  Placeholder
 tabular: |
+  Placeholder
+transformation: |
   Placeholder

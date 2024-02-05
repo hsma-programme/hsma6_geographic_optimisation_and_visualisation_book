@@ -199,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">qgis_python.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Python with QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -386,7 +386,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#installing-qgis" id="toc-installing-qgis" class="nav-link active" data-scroll-target="#installing-qgis">Installing QGIS</a>
+  <ul class="collapse">
+  <li><a href="#device-requirements" id="toc-device-requirements" class="nav-link" data-scroll-target="#device-requirements">Device Requirements</a></li>
+  <li><a href="#installing-qgis-1" id="toc-installing-qgis-1" class="nav-link" data-scroll-target="#installing-qgis-1">Installing QGIS</a>
+  <ul class="collapse">
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -453,12 +467,77 @@ a.glossary:active .def::after {
 <li>Where are service users located?
 <ul>
 <li>What is the relative rate of users in different areas?</li>
-<li>How does this interact with e.g.&nbsp;deprivation?</li>
+<li>How does this interact with demographic factors (e.g.&nbsp;age, deprivation)?</li>
+<li>Are there areas where you’re getting less people attending than others that may indicate an access problem?</li>
 </ul></li>
-<li>Where are your services located?</li>
+<li>Where are your services located?
+<ul>
+<li>How does this interact with demographic factors (e.g.&nbsp;deprivation)?</li>
+<li>Are they near to bus stops, train stations, car parks etc?</li>
+</ul></li>
 </ul>
+<p>There are a number of different tools you could use to make maps.</p>
+<p>The one you’ll often hear about is <a href="https://www.arcgis.com/index.html">ArcGIS</a></p>
+<p>One powerful <a class="glossary" title="Placeholder">FOSS</a> option is <a href="https://qgis.org/en/site/">QGIS</a>.</p>
+<p>Now, GIS is just “software that blends the power of a map with the power of a database to allow people to create, manage and analyse information, particularly information about location.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>(https://www.ordnancesurvey.co.uk/business-government/tools-support/gis/what-is-gis)</p>
+<p>In later modules, we will explore how to do mapping from within Python, which will allow you to create ‘static’ maps (non-interactive images where you can control exactly how the final output looks), and ‘interactive’ maps (where a user can move around the map, zoom in or out, and interact with elements on the map to get more information). However, learning to create maps in Python doesn’t make your QGIS knowledge redundant - it’s a very powerful tool that is also accessible to those who don’t know how to code.</p>
+<p>::: {.callout-note appearance=“simple” collapse=“true”} ### Click here for help with installing QGIS</p>
+<section id="installing-qgis" class="level1">
+<h1>Installing QGIS</h1>
+<section id="device-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="device-requirements">Device Requirements</h2>
+<p>To install QGIS, you will need a laptop or desktop computer running Windows, MacOS, or Linux.</p>
+<p>You will not be able to install the software on a phone or tablet! While versions exist for these devices, they are aimed more at conducting fieldwork than doing the sort of task we’ll be covering in this course.</p>
+</section>
+<section id="installing-qgis-1" class="level2">
+<h2 class="anchored" data-anchor-id="installing-qgis-1">Installing QGIS</h2>
+<p>QGIS is widely used across the globe, and is totally free, with the code for the program also made available.</p>
+<p>QGIS is used by tens of thousands of users - some statistics can be viewed here if you are interested.</p>
+<p>If your organisation has had someone on the HSMA programme in the last few years, they will have been required to download QGIS, so the software may already be available in your organisation’s software centre. If so, click here to jump to the section on checking your version to ensure that the version you are running is suitable for the workshop.</p>
+<p>If you are installing QGIS for the first time without using a software centre, head to this page - https://qgis.org/en/site/forusers/download.html - and click on the appropriate box for your operating system. The box may open automatically.</p>
+<p><img src="images/qgis_install.png" class="img-fluid"></p>
+<p>We would recommend going directly to this page rather than searching Google or Bing for QGIS as we know the link above is correct and you won’t redirected to a third-party download site - using the link provided above ensures you are getting the software directly from the QGIS team.</p>
+<p>Don’t worry if the version number doesn’t exactly match the screenshots below - it will just automatically download the most recent release, which will be fine for the course.</p>
+<p>More detailed instructions for Windows are given below.</p>
+<section id="windows" class="level3">
+<h3 class="anchored" data-anchor-id="windows">Windows</h3>
+<p>Note that installing the software will require administrator rights. If you are on a personal device this will not be a problem.</p>
+<p>If you are installing it on your work device, please make sure you have gone through the appropriate processes with your IT department.</p>
+<p>Click on the green banner to download the installer.</p>
+<p><img src="images/qgis_windows.png" class="img-fluid"></p>
+<p>The download will take roughly 5 to 15 minutes, depending on the speed of your internet.</p>
+<p>When the installer has downloaded, find the file in the folder you saved it to, and double click on the file.</p>
+<p>Follow the instructions in the window that appears to install QGIS on your device.</p>
+<p>When you reach the step below, it may appear to pause for a long time with the progress bar not filling up.</p>
+<p><img src="images/qgis_windows_setup.png" class="img-fluid"></p>
+<p>If this happens, check your windows taskbar for the following icon:</p>
+<p><img src="images/qgis_windows_account_control.png" class="img-fluid"></p>
+<p>This is a pop-up for Windows user account control. You may need to click this and authorize the installer.</p>
+<p>The process should then take a maximum of 10 minutes to complete.</p>
+<p><img src="images/qgis_windows_install_complete.png" class="img-fluid"></p>
+<p>Click ‘Finish’. You should now be able to run QGIS from your start menu or an icon on your desktop.</p>
+<p>Checking the version of an existing QGIS install</p>
+<p>If you are using an older version your organisation has approved, you may wish to check the version number.</p>
+<p>If the version number is lower than 3.0, you may find the layout is a bit different to the version we use in the workshop.</p>
+<p>To check the version this, open QGIS up, hover over ‘Help’ in the top menu bar, and then click ‘About’.</p>
+<p><img src="images/qgis_existing_version_check_version.png" class="img-fluid"></p>
+<p>The top line will tell you which version of QGIS you are currently running.</p>
+<p><img src="images/qgis_existing_version_check_version_part_2.png" class="img-fluid"></p>
+<p>You can also choose ‘Check QGIS Version’ from the same menu, but this isn’t quite as reliable!</p>
+</section>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Ordnance Survey<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script>

@@ -15,6 +15,7 @@ book:
     - ct_filetypes.qmd
   - part: introduction_mapping_with_qgis.qmd
     chapters:
+    - qgis_basemaps.qmd
     - qgis_point_data.qmd
     - qgis_choropleth.qmd
     - qgis_filtering.qmd

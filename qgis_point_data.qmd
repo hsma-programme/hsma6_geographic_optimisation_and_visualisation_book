@@ -1,4 +1,4 @@
-# Visualising Point Data in QGIS
+# Visualising Point Data in QGIS {@sec-qgis-point}
 ```{r, echo = FALSE}
 source("glossary_funcs.R")
 glossary_setup()
@@ -7,3 +7,67 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+
+
+
+
+### A note about the CRS
+
+*This seems like a bit of a boring topic - but I promise you it will save you some headaches down the line!*
+
+*It doesn't matter if you don't fully understand all of this section right now - but if you import some data that keeps ending up in the wrong place, just think to yourself 'could this be because of the coordinate reference system? - and then come back and read this section again!*
+
+If we import the basemap in this way, then there are a few things to note about the `r glossary("CRS", "coordinate reference system")` of our QGIS project.
+
+We can always look at the bottom-right corner of QGIS to see the coordinate reference system being used by our **project**.
+
+![](images/qgis_see_crs.png)
+
+If we click on that, it will bring up the project properties and open the 'CRS' part of the properties dialog automatically, which will look something like this.
+
+![](images/qgis_crs_project_properties.png)
+
+Now, here I've already imported the OpenStreetMap basemap as shown in the step above.
+
+Note that here what is selected is called **EPSG:3857** - also known as **WGS:84 / Pseudo-Mercator**.
+
+If we right click on 'OpenStreetMap' in the XYZ tiles and scroll down a bit, we can see that this is the CRS of the OpenStreetMap 'tileset' too.
+
+![](images/qgis_tileset_properties_xyz.png)
+
+It's important to know what CRS your project is using as when you come to import data from other files, it may not be using the same reference system and the data will have to be `r glossary("transformation", "transformed")` to ensure that the points or areas end up in the right place at the end!
+
+#### But there's a twist...
+
+If I now create a new project and look at the CRS, we can see it's different!
+
+![](images/qgis_default_crs_new_project.png)
+
+And this is due to one of the default settings in QGIS.
+
+If I go to "Settings" --> "Options" --> "CRS and Transforms" --> "CRS Handling", then you will spot some things about how QGIS deals with CRS options by default.
+
+![](images/qgis_crs_option_defaults.png)
+
+What we can see is that the project CRS will be based on the CRS of the **first layer added**.
+
+So if we load in the OpenStreetMap basemap **first** when we create a new project, our projection will be **EPSG:3857** - also known as **WGS:84 / Pseudo-Mercator**.
+
+If we load in some other data first - which you might decide to do once you've got a few projects under your belt, or you might do if you get started and only realise afterwards that you haven't loaded your basemap in yet - then you might find that your project is not using the CRS you were expecting!
+
+Now - this isn't a **problem** by itself - but it can cause a lot of confusion when you try and load in additional data!
+
+For example, here I've loaded in a dataset relating to the United Kingdom. There should be some points on the UK... but where are they?
+
+![](images/qgis_loading_incorrect_crs.png)
+
+Well, the only point I can see is in the sea off the coast of Africa!
+
+If I zoom a really long way in, it turns out my points did load in - but they're not anywhere near the UK on my basemap.
+
+![](images/qgis_crs_error.png)
+
+So what's the trick?
+
+The trick is to ignore the project CRS!

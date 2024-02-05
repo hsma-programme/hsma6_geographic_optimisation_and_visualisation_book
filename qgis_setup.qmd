@@ -1,0 +1,53 @@
+# Getting QGIS Ready to Use
+```{r, echo = FALSE}
+source("glossary_funcs.R")
+glossary_setup()
+```
+
+```{r, echo = FALSE, results='asis'}
+glossary_setup_style()
+```
+
+## Selecting panels
+
+When you open up QGIS for the first time, a few of the different panels you will need to use are hidden by default.
+
+![](images/qgis_blank.png)
+
+
+
+Let’s make sure we all have the same tools available
+
+Click **“View”** → **“Panels”**
+
+Make sure
+- “Browser”,
+- “Layer Styling”
+- and “Layers”
+all have a tick next to them
+
+![](images/qgis_panels.png)
+
+Now our QGIS should look a bit like this, with the panels highlighted in orange (browser, layer styling and layers) all visible on the screen.
+
+## Moving around QGIS
+
+![](images/qgis_panels_shown.png)
+
+To move around your maps, you will need two key tools: move (pan) and zoom.
+
+![](images/qgis_panzoom.png)
+
+However, if you’re using a mouse with a scroll wheel, you can use that instead of the zoom buttons. The zoom will be centred around the point your mouse is hovering over, which can be useful for getting to a certain point quickly!
+
+Or on a laptop trackpad, you can “pinch” outwards to zoom out, and inwards to zoom in.
+
+## Starting a project
+
+Now you will want to start a new project.
+
+Click **"Project"** → **"New"**
+
+![](images/qgis_new_project.png)
+
+Now it's time to add our basemap - so head to the next chapter to find out how to do that.

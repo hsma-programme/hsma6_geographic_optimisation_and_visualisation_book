@@ -11,13 +11,11 @@ glossary_setup_style()
 
 Creating maps in Python opens up a whole world of opportunities to you.
 
-
 - You can do every step in one place - you don't have to move between different tools to clean and visualise your data
 - You can create reproducible analyses for different areas using similar code (for example, you could create and visualise a report per county programatically and schedule this to be rerun on a regular basis)
 - You can create interactive web applications that allow users to explore maps at their own pace and gain insights.
 
 By the end of this section, you will be able to make all sorts of maps within Python and incorporate them into a range of outputs to enable other people to make use of them within or outside your organisation.
-
 
 Let's start by taking a look at some example maps:
 
@@ -27,8 +25,6 @@ Let's start by taking a look at some example maps:
 <iframe width="780" height="550" src="https://fingertips.phe.org.uk/topic/public-health-dashboard/map-with-data" title="PHE"></iframe>
 ```
 :::
-
-
 
 
 # Further reading

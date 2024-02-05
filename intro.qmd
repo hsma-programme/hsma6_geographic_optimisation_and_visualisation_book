@@ -28,7 +28,7 @@ We will cover topics including:
 - interacting with travel time `r glossary("API", "APIs")`
 - visualising travel times to sites across regions
 - optimizing the locations of facilities to minimize travel time across a region
-- optimizing the locations of facilities to maximize perfo
+- optimizing the locations of facilities to maximize performance against multiple objectives (e.g. minimizing average travel time while maximizing the percentage of people who can reach a service within 30 minuts)
 
 
 

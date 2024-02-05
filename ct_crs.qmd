@@ -1,3 +1,5 @@
+# Projections and Coordinate Reference Systems {#sec-projections-crs}
+
 ```{r, echo = FALSE}
 source("glossary_funcs.R")
 glossary_setup()
@@ -6,8 +8,6 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
-
-# Projections and Coordinate Reference Systems
 
 Every map ever created is **wrong**.
 

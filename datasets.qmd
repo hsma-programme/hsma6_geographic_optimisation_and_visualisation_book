@@ -1,0 +1,47 @@
+# Datasets used in this book
+
+```{r, echo = FALSE}
+source("glossary_funcs.R")
+glossary_setup()
+```
+
+```{r, echo = FALSE, results='asis'}
+glossary_setup_style()
+```
+
+We'll be using a couple of different datasets throughout this book.
+
+# STATS-19
+
+The STATS-19 form is used by police to record the
+
+The STATS19 dataset is available under an [Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+
+This is available from [data.gov.uk](https://www.data.gov.uk), where you can find thousands of open datasets to work with (though not all are geographic datasets).
+
+As of February 2024, there are [over 1700 datasets available](https://www.data.gov.uk/search?filters%5Btopic%5D=Health) with the tag of 'health'.
+
+# SAMHI
+
+SAMHI is the Small Area Mental Health Index.
+
+This is LSOA-level data that combines a range of things into a single index:
+- NHS Mental Health-related hospital Attendances
+- Antidepressant prescribing
+- Depression (as measured by the QOF)
+- Department for Work and Pensions (DWP) data on Incapaacity benefit and employment support allowance for mental health
+
+The STATS19 dataset is available under an [Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+
+Daras K, Barr B (2021), Small Area Mental Health Index (SAMHI) <VERSION 4.00> [Open Dataset], Place-based Logitudinal Data Resource, DOI: 10.17638/datacat.liverpool.ac.uk/1188
+
+# TIA clinics
+
+A TIA is a transient ischaemic attack. This is sometimes referred to as a 'mini-stroke', and it can be a precursor to a larger stroke. [TODO: SOURCE]
+
+
+# Where to find more datasets
+
+[Office for National Statistics - Open Geography Portal](https://geoportal.statistics.gov.uk/)
+
+[data.gov.uk](https://www.data.gov.uk)
