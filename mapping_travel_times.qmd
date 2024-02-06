@@ -1,4 +1,4 @@
-# An Introduction to Calculating and Visualising Travel Times
+# Calculating and Visualising Travel Times
 
 ```{r, echo = FALSE}
 source("glossary_funcs.R")

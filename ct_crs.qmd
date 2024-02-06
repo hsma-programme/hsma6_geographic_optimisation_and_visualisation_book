@@ -280,9 +280,147 @@ The UK government provides the following guidelines on the usage of coordinate r
 > You can also combine these standards and/or add other CRS to meet your organisation’s requirements, for example, when you need greater accuracy for precision engineering decisions.
 
 
-## The British National Grid
+### The British National Grid
+
+Given the government's recommendation to use the BNG - which is also sometimes referred to as the Ordnance Survey National Grid reference system (OSBG) - you may come across datasets which make use of it, so it's worth knowing how it works!
+
+Rather than latitude and longitude, BNG uses Northings and Eastings.
+
+Northing sand Estings will be given as a series of digits without decimal places.
+
+For example, the location of the St Luke's University campus (the home of HSMA!) using the BNG is **29297, 92456**
+
+![](images/crs_st_lukes.png)
+
+In this, the Easting is 29297 and the Northing is 92456.
+
+::: {.callout-warning}
+It's important to note that we give the Easting (the across) **first**, and the Northing (the up) **second**.
+
+This is the **opposite** of using latitude and longitude!
+
+![](images/crs_compare_lat_long_bng.png)
+
+:::
+
+## What other ways do we determine areas within the UK?
+
+### Postcodes
+
+Postcodes are a well-known way of splitting the UK up.
+
+Postcodes can be used at several different levels of resolution.
+
+![](images/crs_postcode_types.png)
+
+Postcode areas are often quite large, sometimes spanning whole counties.
+
+![](images/crs_uk_postcodes.png){.lightbox}^https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/British_postcode_areas_map.svg/450px-British_postcode_areas_map.svg.png
+
+In contrast, a single exact postcode may only cover a handful of houses, so they are often not used when analysing healthcare data as there is too much of a risk of being able to identify an individual patient from their postcode.
+
+::: {.callout-warning}
+There are a lot of valid formats for postcodes, so they are not always the easiest to validate!
+
+You may also find that they are input into software with a mixture of gaps between the first and second half (known as the outward code and inward code), so you may need to clean and standardise them before joining them to other datasets.
+:::
+
+::: {.callout-tip}
+[](postcodes.io) is a great website for getting up-to-date information about postcodes and using this to supplement your data.
+
+For example, you can find out which LSOA - a grouping we will talk about shortly - a postcode belongs to, which can help with aggregating your data for a different level of detail.
+:::
+
+### Output Areas
+
+Output Areas (OA), Lower Layer Super Output Areas (LSOA) and Middle Layer Super Output Areas (MSOA) are standardised geographical units that differ in area but have a roughly similar number of people living in each one.
+
+![](images/crs_oa_lsoa_msoa%20comparison.png)^ https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistical-geographies/, https://www.ons.gov.uk/methodology/geography/ukgeographies/censusgeographies/census2021
+
+#### OA
+
+Output Areas (OA) are very small, with an average of circa 300 people per area.
+
+They are so small that you will probably not work with them very often.
+
+#### LSOA
+
+Lower Layer Super Output Areas (LSOA) are the medium size of area, with around 1500 people per LSOA.
+
+#### MSOA
+
+Lower Layer Super Output Areas (LSOA) are the largest size of area, with around 8000 people per MSOA.
+
+The map below shows MSOA boundaries (in red) overlaid over the LSOA boundaries (in blue).
+
+![](images/crs_lsoa_msoa.png)
+
+Zooming in on a single MSOA, outlined in red, we can see that there are, in this case, four LSOAs within it - though this will not be exactly the same for each MSOA.
+
+You can also wee here that one of the LSOAs is much larger than the other three, suggesting it is likely to be less densely populated.
+
+![](images/crs_lsoa_msoa_zoomed.png)
+
+::: {.callout-note appearance="simple" collapse="true"}
+
+##### Click here to view an interactive map of MSOAs without leaving the book!
+
+```{=html}
+<iframe width="780" height="700" src="https://houseofcommonslibrary.github.io/msoanames/map/
+" title="MSOA Map"></iframe>
+```
+:::
+
+### Issues when working with output areas
+
+::: {.callout-important}
+
+Despite being somewhat standardised, there can still be very significant differences between areas in terms of the number of people living in them or the total land area covered.
+
+You should always carefully consider whether you need to **standardise** the data in some way to account for this variation.
+
+You can read more about this process in a later chapter.
+:::
+
+::: {.callout-warning}
+It's also worth paying attention to which year of output areas you are working with.
+
+A lot of older data will use 2011 boundaries, but the boundaries were refreshed in 2021. If trying to join older data to a newer file of boundaries, or vice-versa, you may find that some areas appear to be missing - so check the dates!
+:::
+
+### Other groupings
+
+#### Local Authorities
+
+There are county councils, which are quite large, and then these are often (though not always) subdivided into multiple district councils.
+
+![](images/crs_local_authorities.png){.lightbox}^https://en.wikipedia.org/wiki/Local_government_in_England
+
+#### Healthcare Regions
+
+Healthcare regions in the UK frequently change.
+
+<1996: Regional Health Authorities
+
+1996-2002: Health Authorities
+
+2002-2013: Strategic health authorities + primary care trusts
+
+2013-2022: CCGs
+
+2022-now (February 2024): Integrated care systems
+(integrated care board plus integrated care partnership)
+
+![](images/crs_icb.png){.lightbox}^https://geoportal.statistics.gov.uk/documents/ons::integrated-care-boards-april-2023-map-in-england/explore
+
+#### Ambulance Trusts
+
+![](images/crs_ambulance_trusts.png){.lightbox}^https://www.bbc.co.uk/news/health-16052725
 
 
+#### Police Forces
+
+![](images/crs_police_forces.png){.lightbox}^https://assets-hmicfrs.justiceinspectorates.gov.uk/uploads/police-force-map.pdf
 
 
 # References and Further Reading

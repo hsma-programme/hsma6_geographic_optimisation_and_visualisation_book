@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 4&nbsp; Projections and Coordinate Reference Systems</title>
+<title>HSMA - Geographic Modelling and Visualisation - 3&nbsp; Projections and Coordinate Reference Systems</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,13 +44,22 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -59,6 +68,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -73,14 +83,14 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">HSMA - Geographic Modelling and Visualisation</span>
     </a>
   </div>
-        <div class="quarto-navbar-tools ms-auto">
+        <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
           <div id="quarto-search" class="" title="Search"></div>
@@ -88,12 +98,12 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./concepts_and_terms.html">Geographical Concepts and Terminology</a></li><li class="breadcrumb-item"><a href="./ct_crs.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./concepts_and_terms.html">Geographical Concepts and Terminology</a></li><li class="breadcrumb-item"><a href="./ct_crs.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -103,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="./index.html" class="sidebar-logo-link">
       <img src="./resources/logos/hsma_logo_transparent_background_large.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -130,14 +140,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./webexercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Webexercises</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./what_geographic_problems_health_etc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Types of Geographic Problems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Types of Geographic Problems</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -152,13 +156,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ct_crs.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ct_filetypes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span></a>
   </div>
 </li>
       </ul>
@@ -166,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./introduction_mapping_with_qgis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">An Introduction to Mapping in QGIS</span></a>
+ <span class="menu-text">Mapping in QGIS</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -174,44 +178,56 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./qgis_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_basemaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./qgis_point_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_choropleth.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_filtering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Filtering Data in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Filtering Data in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_print_layouts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Print Layouts in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Print Layouts in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Combining Python with QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Combining Python with QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_extensions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Extensions in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Extensions in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Exercises - QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercises - QGIS</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,7 +235,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./introduction_mapping_in_python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">An Introduction to Mapping in Python</span></a>
+ <span class="menu-text">Mapping in Python</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -228,31 +244,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas_matplotlib.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Static Maps with Matplotlib</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Static Maps with Matplotlib</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas_leaflet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Interactive Maps with Leaflet and Folium</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Interactive Maps with Leaflet and Folium</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas_kepler.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Interactive Maps with Kepler</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Interactive Maps with Kepler</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_mapping_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Exercises - Mapping in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Exercises - Mapping in Python</span></span></a>
   </div>
 </li>
       </ul>
@@ -260,7 +276,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./mapping_travel_times.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">An Introduction to Calculating and Visualising Travel Times</span></a>
+ <span class="menu-text">Calculating and Visualising Travel Times</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -269,31 +285,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_working_with_lsoa_travel_time_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Working with Precalculated Travel Time Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Working with Precalculated Travel Time Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_mapping_travel_times_qgis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Visualising Travel Times in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualising Travel Times in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_mapping_travel_times_python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualising Travel Times in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Visualising Travel Times in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_travel_time_apis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Using Travel Time APIs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Using Travel Time APIs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mtt_travel_time_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Exercises - Travel Time</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Exercises - Travel Time</span></span></a>
   </div>
 </li>
       </ul>
@@ -301,18 +317,12 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./intro_facility_location.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">An Introduction to Facility Location Problems</span></a>
+ <span class="menu-text">Facility Location Problems</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./fl_limits_of_computation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Limits of Brute Force Computation</span></span></a>
-  </div>
-</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_bruteforce_solutions.html" class="sidebar-item-text sidebar-link">
@@ -321,20 +331,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./fl_limits_of_computation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Limits of Brute Force Computation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./fl_evolutionary_algorithms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Evolutionary Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Evolutionary Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_genetic_algorithms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Genetic Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Genetic Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_facility_location_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Facility Location Exercises</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Facility Location Exercises</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./introduction_travelling_salesman_vrp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">An Introduction to the Travelling Salesperson and Vehicle Routing Problems</span></a>
+ <span class="menu-text">The Travelling Salesperson and Vehicle Routing Problems</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -351,19 +367,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tsvrp_travelling_salesman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">The Travelling Salesperson Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Travelling Salesperson Problem</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tsvrp_vehicle_routing_problem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Vehicle Routing Problem</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Vehicle Routing Problem</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tsvrp_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Exercises - Travelling Salesman and VRP</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Exercises - Travelling Salesman and VRP</span></span></a>
   </div>
 </li>
       </ul>
@@ -371,55 +387,64 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./resources_additional_reading.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Resources and Additional Reading</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Resources and Additional Reading</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#projections" id="toc-projections" class="nav-link active" data-scroll-target="#projections"><span class="header-section-number">4.1</span> Projections</a>
+  <li><a href="#projections" id="toc-projections" class="nav-link active" data-scroll-target="#projections"><span class="header-section-number">3.1</span> Projections</a>
   <ul class="collapse">
   <li><a href="#optional-exercise" id="toc-optional-exercise" class="nav-link" data-scroll-target="#optional-exercise">Optional Exercise</a></li>
   <li><a href="#optional-exercise-1" id="toc-optional-exercise-1" class="nav-link" data-scroll-target="#optional-exercise-1">Optional Exercise</a></li>
   </ul></li>
-  <li><a href="#coordinate-reference-systems" id="toc-coordinate-reference-systems" class="nav-link" data-scroll-target="#coordinate-reference-systems"><span class="header-section-number">4.2</span> Coordinate Reference Systems</a>
+  <li><a href="#coordinate-reference-systems" id="toc-coordinate-reference-systems" class="nav-link" data-scroll-target="#coordinate-reference-systems"><span class="header-section-number">3.2</span> Coordinate Reference Systems</a>
   <ul class="collapse">
-  <li><a href="#latitude-and-longitude" id="toc-latitude-and-longitude" class="nav-link" data-scroll-target="#latitude-and-longitude"><span class="header-section-number">4.2.1</span> Latitude and longitude</a></li>
+  <li><a href="#latitude-and-longitude" id="toc-latitude-and-longitude" class="nav-link" data-scroll-target="#latitude-and-longitude"><span class="header-section-number">3.2.1</span> Latitude and longitude</a></li>
   </ul></li>
-  <li><a href="#what-coordinate-reference-systems-are-in-use-in-the-uk" id="toc-what-coordinate-reference-systems-are-in-use-in-the-uk" class="nav-link" data-scroll-target="#what-coordinate-reference-systems-are-in-use-in-the-uk"><span class="header-section-number">4.3</span> What coordinate reference systems are in use in the UK?</a></li>
-  <li><a href="#the-british-national-grid" id="toc-the-british-national-grid" class="nav-link" data-scroll-target="#the-british-national-grid"><span class="header-section-number">4.4</span> The British National Grid</a></li>
-  <li><a href="#references-and-further-reading" id="toc-references-and-further-reading" class="nav-link" data-scroll-target="#references-and-further-reading"><span class="header-section-number">5</span> References and Further Reading</a>
+  <li><a href="#what-coordinate-reference-systems-are-in-use-in-the-uk" id="toc-what-coordinate-reference-systems-are-in-use-in-the-uk" class="nav-link" data-scroll-target="#what-coordinate-reference-systems-are-in-use-in-the-uk"><span class="header-section-number">3.3</span> What coordinate reference systems are in use in the UK?</a>
   <ul class="collapse">
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">5.1</span> Further Reading</a>
+  <li><a href="#the-british-national-grid" id="toc-the-british-national-grid" class="nav-link" data-scroll-target="#the-british-national-grid"><span class="header-section-number">3.3.1</span> The British National Grid</a></li>
+  </ul></li>
+  <li><a href="#what-other-ways-do-we-determine-areas-within-the-uk" id="toc-what-other-ways-do-we-determine-areas-within-the-uk" class="nav-link" data-scroll-target="#what-other-ways-do-we-determine-areas-within-the-uk"><span class="header-section-number">3.4</span> What other ways do we determine areas within the UK?</a>
   <ul class="collapse">
-  <li><a href="#understanding-the-size-of-countries" id="toc-understanding-the-size-of-countries" class="nav-link" data-scroll-target="#understanding-the-size-of-countries"><span class="header-section-number">5.1.1</span> Understanding the size of countries</a></li>
-  <li><a href="#projections-1" id="toc-projections-1" class="nav-link" data-scroll-target="#projections-1"><span class="header-section-number">5.1.2</span> Projections</a></li>
-  <li><a href="#coordinate-reference-systems-1" id="toc-coordinate-reference-systems-1" class="nav-link" data-scroll-target="#coordinate-reference-systems-1"><span class="header-section-number">5.1.3</span> Coordinate Reference Systems</a></li>
+  <li><a href="#postcodes" id="toc-postcodes" class="nav-link" data-scroll-target="#postcodes"><span class="header-section-number">3.4.1</span> Postcodes</a></li>
+  <li><a href="#output-areas" id="toc-output-areas" class="nav-link" data-scroll-target="#output-areas"><span class="header-section-number">3.4.2</span> Output Areas</a></li>
+  <li><a href="#issues-when-working-with-output-areas" id="toc-issues-when-working-with-output-areas" class="nav-link" data-scroll-target="#issues-when-working-with-output-areas"><span class="header-section-number">3.4.3</span> Issues when working with output areas</a></li>
+  <li><a href="#other-groupings" id="toc-other-groupings" class="nav-link" data-scroll-target="#other-groupings"><span class="header-section-number">3.4.4</span> Other groupings</a></li>
+  </ul></li>
+  <li><a href="#references-and-further-reading" id="toc-references-and-further-reading" class="nav-link" data-scroll-target="#references-and-further-reading"><span class="header-section-number">4</span> References and Further Reading</a>
+  <ul class="collapse">
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">4.1</span> Further Reading</a>
+  <ul class="collapse">
+  <li><a href="#understanding-the-size-of-countries" id="toc-understanding-the-size-of-countries" class="nav-link" data-scroll-target="#understanding-the-size-of-countries"><span class="header-section-number">4.1.1</span> Understanding the size of countries</a></li>
+  <li><a href="#projections-1" id="toc-projections-1" class="nav-link" data-scroll-target="#projections-1"><span class="header-section-number">4.1.2</span> Projections</a></li>
+  <li><a href="#coordinate-reference-systems-1" id="toc-coordinate-reference-systems-1" class="nav-link" data-scroll-target="#coordinate-reference-systems-1"><span class="header-section-number">4.1.3</span> Coordinate Reference Systems</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5</span> References</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./concepts_and_terms.html">Geographical Concepts and Terminology</a></li><li class="breadcrumb-item"><a href="./ct_crs.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></h1>
+<h1 class="title"><span id="sec-projections-crs" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></span></h1>
 </div>
 
 
@@ -432,7 +457,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <style>
 a.glossary {
@@ -477,8 +504,8 @@ a.glossary:active .def::after {
 <p>A bold claim - but a true one! There is no way to take a spherical object like Earth and translate it to a flat object without compromising in some way.</p>
 <p>The following video from Vox<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is a great introduction to this concept, and gives you a nice overview of common <a class="glossary" title="Placeholder">projections</a> - different ways that people have tried to get around this problem over the years.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kIID5FDi2JQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<section id="projections" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="projections"><span class="header-section-number">4.1</span> Projections</h2>
+<section id="projections" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="projections"><span class="header-section-number">3.1</span> Projections</h2>
 <p>In summary, different projections are valuable for different reasons - but they can distort the sizes of countries quite significantly. Just how big these distortions are might surprise you…</p>
 <p>For example, let’s look at Greenland and Africa on the world map you are probably familiar with.</p>
 <p>This map uses the Mercator projection. Now, when our primary requirement for maps was trying to sail ships across the ocean, this map was fantastic. It allowed navigators to set a single constant bearing and get to where they needed to go, rather than constantly adjusting and risking huge errors if they made a single mistake along the way.</p>
@@ -500,7 +527,7 @@ Click here to show an animation demonstrating the impact of the Mercator Project
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images\worlds_animate_jakub_nowosad_cc_by_sa_4_0.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Relative Size of Countries - Mercator Projection Distortion</figcaption>
+<figcaption>Relative Size of Countries - Mercator Projection Distortion</figcaption>
 </figure>
 </div>
 <p>By Jakub Nowosad - Own Work;, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=73955926">Link</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
@@ -552,37 +579,37 @@ Click here to view the website without leaving the book!
 </div>
 </section>
 </section>
-<section id="coordinate-reference-systems" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="coordinate-reference-systems"><span class="header-section-number">4.2</span> Coordinate Reference Systems</h2>
+<section id="coordinate-reference-systems" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="coordinate-reference-systems"><span class="header-section-number">3.2</span> Coordinate Reference Systems</h2>
 <p>The next thing to understand is how we divide the world up so we can all talk about it using the same language and find the same point on the map.</p>
 <p>One of the most common ways to do this is with <a class="glossary" title="Placeholder">latitude</a> and <a class="glossary" title="Placeholder">longitude</a>.</p>
-<section id="latitude-and-longitude" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="latitude-and-longitude"><span class="header-section-number">4.2.1</span> Latitude and longitude</h3>
+<section id="latitude-and-longitude" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="latitude-and-longitude"><span class="header-section-number">3.2.1</span> Latitude and longitude</h3>
 <p><strong>Latitude</strong> looks at how far a point is from the equator - you can also think of it as how close a point is to the North or South Pole.</p>
 <p>Lines of latitude run parallel with the equator.</p>
-<p><img src="images\crs_projections_latitude.png" class="lightbox img-fluid" width="300" alt="Latitude"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p><a href="images\crs_projections_latitude.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Latitude"><img src="images\crs_projections_latitude.png" class="img-fluid" width="300" alt="Latitude"></a><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>Latitude has a value of 0 at the equator.</p>
 <p>‘Above’ the equator - towards the North Pole - latitude gradually gets bigger, written as, for example, 70N, reaching a maximum of 90 North at the North pole.</p>
 <p>‘Below’ the equator - towards the South Pole - latitude gradually gets bigger, but this time it is written as, for example, 45S reaching a maximum of 90 South at the South pole.</p>
 <p><strong>However</strong> - when you are using latitude on a computer, latitude South of the equator is often entered as a negative number instead.</p>
 <p><strong>Longitude</strong> is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.</p>
-<p><img src="images\crs_projections_longitude.png" class="lightbox img-fluid" width="300" alt="Longitude"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p><a href="images\crs_projections_longitude.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Longitude"><img src="images\crs_projections_longitude.png" class="img-fluid" width="300" alt="Longitude"></a><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <p>Longitude has a value of 0 at the Prime Meridian (Greenwich).</p>
 <p>East of the Prime Meridian, longitude gradually gets bigger and is written as, for example, 60E, reaching a maximum of 180 on directly the opposite side of Earth.</p>
 <p>West of the Prime Meridian, longitude gradually gets bigger but this time it is written as, for example, 30W, reaching a maximum of 180 on directly the opposite side of Earth.</p>
 <p><strong>However</strong> - when you are using longitude on a computer, a longitude to the West of Greenwich is often entered as a negative number instead.</p>
 <p>The image below gives you a quick reference to how different points may be written.</p>
 <p><img src="images\crs_projections_lat_long_cartesian.png" class="img-fluid"></p>
-<section id="writing-coordinate-pairs" class="level4" data-number="4.2.1.1">
-<h4 data-number="4.2.1.1" class="anchored" data-anchor-id="writing-coordinate-pairs"><span class="header-section-number">4.2.1.1</span> Writing coordinate pairs</h4>
+<section id="writing-coordinate-pairs" class="level4" data-number="3.2.1.1">
+<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="writing-coordinate-pairs"><span class="header-section-number">3.2.1.1</span> Writing coordinate pairs</h4>
 <p>Any point in the world can be identified by providing a figure for both latitude and longitude.</p>
 <p>However - it’s important to write them in the correct order, else you will end up somewhere very different!</p>
 <p>Now, just to be confusing… it’s the opposite way around to a standard graph.</p>
 <p>If you cast your mind back to school, you might remember being taught about writing a coordinate pair for a standard graph.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\crs_projections_cartesian_grid_comparison.png" class="lightbox img-fluid figure-img" width="400"></p>
-<figcaption class="figure-caption">A cartesian coordinate plane</figcaption>
+<p><a href="images\crs_projections_cartesian_grid_comparison.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3" title="A cartesian coordinate plane"><img src="images\crs_projections_cartesian_grid_comparison.png" class="img-fluid figure-img" width="400" alt="A cartesian coordinate plane"></a></p>
+<figcaption>A cartesian coordinate plane</figcaption>
 </figure>
 </div>
 <p>When we write this, we write the position of the horizontal point (x) first, and then the vertical (y) point - so we write coordinates as (x, y). So for the graph above, this means the coordinates are (2, 5). You might have been taught to remember this as going ‘along the corridor, then up the stairs’.</p>
@@ -591,13 +618,13 @@ Click here to view the website without leaving the book!
 <p>We’d write this as (7, 15) - <em>not</em> (15, 7) as you might have expected!</p>
 <p>So just remember - it’s the opposite order to a graph!</p>
 </section>
-<section id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections" class="level4" data-number="4.2.1.2">
-<h4 data-number="4.2.1.2" class="anchored" data-anchor-id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections"><span class="header-section-number">4.2.1.2</span> How do lines of latitude and longitude appear on different projections?</h4>
+<section id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections" class="level4" data-number="3.2.1.2">
+<h4 data-number="3.2.1.2" class="anchored" data-anchor-id="how-do-lines-of-latitude-and-longitude-appear-on-different-projections"><span class="header-section-number">3.2.1.2</span> How do lines of latitude and longitude appear on different projections?</h4>
 <section id="mercator-projection" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="mercator-projection">Mercator Projection</h5>
 <p>As it’s the projection you’re still going to commonly see (and probably use for most of the maps you create), let’s go back to the Mercator map projection.</p>
 <p>The lines of latitude and longitude are the white grid that’s overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!</p>
-<p><img src="images\Mercator_projection_Square.JPG" class="lightbox img-fluid" width="600"></p>
+<p><a href="images\Mercator_projection_Square.JPG" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="images\Mercator_projection_Square.JPG" class="img-fluid" width="600"></a></p>
 <p>All of the lines of longitude (running top to bottom) are parallel to each other - that is they stay the same distance apart the whole time.</p>
 <p>All of the lines of latitude (running left to right) are also parallel to each other.</p>
 <p>The lines of latitude and longitude are at perfect right angles (also known as perpendicular) to each other.</p>
@@ -609,7 +636,7 @@ Click here to view the website without leaving the book!
 <h5 class="unnumbered anchored" data-anchor-id="gall-peters-projection">Gall-Peters Projection</h5>
 <p>In the Gall-Peters projection, the sizes of each rectangle made by the latitude and longitude lines are quite different to the Mercator proejction.</p>
 <p>The rectangles are tall near the equator and get shorter as you go towards the North and South Poles.</p>
-<p><img src="images\Gall–Peters_projection_SW.jpg" class="lightbox img-fluid" width="600"></p>
+<p><a href="images\Gall–Peters_projection_SW.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="images\Gall–Peters_projection_SW.jpg" class="img-fluid" width="600"></a></p>
 <p>However, like the Mercator projection, the lines of latitude are parallel to each other, and the same is true of the lines of longitude.</p>
 <p>This means that the map can still be used to navigate with a constant bearing - unlike a projection where these lines are curved.</p>
 <p>Gall-Peters maps are UNESCOs preferred map, and are quite common in UK schools.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
@@ -618,12 +645,12 @@ Click here to view the website without leaving the book!
 <h5 class="unnumbered anchored" data-anchor-id="winkel-tripel">Winkel Tripel</h5>
 <p>Finally, let’s look at the lines on the Winkel tripel projection.</p>
 <p>Nowadays, it’s generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It’s used in a lot of textbooks and it’s the preferred projection for world maps made by the National Geographic Society.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
-<p><img src="images\Winkel_triple_projection_SW.jpg" class="lightbox img-fluid" width="600"></p>
+<p><a href="images\Winkel_triple_projection_SW.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="images\Winkel_triple_projection_SW.jpg" class="img-fluid" width="600"></a></p>
 <p>But notice that the lines of latitude and longitude are no longer straight!</p>
 </section>
 </section>
-<section id="exercise-getting-comfortable-with-latitude-and-longitude" class="level4" data-number="4.2.1.3">
-<h4 data-number="4.2.1.3" class="anchored" data-anchor-id="exercise-getting-comfortable-with-latitude-and-longitude"><span class="header-section-number">4.2.1.3</span> Exercise: Getting Comfortable with Latitude and Longitude</h4>
+<section id="exercise-getting-comfortable-with-latitude-and-longitude" class="level4" data-number="3.2.1.3">
+<h4 data-number="3.2.1.3" class="anchored" data-anchor-id="exercise-getting-comfortable-with-latitude-and-longitude"><span class="header-section-number">3.2.1.3</span> Exercise: Getting Comfortable with Latitude and Longitude</h4>
 <p>It’s helpful to get a bit of a feeling for how latitude and longitude is written, as you’ll be dealing with it quite a lot in the datasets we will use later in this book.</p>
 <p>So let’s work through a couple of questions.</p>
 <p>In each of the questions below - the dotted line running vertically (from the top to the bottom of the image) is the <strong>prime meridian</strong> - the line that runs through Greenwich in London, England and is a longitude of 0. - the dotted line running horizontally (from the left to the right of the image) is the <strong>equator</strong> - the line that is a latitude of 0.</p>
@@ -631,44 +658,44 @@ Click here to view the website without leaving the book!
 <h5 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h5>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\crs_projections_q_national_park_brazil.png" class="lightbox img-fluid figure-img" width="700"></p>
-<figcaption class="figure-caption">What are the correct coordinates for this national park in Brazil?</figcaption>
+<p><a href="images\crs_projections_q_national_park_brazil.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-glightbox="description: .lightbox-desc-7" title="What are the correct coordinates for this national park in Brazil?"><img src="images\crs_projections_q_national_park_brazil.png" class="img-fluid figure-img" width="700" alt="What are the correct coordinates for this national park in Brazil?"></a></p>
+<figcaption>What are the correct coordinates for this national park in Brazil?</figcaption>
 </figure>
 </div>
-<div id="radio_RJZIKUSRXO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RJZIKUSRXO" value="" feedback="<b>Not quite! You've correctly identified that the latitude - the first number in the coordinate pair - is negative, as we are below the equator. However, as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>-20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_RJZIKUSRXO" value="" feedback="<b>Almost! You've the latitude - the first number in the coordinate pair - should be negative, as we are below the equator. However, you've got the second part of the coordinate pair (the longitude) correct - as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair is negative too.</b>"> <span>20.655, -49.205</span></label><label><input type="radio" autocomplete="off" name="radio_RJZIKUSRXO" value="" feedback="<b>Try again! The first number in the coordinate pair - the latitude - should be negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_RJZIKUSRXO" value="answer" feedback="<b>Correct! The first number in the coordinate pair - the latitude - is negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>-20.655, -49.205</span></label>
+<div id="radio_QFUWJMFUYZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QFUWJMFUYZ" value="" feedback="<b>Not quite! You've correctly identified that the latitude - the first number in the coordinate pair - is negative, as we are below the equator. However, as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>-20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_QFUWJMFUYZ" value="" feedback="<b>Almost! You've the latitude - the first number in the coordinate pair - should be negative, as we are below the equator. However, you've got the second part of the coordinate pair (the longitude) correct - as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair is negative too.</b>"> <span>20.655, -49.205</span></label><label><input type="radio" autocomplete="off" name="radio_QFUWJMFUYZ" value="" feedback="<b>Try again! The first number in the coordinate pair - the latitude - should be negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_QFUWJMFUYZ" value="answer" feedback="<b>Correct! The first number in the coordinate pair - the latitude - is negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>-20.655, -49.205</span></label>
 </div>
 </section>
 <section id="question-2" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h5>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\crs_projections_q_national_park_japan.png" class="lightbox img-fluid figure-img" width="700"></p>
-<figcaption class="figure-caption">What are the correct coordinates for this national park in Japan?</figcaption>
+<p><a href="images\crs_projections_q_national_park_japan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-glightbox="description: .lightbox-desc-8" title="What are the correct coordinates for this national park in Japan?"><img src="images\crs_projections_q_national_park_japan.png" class="img-fluid figure-img" width="700" alt="What are the correct coordinates for this national park in Japan?"></a></p>
+<figcaption>What are the correct coordinates for this national park in Japan?</figcaption>
 </figure>
 </div>
-<div id="radio_WEKTGTFYDI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WEKTGTFYDI" value="" feedback="<b>Try again! The first number in the coordinate pair - the latitude - should be positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.</b>"> <span>-35.943, -138.764</span></label><label><input type="radio" autocomplete="off" name="radio_WEKTGTFYDI" value="answer" feedback="<b>Correct! The first number in the coordinate pair - the latitude - is positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.</b>"> <span>35.943, 138.764</span></label><label><input type="radio" autocomplete="off" name="radio_WEKTGTFYDI" value="" feedback="<b>Almost! Have another look at the order of the numbers. Remember that unlike a graph, where we write the horizontal coordinate and then the vertical coordinate, when we are working with maps we write the latitude - the vertical coordinate - first, and then we write the longitude - the horizontal coordinate - second. Latitude only goes up to a maximum of 90 degrees, but the first number here is 138! However, you're right that both of the coordinates here are positive - we are above the equator and to the right of the prime meridian.</b>"> <span>138.764, 35.943</span></label><label><input type="radio" autocomplete="off" name="radio_WEKTGTFYDI" value="" feedback="<b>Almost! You've correctly spotted that the first number in the coordinate pair - the latitude - should be positive, as we are above the equator. However, as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - should be positive too.</b>"> <span>35.943, -138.764</span></label>
+<div id="radio_LYVJHGGKWT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LYVJHGGKWT" value="" feedback="<b>Try again! The first number in the coordinate pair - the latitude - should be positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.</b>"> <span>-35.943, -138.764</span></label><label><input type="radio" autocomplete="off" name="radio_LYVJHGGKWT" value="answer" feedback="<b>Correct! The first number in the coordinate pair - the latitude - is positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.</b>"> <span>35.943, 138.764</span></label><label><input type="radio" autocomplete="off" name="radio_LYVJHGGKWT" value="" feedback="<b>Almost! Have another look at the order of the numbers. Remember that unlike a graph, where we write the horizontal coordinate and then the vertical coordinate, when we are working with maps we write the latitude - the vertical coordinate - first, and then we write the longitude - the horizontal coordinate - second. Latitude only goes up to a maximum of 90 degrees, but the first number here is 138! However, you're right that both of the coordinates here are positive - we are above the equator and to the right of the prime meridian.</b>"> <span>138.764, 35.943</span></label><label><input type="radio" autocomplete="off" name="radio_LYVJHGGKWT" value="" feedback="<b>Almost! You've correctly spotted that the first number in the coordinate pair - the latitude - should be positive, as we are above the equator. However, as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - should be positive too.</b>"> <span>35.943, -138.764</span></label>
 </div>
 </section>
 <section id="question-3" class="level5 unnumbered">
 <h5 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h5>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images\crs_projections_q_st_lukes.png" class="lightbox img-fluid figure-img" width="700"></p>
-<figcaption class="figure-caption">What are the correct coordinates for St Luke’s?</figcaption>
+<p><a href="images\crs_projections_q_st_lukes.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-glightbox="description: .lightbox-desc-9" title="What are the correct coordinates for St Luke’s?"><img src="images\crs_projections_q_st_lukes.png" class="img-fluid figure-img" width="700" alt="What are the correct coordinates for St Luke’s?"></a></p>
+<figcaption>What are the correct coordinates for St Luke’s?</figcaption>
 </figure>
 </div>
 <p><em>St Luke’s is part of the University of Exeter and is home to the PenCHORD team, who write the HSMA course!</em></p>
-<div id="radio_EPACESCVGY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EPACESCVGY" value="" feedback="<b>Not quite - we're above the equator (towards the North Pole), so the latitude will be positive. Also latitude will be written first - and because we're so close to the Prime Meridian, we'd expect latitude to be the smaller number here (quite close to zero). Have another go!</b>"> <span>-3.51, -50.722</span></label><label><input type="radio" autocomplete="off" name="radio_EPACESCVGY" value="" feedback="<b>I'm afraid that's not quite right! Remember, we're above the equator, so the first coordinate - the latitude - will be positive. Then as we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - the longitude will be negative.</b>"> <span>-50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_EPACESCVGY" value="answer" feedback="<b>Correct! Well done. The latitude is positive because we're above the equator, and the longitude is a small negative number as we are just to the left of the prime meridian.</b>"> <span>50.722, -3.51</span></label><label><input type="radio" autocomplete="off" name="radio_EPACESCVGY" value="" feedback="<b>Not quite! You're correct that the first coordinate - the latitude - will be positive as we're above the equator. However, notice that we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - so the longitude will be negative.</b>"> <span>50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_EPACESCVGY" value="" feedback="<b>Almost! Have a think about the size of the numbers. Remember that latitude - the distance from the equator - is written first, and goes from 0 at the equator to +- 180 at the poles. We're quite a long way up here, so we'd expect our figure for latitude to be a fairly large positive number. Then our longitude figure will be a fairly small negative number as we're only just to the left of the prime meridian (the vertical line that goes through Greenwich in London, England).</b>"> <span>-3.51, 50.722</span></label>
+<div id="radio_ZXYJWCVFIP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZXYJWCVFIP" value="" feedback="<b>Not quite - we're above the equator (towards the North Pole), so the latitude will be positive. Also latitude will be written first - and because we're so close to the Prime Meridian, we'd expect latitude to be the smaller number here (quite close to zero). Have another go!</b>"> <span>-3.51, -50.722</span></label><label><input type="radio" autocomplete="off" name="radio_ZXYJWCVFIP" value="" feedback="<b>I'm afraid that's not quite right! Remember, we're above the equator, so the first coordinate - the latitude - will be positive. Then as we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - the longitude will be negative.</b>"> <span>-50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_ZXYJWCVFIP" value="answer" feedback="<b>Correct! Well done. The latitude is positive because we're above the equator, and the longitude is a small negative number as we are just to the left of the prime meridian.</b>"> <span>50.722, -3.51</span></label><label><input type="radio" autocomplete="off" name="radio_ZXYJWCVFIP" value="" feedback="<b>Not quite! You're correct that the first coordinate - the latitude - will be positive as we're above the equator. However, notice that we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - so the longitude will be negative.</b>"> <span>50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_ZXYJWCVFIP" value="" feedback="<b>Almost! Have a think about the size of the numbers. Remember that latitude - the distance from the equator - is written first, and goes from 0 at the equator to +- 180 at the poles. We're quite a long way up here, so we'd expect our figure for latitude to be a fairly large positive number. Then our longitude figure will be a fairly small negative number as we're only just to the left of the prime meridian (the vertical line that goes through Greenwich in London, England).</b>"> <span>-3.51, 50.722</span></label>
 </div>
 </section>
 </section>
 </section>
 </section>
-<section id="what-coordinate-reference-systems-are-in-use-in-the-uk" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="what-coordinate-reference-systems-are-in-use-in-the-uk"><span class="header-section-number">4.3</span> What coordinate reference systems are in use in the UK?</h2>
+<section id="what-coordinate-reference-systems-are-in-use-in-the-uk" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="what-coordinate-reference-systems-are-in-use-in-the-uk"><span class="header-section-number">3.3</span> What coordinate reference systems are in use in the UK?</h2>
 <p>The UK government provides the following guidelines on the usage of coordinate reference systems:</p>
 <blockquote class="blockquote">
 <ul>
@@ -680,33 +707,198 @@ Click here to view the website without leaving the book!
 <blockquote class="blockquote">
 <p>You can also combine these standards and/or add other CRS to meet your organisation’s requirements, for example, when you need greater accuracy for precision engineering decisions.</p>
 </blockquote>
+<section id="the-british-national-grid" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="the-british-national-grid"><span class="header-section-number">3.3.1</span> The British National Grid</h3>
+<p>Given the government’s recommendation to use the BNG - which is also sometimes referred to as the Ordnance Survey National Grid reference system (OSBG) - you may come across datasets which make use of it, so it’s worth knowing how it works!</p>
+<p>Rather than latitude and longitude, BNG uses Northings and Eastings.</p>
+<p>Northing sand Estings will be given as a series of digits without decimal places.</p>
+<p>For example, the location of the St Luke’s University campus (the home of HSMA!) using the BNG is <strong>29297, 92456</strong></p>
+<p><img src="images/crs_st_lukes.png" class="img-fluid"></p>
+<p>In this, the Easting is 29297 and the Northing is 92456.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It’s important to note that we give the Easting (the across) <strong>first</strong>, and the Northing (the up) <strong>second</strong>.</p>
+<p>This is the <strong>opposite</strong> of using latitude and longitude!</p>
+<p><img src="images/crs_compare_lat_long_bng.png" class="img-fluid"></p>
+</div>
+</div>
 </section>
-<section id="the-british-national-grid" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="the-british-national-grid"><span class="header-section-number">4.4</span> The British National Grid</h2>
 </section>
-<section id="references-and-further-reading" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> References and Further Reading</h1>
-<section id="further-reading" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">5.1</span> Further Reading</h2>
-<section id="understanding-the-size-of-countries" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="understanding-the-size-of-countries"><span class="header-section-number">5.1.1</span> Understanding the size of countries</h3>
+<section id="what-other-ways-do-we-determine-areas-within-the-uk" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="what-other-ways-do-we-determine-areas-within-the-uk"><span class="header-section-number">3.4</span> What other ways do we determine areas within the UK?</h2>
+<section id="postcodes" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="postcodes"><span class="header-section-number">3.4.1</span> Postcodes</h3>
+<p>Postcodes are a well-known way of splitting the UK up.</p>
+<p>Postcodes can be used at several different levels of resolution.</p>
+<p><img src="images/crs_postcode_types.png" class="img-fluid"></p>
+<p>Postcode areas are often quite large, sometimes spanning whole counties.</p>
+<p><a href="images/crs_uk_postcodes.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="images/crs_uk_postcodes.png" class="img-fluid"></a>^https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/British_postcode_areas_map.svg/450px-British_postcode_areas_map.svg.png</p>
+<p>In contrast, a single exact postcode may only cover a handful of houses, so they are often not used when analysing healthcare data as there is too much of a risk of being able to identify an individual patient from their postcode.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are a lot of valid formats for postcodes, so they are not always the easiest to validate!</p>
+<p>You may also find that they are input into software with a mixture of gaps between the first and second half (known as the outward code and inward code), so you may need to clean and standardise them before joining them to other datasets.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="postcodes.io"></a> is a great website for getting up-to-date information about postcodes and using this to supplement your data.</p>
+<p>For example, you can find out which LSOA - a grouping we will talk about shortly - a postcode belongs to, which can help with aggregating your data for a different level of detail.</p>
+</div>
+</div>
+</section>
+<section id="output-areas" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="output-areas"><span class="header-section-number">3.4.2</span> Output Areas</h3>
+<p>Output Areas (OA), Lower Layer Super Output Areas (LSOA) and Middle Layer Super Output Areas (MSOA) are standardised geographical units that differ in area but have a roughly similar number of people living in each one.</p>
+<p><img src="images/crs_oa_lsoa_msoa comparison.png" class="img-fluid">^ https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistical-geographies/, https://www.ons.gov.uk/methodology/geography/ukgeographies/censusgeographies/census2021</p>
+<section id="oa" class="level4" data-number="3.4.2.1">
+<h4 data-number="3.4.2.1" class="anchored" data-anchor-id="oa"><span class="header-section-number">3.4.2.1</span> OA</h4>
+<p>Output Areas (OA) are very small, with an average of circa 300 people per area.</p>
+<p>They are so small that you will probably not work with them very often.</p>
+</section>
+<section id="lsoa" class="level4" data-number="3.4.2.2">
+<h4 data-number="3.4.2.2" class="anchored" data-anchor-id="lsoa"><span class="header-section-number">3.4.2.2</span> LSOA</h4>
+<p>Lower Layer Super Output Areas (LSOA) are the medium size of area, with around 1500 people per LSOA.</p>
+</section>
+<section id="msoa" class="level4" data-number="3.4.2.3">
+<h4 data-number="3.4.2.3" class="anchored" data-anchor-id="msoa"><span class="header-section-number">3.4.2.3</span> MSOA</h4>
+<p>Lower Layer Super Output Areas (LSOA) are the largest size of area, with around 8000 people per MSOA.</p>
+<p>The map below shows MSOA boundaries (in red) overlaid over the LSOA boundaries (in blue).</p>
+<p><img src="images/crs_lsoa_msoa.png" class="img-fluid"></p>
+<p>Zooming in on a single MSOA, outlined in red, we can see that there are, in this case, four LSOAs within it - though this will not be exactly the same for each MSOA.</p>
+<p>You can also wee here that one of the LSOAs is much larger than the other three, suggesting it is likely to be less densely populated.</p>
+<p><img src="images/crs_lsoa_msoa_zoomed.png" class="img-fluid"></p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click here to view an interactive map of MSOAs without leaving the book!
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<iframe width="780" height="700" src="https://houseofcommonslibrary.github.io/msoanames/map/
+" title="MSOA Map"></iframe>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="issues-when-working-with-output-areas" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="issues-when-working-with-output-areas"><span class="header-section-number">3.4.3</span> Issues when working with output areas</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Despite being somewhat standardised, there can still be very significant differences between areas in terms of the number of people living in them or the total land area covered.</p>
+<p>You should always carefully consider whether you need to <strong>standardise</strong> the data in some way to account for this variation.</p>
+<p>You can read more about this process in a later chapter.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It’s also worth paying attention to which year of output areas you are working with.</p>
+<p>A lot of older data will use 2011 boundaries, but the boundaries were refreshed in 2021. If trying to join older data to a newer file of boundaries, or vice-versa, you may find that some areas appear to be missing - so check the dates!</p>
+</div>
+</div>
+</section>
+<section id="other-groupings" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="other-groupings"><span class="header-section-number">3.4.4</span> Other groupings</h3>
+<section id="local-authorities" class="level4" data-number="3.4.4.1">
+<h4 data-number="3.4.4.1" class="anchored" data-anchor-id="local-authorities"><span class="header-section-number">3.4.4.1</span> Local Authorities</h4>
+<p>There are county councils, which are quite large, and then these are often (though not always) subdivided into multiple district councils.</p>
+<p><a href="images/crs_local_authorities.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="images/crs_local_authorities.png" class="img-fluid"></a>^https://en.wikipedia.org/wiki/Local_government_in_England</p>
+</section>
+<section id="healthcare-regions" class="level4" data-number="3.4.4.2">
+<h4 data-number="3.4.4.2" class="anchored" data-anchor-id="healthcare-regions"><span class="header-section-number">3.4.4.2</span> Healthcare Regions</h4>
+<p>Healthcare regions in the UK frequently change.</p>
+<p>&lt;1996: Regional Health Authorities</p>
+<p>1996-2002: Health Authorities</p>
+<p>2002-2013: Strategic health authorities + primary care trusts</p>
+<p>2013-2022: CCGs</p>
+<p>2022-now (February 2024): Integrated care systems (integrated care board plus integrated care partnership)</p>
+<p><a href="images/crs_icb.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="images/crs_icb.png" class="img-fluid"></a>^https://geoportal.statistics.gov.uk/documents/ons::integrated-care-boards-april-2023-map-in-england/explore</p>
+</section>
+<section id="ambulance-trusts" class="level4" data-number="3.4.4.3">
+<h4 data-number="3.4.4.3" class="anchored" data-anchor-id="ambulance-trusts"><span class="header-section-number">3.4.4.3</span> Ambulance Trusts</h4>
+<p><a href="images/crs_ambulance_trusts.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="images/crs_ambulance_trusts.png" class="img-fluid"></a>^https://www.bbc.co.uk/news/health-16052725</p>
+</section>
+<section id="police-forces" class="level4" data-number="3.4.4.4">
+<h4 data-number="3.4.4.4" class="anchored" data-anchor-id="police-forces"><span class="header-section-number">3.4.4.4</span> Police Forces</h4>
+<p><a href="images/crs_police_forces.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="images/crs_police_forces.png" class="img-fluid"></a>^https://assets-hmicfrs.justiceinspectorates.gov.uk/uploads/police-force-map.pdf</p>
+</section>
+</section>
+</section>
+<section id="references-and-further-reading" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> References and Further Reading</h1>
+<section id="further-reading" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">4.1</span> Further Reading</h2>
+<section id="understanding-the-size-of-countries" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="understanding-the-size-of-countries"><span class="header-section-number">4.1.1</span> Understanding the size of countries</h3>
 <p><a href="https://mapfight.xyz/">https://mapfight.xyz/</a></p>
 <p><a href="https://www.thetruesize.com/">https://www.thetruesize.com/</a></p>
 </section>
-<section id="projections-1" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="projections-1"><span class="header-section-number">5.1.2</span> Projections</h3>
+<section id="projections-1" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="projections-1"><span class="header-section-number">4.1.2</span> Projections</h3>
 <p><a href="https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/mercator-its-not-hip-to-be-square/">A discussion of alternatives to Web Mercator - while it’s geared towards options available in ArcGis, it’s a great demonstration of some options</a></p>
 </section>
-<section id="coordinate-reference-systems-1" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="coordinate-reference-systems-1"><span class="header-section-number">5.1.3</span> Coordinate Reference Systems</h3>
+<section id="coordinate-reference-systems-1" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="coordinate-reference-systems-1"><span class="header-section-number">4.1.3</span> Coordinate Reference Systems</h3>
 <p><a href="https://docs.qgis.org/3.28/en/docs/gentle_gis_introduction/coordinate_reference_systems.html">A gentle Introduction to GIS - Coordinate Reference Systems</a></p>
 </section>
 </section>
 </section>
-<section id="references" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> References</h1>
+<section id="references" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> References</h1>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-3">A cartesian coordinate plane</span>
+<span class="glightbox-desc lightbox-desc-7">What are the correct coordinates for this national park in Brazil?</span>
+<span class="glightbox-desc lightbox-desc-8">What are the correct coordinates for this national park in Japan?</span>
+<span class="glightbox-desc lightbox-desc-9">What are the correct coordinates for St Luke’s?</span>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -1102,6 +1294,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1168,13 +1387,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1253,10 +1474,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1266,8 +1486,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1280,6 +1509,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1323,6 +1671,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1348,6 +1697,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1409,17 +1784,43 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./concepts_and_terms.html" class="pagination-link">
+      <a href="./concepts_and_terms.html" class="pagination-link  aria-label=" geographical="" concepts="" and="" terminology"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Geographical Concepts and Terminology</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ct_filetypes.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ct_filetypes.html" class="pagination-link" aria-label="<span class='chapter-number'>4</span>&nbsp; <span class='chapter-title'>Geographic Data Filetypes</span>">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
 
 
 

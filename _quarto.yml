@@ -7,7 +7,6 @@ book:
   chapters:
   - index.qmd
   - intro.qmd
-  - webexercises.qmd
   - what_geographic_problems_health_etc.qmd
   - part: concepts_and_terms.qmd
     chapters:
@@ -15,6 +14,7 @@ book:
     - ct_filetypes.qmd
   - part: introduction_mapping_with_qgis.qmd
     chapters:
+    - qgis_setup.qmd
     - qgis_basemaps.qmd
     - qgis_point_data.qmd
     - qgis_choropleth.qmd
@@ -39,8 +39,8 @@ book:
     - mtt_travel_time_exercises.qmd
   - part: intro_facility_location.qmd
     chapters:
-    - fl_limits_of_computation.qmd
     - fl_bruteforce_solutions.qmd
+    - fl_limits_of_computation.qmd
     - fl_evolutionary_algorithms.qmd
     - fl_genetic_algorithms.qmd
     - fl_facility_location_exercises.qmd

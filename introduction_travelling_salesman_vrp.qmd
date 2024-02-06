@@ -1,4 +1,4 @@
-# An Introduction to the Travelling Salesperson and Vehicle Routing Problems
+# The Travelling Salesperson and Vehicle Routing Problems
 
 ```{r, echo = FALSE}
 source("glossary_funcs.R")

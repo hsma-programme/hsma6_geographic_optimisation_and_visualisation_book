@@ -1,4 +1,4 @@
-# An Introduction to Mapping in Python
+# Mapping in Python
 
 ```{r, echo = FALSE}
 source("glossary_funcs.R")

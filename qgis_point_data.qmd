@@ -1,4 +1,4 @@
-# Visualising Point Data in QGIS {@sec-qgis-point}
+# Visualising Point Data in QGIS {#sec-qgis-point}
 ```{r, echo = FALSE}
 source("glossary_funcs.R")
 glossary_setup()
@@ -8,6 +8,19 @@ glossary_setup()
 glossary_setup_style()
 ```
 
+# Importing point data from a .csv file
+
+
+
+
+# Styling points
+
+## Colour and size
+
+## Custom Markers
+
+
+# Adding labels to points
 
 
 

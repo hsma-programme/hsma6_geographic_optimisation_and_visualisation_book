@@ -4,21 +4,30 @@
     "href": "index.html",
     "title": "HSMA - Geographic Modelling and Visualisation",
     "section": "",
-    "text": "Preface"
+    "text": "Preface",
+    "crumbs": [
+      "Preface"
+    ]
   },
   {
     "objectID": "intro.html",
     "href": "intro.html",
     "title": "1  Welcome!",
     "section": "",
-    "text": "Welcome to this HSMA book on Geographic Modelling & Visualisation.\n\nLost Kermit GIFfrom Lost GIFs\n\n\nThis book accompanies module 3 of the 15 month HSMA programme.\nIt is aimed at people with some experience of Python who want to be able to work with geographic data.\nIt is particularly aimed at people in the UK working in the National Health Service (NHS), policing, social care, public health or local government.\nWe will cover topics including:\n\nprinciples and terminology needed when working with geographical data and maps\ncreating maps using a free and open source software package (QGIS)\nworking with geographic data in Python using the Geopandas library\ncreating static maps in Python with matplotlib\ncreating interactive maps in Python with Folium, Leaflet and Kepler\ninteracting with travel time APIs\nvisualising travel times to sites across regions\noptimizing the locations of facilities to minimize travel time across a region\noptimizing the locations of facilities to maximize perfo\n\n\n\n\n\n\n\n\n\n\nterm\ndefinition\n\n\n\n\nAPI\nApplication Programming Interface\n\nA way for two or more programs to talk to one another. Designed for computer programmers to utilise when writing programs rather than being used by an end user.\n\nYou will send a request to an API and it will send back a response. For example, you might request data on the postcode EX2 5AA from the postcodes.io API, and it will return a text string containing data like the latitude and longitude."
+    "text": "Welcome to this HSMA book on Geographic Modelling & Visualisation.\n\nLost Kermit GIFfrom Lost GIFs\n\n\nThis book accompanies module 3 of the 15 month HSMA programme.\nIt is aimed at people with some experience of Python who want to be able to work with geographic data.\nIt is particularly aimed at people in the UK working in the National Health Service (NHS), policing, social care, public health or local government.\nWe will cover topics including:\n\nprinciples and terminology needed when working with geographical data and maps\ncreating maps using a free and open source software package (QGIS)\nworking with geographic data in Python using the Geopandas library\ncreating static maps in Python with matplotlib\ncreating interactive maps in Python with Folium, Leaflet and Kepler\ninteracting with travel time APIs\nvisualising travel times to sites across regions\noptimizing the locations of facilities to minimize travel time across a region\noptimizing the locations of facilities to maximize performance against multiple objectives (e.g. minimizing average travel time while maximizing the percentage of people who can reach a service within 30 minuts)\n\n\n\n\n\n\n\n\n\n\nterm\ndefinition\n\n\n\n\nAPI\nApplication Programming Interface\n\nA way for two or more programs to talk to one another. Designed for computer programmers to utilise when writing programs rather than being used by an end user.\n\nYou will send a request to an API and it will send back a response. For example, you might request data on the postcode EX2 5AA from the postcodes.io API, and it will return a text string containing data like the latitude and longitude.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome!</span>"
+    ]
   },
   {
     "objectID": "what_geographic_problems_health_etc.html",
     "href": "what_geographic_problems_health_etc.html",
-    "title": "3  Types of Geographic Problems",
+    "title": "2  Types of Geographic Problems",
     "section": "",
-    "text": "For the purpose of this book, we’re considering geospatial problems to be ay delivery or service configuration problem that is related to and/or complicated by geography.\nThese can include\n\nRouting and Scheduling Problems\nLocation-allocation Problems\n\n\n\n\n\n\n\n\nWhere? (the ‘geographic’)\nPredictions (the ‘modelling’)\n\n\n\n\nWhere to place services…\n… if demand continues to grow?\n\n\nWhere will patients go…\n… if we close these services?\n\n\nWhere are people with a given disease…\n… and how is it spreading?\n\n\nWhere is the demand…\n… and is access equitable?\n\n\n\n\n4 Understanding an Area\nTalk about disease distributions, IMD, etc.\n\n\n5 Location Optimization Problems\nTalk about simple location optimization, competing priorities, etc.\n\n\n6 Routing and Scheduling Problems\nIf you’ve ordered an item for delivery in the past few years, you may have found yourself looking at a link sent to you by a delivery company, showing you where your delivery driver is and how many stops there are until they arrive with you.\nDelivery drivers can have hundreds of parcels to deliver in a day, and companies have tens of thousands of packages to coordinate delivering. They want to keep fuel costs down and use as few vehicles as possible - so optimizing the route of each vehicle is crucial.\nNow, while health systems certainly have inventory and delivery problems, there are other kinds of resources that are often travelling - nurses.\nCommunity nursing is a huge part of the NHS. In acute (physical) trusts, nurses may be visiting the homes of clients to change dressings, conduct health checks, administer medication, and more.\n\n\n\n\nflowchart LR\n    id1{{\"Beryl can’t do leg dressing changes for patients at the moment because she has a bad back\"}}\n\n    id2{{\"Mr H only wants male nurses for the catheter change\"}}\n\n    id3{{\"We need two nurses for that visit\"}}\n\n    id4{{\"There are roadworks on Quarry lane for the next three weeks so it’s taking 20 minutes extra to get between visits\"}}\n\n    id5{{\"Matt hasn’t done his insulin pump training yet\"}}\n\n\n\n\n\nCommunity transport problems are another class of routing problem in the NHS. Patients are sometimes unable to get themselves to crucial appointments by driving or public transport, meaning transport vehicles are necessary to ensure they can attend critical appointements such as dialysis.\n[PUT IN COVID DIALYSIS TRANSPORT EXAMPLE]\nIn other situations, such as mental health trusts, there may be a requirement to securely transport patients from their home to a ward for inpatient treatment, or between wards with different levels of security or treatment intensity.\nThis is before we start to consider things such as paramedic cars and ambulances, where the location and movement of vehicles is crucial."
+    "text": "2.1 Simple Mapping Problems - Understanding the Geographical Distribution of a Variable\nTalk about disease distributions, IMD, etc.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Types of Geographic Problems</span>"
+    ]
   },
   {
     "objectID": "webexercises.html#example-questions",
@@ -58,37 +67,55 @@
   {
     "objectID": "what_geographic_problems_health_etc.html#location-optimization-facility-location-problems",
     "href": "what_geographic_problems_health_etc.html#location-optimization-facility-location-problems",
-    "title": "3  Types of Geographic Problems",
-    "section": "3.2 Location Optimization (Facility Location) Problems",
-    "text": "3.2 Location Optimization (Facility Location) Problems\nTalk about simple location optimization, competing priorities, etc."
+    "title": "2  Types of Geographic Problems",
+    "section": "2.2 Location Optimization (Facility Location) Problems",
+    "text": "2.2 Location Optimization (Facility Location) Problems\nTalk about simple location optimization, competing priorities, etc.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Types of Geographic Problems</span>"
+    ]
   },
   {
     "objectID": "what_geographic_problems_health_etc.html#routing-and-scheduling-problems",
     "href": "what_geographic_problems_health_etc.html#routing-and-scheduling-problems",
-    "title": "3  Types of Geographic Problems",
-    "section": "3.3 Routing and Scheduling Problems",
-    "text": "3.3 Routing and Scheduling Problems\nIf you’ve ordered an item for delivery in the past few years, you may have found yourself looking at a link sent to you by a delivery company, showing you where your delivery driver is and how many stops there are until they arrive with you.\nDelivery drivers can have hundreds of parcels to deliver in a day, and companies have tens of thousands of packages to coordinate delivering. They want to keep fuel costs down and use as few vehicles as possible - so optimizing the route of each vehicle is crucial.\nNow, while health systems certainly have inventory and delivery problems, there are other kinds of resources that are often travelling - nurses.\nCommunity nursing is a huge part of the NHS. In acute (physical) trusts, nurses may be visiting the homes of clients to change dressings, conduct health checks, administer medication, and more.\n\n\n\n\nflowchart LR\n    id1{{\"Beryl can’t do leg dressing changes for patients at the moment because she has a bad back\"}}\n\n    id2{{\"Mr H only wants male nurses for the catheter change\"}}\n\n    id3{{\"We need two nurses for that visit\"}}\n\n    id4{{\"There are roadworks on Quarry lane for the next three weeks so it’s taking 20 minutes extra to get between visits\"}}\n\n    id5{{\"Matt hasn’t done his insulin pump training yet\"}}\n\n\n\n\n\nCommunity transport problems are another class of routing problem in the NHS. Patients are sometimes unable to get themselves to crucial appointments by driving or public transport, meaning transport vehicles are necessary to ensure they can attend critical appointements such as dialysis.\n[PUT IN COVID DIALYSIS TRANSPORT EXAMPLE]\nIn other situations, such as mental health trusts, there may be a requirement to securely transport patients from their home to a ward for inpatient treatment, or between wards with different levels of security or treatment intensity.\nThis is before we start to consider things such as paramedic cars and ambulances, where the location and movement of vehicles is crucial."
+    "title": "2  Types of Geographic Problems",
+    "section": "2.3 Routing and Scheduling Problems",
+    "text": "2.3 Routing and Scheduling Problems\nIf you’ve ordered an item for delivery in the past few years, you may have found yourself looking at a link sent to you by a delivery company, showing you where your delivery driver is and how many stops there are until they arrive with you.\nDelivery drivers can have hundreds of parcels to deliver in a day, and companies have tens of thousands of packages to coordinate delivering. They want to keep fuel costs down and use as few vehicles as possible - so optimizing the route of each vehicle is crucial.\nNow, while health systems certainly have inventory and delivery problems, there are other kinds of resources that are often travelling - nurses.\nCommunity nursing is a huge part of the NHS. In acute (physical) trusts, nurses may be visiting the homes of clients to change dressings, conduct health checks, administer medication, and more.\n\n\n\n\n\nflowchart LR\n    id1{{\"Beryl can’t do leg dressing changes for patients at the moment because she has a bad back\"}}\n\n    id2{{\"Mr H only wants male nurses for the catheter change\"}}\n\n    id3{{\"We need two nurses for that visit\"}}\n\n    id4{{\"There are roadworks on Quarry lane for the next three weeks so it’s taking 20 minutes extra to get between visits\"}}\n\n    id5{{\"Matt hasn’t done his insulin pump training yet\"}}\n\n\n\n\n\n\nCommunity transport problems are another class of routing problem in the NHS. Patients are sometimes unable to get themselves to crucial appointments by driving or public transport, meaning transport vehicles are necessary to ensure they can attend critical appointements such as dialysis.\n[PUT IN COVID DIALYSIS TRANSPORT EXAMPLE]\nIn other situations, such as mental health trusts, there may be a requirement to securely transport patients from their home to a ward for inpatient treatment, or between wards with different levels of security or treatment intensity.\nThis is before we start to consider things such as paramedic cars and ambulances, where the location and movement of vehicles is crucial.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Types of Geographic Problems</span>"
+    ]
   },
   {
     "objectID": "ct_crs.html",
     "href": "ct_crs.html",
-    "title": "4  Projections and Coordinate Reference Systems",
+    "title": "3  Projections and Coordinate Reference Systems",
     "section": "",
-    "text": "5 References and Further Reading"
+    "text": "3.1 Projections\nIn summary, different projections are valuable for different reasons - but they can distort the sizes of countries quite significantly. Just how big these distortions are might surprise you…\nFor example, let’s look at Greenland and Africa on the world map you are probably familiar with.\nThis map uses the Mercator projection. Now, when our primary requirement for maps was trying to sail ships across the ocean, this map was fantastic. It allowed navigators to set a single constant bearing and get to where they needed to go, rather than constantly adjusting and risking huge errors if they made a single mistake along the way.\nActually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - in fact, a special variant of the Mercator projection, known as Web Mercator (a.k.a. WGS 84 Web Mercator, WGS 84/Pseudo-Mercator, EPSG:3857) is used by almost every major web mapping service, such as Bing, OpenStreetMap, and others - so it’s worth knowing about as you’ll use it a lot when you’re making interactive maps later in the course.2\nHowever, all versions of the Mercator projection have the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.\nCountries far from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than they are in reality. If you don’t know it’s happening, it can be quite a surprise to learn that certain countries really aren’t as big as you might have thought!",
+    "crumbs": [
+      "Geographical Concepts and Terminology",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+    ]
   },
   {
     "objectID": "ct_crs.html#projections",
     "href": "ct_crs.html#projections",
-    "title": "4  Projections and Coordinate Reference Systems",
-    "section": "4.1 Projections",
-    "text": "4.1 Projections\nIn summary, different projections are valuable for different reasons - but they can distort the sizes of countries quite significantly. Just how big these distortions are might surprise you…\nFor example, let’s look at Greenland and Africa on the world map you are probably familiar with.\nThis map uses the Mercator projection. Now, when our primary requirement for maps was trying to sail ships across the ocean, this map was fantastic. It allowed navigators to set a single constant bearing and get to where they needed to go, rather than constantly adjusting and risking huge errors if they made a single mistake along the way.\nActually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - in fact, a special variant of the Mercator projection, known as Web Mercator (a.k.a. WGS 84 Web Mercator, WGS 84/Pseudo-Mercator, EPSG:3857) is used by almost every major web mapping service, such as Bing, OpenStreetMap, and others - so it’s worth knowing about as you’ll use it a lot when you’re making interactive maps later in the course.2\nHowever, all versions of the Mercator projection have the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.\nCountries far from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than they are in reality. If you don’t know it’s happening, it can be quite a surprise to learn that certain countries really aren’t as big as you might have thought!\n\n\n\n\n\n\nClick here to show an animation demonstrating the impact of the Mercator Projection on the relative size of different countries\n\n\n\n\n\n\n\n\nRelative Size of Countries - Mercator Projection Distortion\n\n\nBy Jakub Nowosad - Own Work;, CC BY-SA 4.0, Link3\n\n\n\n\nOptional Exercise\nA great way to get your head around the impact of the Mercator projection on our understanding of the world is to use the website the true size of.\nTry the following out. Do the results surprise you? Does this change your sense of our world? Click ‘clear map’ after each exercise to get back to a blank map, or right click on the coloured shape of the country to remove it - Search for Russia and drag it onto the North of Africa. - Search for the United Kingdom and drag it onto Greenland. - Search for Canada and drag it onto Brazil.\n\n\n\n\n\n\nClick here to view the website without leaving the book!\n\n\n\n\n\n\n\n\n\n\n\nOptional Exercise\nYou can play around with some different projections at the metrocosm website.\nYou will notice that there are a large number of purple dots all over the maps on that website. Why are they there?\nOn a globe, all of those purple dots would be the same size. They are a good way of understanding how different projections distort the size or shape of different parts of the world.\nLook at each projection.\n\n\n\n\n\n\nClick here to view the website without leaving the book!"
+    "title": "3  Projections and Coordinate Reference Systems",
+    "section": "",
+    "text": "Click here to show an animation demonstrating the impact of the Mercator Projection on the relative size of different countries\n\n\n\n\n\n\n\n\nRelative Size of Countries - Mercator Projection Distortion\n\n\nBy Jakub Nowosad - Own Work;, CC BY-SA 4.0, Link3\n\n\n\n\nOptional Exercise\nA great way to get your head around the impact of the Mercator projection on our understanding of the world is to use the website the true size of.\nTry the following out. Do the results surprise you? Does this change your sense of our world? Click ‘clear map’ after each exercise to get back to a blank map, or right click on the coloured shape of the country to remove it - Search for Russia and drag it onto the North of Africa. - Search for the United Kingdom and drag it onto Greenland. - Search for Canada and drag it onto Brazil.\n\n\n\n\n\n\nClick here to view the website without leaving the book!\n\n\n\n\n\n\n\n\n\n\n\nOptional Exercise\nYou can play around with some different projections at the metrocosm website.\nYou will notice that there are a large number of purple dots all over the maps on that website. Why are they there?\nOn a globe, all of those purple dots would be the same size. They are a good way of understanding how different projections distort the size or shape of different parts of the world.\nLook at each projection.\n\n\n\n\n\n\nClick here to view the website without leaving the book!",
+    "crumbs": [
+      "Geographical Concepts and Terminology",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+    ]
   },
   {
     "objectID": "ct_crs.html#coordinate-reference-systems",
     "href": "ct_crs.html#coordinate-reference-systems",
-    "title": "4  Projections and Coordinate Reference Systems",
-    "section": "4.2 Coordinate Reference Systems",
-    "text": "4.2 Coordinate Reference Systems\nThe next thing to understand is how we divide the world up so we can all talk about it using the same language and find the same point on the map.\nOne of the most common ways to do this is with latitude and longitude.\n\n4.2.1 Latitude and longitude\nLatitude looks at how far a point is from the equator - you can also think of it as how close a point is to the North or South Pole.\nLines of latitude run parallel with the equator.\n4\nLatitude has a value of 0 at the equator.\n‘Above’ the equator - towards the North Pole - latitude gradually gets bigger, written as, for example, 70N, reaching a maximum of 90 North at the North pole.\n‘Below’ the equator - towards the South Pole - latitude gradually gets bigger, but this time it is written as, for example, 45S reaching a maximum of 90 South at the South pole.\nHowever - when you are using latitude on a computer, latitude South of the equator is often entered as a negative number instead.\nLongitude is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.\n5\nLongitude has a value of 0 at the Prime Meridian (Greenwich).\nEast of the Prime Meridian, longitude gradually gets bigger and is written as, for example, 60E, reaching a maximum of 180 on directly the opposite side of Earth.\nWest of the Prime Meridian, longitude gradually gets bigger but this time it is written as, for example, 30W, reaching a maximum of 180 on directly the opposite side of Earth.\nHowever - when you are using longitude on a computer, a longitude to the West of Greenwich is often entered as a negative number instead.\nThe image below gives you a quick reference to how different points may be written.\n\n\n4.2.1.1 Writing coordinate pairs\nAny point in the world can be identified by providing a figure for both latitude and longitude.\nHowever - it’s important to write them in the correct order, else you will end up somewhere very different!\nNow, just to be confusing… it’s the opposite way around to a standard graph.\nIf you cast your mind back to school, you might remember being taught about writing a coordinate pair for a standard graph.\n\n\n\nA cartesian coordinate plane\n\n\nWhen we write this, we write the position of the horizontal point (x) first, and then the vertical (y) point - so we write coordinates as (x, y). So for the graph above, this means the coordinates are (2, 5). You might have been taught to remember this as going ‘along the corridor, then up the stairs’.\nNow… it’s the opposite for latitude and longitude!\nLet’s say we have a latitude (the position vertically in relation to the equator - sort of equivalent to our y value above) of 7, and a longitude (the position horizontally in relation to the prime meridian - sort of equivalent to our x value above) of 15.\nWe’d write this as (7, 15) - not (15, 7) as you might have expected!\nSo just remember - it’s the opposite order to a graph!\n\n\n4.2.1.2 How do lines of latitude and longitude appear on different projections?\n\nMercator Projection\nAs it’s the projection you’re still going to commonly see (and probably use for most of the maps you create), let’s go back to the Mercator map projection.\nThe lines of latitude and longitude are the white grid that’s overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!\n\nAll of the lines of longitude (running top to bottom) are parallel to each other - that is they stay the same distance apart the whole time.\nAll of the lines of latitude (running left to right) are also parallel to each other.\nThe lines of latitude and longitude are at perfect right angles (also known as perpendicular) to each other.\nHere, each horizontal line represents a distance of 15 degrees north or south.\nHowever - if you look at the top of the map, you will notice that the lines get further and further apart - even though the gaps still represent 15 degrees.\nRemember what we said before about the Mercator projection making countries further from the equator appear bigger than they are? Well this is it in action!\n\n\nGall-Peters Projection\nIn the Gall-Peters projection, the sizes of each rectangle made by the latitude and longitude lines are quite different to the Mercator proejction.\nThe rectangles are tall near the equator and get shorter as you go towards the North and South Poles.\n\nHowever, like the Mercator projection, the lines of latitude are parallel to each other, and the same is true of the lines of longitude.\nThis means that the map can still be used to navigate with a constant bearing - unlike a projection where these lines are curved.\nGall-Peters maps are UNESCOs preferred map, and are quite common in UK schools.6\n\n\nWinkel Tripel\nFinally, let’s look at the lines on the Winkel tripel projection.\nNowadays, it’s generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It’s used in a lot of textbooks and it’s the preferred projection for world maps made by the National Geographic Society.7\n\nBut notice that the lines of latitude and longitude are no longer straight!\n\n\n\n4.2.1.3 Exercise: Getting Comfortable with Latitude and Longitude\nIt’s helpful to get a bit of a feeling for how latitude and longitude is written, as you’ll be dealing with it quite a lot in the datasets we will use later in this book.\nSo let’s work through a couple of questions.\nIn each of the questions below - the dotted line running vertically (from the top to the bottom of the image) is the prime meridian - the line that runs through Greenwich in London, England and is a longitude of 0. - the dotted line running horizontally (from the left to the right of the image) is the equator - the line that is a latitude of 0.\n\nQuestion 1\n\n\n\nWhat are the correct coordinates for this national park in Brazil?\n\n\n\n -20.655, 49.205 20.655, -49.205 20.655, 49.205 -20.655, -49.205\n\n\n\nQuestion 2\n\n\n\nWhat are the correct coordinates for this national park in Japan?\n\n\n\n -35.943, -138.764 35.943, 138.764 138.764, 35.943 35.943, -138.764\n\n\n\nQuestion 3\n\n\n\nWhat are the correct coordinates for St Luke’s?\n\n\nSt Luke’s is part of the University of Exeter and is home to the PenCHORD team, who write the HSMA course!\n\n -3.51, -50.722 -50.722, 3.51 50.722, -3.51 50.722, 3.51 -3.51, 50.722"
+    "title": "3  Projections and Coordinate Reference Systems",
+    "section": "3.2 Coordinate Reference Systems",
+    "text": "3.2 Coordinate Reference Systems\nThe next thing to understand is how we divide the world up so we can all talk about it using the same language and find the same point on the map.\nOne of the most common ways to do this is with latitude and longitude.\n\n3.2.1 Latitude and longitude\nLatitude looks at how far a point is from the equator - you can also think of it as how close a point is to the North or South Pole.\nLines of latitude run parallel with the equator.\n4\nLatitude has a value of 0 at the equator.\n‘Above’ the equator - towards the North Pole - latitude gradually gets bigger, written as, for example, 70N, reaching a maximum of 90 North at the North pole.\n‘Below’ the equator - towards the South Pole - latitude gradually gets bigger, but this time it is written as, for example, 45S reaching a maximum of 90 South at the South pole.\nHowever - when you are using latitude on a computer, latitude South of the equator is often entered as a negative number instead.\nLongitude is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.\n5\nLongitude has a value of 0 at the Prime Meridian (Greenwich).\nEast of the Prime Meridian, longitude gradually gets bigger and is written as, for example, 60E, reaching a maximum of 180 on directly the opposite side of Earth.\nWest of the Prime Meridian, longitude gradually gets bigger but this time it is written as, for example, 30W, reaching a maximum of 180 on directly the opposite side of Earth.\nHowever - when you are using longitude on a computer, a longitude to the West of Greenwich is often entered as a negative number instead.\nThe image below gives you a quick reference to how different points may be written.\n\n\n3.2.1.1 Writing coordinate pairs\nAny point in the world can be identified by providing a figure for both latitude and longitude.\nHowever - it’s important to write them in the correct order, else you will end up somewhere very different!\nNow, just to be confusing… it’s the opposite way around to a standard graph.\nIf you cast your mind back to school, you might remember being taught about writing a coordinate pair for a standard graph.\n\n\n\nA cartesian coordinate plane\n\n\nWhen we write this, we write the position of the horizontal point (x) first, and then the vertical (y) point - so we write coordinates as (x, y). So for the graph above, this means the coordinates are (2, 5). You might have been taught to remember this as going ‘along the corridor, then up the stairs’.\nNow… it’s the opposite for latitude and longitude!\nLet’s say we have a latitude (the position vertically in relation to the equator - sort of equivalent to our y value above) of 7, and a longitude (the position horizontally in relation to the prime meridian - sort of equivalent to our x value above) of 15.\nWe’d write this as (7, 15) - not (15, 7) as you might have expected!\nSo just remember - it’s the opposite order to a graph!\n\n\n3.2.1.2 How do lines of latitude and longitude appear on different projections?\n\nMercator Projection\nAs it’s the projection you’re still going to commonly see (and probably use for most of the maps you create), let’s go back to the Mercator map projection.\nThe lines of latitude and longitude are the white grid that’s overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!\n\nAll of the lines of longitude (running top to bottom) are parallel to each other - that is they stay the same distance apart the whole time.\nAll of the lines of latitude (running left to right) are also parallel to each other.\nThe lines of latitude and longitude are at perfect right angles (also known as perpendicular) to each other.\nHere, each horizontal line represents a distance of 15 degrees north or south.\nHowever - if you look at the top of the map, you will notice that the lines get further and further apart - even though the gaps still represent 15 degrees.\nRemember what we said before about the Mercator projection making countries further from the equator appear bigger than they are? Well this is it in action!\n\n\nGall-Peters Projection\nIn the Gall-Peters projection, the sizes of each rectangle made by the latitude and longitude lines are quite different to the Mercator proejction.\nThe rectangles are tall near the equator and get shorter as you go towards the North and South Poles.\n\nHowever, like the Mercator projection, the lines of latitude are parallel to each other, and the same is true of the lines of longitude.\nThis means that the map can still be used to navigate with a constant bearing - unlike a projection where these lines are curved.\nGall-Peters maps are UNESCOs preferred map, and are quite common in UK schools.6\n\n\nWinkel Tripel\nFinally, let’s look at the lines on the Winkel tripel projection.\nNowadays, it’s generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It’s used in a lot of textbooks and it’s the preferred projection for world maps made by the National Geographic Society.7\n\nBut notice that the lines of latitude and longitude are no longer straight!\n\n\n\n3.2.1.3 Exercise: Getting Comfortable with Latitude and Longitude\nIt’s helpful to get a bit of a feeling for how latitude and longitude is written, as you’ll be dealing with it quite a lot in the datasets we will use later in this book.\nSo let’s work through a couple of questions.\nIn each of the questions below - the dotted line running vertically (from the top to the bottom of the image) is the prime meridian - the line that runs through Greenwich in London, England and is a longitude of 0. - the dotted line running horizontally (from the left to the right of the image) is the equator - the line that is a latitude of 0.\n\nQuestion 1\n\n\n\nWhat are the correct coordinates for this national park in Brazil?\n\n\n\n -20.655, 49.205 20.655, -49.205 20.655, 49.205 -20.655, -49.205\n\n\n\nQuestion 2\n\n\n\nWhat are the correct coordinates for this national park in Japan?\n\n\n\n -35.943, -138.764 35.943, 138.764 138.764, 35.943 35.943, -138.764\n\n\n\nQuestion 3\n\n\n\nWhat are the correct coordinates for St Luke’s?\n\n\nSt Luke’s is part of the University of Exeter and is home to the PenCHORD team, who write the HSMA course!\n\n -3.51, -50.722 -50.722, 3.51 50.722, -3.51 50.722, 3.51 -3.51, 50.722",
+    "crumbs": [
+      "Geographical Concepts and Terminology",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+    ]
   },
   {
     "objectID": "ct_crs.html#the-british-national-grid",
@@ -100,9 +127,13 @@
   {
     "objectID": "ct_crs.html#further-reading",
     "href": "ct_crs.html#further-reading",
-    "title": "4  Projections and Coordinate Reference Systems",
-    "section": "5.1 Further Reading",
-    "text": "5.1 Further Reading\n\n5.1.1 Understanding the size of countries\nhttps://mapfight.xyz/\nhttps://www.thetruesize.com/\n\n\n5.1.2 Projections\nA discussion of alternatives to Web Mercator - while it’s geared towards options available in ArcGis, it’s a great demonstration of some options\n\n\n5.1.3 Coordinate Reference Systems\nA gentle Introduction to GIS - Coordinate Reference Systems"
+    "title": "3  Projections and Coordinate Reference Systems",
+    "section": "4.1 Further Reading",
+    "text": "4.1 Further Reading\n\n4.1.1 Understanding the size of countries\nhttps://mapfight.xyz/\nhttps://www.thetruesize.com/\n\n\n4.1.2 Projections\nA discussion of alternatives to Web Mercator - while it’s geared towards options available in ArcGis, it’s a great demonstration of some options\n\n\n4.1.3 Coordinate Reference Systems\nA gentle Introduction to GIS - Coordinate Reference Systems",
+    "crumbs": [
+      "Geographical Concepts and Terminology",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+    ]
   },
   {
     "objectID": "ct_crs.html#references",
@@ -123,35 +154,53 @@
     "href": "concepts_and_terms.html",
     "title": "Geographical Concepts and Terminology",
     "section": "",
-    "text": "Before you get started with making your own maps, it’s helpful to understand a few key concepts and terms."
+    "text": "Before you get started with making your own maps, it’s helpful to understand a few key concepts and terms.",
+    "crumbs": [
+      "Geographical Concepts and Terminology"
+    ]
   },
   {
     "objectID": "ct_crs.html#footnotes",
     "href": "ct_crs.html#footnotes",
-    "title": "4  Projections and Coordinate Reference Systems",
+    "title": "3  Projections and Coordinate Reference Systems",
     "section": "",
-    "text": "Video Credit - Vox, Terms of Licence Use↩︎\nhttps://en.wikipedia.org/wiki/Web_Mercator_projection↩︎\nBy Jakub Nowosad - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=73955926↩︎\nDjexplo, CC0, via Wikimedia Commons↩︎\nDjexplo, CC0, via Wikimedia Commons↩︎\nHiggins, Hannah B. The Grid Book. Cambridge, Massachusetts: MIT Press, 2009. ISBN 9780262512404 p.94. “Embroiled in controversy from the start, the map is nonetheless widely used in the British school system and is promoted by the United Nations Educational and Scientific Cultural Organization (UNESCO) because of its ability to communicate visually the actual relative sizes of the various regions of the planet.”, via Wikipedia - https://en.wikipedia.org/wiki/Gall%E2%80%93Peters_projection↩︎\nhttps://en.wikipedia.org/wiki/Winkel_tripel_projection↩︎"
+    "text": "Video Credit - Vox, Terms of Licence Use↩︎\nhttps://en.wikipedia.org/wiki/Web_Mercator_projection↩︎\nBy Jakub Nowosad - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=73955926↩︎\nDjexplo, CC0, via Wikimedia Commons↩︎\nDjexplo, CC0, via Wikimedia Commons↩︎\nHiggins, Hannah B. The Grid Book. Cambridge, Massachusetts: MIT Press, 2009. ISBN 9780262512404 p.94. “Embroiled in controversy from the start, the map is nonetheless widely used in the British school system and is promoted by the United Nations Educational and Scientific Cultural Organization (UNESCO) because of its ability to communicate visually the actual relative sizes of the various regions of the planet.”, via Wikipedia - https://en.wikipedia.org/wiki/Gall%E2%80%93Peters_projection↩︎\nhttps://en.wikipedia.org/wiki/Winkel_tripel_projection↩︎",
+    "crumbs": [
+      "Geographical Concepts and Terminology",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+    ]
   },
   {
     "objectID": "ct_crs.html#what-coordinate-reference-systems-are-in-use-in-the-uk",
     "href": "ct_crs.html#what-coordinate-reference-systems-are-in-use-in-the-uk",
-    "title": "4  Projections and Coordinate Reference Systems",
-    "section": "4.3 What coordinate reference systems are in use in the UK?",
-    "text": "4.3 What coordinate reference systems are in use in the UK?\nThe UK government provides the following guidelines on the usage of coordinate reference systems:\n\n\nuse British or Irish National Grid for data related to the UK and Northern Ireland\nuse ETRS89 (EPSG::4258) for Europe\nuse WGS84 for worldwide geographic location points\n\n\n\nYou can also combine these standards and/or add other CRS to meet your organisation’s requirements, for example, when you need greater accuracy for precision engineering decisions."
+    "title": "3  Projections and Coordinate Reference Systems",
+    "section": "3.3 What coordinate reference systems are in use in the UK?",
+    "text": "3.3 What coordinate reference systems are in use in the UK?\nThe UK government provides the following guidelines on the usage of coordinate reference systems:\n\n\nuse British or Irish National Grid for data related to the UK and Northern Ireland\nuse ETRS89 (EPSG::4258) for Europe\nuse WGS84 for worldwide geographic location points\n\n\n\nYou can also combine these standards and/or add other CRS to meet your organisation’s requirements, for example, when you need greater accuracy for precision engineering decisions.\n\n\n3.3.1 The British National Grid\nGiven the government’s recommendation to use the BNG - which is also sometimes referred to as the Ordnance Survey National Grid reference system (OSBG) - you may come across datasets which make use of it, so it’s worth knowing how it works!\nRather than latitude and longitude, BNG uses Northings and Eastings.\nNorthing sand Estings will be given as a series of digits without decimal places.\nFor example, the location of the St Luke’s University campus (the home of HSMA!) using the BNG is 29297, 92456\n\nIn this, the Easting is 29297 and the Northing is 92456.\n\n\n\n\n\n\nWarning\n\n\n\nIt’s important to note that we give the Easting (the across) first, and the Northing (the up) second.\nThis is the opposite of using latitude and longitude!",
+    "crumbs": [
+      "Geographical Concepts and Terminology",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+    ]
   },
   {
     "objectID": "ct_filetypes.html",
     "href": "ct_filetypes.html",
     "title": "5  Geographic Data Filetypes",
     "section": "",
-    "text": "When working with geometry filetypes, they can define the boundaries of an area by storing a series of latitude and longitude pairs within them. This defines a polygon."
+    "text": "When working with geometry filetypes, they can define the boundaries of an area by storing a series of latitude and longitude pairs within them. This defines a polygon.",
+    "crumbs": [
+      "Geographical Concepts and Terminology",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Geographic Data Filetypes</span>"
+    ]
   },
   {
     "objectID": "introduction_mapping_with_qgis.html",
     "href": "introduction_mapping_with_qgis.html",
     "title": "An Introduction to Mapping in QGIS",
     "section": "",
-    "text": "Installing QGIS"
+    "text": "References",
+    "crumbs": [
+      "An Introduction to Mapping in QGIS"
+    ]
   },
   {
     "objectID": "introduction_mapping_in_python.html",
@@ -172,20 +221,179 @@
     "href": "introduction_mapping_with_qgis.html#device-requirements",
     "title": "An Introduction to Mapping in QGIS",
     "section": "Device Requirements",
-    "text": "Device Requirements\nTo install QGIS, you will need a laptop or desktop computer running Windows, MacOS, or Linux.\nYou will not be able to install the software on a phone or tablet! While versions exist for these devices, they are aimed more at conducting fieldwork than doing the sort of task we’ll be covering in this course."
+    "text": "Device Requirements\nTo install QGIS, you will need a laptop or desktop computer running Windows, MacOS, or Linux.\nYou will not be able to install the software on a phone or tablet! While versions exist for these devices, they are aimed more at conducting fieldwork than doing the sort of task we’ll be covering in this course.",
+    "crumbs": [
+      "An Introduction to Mapping in QGIS"
+    ]
   },
   {
     "objectID": "introduction_mapping_with_qgis.html#installing-qgis-1",
     "href": "introduction_mapping_with_qgis.html#installing-qgis-1",
     "title": "An Introduction to Mapping in QGIS",
     "section": "Installing QGIS",
-    "text": "Installing QGIS\nQGIS is widely used across the globe, and is totally free, with the code for the program also made available.\nQGIS is used by tens of thousands of users - some statistics can be viewed here if you are interested.\nIf your organisation has had someone on the HSMA programme in the last few years, they will have been required to download QGIS, so the software may already be available in your organisation’s software centre. If so, click here to jump to the section on checking your version to ensure that the version you are running is suitable for the workshop.\nIf you are installing QGIS for the first time without using a software centre, head to this page - https://qgis.org/en/site/forusers/download.html - and click on the appropriate box for your operating system. The box may open automatically.\n\nWe would recommend going directly to this page rather than searching Google or Bing for QGIS as we know the link above is correct and you won’t redirected to a third-party download site - using the link provided above ensures you are getting the software directly from the QGIS team.\nDon’t worry if the version number doesn’t exactly match the screenshots below - it will just automatically download the most recent release, which will be fine for the course.\nMore detailed instructions for Windows are given below.\n\nWindows\nNote that installing the software will require administrator rights. If you are on a personal device this will not be a problem.\nIf you are installing it on your work device, please make sure you have gone through the appropriate processes with your IT department.\nClick on the green banner to download the installer.\n\nThe download will take roughly 5 to 15 minutes, depending on the speed of your internet.\nWhen the installer has downloaded, find the file in the folder you saved it to, and double click on the file.\nFollow the instructions in the window that appears to install QGIS on your device.\nWhen you reach the step below, it may appear to pause for a long time with the progress bar not filling up.\n\nIf this happens, check your windows taskbar for the following icon:\n\nThis is a pop-up for Windows user account control. You may need to click this and authorize the installer.\nThe process should then take a maximum of 10 minutes to complete.\n\nClick ‘Finish’. You should now be able to run QGIS from your start menu or an icon on your desktop.\nChecking the version of an existing QGIS install\nIf you are using an older version your organisation has approved, you may wish to check the version number.\nIf the version number is lower than 3.0, you may find the layout is a bit different to the version we use in the workshop.\nTo check the version this, open QGIS up, hover over ‘Help’ in the top menu bar, and then click ‘About’.\n\nThe top line will tell you which version of QGIS you are currently running.\n\nYou can also choose ‘Check QGIS Version’ from the same menu, but this isn’t quite as reliable!"
+    "text": "Installing QGIS\nQGIS is widely used across the globe, and is totally free, with the code for the program also made available.\nQGIS is used by tens of thousands of users - some statistics can be viewed here if you are interested.\nIf your organisation has had someone on the HSMA programme in the last few years, they will have been required to download QGIS, so the software may already be available in your organisation’s software centre. If so, click here to jump to the section on checking your version to ensure that the version you are running is suitable for the workshop.\nIf you are installing QGIS for the first time without using a software centre, head to this page - https://qgis.org/en/site/forusers/download.html - and click on the appropriate box for your operating system. The box may open automatically.\n\nWe would recommend going directly to this page rather than searching Google or Bing for QGIS as we know the link above is correct and you won’t redirected to a third-party download site - using the link provided above ensures you are getting the software directly from the QGIS team.\nDon’t worry if the version number doesn’t exactly match the screenshots below - it will just automatically download the most recent release, which will be fine for the course.\nMore detailed instructions for Windows are given below.\n\nWindows\nNote that installing the software will require administrator rights. If you are on a personal device this will not be a problem.\nIf you are installing it on your work device, please make sure you have gone through the appropriate processes with your IT department.\nClick on the green banner to download the installer.\n\nThe download will take roughly 5 to 15 minutes, depending on the speed of your internet.\nWhen the installer has downloaded, find the file in the folder you saved it to, and double click on the file.\nFollow the instructions in the window that appears to install QGIS on your device.\nWhen you reach the step below, it may appear to pause for a long time with the progress bar not filling up.\n\nIf this happens, check your windows taskbar for the following icon:\n\nThis is a pop-up for Windows user account control. You may need to click this and authorize the installer.\nThe process should then take a maximum of 10 minutes to complete.\n\nClick ‘Finish’. You should now be able to run QGIS from your start menu or an icon on your desktop.\nChecking the version of an existing QGIS install\nIf you are using an older version your organisation has approved, you may wish to check the version number.\nIf the version number is lower than 3.0, you may find the layout is a bit different to the version we use in the workshop.\nTo check the version this, open QGIS up, hover over ‘Help’ in the top menu bar, and then click ‘About’.\n\nThe top line will tell you which version of QGIS you are currently running.\n\nYou can also choose ‘Check QGIS Version’ from the same menu, but this isn’t quite as reliable!",
+    "crumbs": [
+      "An Introduction to Mapping in QGIS"
+    ]
   },
   {
     "objectID": "introduction_mapping_with_qgis.html#footnotes",
     "href": "introduction_mapping_with_qgis.html#footnotes",
     "title": "An Introduction to Mapping in QGIS",
     "section": "",
-    "text": "Ordnance Survey↩︎"
+    "text": "Ordnance Survey↩︎",
+    "crumbs": [
+      "An Introduction to Mapping in QGIS"
+    ]
+  },
+  {
+    "objectID": "qgis_basemaps.html#the-simplest-way-to-get-started",
+    "href": "qgis_basemaps.html#the-simplest-way-to-get-started",
+    "title": "7  Adding a basemap in QGIS",
+    "section": "",
+    "text": "Warning\n\n\n\nIt’s important that you credit OpenStreetMap when sharing this map in any way, in accordance with its licencing terms.\nThe licencing text you need to include is this:\n© OpenStreetMap contributors, licenced as CC BY-SA\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nYou can stop reading here and move onto Chapter 8 if you like! There you will learn about importing a dataset of points.\nHowever, if you want to use a different basemap to the default one provided by QGIS or are interested in learning about an alternate, less ‘busy’ looking basemap, then you can carry on to the sections below.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_basemaps.html#using-different-basemap-providers",
+    "href": "qgis_basemaps.html#using-different-basemap-providers",
+    "title": "7  Adding a basemap in QGIS",
+    "section": "7.2 Using different basemap providers",
+    "text": "7.2 Using different basemap providers\nBy default, QGIS only offers OpenStreetMap basemap tiles.\nHowever, you can easily load in additional tiles.\n\n\n\n\n\n\nWarning\n\n\n\nMake sure to appropriately credit the providers of any basemap services you use when sharing your maps, even internally!\n\n\nTo add new basemaps, right click on ‘XYZ Tiles’ in the Browser and select ‘New Connection…’.\n\nHere, you can give your new map tiles any name you like.\n\nUnder the URL setting, enter one of the following URLS^https://astro-geo-gis.com/liaison/qgis-tutorials/customizing-map-tiles-in-qgis/\nGoogle Maps: http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}\n\nGoogle Hybrid (Satellite + Roads): https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}\nMore tiles can be obtained by some careful searching! But note that many tiles will require a API key and may require payment to use, so you will likely want to stick to the default OpenStreetMaps in most cases.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_basemaps.html#loading-in-a-basic-world-map-instead",
+    "href": "qgis_basemaps.html#loading-in-a-basic-world-map-instead",
+    "title": "7  Adding a basemap in QGIS",
+    "section": "7.3 Loading in a basic world map instead",
+    "text": "7.3 Loading in a basic world map instead\nThere are a few situations in which you might want to use the approach below instead, which will give you a nice plain basemap at the end of it, like the image below. - you want your data to be the star of the show - you don’t have an internet connection available to download the OpenStreetMap tiles - you can’t use the OpenStreetMap tiles due to licencing restrictions\n\n\n\n\n\n\n\nWarning\n\n\n\nThis method gives you a map outline that isn’t of a very high resolution - i.e. the areas don’t follow the outline of the UK precisely. It’s fine if you’re using the map at a fairly zoomed-out level, but it might not be so much use if you want to really zoom in to your county or a particular city!\n\n\nStart a new project - you can either discard the changes to your previous project if you had a go at adding the OpenStreetMap basemap in, or you can save it somewhere for later.\nLook at the very bottom of your QGIS window. Down at the bottom you should see a box that says ‘Coordinate’.\n\nNormally this will show the coordinates of the point your mouse is hovering over.\nHowever, we can click on this box and do a neat trick!\nClick into the box and get rid of the coordinates - either by highlighting them and clicking ‘del’ or backspace to delete them all at once, or by clicking somewhere in the box and using a combination of those keys to get rid of any numbers and symbols.\n\nEnter ‘world’ into this box and click the ‘enter’ or ‘return’ key on your keyboard.\n\nVoila! Suddenly you have a world map.\n\n7.3.1 Cutting out unnecessary areas\nFor a lot of people on the HSMA course, you will only be interested in displaying data for the UK - or even just one nation within the UK.\nThis world map is split into different polygons.\nIf we click on the ‘select features by area’ button on the top toolbar, we can select individual polygons.\n\nHere I’ve selected only\n\nI can select additional areas by holding ‘shift’ and selecting an additional polygon. Here I’ve done this to select Ireland too.\n\nIf I click on Ireland again with shift held down, it will be deselected. However, if I click on a selected polygon without shift held down, I will lose all my prior selections, and only the most recently clicked on polygon will be highlighted.\nBut just selecting these doesn’t do much. We can see that other areas are still visible.\nIf we head over to the layers panel, which is probably on the left of your screen, you can see that it has a layer called ‘world map’.\nWith the polygon(s) you are interested in selected, right click on the ‘world map’ layer and select ‘Save Selected Features As’.\n\nThis will bring up the following dialog box.\n\nFrom the format box, you can select any of the options, but choosing ‘GeoPackage’ or ‘GeoJSON’ is a good idea as they output a single file that can be easily transferred into other software at a later date.\nYou can then enter a file name into the box below, which will be displayed in the next step, so make it something clear and useful. Clicking the three dots to the right of this box will open a standard operating system dialog box for saving the output file - but unusually, we don’t actually really care where it’s getting saved to! So you can really save it anywhere - though perhaps you might want to reuse this as a starting point in the future for different projects, so knowing where it’s gone could be handy.\nSo why aren’t we too worried about where it’s getting saved to? It’s because we’re interested in two other key things - the tickbox that says ‘Save only selected features’ and ‘Add saved file to map’.\nMake sure those are checked, and then click ‘Ok’.\nYou’ll now see a second layer - with the name you entered in the previous step and a new randomly-chosen colour. .\n\nWe can now untick the box next to the ‘World Map’ layer - or even right click and choose ‘Remove Layer’.\n\nNow we’ll just have a nice outline of the UK to work with, which will be nice and efficient and clear for our final output.\n\n\n\n7.3.2 Styling our custom map\nWith our new layer selected - you can tell it’s selected because the name will have a grey background in the ‘Layers’ panel, and if it’s not selected you can click on the name of it in the ‘Layers’ panel - we then want to take a look at it in the Layer Styling Panel.\n\n\n\n\n\n\nTip\n\n\n\nThis panel isn’t visible by default. If you followed the setup steps in the previous chapted, this should be on the right of your screen.\nIf you didn’t, you can make it show up by clicking the “View” button in the top menu, then “Panels” and click on “Layer Styling” - this should make a tick appear next it and the panel will open up on the right side of the screen.\n\n\nTo start with, let’s change the background colour of the map.\n\nClicking on the wide bar of colour with the label ‘Color’ brings up a colour picker.\n\nWe can drag the crosshair to a nice pale green - or any colour you like!\n\nThen click on the back arrow next to ‘Select Color’, near the top of the layer styling panel, to get back to the previous screen.\nNext, you’ll notice that we originally had ‘Fill’ selected. Click on ‘Simple Fill’ instead. It should show up by default, but if it doesn’t, click on the little black arrow to the left of the word ‘Fill’.\n\nYou can see thaat now we get some extra options available to us.\nFirst, let’s get rid of the black outline by clicking the dropdown next to ‘Stroke style’ and choosing ‘No Line’.\nNext, let’s add in a background colour.\nClick on the words ‘layer rendering’ towards the bottom of the layer styling panel.\n\nNext, tick the box ‘Draw effects’ and click on the yellow star to the right to change the options.\n\nTick ‘Outer Glow’ and set the following options.\nSpread = 200 Blur radius = 0 Single Color = Blue\n\nYou now have a a nice plain UK map to work from!",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_point_data.html",
+    "href": "qgis_point_data.html",
+    "title": "8  Visualising Point Data in QGIS",
+    "section": "",
+    "text": "9 Importing point data from a .csv file",
+    "crumbs": [
+      "An Introduction to Mapping in QGIS",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_setup.html#selecting-panels",
+    "href": "qgis_setup.html#selecting-panels",
+    "title": "6  Getting QGIS Ready to Use",
+    "section": "6.1 Selecting panels",
+    "text": "6.1 Selecting panels\nWhen you open up QGIS for the first time, a few of the different panels you will need to use are hidden by default.\n\nLet’s make sure we all have the same tools available\nClick “View” → “Panels”\nMake sure - “Browser”, - “Layer Styling” - and “Layers” all have a tick next to them\n\nNow our QGIS should look a bit like this, with the panels highlighted in orange (browser, layer styling and layers) all visible on the screen."
+  },
+  {
+    "objectID": "qgis_setup.html#moving-around-qgis",
+    "href": "qgis_setup.html#moving-around-qgis",
+    "title": "5  Getting QGIS Ready to Use",
+    "section": "6.4 Moving around QGIS",
+    "text": "6.4 Moving around QGIS\n\nTo move around your maps, you will need two key tools: move (pan) and zoom.\n\nHowever, if you’re using a mouse with a scroll wheel, you can use that instead of the zoom buttons. The zoom will be centred around the point your mouse is hovering over, which can be useful for getting to a certain point quickly!\nOr on a laptop trackpad, you can “pinch” outwards to zoom out, and inwards to zoom in.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_setup.html#starting-a-project",
+    "href": "qgis_setup.html#starting-a-project",
+    "title": "5  Getting QGIS Ready to Use",
+    "section": "6.5 Starting a project",
+    "text": "6.5 Starting a project\nNow you will want to start a new project.\nClick “Project” → “New”\n\nNow it’s time to add our basemap - so head to the next chapter to find out how to do that.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+    ]
+  },
+  {
+    "objectID": "ct_crs.html#what-other-ways-do-we-determine-areas-within-the-uk",
+    "href": "ct_crs.html#what-other-ways-do-we-determine-areas-within-the-uk",
+    "title": "3  Projections and Coordinate Reference Systems",
+    "section": "3.4 What other ways do we determine areas within the UK?",
+    "text": "3.4 What other ways do we determine areas within the UK?\n\n3.4.1 Postcodes\nPostcodes are a well-known way of splitting the UK up.\nPostcodes can be used at several different levels of resolution.\n\nPostcode areas are often quite large, sometimes spanning whole counties.\n^https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/British_postcode_areas_map.svg/450px-British_postcode_areas_map.svg.png\nIn contrast, a single exact postcode may only cover a handful of houses, so they are often not used when analysing healthcare data as there is too much of a risk of being able to identify an individual patient from their postcode.\n\n\n\n\n\n\nWarning\n\n\n\nThere are a lot of valid formats for postcodes, so they are not always the easiest to validate!\nYou may also find that they are input into software with a mixture of gaps between the first and second half (known as the outward code and inward code), so you may need to clean and standardise them before joining them to other datasets.\n\n\n\n\n\n\n\n\nTip\n\n\n\n is a great website for getting up-to-date information about postcodes and using this to supplement your data.\nFor example, you can find out which LSOA - a grouping we will talk about shortly - a postcode belongs to, which can help with aggregating your data for a different level of detail.\n\n\n\n\n3.4.2 Output Areas\nOutput Areas (OA), Lower Layer Super Output Areas (LSOA) and Middle Layer Super Output Areas (MSOA) are standardised geographical units that differ in area but have a roughly similar number of people living in each one.\n^ https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistical-geographies/, https://www.ons.gov.uk/methodology/geography/ukgeographies/censusgeographies/census2021\n\n3.4.2.1 OA\nOutput Areas (OA) are very small, with an average of circa 300 people per area.\nThey are so small that you will probably not work with them very often.\n\n\n3.4.2.2 LSOA\nLower Layer Super Output Areas (LSOA) are the medium size of area, with around 1500 people per LSOA.\n\n\n3.4.2.3 MSOA\nLower Layer Super Output Areas (LSOA) are the largest size of area, with around 8000 people per MSOA.\nThe map below shows MSOA boundaries (in red) overlaid over the LSOA boundaries (in blue).\n\nZooming in on a single MSOA, outlined in red, we can see that there are, in this case, four LSOAs within it - though this will not be exactly the same for each MSOA.\nYou can also wee here that one of the LSOAs is much larger than the other three, suggesting it is likely to be less densely populated.\n\n\n\n\n\n\n\nClick here to view an interactive map of MSOAs without leaving the book!\n\n\n\n\n\n\n\n\n\n\n\n\n3.4.3 Issues when working with output areas\n\n\n\n\n\n\nImportant\n\n\n\nDespite being somewhat standardised, there can still be very significant differences between areas in terms of the number of people living in them or the total land area covered.\nYou should always carefully consider whether you need to standardise the data in some way to account for this variation.\nYou can read more about this process in a later chapter.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nIt’s also worth paying attention to which year of output areas you are working with.\nA lot of older data will use 2011 boundaries, but the boundaries were refreshed in 2021. If trying to join older data to a newer file of boundaries, or vice-versa, you may find that some areas appear to be missing - so check the dates!\n\n\n\n\n3.4.4 Other groupings\n\n3.4.4.1 Local Authorities\nThere are county councils, which are quite large, and then these are often (though not always) subdivided into multiple district councils.\n^https://en.wikipedia.org/wiki/Local_government_in_England\n\n\n3.4.4.2 Healthcare Regions\nHealthcare regions in the UK frequently change.\n&lt;1996: Regional Health Authorities\n1996-2002: Health Authorities\n2002-2013: Strategic health authorities + primary care trusts\n2013-2022: CCGs\n2022-now (February 2024): Integrated care systems (integrated care board plus integrated care partnership)\n^https://geoportal.statistics.gov.uk/documents/ons::integrated-care-boards-april-2023-map-in-england/explore\n\n\n3.4.4.3 Ambulance Trusts\n^https://www.bbc.co.uk/news/health-16052725\n\n\n3.4.4.4 Police Forces\n^https://assets-hmicfrs.justiceinspectorates.gov.uk/uploads/police-force-map.pdf",
+    "crumbs": [
+      "Geographical Concepts and Terminology",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_point_data.html#colour-and-size",
+    "href": "qgis_point_data.html#colour-and-size",
+    "title": "8  Visualising Point Data in QGIS",
+    "section": "10.1 Colour and size",
+    "text": "10.1 Colour and size",
+    "crumbs": [
+      "An Introduction to Mapping in QGIS",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_point_data.html#custom-markers",
+    "href": "qgis_point_data.html#custom-markers",
+    "title": "8  Visualising Point Data in QGIS",
+    "section": "10.2 Custom Markers",
+    "text": "10.2 Custom Markers",
+    "crumbs": [
+      "An Introduction to Mapping in QGIS",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_setup.html",
+    "href": "qgis_setup.html",
+    "title": "5  Getting QGIS Ready to Use",
+    "section": "",
+    "text": "6.3 Selecting panels\nWhen you open up QGIS for the first time, a few of the different panels you will need to use are hidden by default.\nLet’s make sure we all have the same tools available\nClick “View” → “Panels”\nMake sure - “Browser”, - “Layer Styling” - and “Layers” all have a tick next to them\nNow our QGIS should look a bit like this, with the panels highlighted in orange (browser, layer styling and layers) all visible on the screen.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_basemaps.html",
+    "href": "qgis_basemaps.html",
+    "title": "7  Adding a basemap in QGIS",
+    "section": "",
+    "text": "7.1 The simplest way to get started\nQGIS has one basemap built in - so let’s load that in first.\nLook at the ‘Browser’ panel in QGIS, which will probably be on the left-hand side of your screen.\nClick on the arrow next to ‘XYZ Tiles’\nOR\nDouble click on the phrase ‘XYZ Tiles’\nNow double click on ‘OpenStreetMap’\nYou should now be presented with a zoomed-out map of the world - if you’ve been reading this book in order, you may recognise the Mercator projection! If you’re interested, you can go back and brush up on projections in Chapter 4.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_setup.html#device-requirements",
+    "href": "qgis_setup.html#device-requirements",
+    "title": "5  Getting QGIS Ready to Use",
+    "section": "6.1 Device Requirements",
+    "text": "6.1 Device Requirements\nTo install QGIS, you will need a laptop or desktop computer running Windows, MacOS, or Linux.\nYou will not be able to install the software on a phone or tablet! While versions exist for these devices, they are aimed more at conducting fieldwork than doing the sort of task we’ll be covering in this course.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_setup.html#installing-qgis-1",
+    "href": "qgis_setup.html#installing-qgis-1",
+    "title": "5  Getting QGIS Ready to Use",
+    "section": "6.2 Installing QGIS",
+    "text": "6.2 Installing QGIS\nQGIS is widely used across the globe, and is totally free, with the code for the program also made available.\nQGIS is used by tens of thousands of users - some statistics can be viewed here if you are interested.\nIf your organisation has had someone on the HSMA programme in the last few years, they will have been required to download QGIS, so the software may already be available in your organisation’s software centre. If so, click here to jump to the section on checking your version to ensure that the version you are running is suitable for the workshop.\nIf you are installing QGIS for the first time without using a software centre, head to this page - https://qgis.org/en/site/forusers/download.html - and click on the appropriate box for your operating system. The box may open automatically.\n\nWe would recommend going directly to this page rather than searching Google or Bing for QGIS as we know the link above is correct and you won’t redirected to a third-party download site - using the link provided above ensures you are getting the software directly from the QGIS team.\nDon’t worry if the version number doesn’t exactly match the screenshots below - it will just automatically download the most recent release, which will be fine for the course.\nMore detailed instructions for Windows are given below.\n\n6.2.1 Windows\nNote that installing the software will require administrator rights. If you are on a personal device this will not be a problem.\nIf you are installing it on your work device, please make sure you have gone through the appropriate processes with your IT department.\nClick on the green banner to download the installer.\n\nThe download will take roughly 5 to 15 minutes, depending on the speed of your internet.\nWhen the installer has downloaded, find the file in the folder you saved it to, and double click on the file.\nFollow the instructions in the window that appears to install QGIS on your device.\nWhen you reach the step below, it may appear to pause for a long time with the progress bar not filling up.\n\nIf this happens, check your windows taskbar for the following icon:\n\nThis is a pop-up for Windows user account control. You may need to click this and authorize the installer.\nThe process should then take a maximum of 10 minutes to complete.\n\nClick ‘Finish’. You should now be able to run QGIS from your start menu or an icon on your desktop.\nChecking the version of an existing QGIS install\nIf you are using an older version your organisation has approved, you may wish to check the version number.\nIf the version number is lower than 3.0, you may find the layout is a bit different to the version we use in the workshop.\nTo check the version this, open QGIS up, hover over ‘Help’ in the top menu bar, and then click ‘About’.\n\nThe top line will tell you which version of QGIS you are currently running.\n\nYou can also choose ‘Check QGIS Version’ from the same menu, but this isn’t quite as reliable!",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+    ]
   }
 ]
