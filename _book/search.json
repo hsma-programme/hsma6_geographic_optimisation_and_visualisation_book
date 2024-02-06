@@ -282,12 +282,12 @@
   {
     "objectID": "qgis_point_data.html",
     "href": "qgis_point_data.html",
-    "title": "8  Visualising Point Data in QGIS",
+    "title": "7  Visualising Point Data in QGIS",
     "section": "",
-    "text": "9 Importing point data from a .csv file",
+    "text": "8 Importing point data from a .csv file\nOur data is stored in what’s called a ‘.csv’ file\nA csv has columns of data separated by commas, like this:\naccident_index,longitude,latitude,date\nA001,-0.198224,51.486454,2023/01/01\nA002,0.105042,1.49883,2023/01/02\nA002,0.173482,51.451924,2023/01/04\nWhen we load it into a program like Excel, it turns it into a table we can read\nSo we can say that our file is a text file that is split - or ‘delimited’ - by commas\nSo we need to tell QGIS that!\nSelect ‘Layer’ → ‘Add Layer’ → ‘Add Delimited Text Layer…’\nClick on the three dots to open up the file browser\nNavigate to where your file is located.\nIt will automatically show only files that are delimited text. When you reach the file, either\nDouble click on the file OR single click on it, then click ‘Open’",
     "crumbs": [
-      "An Introduction to Mapping in QGIS",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "Mapping in QGIS",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
@@ -333,23 +333,23 @@
   {
     "objectID": "qgis_point_data.html#colour-and-size",
     "href": "qgis_point_data.html#colour-and-size",
-    "title": "8  Visualising Point Data in QGIS",
-    "section": "10.1 Colour and size",
-    "text": "10.1 Colour and size",
+    "title": "7  Visualising Point Data in QGIS",
+    "section": "9.1 Colour and size",
+    "text": "9.1 Colour and size",
     "crumbs": [
-      "An Introduction to Mapping in QGIS",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "Mapping in QGIS",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html#custom-markers",
     "href": "qgis_point_data.html#custom-markers",
-    "title": "8  Visualising Point Data in QGIS",
-    "section": "10.2 Custom Markers",
-    "text": "10.2 Custom Markers",
+    "title": "7  Visualising Point Data in QGIS",
+    "section": "9.2 Custom Markers",
+    "text": "9.2 Custom Markers",
     "crumbs": [
-      "An Introduction to Mapping in QGIS",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "Mapping in QGIS",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {

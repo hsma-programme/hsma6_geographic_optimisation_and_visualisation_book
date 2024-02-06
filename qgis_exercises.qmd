@@ -7,3 +7,12 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+
+# QGIS Exercise 1
+
+
+# QGIS Exercise 2
+
+
+# QGIS Exercise 3
