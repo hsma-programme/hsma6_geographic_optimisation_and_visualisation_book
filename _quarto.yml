@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: docs
 book:
   title: HSMA - Geographic Modelling and Visualisation
   author: Sammi Rosser
@@ -17,40 +18,40 @@ book:
     - qgis_setup.qmd
     - qgis_basemaps.qmd
     - qgis_point_data.qmd
-    - qgis_choropleth.qmd
-    - qgis_filtering.qmd
-    - qgis_print_layouts.qmd
-    - qgis_python.qmd
-    - qgis_extensions.qmd
-    - qgis_exercises.qmd
-  - part: introduction_mapping_in_python.qmd
-    chapters:
-    - python_geopandas.qmd
-    - python_geopandas_matplotlib.qmd
-    - python_geopandas_leaflet.qmd
-    - python_geopandas_kepler.qmd
-    - python_mapping_exercises.qmd
-  - part: mapping_travel_times.qmd
-    chapters:
-    - mtt_working_with_lsoa_travel_time_data.qmd
-    - mtt_mapping_travel_times_qgis.qmd
-    - mtt_mapping_travel_times_python.qmd
-    - mtt_travel_time_apis.qmd
-    - mtt_travel_time_exercises.qmd
-  - part: intro_facility_location.qmd
-    chapters:
-    - fl_bruteforce_solutions.qmd
-    - fl_limits_of_computation.qmd
-    - fl_evolutionary_algorithms.qmd
-    - fl_genetic_algorithms.qmd
-    - fl_facility_location_exercises.qmd
-  - part: introduction_travelling_salesman_vrp.qmd
-    chapters:
-    - tsvrp_travelling_salesman.qmd
-    - tsvrp_vehicle_routing_problem.qmd
-    - tsvrp_exercises.qmd
-  - conclusion.qmd
-  - resources_additional_reading.qmd
+  #   - qgis_choropleth.qmd
+  #   - qgis_filtering.qmd
+  #   - qgis_print_layouts.qmd
+  #   - qgis_python.qmd
+  #   - qgis_extensions.qmd
+  #   - qgis_exercises.qmd
+  # - part: introduction_mapping_in_python.qmd
+  #   chapters:
+  #   - python_geopandas.qmd
+  #   - python_geopandas_matplotlib.qmd
+  #   - python_geopandas_leaflet.qmd
+  #   - python_geopandas_kepler.qmd
+  #   - python_mapping_exercises.qmd
+  # - part: mapping_travel_times.qmd
+  #   chapters:
+  #   - mtt_working_with_lsoa_travel_time_data.qmd
+  #   - mtt_mapping_travel_times_qgis.qmd
+  #   - mtt_mapping_travel_times_python.qmd
+  #   - mtt_travel_time_apis.qmd
+  #   - mtt_travel_time_exercises.qmd
+  # - part: intro_facility_location.qmd
+  #   chapters:
+  #   - fl_bruteforce_solutions.qmd
+  #   - fl_limits_of_computation.qmd
+  #   - fl_evolutionary_algorithms.qmd
+  #   - fl_genetic_algorithms.qmd
+  #   - fl_facility_location_exercises.qmd
+  # - part: introduction_travelling_salesman_vrp.qmd
+  #   chapters:
+  #   - tsvrp_travelling_salesman.qmd
+  #   - tsvrp_vehicle_routing_problem.qmd
+  #   - tsvrp_exercises.qmd
+  # - conclusion.qmd
+  # - resources_additional_reading.qmd
   cover-image: resources/logos/hsma_logo_transparent_background_large.png
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true
