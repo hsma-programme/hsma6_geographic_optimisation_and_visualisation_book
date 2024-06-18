@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 7&nbsp; Visualising Point Data in QGIS</title>
+<title>HSMA - Geographic Modelling and Visualisation - 8&nbsp; Visualising Point Data in QGIS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./qgis_choropleth.html" rel="next">
 <link href="./qgis_basemaps.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -100,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_point_data.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_point_data.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -164,6 +165,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./the_importance_of_standardisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Standardisation</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -178,19 +185,66 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_basemaps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_point_data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_choropleth.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_choropleths_joining.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Filtering Data in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_print_layouts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Print Layouts in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercises - QGIS</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./introduction_mapping_in_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mapping in Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./why_python_mapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Why use python for maps?</span></span></a>
   </div>
 </li>
       </ul>
@@ -205,17 +259,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#importing-point-data-from-a-.csv-file" id="toc-importing-point-data-from-a-.csv-file" class="nav-link active" data-scroll-target="#importing-point-data-from-a-.csv-file"><span class="header-section-number">8</span> Importing point data from a .csv file</a>
+  <li><a href="#importing-point-data-from-a-.csv-file" id="toc-importing-point-data-from-a-.csv-file" class="nav-link active" data-scroll-target="#importing-point-data-from-a-.csv-file"><span class="header-section-number">9</span> Importing point data from a .csv file</a>
   <ul class="collapse">
-  <li><a href="#setting-the-crs-of-our-data" id="toc-setting-the-crs-of-our-data" class="nav-link" data-scroll-target="#setting-the-crs-of-our-data"><span class="header-section-number">8.1</span> Setting the CRS of our data</a></li>
-  <li><a href="#styling-points" id="toc-styling-points" class="nav-link" data-scroll-target="#styling-points"><span class="header-section-number">8.2</span> Styling points</a>
+  <li><a href="#setting-the-crs-of-our-data" id="toc-setting-the-crs-of-our-data" class="nav-link" data-scroll-target="#setting-the-crs-of-our-data"><span class="header-section-number">9.1</span> Setting the CRS of our data</a></li>
+  <li><a href="#styling-points" id="toc-styling-points" class="nav-link" data-scroll-target="#styling-points"><span class="header-section-number">9.2</span> Styling points</a>
   <ul class="collapse">
-  <li><a href="#hiding-points" id="toc-hiding-points" class="nav-link" data-scroll-target="#hiding-points"><span class="header-section-number">8.2.1</span> Hiding points</a></li>
-  <li><a href="#colour-and-size" id="toc-colour-and-size" class="nav-link" data-scroll-target="#colour-and-size"><span class="header-section-number">8.2.2</span> Colour and size</a></li>
-  <li><a href="#custom-markers" id="toc-custom-markers" class="nav-link" data-scroll-target="#custom-markers"><span class="header-section-number">8.2.3</span> Custom Markers</a></li>
+  <li><a href="#hiding-points" id="toc-hiding-points" class="nav-link" data-scroll-target="#hiding-points"><span class="header-section-number">9.2.1</span> Hiding points</a></li>
+  <li><a href="#colour-and-size" id="toc-colour-and-size" class="nav-link" data-scroll-target="#colour-and-size"><span class="header-section-number">9.2.2</span> Colour and size</a></li>
+  <li><a href="#custom-markers" id="toc-custom-markers" class="nav-link" data-scroll-target="#custom-markers"><span class="header-section-number">9.2.3</span> Custom Markers</a></li>
   </ul></li>
-  <li><a href="#adding-labels-to-points" id="toc-adding-labels-to-points" class="nav-link" data-scroll-target="#adding-labels-to-points"><span class="header-section-number">8.3</span> Adding labels to points</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">8.4</span> Next Steps</a></li>
+  <li><a href="#adding-labels-to-points" id="toc-adding-labels-to-points" class="nav-link" data-scroll-target="#adding-labels-to-points"><span class="header-section-number">9.3</span> Adding labels to points</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">9.4</span> Next Steps</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -223,9 +277,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_point_data.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_point_data.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-qgis-point" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></h1>
+<h1 class="title"><span id="sec-qgis-point" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></h1>
 </div>
 
 
@@ -295,8 +349,8 @@ Note
 <p>–&gt;<a href="https://raw.githubusercontent.com/Bergam0t/hsma6_module_3_geographic_optimisation_visualisation/main/data/chapter_qgis/stats19_collision_2022_minimal.csv?token=GHSAT0AAAAAACK7SKC7XGTYOIHF3QCRPKR4ZOCG7JA">Right-click here</a>&lt;–</p>
 </div>
 </div>
-<section id="importing-point-data-from-a-.csv-file" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Importing point data from a .csv file</h1>
+<section id="importing-point-data-from-a-.csv-file" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Importing point data from a .csv file</h1>
 <p>Our data is stored in what’s called a ‘.csv’ file</p>
 <p>A csv has columns of data separated by commas, like this:</p>
 <p><span style="color:orange;">accident_index</span>,longitude,<span style="color:green;">latitude</span>,<span style="color:yellow;">date</span></p>
@@ -314,8 +368,8 @@ Note
 <p>Navigate to where your file is located.</p>
 <p>It will automatically show only files that are delimited text. When you reach the file, either</p>
 <p>Double click on the file OR single click on it, then click ‘Open’</p>
-<section id="setting-the-crs-of-our-data" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="setting-the-crs-of-our-data"><span class="header-section-number">8.1</span> Setting the CRS of our data</h2>
+<section id="setting-the-crs-of-our-data" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="setting-the-crs-of-our-data"><span class="header-section-number">9.1</span> Setting the CRS of our data</h2>
 <p>Now we need to tell it what columns to use to determine the location of each point</p>
 <p>Click on ‘Geometry Definition’</p>
 <p><img src="images/qgis_point_data_geometry_definition.png" class="img-fluid"></p>
@@ -410,8 +464,8 @@ Exercise 1
 </div>
 </div>
 </section>
-<section id="styling-points" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="styling-points"><span class="header-section-number">8.2</span> Styling points</h2>
+<section id="styling-points" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="styling-points"><span class="header-section-number">9.2</span> Styling points</h2>
 <p>Now we have the accidents, but there’s so many that it’s hard to tell much.</p>
 <p>Let’s try splitting them out by severity.</p>
 <p>Select your imported layer of points - if you’re following along with the dataset, this will be called stats19_collision_2022_minimal layer - in the layer panel by clicking it.</p>
@@ -445,8 +499,8 @@ HINT
 <p>Once clicked, our points will have different colours (maybe not these exact ones).</p>
 <p>You can see the categories it has created in our layer styling panel.</p>
 <p><a href="images/qgis_points_accident_severity_classified.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/qgis_points_accident_severity_classified.png" class="img-fluid"></a></p>
-<section id="hiding-points" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="hiding-points"><span class="header-section-number">8.2.1</span> Hiding points</h3>
+<section id="hiding-points" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="hiding-points"><span class="header-section-number">9.2.1</span> Hiding points</h3>
 <p>We can hide some of these points by clicking the checkboxes (ticks) to the left of the symbol colour in the Layer Styling panel.</p>
 <p><img src="images/qgis_point_show_hide_category.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -494,8 +548,8 @@ Click here to see some example answers to this step
 </div>
 </div>
 </section>
-<section id="colour-and-size" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="colour-and-size"><span class="header-section-number">8.2.2</span> Colour and size</h3>
+<section id="colour-and-size" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="colour-and-size"><span class="header-section-number">9.2.2</span> Colour and size</h3>
 <p>With the layer selected, look at the layer styling panel.</p>
 <p>Click on one of the categorised symbols in the section with the headers ‘symbol’, ‘value’ and ‘legend’, then click on the symbol itself (marked 1. in the image below) to load a new page with options for point colour, opacity and size.</p>
 <p><img src="images/qgis_layer_styling_point_selected.png" class="img-fluid"></p>
@@ -528,17 +582,17 @@ Click here to see some example answers to this step
 <p>:::</p>
 </section>
 </section>
-<section id="custom-markers" class="level3" data-number="8.2.3">
-<h3 data-number="8.2.3" class="anchored" data-anchor-id="custom-markers"><span class="header-section-number">8.2.3</span> Custom Markers</h3>
+<section id="custom-markers" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="custom-markers"><span class="header-section-number">9.2.3</span> Custom Markers</h3>
 </section>
 </section>
-<section id="adding-labels-to-points" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="adding-labels-to-points"><span class="header-section-number">8.3</span> Adding labels to points</h2>
+<section id="adding-labels-to-points" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="adding-labels-to-points"><span class="header-section-number">9.3</span> Adding labels to points</h2>
 <p>In addition to changing the markers, we can add labels to our points.</p>
 <p>Now, simple labels can be a little hard to read, especially if we have a</p>
 </section>
-<section id="next-steps" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="next-steps"><span class="header-section-number">8.4</span> Next Steps</h2>
+<section id="next-steps" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="next-steps"><span class="header-section-number">9.4</span> Next Steps</h2>
 <p>For looking at individual roads, this approach is quite useful, but often there are so many accidents happening of a given type that it’s really hard to draw any conclusions about the country more widely.</p>
 <p>This is where colouring regions of the map by some sort of count is quite useful - and this is what we will cover in the next chapter.</p>
 
@@ -549,678 +603,341 @@ Click here to see some example answers to this step
 </main> <!-- /main -->
 <script>
 
-
-
 /* update total correct if #webex-total_correct exists */
-
 update_total_correct = function() {
-
   console.log("webex: update total_correct");
 
-
-
   var t = document.getElementsByClassName("webex-total_correct");
-
   for (var i = 0; i < t.length; i++) {
-
     p = t[i].parentElement;
-
     var correct = p.getElementsByClassName("webex-correct").length;
-
     var solvemes = p.getElementsByClassName("webex-solveme").length;
-
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-
     var selects = p.getElementsByClassName("webex-select").length;
 
-
-
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-
   }
-
 }
-
-
 
 /* webex-solution button toggling function */
-
 b_func = function() {
-
   console.log("webex: toggle hide");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('open')) {
-
     cl.remove("open");
-
   } else {
-
     cl.add("open");
-
   }
-
 }
-
-
 
 /* check answers */
-
 check_func = function() {
-
   console.log("webex: check answers");
-
   console.log(document.getElementsByClassName("webex-check"));
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('unchecked')) {
-
     cl.remove("unchecked");
-
     this.innerHTML = "Hide Answers";
 
-
-
     check_answer_box_nodelist = this.parentNode.childNodes
-
     console.log(check_answer_box_nodelist)
-
     for (let i = 0; i < check_answer_box_nodelist.length; i++) {
-
       var cl_inner = check_answer_box_nodelist[i].classList;
-
       console.log("Nodelist", i, ":", cl_inner);
-
       if (typeof cl_inner !== "undefined")
-
         {
-
           if (cl_inner.contains("feedback")) {
-
             {/* console.log(cl_inner.contains("feedback")) */}
-
             {/* console.log(check_answer_box_nodelist[i].style.display) */}
-
             check_answer_box_nodelist[i].style.display = "block"
-
           }
-
         }
 
-
-
       }
-
-
 
   } else {
-
     cl.add("unchecked");
-
     this.innerHTML = "Show Answers";
 
-
-
     check_answer_box_nodelist = this.parentNode.childNodes
-
     console.log(check_answer_box_nodelist)
-
     for (let i = 0; i < check_answer_box_nodelist.length; i++) {
-
       var cl_inner = check_answer_box_nodelist[i].classList;
-
       console.log("Nodelist", i, ":", cl_inner);
-
       if (typeof cl_inner !== "undefined")
-
         {
-
           if (cl_inner.contains("feedback")) {
-
             {/* console.log(cl_inner.contains("feedback")) */}
-
             {/* console.log(check_answer_box_nodelist[i].style.display) */}
-
             check_answer_box_nodelist[i].style.display = "none"
-
           }
-
         }
 
-
-
       }
-
-
 
   }
 
-
-
 }
 
-
-
 /* function for checking solveme answers */
-
 solveme_func = function(e) {
-
   console.log("webex: check solveme");
-
   {/* console.log(e) */}
-
   {/* console.log(this) */}
 
-
-
   var real_answers = JSON.parse(this.dataset.answer);
-
   var my_answer = this.value;
-
   var cl = this.classList;
-
-
 
   var feedback = (this.getAttribute("feedback"))
 
-
-
   if (document.getElementById('feedbackDiv'+this.id) === null){
 
-
-
     var feedbackDiv = document.createElement("p");
-
     feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-
     feedbackDiv.setAttribute("class", "feedback");
 
-
-
   } else {
-
-
 
     var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-
     feedbackDiv.innerHTML = "";
 
-
-
   }
-
-
 
   // Check if inside a 'check answers' box - if so and if answer box is
-
   // currently unchecked, ensure feedback is hidden
-
   if (this.parentElement.parentElement.classList.contains("unchecked")) {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "none"
-
   } else {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "block"
-
   }
-
-
 
   if (cl.contains("ignorecase")) {
-
     my_answer = my_answer.toLowerCase();
-
   }
-
   if (cl.contains("nospaces")) {
-
     my_answer = my_answer.replace(/ /g, "")
-
   }
-
-
 
   if (my_answer == "") {
-
     cl.remove("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else if (real_answers.includes(my_answer)) {
-
     cl.add("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else {
-
     cl.add("webex-incorrect");
-
     cl.remove("webex-correct");
-
     feedbackDiv.innerHTML = feedback;
-
   	this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
-
   }
-
-
 
   // match numeric answers within a specified tolerance
-
   if(this.dataset.tol > 0){
-
     var tol = JSON.parse(this.dataset.tol);
-
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-
     if (matches.reduce((a, b) => a + b, 0) > 0) {
-
       cl.add("webex-correct");
-
     } else {
-
       cl.remove("webex-correct");
-
       feedbackDiv.innerHTML = feedback;
-
   	  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
-
     }
-
   }
-
-
 
   // added regex bit
-
   if (cl.contains("regex")){
-
     answer_regex = RegExp(real_answers.join("|"))
-
     if (answer_regex.test(my_answer)) {
-
       cl.add("webex-correct");
-
     }
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 /* function for checking select answers */
-
 select_func = function(e) {
-
   console.log("webex: check select");
 
-
-
   var cl = this.classList
-
   var feedback = (this[this.selectedIndex].getAttribute("feedback"))
 
-
-
   if (document.getElementById('feedbackDiv'+this.id) === null){
-
-
 
     var feedbackDiv = document.createElement("p");
-
     feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-
     feedbackDiv.setAttribute("class", "feedback");
 
-
-
   } else {
-
-
 
     var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-
     feedbackDiv.innerHTML = "";
 
-
-
   }
-
-
 
   feedbackDiv.innerHTML = feedback;
-
   this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
 
-
-
   // Check if inside a 'check answers' box - if so and if answer box is
-
   // currently unchecked, ensure feedback is hidden
-
   if (this.parentElement.parentElement.classList.contains("unchecked")) {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "none"
-
   } else {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "block"
-
   }
-
-
 
   /* add style */
-
   cl.remove("webex-incorrect");
-
   cl.remove("webex-correct");
-
   if (this.value == "answer") {
-
     cl.add("webex-correct");
-
   } else if (this.value != "blank") {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 /* function for checking radiogroups answers */
-
 radiogroups_func = function(e) {
-
   console.log("webex: check radiogroups");
 
-
-
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-
   var cl = checked_button.parentElement.classList;
-
   var labels = checked_button.parentElement.parentElement.children;
-
   var feedback = (checked_button.getAttribute("feedback"))
-
   if (feedback !== null & feedback !== "<b></b>") { feedback = feedback + "</br></br>" }
-
-
 
   if (document.getElementById('feedbackDiv'+this.id) === null){
 
-
-
     var feedbackDiv = document.createElement("div");
-
     feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-
     feedbackDiv.setAttribute("class", "feedback");
-
-
 
   } else {
 
-
-
       var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-
       feedbackDiv.innerHTML = "";
-
-
 
   }
 
-
-
   const currentDiv = document.getElementById(this);
-
   feedbackDiv.innerHTML = feedback;
-
   this.insertAdjacentElement('afterend', feedbackDiv);
 
-
-
     // Check if inside a 'check answers' box - if so and if answer box is
-
   // currently unchecked, ensure feedback is hidden
-
   if (this.parentElement.classList.contains("unchecked")) {
-
       {/* console.log(this.parentElement.parentElement.classList); */}
-
       feedbackDiv.style.display = "none"
-
     } else {
-
       {/* console.log(this.parentElement.parentElement.classList); */}
-
       feedbackDiv.style.display = "block"
-
     }
-
-
-
 
 
   /* get rid of styles */
-
   for (i = 0; i < labels.length; i++) {
-
     labels[i].classList.remove("webex-incorrect");
-
     labels[i].classList.remove("webex-correct");
-
   }
-
-
 
   /* add style */
-
   if (checked_button.value == "answer") {
-
     cl.add("webex-correct");
-
   } else {
-
     cl.add("webex-incorrect");
-
   }
-
-
 
   update_total_correct();
-
 }
 
-
-
 window.onload = function() {
-
   console.log("webex onload");
-
   /* set up solution buttons */
-
   var buttons = document.getElementsByTagName("button");
 
-
-
   for (var i = 0; i < buttons.length; i++) {
-
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
-
       buttons[i].onclick = b_func;
-
     }
-
   }
 
-
-
   var check_sections = document.getElementsByClassName("webex-check");
-
   console.log("check:", check_sections.length);
-
   for (var i = 0; i < check_sections.length; i++) {
-
     check_sections[i].classList.add("unchecked");
-
     console.log(check_sections[i])
 
-
-
     let btn = document.createElement("button");
-
     btn.innerHTML = "Show Answers";
-
     btn.classList.add("webex-check-button");
-
     // check_func removes the 'unchecked' class from box
-
     // and updates the button text
-
     // subsequently recheck all possible question funcs
-
     // to ensure feedback gets shown or hidden as appropriate
-
     btn.onclick = check_func;
-
-
 
     check_sections[i].appendChild(btn);
 
-
-
     let spn = document.createElement("span");
-
     spn.classList.add("webex-total_correct");
-
     check_sections[i].appendChild(spn);
-
   }
-
-
 
   /* set up webex-solveme inputs */
-
   var solveme = document.getElementsByClassName("webex-solveme");
 
-
-
   for (var i = 0; i < solveme.length; i++) {
-
     /* make sure input boxes don't auto-anything */
-
     solveme[i].setAttribute("autocomplete","off");
-
     solveme[i].setAttribute("autocorrect", "off");
-
     solveme[i].setAttribute("autocapitalize", "off");
-
     solveme[i].setAttribute("spellcheck", "false");
-
     solveme[i].value = "";
 
-
-
     /* adjust answer for ignorecase or nospaces */
-
     var cl = solveme[i].classList;
-
     var real_answer = solveme[i].dataset.answer;
-
     if (cl.contains("ignorecase")) {
-
       real_answer = real_answer.toLowerCase();
-
     }
-
     if (cl.contains("nospaces")) {
-
       real_answer = real_answer.replace(/ /g, "");
-
     }
-
     solveme[i].dataset.answer = real_answer;
 
-
-
     /* attach checking function */
-
     solveme[i].onkeyup = solveme_func;
-
     solveme[i].onchange = solveme_func;
 
-
-
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
-
-
 
   /* set up radiogroups */
-
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
-
   for (var i = 0; i < radiogroups.length; i++) {
-
     radiogroups[i].onchange = radiogroups_func;
-
   }
-
-
 
   /* set up selects */
-
   var selects = document.getElementsByClassName("webex-select");
-
   for (var i = 0; i < selects.length; i++) {
-
     selects[i].onchange = select_func;
-
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 </script>
-
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1777,14 +1494,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./qgis_basemaps.html" class="pagination-link" aria-label="Adding a basemap in QGIS">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./qgis_choropleth.html" class="pagination-link" aria-label="Creating Choropleths in QGIS">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

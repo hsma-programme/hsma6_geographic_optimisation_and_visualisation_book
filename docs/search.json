@@ -14,7 +14,7 @@
     "href": "intro.html",
     "title": "1  Welcome!",
     "section": "",
-    "text": "Welcome to this HSMA book on Geographic Modelling & Visualisation.\n\nLost Kermit GIFfrom Lost GIFs\n\n\nThis book accompanies module 3 of the 15 month HSMA programme.\nIt is aimed at people with some experience of Python who want to be able to work with geographic data.\nIt is particularly aimed at people in the UK working in the National Health Service (NHS), policing, social care, public health or local government.\nWe will cover topics including:\n\nprinciples and terminology needed when working with geographical data and maps\ncreating maps using a free and open source software package (QGIS)\nworking with geographic data in Python using the Geopandas library\ncreating static maps in Python with matplotlib\ncreating interactive maps in Python with Folium, Leaflet and Kepler\ninteracting with travel time APIs\nvisualising travel times to sites across regions\noptimizing the locations of facilities to minimize travel time across a region\noptimizing the locations of facilities to maximize performance against multiple objectives (e.g. minimizing average travel time while maximizing the percentage of people who can reach a service within 30 minuts)\n\n\n\n\n\n\n\n\n\n\n\nterm\ndefinition\n\n\n\n\nAPI\nApplication Programming Interface\n\nA way for two or more programs to talk to one another. Designed for computer programmers to utilise when writing programs rather than being used by an end user.\n\nYou will send a request to an API and it will send back a response. For example, you might request data on the postcode EX2 5AA from the postcodes.io API, and it will return a text string containing data like the latitude and longitude.",
+    "text": "Welcome to this HSMA book on Geographic Modelling & Visualisation.\n\nLost Kermit GIFfrom Lost GIFs\n\n\nThis book accompanies module 3 of the 15 month HSMA programme.\nIt is aimed at people with some experience of Python who want to be able to work with geographic data.\nIt is particularly aimed at people in the UK working in the National Health Service (NHS), policing, social care, public health or local government.\nWe will cover topics including:\n\nprinciples and terminology needed when working with geographical data and maps\ncreating maps using a free and open source software package (QGIS)\nworking with geographic data in Python using the Geopandas library\ncreating static maps in Python with matplotlib\ncreating interactive maps in Python with Folium, Leaflet and Kepler\ninteracting with travel time APIs\nvisualising travel times to sites across regions\noptimizing the locations of facilities to minimize travel time across a region\noptimizing the locations of facilities to maximize performance against multiple objectives (e.g. minimizing average travel time while maximizing the percentage of people who can reach a service within 30 minuts)\n\n\n\n\n\n\n\nterm\ndefinition\n\n\n\n\nAPI\n&lt;b&gt;Application Programming Interface&lt;/b&gt;&lt;br/&gt;&lt;br/&gt; A way for two or more programs to talk to one another. Designed for computer programmers to utilise when writing programs rather than being used by an end user.&lt;br/&gt;&lt;br/&gt; You will send a request to an API and it will send back a response. For example, you might request data on the postcode EX2 5AA from the postcodes.io API, and it will return a text string containing data like the latitude and longitu",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome!</span>"
     ]
@@ -148,6 +148,17 @@
     ]
   },
   {
+    "objectID": "the_importance_of_standardisation.html",
+    "href": "the_importance_of_standardisation.html",
+    "title": "5  Standardisation",
+    "section": "",
+    "text": "We might initially work with a dataset that hasn’t been standardised.\nWhy might this be a problem?\nPatterns may be an artefact of population\nAreas with more people may just have higher values - but it may not be unusual given the number of people.\nBe careful with your interpretation!\nYou could get around this in a few ways depending on your dataset.\n\nYou could adjust by the size of an area - say, looking at the number of incidents per square kilometre\nYou could provide a rate per 1,000 occupants\nYou could provide a % of the total occupants\n\nEstimates of LSOA populations can be found online.\nUsing this information within SQL, Excel or (ideally) Python can help you to construct the most representative dataset and ensure you are not coming to incorrect conclusions.",
+    "crumbs": [
+      "Geographical Concepts and Terminology",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Standardisation</span>"
+    ]
+  },
+  {
     "objectID": "introduction_mapping_with_qgis.html",
     "href": "introduction_mapping_with_qgis.html",
     "title": "Mapping in QGIS",
@@ -170,155 +181,462 @@
   {
     "objectID": "qgis_setup.html",
     "href": "qgis_setup.html",
-    "title": "5  Getting QGIS Ready to Use",
+    "title": "6  Getting QGIS Ready to Use",
     "section": "",
-    "text": "6.3 Selecting panels\nWhen you open up QGIS for the first time, a few of the different panels you will need to use are hidden by default.\nLet’s make sure we all have the same tools available\nClick “View” → “Panels”\nMake sure - “Browser”, - “Layer Styling” - and “Layers” all have a tick next to them\nNow our QGIS should look a bit like this, with the panels highlighted in orange (browser, layer styling and layers) all visible on the screen.",
+    "text": "7.3 Selecting panels\nWhen you open up QGIS for the first time, a few of the different panels you will need to use are hidden by default.\nLet’s make sure we all have the same tools available\nClick “View” → “Panels”\nMake sure - “Browser”, - “Layer Styling” - and “Layers” all have a tick next to them\nNow our QGIS should look a bit like this, with the panels highlighted in orange (browser, layer styling and layers) all visible on the screen.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_setup.html#device-requirements",
     "href": "qgis_setup.html#device-requirements",
-    "title": "5  Getting QGIS Ready to Use",
-    "section": "6.1 Device Requirements",
-    "text": "6.1 Device Requirements\nTo install QGIS, you will need a laptop or desktop computer running Windows, MacOS, or Linux.\nYou will not be able to install the software on a phone or tablet! While versions exist for these devices, they are aimed more at conducting fieldwork than doing the sort of task we’ll be covering in this course.",
+    "title": "6  Getting QGIS Ready to Use",
+    "section": "7.1 Device Requirements",
+    "text": "7.1 Device Requirements\nTo install QGIS, you will need a laptop or desktop computer running Windows, MacOS, or Linux.\nYou will not be able to install the software on a phone or tablet! While versions exist for these devices, they are aimed more at conducting fieldwork than doing the sort of task we’ll be covering in this course.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_setup.html#installing-qgis-1",
     "href": "qgis_setup.html#installing-qgis-1",
-    "title": "5  Getting QGIS Ready to Use",
-    "section": "6.2 Installing QGIS",
-    "text": "6.2 Installing QGIS\nQGIS is widely used across the globe, and is totally free, with the code for the program also made available.\nQGIS is used by tens of thousands of users - some statistics can be viewed here if you are interested.\nIf your organisation has had someone on the HSMA programme in the last few years, they will have been required to download QGIS, so the software may already be available in your organisation’s software centre. If so, click here to jump to the section on checking your version to ensure that the version you are running is suitable for the workshop.\nIf you are installing QGIS for the first time without using a software centre, head to this page - https://qgis.org/en/site/forusers/download.html - and click on the appropriate box for your operating system. The box may open automatically.\n\nWe would recommend going directly to this page rather than searching Google or Bing for QGIS as we know the link above is correct and you won’t redirected to a third-party download site - using the link provided above ensures you are getting the software directly from the QGIS team.\nDon’t worry if the version number doesn’t exactly match the screenshots below - it will just automatically download the most recent release, which will be fine for the course.\nMore detailed instructions for Windows are given below.\n\n6.2.1 Windows\nNote that installing the software will require administrator rights. If you are on a personal device this will not be a problem.\nIf you are installing it on your work device, please make sure you have gone through the appropriate processes with your IT department.\nClick on the green banner to download the installer.\n\nThe download will take roughly 5 to 15 minutes, depending on the speed of your internet.\nWhen the installer has downloaded, find the file in the folder you saved it to, and double click on the file.\nFollow the instructions in the window that appears to install QGIS on your device.\nWhen you reach the step below, it may appear to pause for a long time with the progress bar not filling up.\n\nIf this happens, check your windows taskbar for the following icon:\n\nThis is a pop-up for Windows user account control. You may need to click this and authorize the installer.\nThe process should then take a maximum of 10 minutes to complete.\n\nClick ‘Finish’. You should now be able to run QGIS from your start menu or an icon on your desktop.\nChecking the version of an existing QGIS install\nIf you are using an older version your organisation has approved, you may wish to check the version number.\nIf the version number is lower than 3.0, you may find the layout is a bit different to the version we use in the workshop.\nTo check the version this, open QGIS up, hover over ‘Help’ in the top menu bar, and then click ‘About’.\n\nThe top line will tell you which version of QGIS you are currently running.\n\nYou can also choose ‘Check QGIS Version’ from the same menu, but this isn’t quite as reliable!",
+    "title": "6  Getting QGIS Ready to Use",
+    "section": "7.2 Installing QGIS",
+    "text": "7.2 Installing QGIS\nQGIS is widely used across the globe, and is totally free, with the code for the program also made available.\nQGIS is used by tens of thousands of users - some statistics can be viewed here if you are interested.\nIf your organisation has had someone on the HSMA programme in the last few years, they will have been required to download QGIS, so the software may already be available in your organisation’s software centre. If so, click here to jump to the section on checking your version to ensure that the version you are running is suitable for the workshop.\nIf you are installing QGIS for the first time without using a software centre, head to this page - https://qgis.org/en/site/forusers/download.html - and click on the appropriate box for your operating system. The box may open automatically.\n\nWe would recommend going directly to this page rather than searching Google or Bing for QGIS as we know the link above is correct and you won’t redirected to a third-party download site - using the link provided above ensures you are getting the software directly from the QGIS team.\nDon’t worry if the version number doesn’t exactly match the screenshots below - it will just automatically download the most recent release, which will be fine for the course.\nMore detailed instructions for Windows are given below.\n\n7.2.1 Windows\nNote that installing the software will require administrator rights. If you are on a personal device this will not be a problem.\nIf you are installing it on your work device, please make sure you have gone through the appropriate processes with your IT department.\nClick on the green banner to download the installer.\n\nThe download will take roughly 5 to 15 minutes, depending on the speed of your internet.\nWhen the installer has downloaded, find the file in the folder you saved it to, and double click on the file.\nFollow the instructions in the window that appears to install QGIS on your device.\nWhen you reach the step below, it may appear to pause for a long time with the progress bar not filling up.\n\nIf this happens, check your windows taskbar for the following icon:\n\nThis is a pop-up for Windows user account control. You may need to click this and authorize the installer.\nThe process should then take a maximum of 10 minutes to complete.\n\nClick ‘Finish’. You should now be able to run QGIS from your start menu or an icon on your desktop.\nChecking the version of an existing QGIS install\nIf you are using an older version your organisation has approved, you may wish to check the version number.\nIf the version number is lower than 3.0, you may find the layout is a bit different to the version we use in the workshop.\nTo check the version this, open QGIS up, hover over ‘Help’ in the top menu bar, and then click ‘About’.\n\nThe top line will tell you which version of QGIS you are currently running.\n\nYou can also choose ‘Check QGIS Version’ from the same menu, but this isn’t quite as reliable!",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_setup.html#moving-around-qgis",
     "href": "qgis_setup.html#moving-around-qgis",
-    "title": "5  Getting QGIS Ready to Use",
-    "section": "6.4 Moving around QGIS",
-    "text": "6.4 Moving around QGIS\n\nTo move around your maps, you will need two key tools: move (pan) and zoom.\n\nHowever, if you’re using a mouse with a scroll wheel, you can use that instead of the zoom buttons. The zoom will be centred around the point your mouse is hovering over, which can be useful for getting to a certain point quickly!\nOr on a laptop trackpad, you can “pinch” outwards to zoom out, and inwards to zoom in.",
+    "title": "6  Getting QGIS Ready to Use",
+    "section": "7.4 Moving around QGIS",
+    "text": "7.4 Moving around QGIS\n\nTo move around your maps, you will need two key tools: move (pan) and zoom.\n\nHowever, if you’re using a mouse with a scroll wheel, you can use that instead of the zoom buttons. The zoom will be centred around the point your mouse is hovering over, which can be useful for getting to a certain point quickly!\nOr on a laptop trackpad, you can “pinch” outwards to zoom out, and inwards to zoom in.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_setup.html#starting-a-project",
     "href": "qgis_setup.html#starting-a-project",
-    "title": "5  Getting QGIS Ready to Use",
-    "section": "6.5 Starting a project",
-    "text": "6.5 Starting a project\nNow you will want to start a new project.\nClick “Project” → “New”\n\nNow it’s time to add our basemap - so head to the next chapter to find out how to do that.",
+    "title": "6  Getting QGIS Ready to Use",
+    "section": "7.5 Starting a project",
+    "text": "7.5 Starting a project\nNow you will want to start a new project.\nClick “Project” → “New”\n\nNow it’s time to add our basemap - so head to the next chapter to find out how to do that.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_basemaps.html",
     "href": "qgis_basemaps.html",
-    "title": "6  Adding a basemap in QGIS",
+    "title": "7  Adding a basemap in QGIS",
     "section": "",
-    "text": "6.1 The simplest way to get started\nQGIS has one basemap built in - so let’s load that in first.\nLook at the ‘Browser’ panel in QGIS, which will probably be on the left-hand side of your screen.\nClick on the arrow next to ‘XYZ Tiles’\nOR\nDouble click on the phrase ‘XYZ Tiles’\nNow double click on ‘OpenStreetMap’\nYou should now be presented with a zoomed-out map of the world - if you’ve been reading this book in order, you may recognise the Mercator projection! If you’re interested, you can go back and brush up on projections in Chapter 3.",
+    "text": "7.1 The simplest way to get started\nQGIS has one basemap built in - so let’s load that in first.\nLook at the ‘Browser’ panel in QGIS, which will probably be on the left-hand side of your screen.\nClick on the arrow next to ‘XYZ Tiles’\nOR\nDouble click on the phrase ‘XYZ Tiles’\nNow double click on ‘OpenStreetMap’\nYou should now be presented with a zoomed-out map of the world - if you’ve been reading this book in order, you may recognise the Mercator projection! If you’re interested, you can go back and brush up on projections in Chapter 3.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_basemaps.html#the-simplest-way-to-get-started",
     "href": "qgis_basemaps.html#the-simplest-way-to-get-started",
-    "title": "6  Adding a basemap in QGIS",
+    "title": "7  Adding a basemap in QGIS",
     "section": "",
-    "text": "Warning\n\n\n\nIt’s important that you credit OpenStreetMap when sharing this map in any way, in accordance with its licencing terms.\nThe licencing text you need to include is this:\n© OpenStreetMap contributors, licenced as CC BY-SA\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nYou can stop reading here and move onto Chapter 7 if you like! There you will learn about importing a dataset of points.\nHowever, if you want to use a different basemap to the default one provided by QGIS or are interested in learning about an alternate, less ‘busy’ looking basemap, then you can carry on to the sections below.",
+    "text": "Warning\n\n\n\nIt’s important that you credit OpenStreetMap when sharing this map in any way, in accordance with its licencing terms.\nThe licencing text you need to include is this:\n© OpenStreetMap contributors, licenced as CC BY-SA\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nYou can stop reading here and move onto Chapter 8 if you like! There you will learn about importing a dataset of points.\nHowever, if you want to use a different basemap to the default one provided by QGIS or are interested in learning about an alternate, less ‘busy’ looking basemap, then you can carry on to the sections below.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_basemaps.html#using-different-basemap-providers",
     "href": "qgis_basemaps.html#using-different-basemap-providers",
-    "title": "6  Adding a basemap in QGIS",
-    "section": "6.2 Using different basemap providers",
-    "text": "6.2 Using different basemap providers\nBy default, QGIS only offers OpenStreetMap basemap tiles.\nHowever, you can easily load in additional tiles.\n\n\n\n\n\n\nWarning\n\n\n\nMake sure to appropriately credit the providers of any basemap services you use when sharing your maps, even internally!\n\n\nTo add new basemaps, right click on ‘XYZ Tiles’ in the Browser and select ‘New Connection…’.\n\nHere, you can give your new map tiles any name you like.\n\nUnder the URL setting, enter one of the following URLS^https://astro-geo-gis.com/liaison/qgis-tutorials/customizing-map-tiles-in-qgis/\nGoogle Maps: http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}\n\nGoogle Hybrid (Satellite + Roads): https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}\nMore tiles can be obtained by some careful searching! But note that many tiles will require a API key and may require payment to use, so you will likely want to stick to the default OpenStreetMaps in most cases.",
+    "title": "7  Adding a basemap in QGIS",
+    "section": "7.2 Using different basemap providers",
+    "text": "7.2 Using different basemap providers\nBy default, QGIS only offers OpenStreetMap basemap tiles.\nHowever, you can easily load in additional tiles.\n\n\n\n\n\n\nWarning\n\n\n\nMake sure to appropriately credit the providers of any basemap services you use when sharing your maps, even internally!\n\n\nTo add new basemaps, right click on ‘XYZ Tiles’ in the Browser and select ‘New Connection…’.\n\nHere, you can give your new map tiles any name you like.\n\nUnder the URL setting, enter one of the following URLS^https://astro-geo-gis.com/liaison/qgis-tutorials/customizing-map-tiles-in-qgis/\nGoogle Maps: http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}\n\nGoogle Hybrid (Satellite + Roads): https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}\nMore tiles can be obtained by some careful searching! But note that many tiles will require a API key and may require payment to use, so you will likely want to stick to the default OpenStreetMaps in most cases.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_basemaps.html#loading-in-a-basic-world-map-instead",
     "href": "qgis_basemaps.html#loading-in-a-basic-world-map-instead",
-    "title": "6  Adding a basemap in QGIS",
-    "section": "6.3 Loading in a basic world map instead",
-    "text": "6.3 Loading in a basic world map instead\nThere are a few situations in which you might want to use the approach below instead, which will give you a nice plain basemap at the end of it, like the image below. - you want your data to be the star of the show - you don’t have an internet connection available to download the OpenStreetMap tiles - you can’t use the OpenStreetMap tiles due to licencing restrictions\n\n\n\n\n\n\n\nWarning\n\n\n\nThis method gives you a map outline that isn’t of a very high resolution - i.e. the areas don’t follow the outline of the UK precisely. It’s fine if you’re using the map at a fairly zoomed-out level, but it might not be so much use if you want to really zoom in to your county or a particular city!\n\n\nStart a new project - you can either discard the changes to your previous project if you had a go at adding the OpenStreetMap basemap in, or you can save it somewhere for later.\nLook at the very bottom of your QGIS window. Down at the bottom you should see a box that says ‘Coordinate’.\n\nNormally this will show the coordinates of the point your mouse is hovering over.\nHowever, we can click on this box and do a neat trick!\nClick into the box and get rid of the coordinates - either by highlighting them and clicking ‘del’ or backspace to delete them all at once, or by clicking somewhere in the box and using a combination of those keys to get rid of any numbers and symbols.\n\nEnter ‘world’ into this box and click the ‘enter’ or ‘return’ key on your keyboard.\n\nVoila! Suddenly you have a world map.\n\n6.3.1 Cutting out unnecessary areas\nFor a lot of people on the HSMA course, you will only be interested in displaying data for the UK - or even just one nation within the UK.\nThis world map is split into different polygons.\nIf we click on the ‘select features by area’ button on the top toolbar, we can select individual polygons.\n\nHere I’ve selected only\n\nI can select additional areas by holding ‘shift’ and selecting an additional polygon. Here I’ve done this to select Ireland too.\n\nIf I click on Ireland again with shift held down, it will be deselected. However, if I click on a selected polygon without shift held down, I will lose all my prior selections, and only the most recently clicked on polygon will be highlighted.\nBut just selecting these doesn’t do much. We can see that other areas are still visible.\nIf we head over to the layers panel, which is probably on the left of your screen, you can see that it has a layer called ‘world map’.\nWith the polygon(s) you are interested in selected, right click on the ‘world map’ layer and select ‘Save Selected Features As’.\n\nThis will bring up the following dialog box.\n\nFrom the format box, you can select any of the options, but choosing ‘GeoPackage’ or ‘GeoJSON’ is a good idea as they output a single file that can be easily transferred into other software at a later date.\nYou can then enter a file name into the box below, which will be displayed in the next step, so make it something clear and useful. Clicking the three dots to the right of this box will open a standard operating system dialog box for saving the output file - but unusually, we don’t actually really care where it’s getting saved to! So you can really save it anywhere - though perhaps you might want to reuse this as a starting point in the future for different projects, so knowing where it’s gone could be handy.\nSo why aren’t we too worried about where it’s getting saved to? It’s because we’re interested in two other key things - the tickbox that says ‘Save only selected features’ and ‘Add saved file to map’.\nMake sure those are checked, and then click ‘Ok’.\nYou’ll now see a second layer - with the name you entered in the previous step and a new randomly-chosen colour. .\n\nWe can now untick the box next to the ‘World Map’ layer - or even right click and choose ‘Remove Layer’.\n\nNow we’ll just have a nice outline of the UK to work with, which will be nice and efficient and clear for our final output.\n\n\n\n6.3.2 Styling our custom map\nWith our new layer selected - you can tell it’s selected because the name will have a grey background in the ‘Layers’ panel, and if it’s not selected you can click on the name of it in the ‘Layers’ panel - we then want to take a look at it in the Layer Styling Panel.\n\n\n\n\n\n\nTip\n\n\n\nThis panel isn’t visible by default. If you followed the setup steps in the previous chapted, this should be on the right of your screen.\nIf you didn’t, you can make it show up by clicking the “View” button in the top menu, then “Panels” and click on “Layer Styling” - this should make a tick appear next it and the panel will open up on the right side of the screen.\n\n\nTo start with, let’s change the background colour of the map.\n\nClicking on the wide bar of colour with the label ‘Color’ brings up a colour picker.\n\nWe can drag the crosshair to a nice pale green - or any colour you like!\n\nThen click on the back arrow next to ‘Select Color’, near the top of the layer styling panel, to get back to the previous screen.\nNext, you’ll notice that we originally had ‘Fill’ selected. Click on ‘Simple Fill’ instead. It should show up by default, but if it doesn’t, click on the little black arrow to the left of the word ‘Fill’.\n\nYou can see thaat now we get some extra options available to us.\nFirst, let’s get rid of the black outline by clicking the dropdown next to ‘Stroke style’ and choosing ‘No Line’.\nNext, let’s add in a background colour.\nClick on the words ‘layer rendering’ towards the bottom of the layer styling panel.\n\nNext, tick the box ‘Draw effects’ and click on the yellow star to the right to change the options.\n\nTick ‘Outer Glow’ and set the following options.\nSpread = 200 Blur radius = 0 Single Color = Blue\n\nYou now have a a nice plain UK map to work from!",
+    "title": "7  Adding a basemap in QGIS",
+    "section": "7.3 Loading in a basic world map instead",
+    "text": "7.3 Loading in a basic world map instead\nThere are a few situations in which you might want to use the approach below instead, which will give you a nice plain basemap at the end of it, like the image below. - you want your data to be the star of the show - you don’t have an internet connection available to download the OpenStreetMap tiles - you can’t use the OpenStreetMap tiles due to licencing restrictions\n\n\n\n\n\n\n\nWarning\n\n\n\nThis method gives you a map outline that isn’t of a very high resolution - i.e. the areas don’t follow the outline of the UK precisely. It’s fine if you’re using the map at a fairly zoomed-out level, but it might not be so much use if you want to really zoom in to your county or a particular city!\n\n\nStart a new project - you can either discard the changes to your previous project if you had a go at adding the OpenStreetMap basemap in, or you can save it somewhere for later.\nLook at the very bottom of your QGIS window. Down at the bottom you should see a box that says ‘Coordinate’.\n\nNormally this will show the coordinates of the point your mouse is hovering over.\nHowever, we can click on this box and do a neat trick!\nClick into the box and get rid of the coordinates - either by highlighting them and clicking ‘del’ or backspace to delete them all at once, or by clicking somewhere in the box and using a combination of those keys to get rid of any numbers and symbols.\n\nEnter ‘world’ into this box and click the ‘enter’ or ‘return’ key on your keyboard.\n\nVoila! Suddenly you have a world map.\n\n7.3.1 Cutting out unnecessary areas\nFor a lot of people on the HSMA course, you will only be interested in displaying data for the UK - or even just one nation within the UK.\nThis world map is split into different polygons.\nIf we click on the ‘select features by area’ button on the top toolbar, we can select individual polygons.\n\nHere I’ve selected only\n\nI can select additional areas by holding ‘shift’ and selecting an additional polygon. Here I’ve done this to select Ireland too.\n\nIf I click on Ireland again with shift held down, it will be deselected. However, if I click on a selected polygon without shift held down, I will lose all my prior selections, and only the most recently clicked on polygon will be highlighted.\nBut just selecting these doesn’t do much. We can see that other areas are still visible.\nIf we head over to the layers panel, which is probably on the left of your screen, you can see that it has a layer called ‘world map’.\nWith the polygon(s) you are interested in selected, right click on the ‘world map’ layer and select ‘Save Selected Features As’.\n\nThis will bring up the following dialog box.\n\nFrom the format box, you can select any of the options, but choosing ‘GeoPackage’ or ‘GeoJSON’ is a good idea as they output a single file that can be easily transferred into other software at a later date.\nYou can then enter a file name into the box below, which will be displayed in the next step, so make it something clear and useful. Clicking the three dots to the right of this box will open a standard operating system dialog box for saving the output file - but unusually, we don’t actually really care where it’s getting saved to! So you can really save it anywhere - though perhaps you might want to reuse this as a starting point in the future for different projects, so knowing where it’s gone could be handy.\nSo why aren’t we too worried about where it’s getting saved to? It’s because we’re interested in two other key things - the tickbox that says ‘Save only selected features’ and ‘Add saved file to map’.\nMake sure those are checked, and then click ‘Ok’.\nYou’ll now see a second layer - with the name you entered in the previous step and a new randomly-chosen colour. .\n\nWe can now untick the box next to the ‘World Map’ layer - or even right click and choose ‘Remove Layer’.\n\nNow we’ll just have a nice outline of the UK to work with, which will be nice and efficient and clear for our final output.\n\n\n\n7.3.2 Styling our custom map\nWith our new layer selected - you can tell it’s selected because the name will have a grey background in the ‘Layers’ panel, and if it’s not selected you can click on the name of it in the ‘Layers’ panel - we then want to take a look at it in the Layer Styling Panel.\n\n\n\n\n\n\nTip\n\n\n\nThis panel isn’t visible by default. If you followed the setup steps in the previous chapted, this should be on the right of your screen.\nIf you didn’t, you can make it show up by clicking the “View” button in the top menu, then “Panels” and click on “Layer Styling” - this should make a tick appear next it and the panel will open up on the right side of the screen.\n\n\nTo start with, let’s change the background colour of the map.\n\nClicking on the wide bar of colour with the label ‘Color’ brings up a colour picker.\n\nWe can drag the crosshair to a nice pale green - or any colour you like!\n\nThen click on the back arrow next to ‘Select Color’, near the top of the layer styling panel, to get back to the previous screen.\nNext, you’ll notice that we originally had ‘Fill’ selected. Click on ‘Simple Fill’ instead. It should show up by default, but if it doesn’t, click on the little black arrow to the left of the word ‘Fill’.\n\nYou can see thaat now we get some extra options available to us.\nFirst, let’s get rid of the black outline by clicking the dropdown next to ‘Stroke style’ and choosing ‘No Line’.\nNext, let’s add in a background colour.\nClick on the words ‘layer rendering’ towards the bottom of the layer styling panel.\n\nNext, tick the box ‘Draw effects’ and click on the yellow star to the right to change the options.\n\nTick ‘Outer Glow’ and set the following options.\nSpread = 200 Blur radius = 0 Single Color = Blue\n\nYou now have a a nice plain UK map to work from!",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html",
     "href": "qgis_point_data.html",
-    "title": "7  Visualising Point Data in QGIS",
+    "title": "8  Visualising Point Data in QGIS",
     "section": "",
-    "text": "8 Importing point data from a .csv file\nOur data is stored in what’s called a ‘.csv’ file\nA csv has columns of data separated by commas, like this:\naccident_index,longitude,latitude,date\nA001,-0.198224,51.486454,2023/01/01\nA002,0.105042,1.49883,2023/01/02\nA002,0.173482,51.451924,2023/01/04\nWhen we load it into a program like Excel, it turns it into a table we can read\nSo we can say that our file is a text file that is split - or ‘delimited’ - by commas\nSo we need to tell QGIS that!\nSelect ‘Layer’ → ‘Add Layer’ → ‘Add Delimited Text Layer…’\nClick on the three dots to open up the file browser\nNavigate to where your file is located.\nIt will automatically show only files that are delimited text. When you reach the file, either\nDouble click on the file OR single click on it, then click ‘Open’",
+    "text": "9 Importing point data from a .csv file\nOur data is stored in what’s called a ‘.csv’ file\nA csv has columns of data separated by commas, like this:\naccident_index,longitude,latitude,date\nA001,-0.198224,51.486454,2023/01/01\nA002,0.105042,1.49883,2023/01/02\nA002,0.173482,51.451924,2023/01/04\nWhen we load it into a program like Excel, it turns it into a table we can read\nSo we can say that our file is a text file that is split - or ‘delimited’ - by commas\nSo we need to tell QGIS that!\nSelect ‘Layer’ → ‘Add Layer’ → ‘Add Delimited Text Layer…’\nClick on the three dots to open up the file browser\nNavigate to where your file is located.\nIt will automatically show only files that are delimited text. When you reach the file, either\nDouble click on the file OR single click on it, then click ‘Open’",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html#setting-the-crs-of-our-data",
     "href": "qgis_point_data.html#setting-the-crs-of-our-data",
-    "title": "7  Visualising Point Data in QGIS",
-    "section": "8.1 Setting the CRS of our data",
-    "text": "8.1 Setting the CRS of our data\nNow we need to tell it what columns to use to determine the location of each point\nClick on ‘Geometry Definition’\n\nFirst, check that it has correctly picked up the ‘latitude’ and ‘longitude’ columns from the dataset\nIf our columns are named this in our input file, it should do this automatically.\n\nNow we need to select the correct geometry CRS.\nBut how do we know what is correct?\n\n\n\n\n\n\n\nTip\n\n\n\nWhat matters here is the CRS used in the data originally.\nIf it is different to the project CRS - which is explained below - then QGIS will reproject the data you import so it matches up with the project CRS.\nIf you are unsure what CRS has been used for your data, there are a few you can try, starting at the top of this list: - EPSG:4326 - WGS 84 - EPSG:3857 - WGS 84/Pseudo-Mercator - EPSG:32630 - WGS 84 / UTN zone 30N\nIt will usually be very obvious if it’s wrong, because your data will be in totally the wrong place!\nIf it’s wrong, then delete the layer by right clicking on it in the layers tab\n\n\n\n\n\n\n\n\nClick here to read more about selecting the right CRS for your project and the data you are importing\n\n\n\n\n\nThis seems like a bit of a boring topic - but I promise you it will save you some headaches down the line!\nIt doesn’t matter if you don’t fully understand all of this section right now - but if you import some data that keeps ending up in the wrong place, just think to yourself ’could this be because of the coordinate reference system? - and then come back and read this section again!\nHowever we start our project - whether that’s by using the OpenStreetMap basemap or doing something else - then there are a few things to note about the coordinate reference system of our QGIS project.\nWe can always look at the bottom-right corner of QGIS to see the coordinate reference system being used by our project.\n\nIf we click on that, it will bring up the project properties and open the ‘CRS’ part of the properties dialog automatically, which will look something like this.\n\nNow, here I’ve already imported the OpenStreetMap basemap as shown in the step above.\nNote that here what is selected is called EPSG:3857 - also known as WGS:84 / Pseudo-Mercator.\nIf we right click on ‘OpenStreetMap’ in the XYZ tiles and scroll down a bit, we can see that this is the CRS of the OpenStreetMap ‘tileset’ too.\n\nIt’s important to know what CRS your project is using as when you come to import data from other files, it may not be using the same reference system and the data will have to be transformed to ensure that the points or areas end up in the right place at the end!\n\nBut there’s a twist…\nIf I now create a new project and look at the CRS, we can see it’s different!\n\nAnd this is due to one of the default settings in QGIS.\nIf I go to “Settings” –&gt; “Options” –&gt; “CRS and Transforms” –&gt; “CRS Handling”, then you will spot some things about how QGIS deals with CRS options by default.\n\nWhat we can see is that the project CRS will be based on the CRS of the first layer added.\nSo if we load in the OpenStreetMap basemap first when we create a new project, our projection will be EPSG:3857 - also known as WGS:84 / Pseudo-Mercator.\nIf we load in some other data first - which you might decide to do once you’ve got a few projects under your belt, or you might do if you get started and only realise afterwards that you haven’t loaded your basemap in yet - then you might find that your project is not using the CRS you were expecting!\nNow - this isn’t a problem by itself - but it can cause confusion about what CRS you should use when you try and load in additional data!\nFor example, here I’ve loaded in a dataset relating to the United Kingdom. There should be some points on the UK… but where are they?\n\nWell, the only point I can see is in the sea off the coast of Africa!\nIf I zoom a really long way in, it turns out my points did load in - but they’re not anywhere near the UK on my basemap.\n\nSo what went wrong here?\nWhen I loaded this data in, I told QGIS to use the project CRS.\nBut that’s not what QGIS is expecting!\nIt wants me to tell it what the CRS is of the data I am loading in - it already knows what the project CRS is! It just needs to know what it’s loading in so it can work out how to translate between the two.\n\n\n\n\nOnce you’ve chosen the correct CRS, click ‘add’, then click ‘close’.\n\nOnce you’ve done this, your map should look something like this:\n\n\n\n\n\n\n\nExercise 1\n\n\n\nNow we’ve got a map, let’s take a few minutes to explore some of the patterns we can see.\nTry zooming in and moving around.\nMaybe explore an area you know, or look at the layout of roads in some of the areas with more or fewer accidents than others.",
+    "title": "8  Visualising Point Data in QGIS",
+    "section": "9.1 Setting the CRS of our data",
+    "text": "9.1 Setting the CRS of our data\nNow we need to tell it what columns to use to determine the location of each point\nClick on ‘Geometry Definition’\n\nFirst, check that it has correctly picked up the ‘latitude’ and ‘longitude’ columns from the dataset\nIf our columns are named this in our input file, it should do this automatically.\n\nNow we need to select the correct geometry CRS.\nBut how do we know what is correct?\n\n\n\n\n\n\n\nTip\n\n\n\nWhat matters here is the CRS used in the data originally.\nIf it is different to the project CRS - which is explained below - then QGIS will reproject the data you import so it matches up with the project CRS.\nIf you are unsure what CRS has been used for your data, there are a few you can try, starting at the top of this list: - EPSG:4326 - WGS 84 - EPSG:3857 - WGS 84/Pseudo-Mercator - EPSG:32630 - WGS 84 / UTN zone 30N\nIt will usually be very obvious if it’s wrong, because your data will be in totally the wrong place!\nIf it’s wrong, then delete the layer by right clicking on it in the layers tab\n\n\n\n\n\n\n\n\nClick here to read more about selecting the right CRS for your project and the data you are importing\n\n\n\n\n\nThis seems like a bit of a boring topic - but I promise you it will save you some headaches down the line!\nIt doesn’t matter if you don’t fully understand all of this section right now - but if you import some data that keeps ending up in the wrong place, just think to yourself ’could this be because of the coordinate reference system? - and then come back and read this section again!\nHowever we start our project - whether that’s by using the OpenStreetMap basemap or doing something else - then there are a few things to note about the coordinate reference system of our QGIS project.\nWe can always look at the bottom-right corner of QGIS to see the coordinate reference system being used by our project.\n\nIf we click on that, it will bring up the project properties and open the ‘CRS’ part of the properties dialog automatically, which will look something like this.\n\nNow, here I’ve already imported the OpenStreetMap basemap as shown in the step above.\nNote that here what is selected is called EPSG:3857 - also known as WGS:84 / Pseudo-Mercator.\nIf we right click on ‘OpenStreetMap’ in the XYZ tiles and scroll down a bit, we can see that this is the CRS of the OpenStreetMap ‘tileset’ too.\n\nIt’s important to know what CRS your project is using as when you come to import data from other files, it may not be using the same reference system and the data will have to be transformed to ensure that the points or areas end up in the right place at the end!\n\nBut there’s a twist…\nIf I now create a new project and look at the CRS, we can see it’s different!\n\nAnd this is due to one of the default settings in QGIS.\nIf I go to “Settings” –&gt; “Options” –&gt; “CRS and Transforms” –&gt; “CRS Handling”, then you will spot some things about how QGIS deals with CRS options by default.\n\nWhat we can see is that the project CRS will be based on the CRS of the first layer added.\nSo if we load in the OpenStreetMap basemap first when we create a new project, our projection will be EPSG:3857 - also known as WGS:84 / Pseudo-Mercator.\nIf we load in some other data first - which you might decide to do once you’ve got a few projects under your belt, or you might do if you get started and only realise afterwards that you haven’t loaded your basemap in yet - then you might find that your project is not using the CRS you were expecting!\nNow - this isn’t a problem by itself - but it can cause confusion about what CRS you should use when you try and load in additional data!\nFor example, here I’ve loaded in a dataset relating to the United Kingdom. There should be some points on the UK… but where are they?\n\nWell, the only point I can see is in the sea off the coast of Africa!\nIf I zoom a really long way in, it turns out my points did load in - but they’re not anywhere near the UK on my basemap.\n\nSo what went wrong here?\nWhen I loaded this data in, I told QGIS to use the project CRS.\nBut that’s not what QGIS is expecting!\nIt wants me to tell it what the CRS is of the data I am loading in - it already knows what the project CRS is! It just needs to know what it’s loading in so it can work out how to translate between the two.\n\n\n\n\nOnce you’ve chosen the correct CRS, click ‘add’, then click ‘close’.\n\nOnce you’ve done this, your map should look something like this:\n\n\n\n\n\n\n\nExercise 1\n\n\n\nNow we’ve got a map, let’s take a few minutes to explore some of the patterns we can see.\nTry zooming in and moving around.\nMaybe explore an area you know, or look at the layout of roads in some of the areas with more or fewer accidents than others.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html#styling-points",
     "href": "qgis_point_data.html#styling-points",
-    "title": "7  Visualising Point Data in QGIS",
-    "section": "8.2 Styling points",
-    "text": "8.2 Styling points\nNow we have the accidents, but there’s so many that it’s hard to tell much.\nLet’s try splitting them out by severity.\nSelect your imported layer of points - if you’re following along with the dataset, this will be called stats19_collision_2022_minimal layer - in the layer panel by clicking it.\nClick on ‘Single Symbol’ in the layer styling panel.\n\nIn the dropdown menu that appears, select ‘Categorized’\n\nYour layer styling panel should now look something like the image on the right\n\n\n\n\n\n\n\nHINT\n\n\n\nYour layer styling panel might be too narrow by default, which cuts off some rather important buttons!\nHover over the left edge of the layer styling panel until your cursor changes to this icon: &lt;–&gt;\nThen drag it to the left until it takes up about a quarter to a third of the page and shows all the buttons below.\n\n\n\nNow we want to tell it to categorize by one of the columns in our data.\nSelect ‘accident_severity’ from the list.\n\nThen click ‘Classify’.\n\nOnce clicked, our points will have different colours (maybe not these exact ones).\nYou can see the categories it has created in our layer styling panel.\n\n\n8.2.1 Hiding points\nWe can hide some of these points by clicking the checkboxes (ticks) to the left of the symbol colour in the Layer Styling panel.\n\n\n\n\n\n\n\nExercise 2\n\n\n\nTry changing the selected value and click ‘classify’ again. Explore some of the different things we have in the dataset.\nWhich work well as things to colour our points by?\nExperiment with hiding certain values by unticking them in the layer styling panel.\nHint: you will need to click ‘yes’ when it asks you if existing classes should be deleted before classification, otherwise you will end up with categories in your legend that aren’t being used.\n\n\n\n\n\n\n\nClick here to see some example answers to this step\n\n\n\n\n\n\n\n\nAccidents at 20mph vs 70mph\n\n\n\n\n\nAccidents involving 1 vehicle vs Accidents involving more than 5 vehicles\n\n\n\n\n\n\n\n\n\n8.2.2 Colour and size\nWith the layer selected, look at the layer styling panel.\nClick on one of the categorised symbols in the section with the headers ‘symbol’, ‘value’ and ‘legend’, then click on the symbol itself (marked 1. in the image below) to load a new page with options for point colour, opacity and size.\n\nNext, you can change the colour, size or opacity using the options highlighted in the box marked ‘2.’\nYou can then click the arrow marked ‘3.’ to return to the previous page.\n\nYour changes will automatically apply if the small box labelled ‘Live update’, which is next to the ‘Apply’ button at the very bottom of the layer styling panel, has a tick in it.\n\nExercise 3\nTry changing the size, colour and opacity of some points to make the important information stand out more for a chosen category of information.\nYou can also choose to hide some categories.\nThink about the story you want to try to tell with your map. What important things do you want someone who looks at your map to take away from it? How can you use size, colour and opacity to support this?\n\n\n\n\n\n\nClick here to see some example answers to this step\n\n\n\n\n\nHere, for a map where the accidents have been classified by severity, we have - Reduced opacity of less severe accidents (so full accident patterns can still be seen - we can still spot areas with more accidents overall - while making them less obvious) - Increased size of fatal accidents (so they stand out to the viewer) - Changed severe accidents to a colour more traditionally associated with ‘bad’\n\n\n\n\n:::\n\n\n\n8.2.3 Custom Markers",
+    "title": "8  Visualising Point Data in QGIS",
+    "section": "9.2 Styling points",
+    "text": "9.2 Styling points\nNow we have the accidents, but there’s so many that it’s hard to tell much.\nLet’s try splitting them out by severity.\nSelect your imported layer of points - if you’re following along with the dataset, this will be called stats19_collision_2022_minimal layer - in the layer panel by clicking it.\nClick on ‘Single Symbol’ in the layer styling panel.\n\nIn the dropdown menu that appears, select ‘Categorized’\n\nYour layer styling panel should now look something like the image on the right\n\n\n\n\n\n\n\nHINT\n\n\n\nYour layer styling panel might be too narrow by default, which cuts off some rather important buttons!\nHover over the left edge of the layer styling panel until your cursor changes to this icon: &lt;–&gt;\nThen drag it to the left until it takes up about a quarter to a third of the page and shows all the buttons below.\n\n\n\nNow we want to tell it to categorize by one of the columns in our data.\nSelect ‘accident_severity’ from the list.\n\nThen click ‘Classify’.\n\nOnce clicked, our points will have different colours (maybe not these exact ones).\nYou can see the categories it has created in our layer styling panel.\n\n\n9.2.1 Hiding points\nWe can hide some of these points by clicking the checkboxes (ticks) to the left of the symbol colour in the Layer Styling panel.\n\n\n\n\n\n\n\nExercise 2\n\n\n\nTry changing the selected value and click ‘classify’ again. Explore some of the different things we have in the dataset.\nWhich work well as things to colour our points by?\nExperiment with hiding certain values by unticking them in the layer styling panel.\nHint: you will need to click ‘yes’ when it asks you if existing classes should be deleted before classification, otherwise you will end up with categories in your legend that aren’t being used.\n\n\n\n\n\n\n\nClick here to see some example answers to this step\n\n\n\n\n\n\n\n\nAccidents at 20mph vs 70mph\n\n\n\n\n\nAccidents involving 1 vehicle vs Accidents involving more than 5 vehicles\n\n\n\n\n\n\n\n\n\n9.2.2 Colour and size\nWith the layer selected, look at the layer styling panel.\nClick on one of the categorised symbols in the section with the headers ‘symbol’, ‘value’ and ‘legend’, then click on the symbol itself (marked 1. in the image below) to load a new page with options for point colour, opacity and size.\n\nNext, you can change the colour, size or opacity using the options highlighted in the box marked ‘2.’\nYou can then click the arrow marked ‘3.’ to return to the previous page.\n\nYour changes will automatically apply if the small box labelled ‘Live update’, which is next to the ‘Apply’ button at the very bottom of the layer styling panel, has a tick in it.\n\nExercise 3\nTry changing the size, colour and opacity of some points to make the important information stand out more for a chosen category of information.\nYou can also choose to hide some categories.\nThink about the story you want to try to tell with your map. What important things do you want someone who looks at your map to take away from it? How can you use size, colour and opacity to support this?\n\n\n\n\n\n\nClick here to see some example answers to this step\n\n\n\n\n\nHere, for a map where the accidents have been classified by severity, we have - Reduced opacity of less severe accidents (so full accident patterns can still be seen - we can still spot areas with more accidents overall - while making them less obvious) - Increased size of fatal accidents (so they stand out to the viewer) - Changed severe accidents to a colour more traditionally associated with ‘bad’\n\n\n\n\n:::\n\n\n\n9.2.3 Custom Markers",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html#adding-labels-to-points",
     "href": "qgis_point_data.html#adding-labels-to-points",
-    "title": "7  Visualising Point Data in QGIS",
-    "section": "8.3 Adding labels to points",
-    "text": "8.3 Adding labels to points\nIn addition to changing the markers, we can add labels to our points.\nNow, simple labels can be a little hard to read, especially if we have a",
+    "title": "8  Visualising Point Data in QGIS",
+    "section": "9.3 Adding labels to points",
+    "text": "9.3 Adding labels to points\nIn addition to changing the markers, we can add labels to our points.\nNow, simple labels can be a little hard to read, especially if we have a",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html#next-steps",
     "href": "qgis_point_data.html#next-steps",
-    "title": "7  Visualising Point Data in QGIS",
-    "section": "8.4 Next Steps",
-    "text": "8.4 Next Steps\nFor looking at individual roads, this approach is quite useful, but often there are so many accidents happening of a given type that it’s really hard to draw any conclusions about the country more widely.\nThis is where colouring regions of the map by some sort of count is quite useful - and this is what we will cover in the next chapter.",
+    "title": "8  Visualising Point Data in QGIS",
+    "section": "9.4 Next Steps",
+    "text": "9.4 Next Steps\nFor looking at individual roads, this approach is quite useful, but often there are so many accidents happening of a given type that it’s really hard to draw any conclusions about the country more widely.\nThis is where colouring regions of the map by some sort of count is quite useful - and this is what we will cover in the next chapter.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_choropleth.html",
+    "href": "qgis_choropleth.html",
+    "title": "9  Creating Choropleths in QGIS",
+    "section": "",
+    "text": "9.1 Reminder - what’s a choropleth?\nOr, in short, something a bit like this!\nAnd the great news is that we can create these in QGIS.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_choropleth.html#reminder---whats-a-choropleth",
+    "href": "qgis_choropleth.html#reminder---whats-a-choropleth",
+    "title": "9  Creating Choropleths in QGIS",
+    "section": "",
+    "text": "“A choropleth map is a type of statistical thematic map… [where] color corresponding with an aggregate summary of a geographic characteristic … such as population density or per-capita income.\n\n\nChoropleth maps provide an easy way to visualize how a variable varies across a geographic area or show the level of variability within a region.\n\n\nA heat map or isarithmic map is similar but uses regions drawn according to the pattern of the variable, rather than the a priori geographic areas of choropleth maps.”\n\n\nhttps://en.wikipedia.org/wiki/Choropleth_map",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_choropleth.html#importing-a-premade-geodataset",
+    "href": "qgis_choropleth.html#importing-a-premade-geodataset",
+    "title": "9  Creating Choropleths in QGIS",
+    "section": "9.2 Importing a premade geodataset",
+    "text": "9.2 Importing a premade geodataset\nSometimes we are lucky enough to have access to a dataset that contains a series of boundaries - so showing where the edges of a series of LSOAs, MSOAs, counties, or some other type of boundary are - as well as giving us some counts relating to those areas.\nUnlike our point data, which came in a csv (a type of delimited text file), when we’re working with data relating to areas, we’re going to be using a vector layer.\nVector layers can come in a range of formats: .shp (Shapefile) .geojson (Geo JSON) *.gpkg (Geopackage)\n(note: you can also get point data that’s a vector layer)\nFirst, we need to tell QGIS that we want to import a vector layer.\n\nNext, we click on the three small dots next to ‘source’ in the window that pops up to get our file picker.\n\nNotice there are no geometry settings here as the CRS is set within the file! So we can just click ‘Add’\nYou will now see a number of area boundaries, but at the moment, they are all the same colour - which isn’t much use!",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_choropleth.html#adding-colour-to-our-choropleths",
+    "href": "qgis_choropleth.html#adding-colour-to-our-choropleths",
+    "title": "9  Creating Choropleths in QGIS",
+    "section": "9.3 Adding colour to our choropleths",
+    "text": "9.3 Adding colour to our choropleths\nPreviously we were working with data that had a certain number of categories per value.\nHowever, if we take a look at the attribute table for this layer, we can see we have numeric values - so instead we want a graduated symbology.\nThis means values will be grouped together rather than having a separate category per value.\nThis is just a quick overview of the dataset in this section, opened up within QGIS. Notice that there is a row per LSOA, and some relevant counts for that LSOA stored in the later columns.\n\nNow we need to head to our layer styling panel. Where it says ‘no symbol’, click in the box and choose ‘graduated’.\n\nLike before, we need to choose the value we want to colour our areas by.\nWe’ve got quite a lot to choose from in this dataset.\nLet’s start by looking at Shoplifting.\nTo do this, we need to click on the small arrow at the far right-hand side of the ‘values’ box.\n\nOnce we’ve selected this, click the ‘classify’ button (if it does not automatically populate the white box with a series of colours and category boundaries).\nWe now have our areas coloured by the number of shoplifting incidents. What do you notice about the categories it has set up for us?",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_choropleth.html#adjusting-category-boundaries-and-the-number-of-categories-in-qgis",
+    "href": "qgis_choropleth.html#adjusting-category-boundaries-and-the-number-of-categories-in-qgis",
+    "title": "9  Creating Choropleths in QGIS",
+    "section": "9.4 Adjusting category boundaries and the number of categories in QGIS",
+    "text": "9.4 Adjusting category boundaries and the number of categories in QGIS\n\n9.4.1 Number of categories\nFirst, let’s experiment with the number of categories and see if that helps.\nWe can change this using the arrows next to the ‘classes’ box, or by typing in the number of classes we would like.\n\nThis can produce some odd behaviour when a lot of our groups have a very low number of values in!\nWe seem to have multiple categories for ‘0’, each with a slightly different colour. That’s not ideal behaviour - though depending on your dataset, this might not occur, and the default categorisation method may work fine, in which case you can just play around with the number of classes.\n\n\n9.4.2 Categorisation type\nLet’s now try changing the classification mode.\nThis adjusts the algorithm used by QGIS to work out the size of each category and where the boundary will be.\nClick in the ‘mode’ box.\nYou can see there are several options to choose from.\nLet’s try ‘equal interval’\n\n\nThis looks very different - is this a good option?\n\nHere, while our categories now are of consistent width (i.e. the number of values they encompass is the same), due to the way the values in this dataset are distributed - with a lot of low values and only a handful of higher ones - the map is quite hard to interpret again.\nSo a small change to the mode led to a large change in our legend!",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_choropleth.html#hiding-categories",
+    "href": "qgis_choropleth.html#hiding-categories",
+    "title": "9  Creating Choropleths in QGIS",
+    "section": "9.5 Hiding categories",
+    "text": "9.5 Hiding categories\nLike with our categorised point data, we can untick layers in the layer styling panel to just show certain categories.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_choropleth.html#changing-the-colourscheme",
+    "href": "qgis_choropleth.html#changing-the-colourscheme",
+    "title": "9  Creating Choropleths in QGIS",
+    "section": "9.6 Changing the Colourscheme",
+    "text": "9.6 Changing the Colourscheme",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_choropleth.html#viewing-the-distribution",
+    "href": "qgis_choropleth.html#viewing-the-distribution",
+    "title": "9  Creating Choropleths in QGIS",
+    "section": "9.7 Viewing the Distribution",
+    "text": "9.7 Viewing the Distribution\nIf you go to ‘histogram’ and click ‘load values’, you will see the distribution of the values in the column you’re visualising, along with vertical lines showing the boundary of each category.\nThis can be really helpful for understanding the distribution of your data…\n… but sometimes, like this, it’s really hard to see!",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_choropleths_joining.html",
+    "href": "qgis_choropleths_joining.html",
+    "title": "10  Creating Choropleths in QGIS",
+    "section": "",
+    "text": "“But the data in my organisation isn’t just sitting around in geopackage files…”\n\n\nLoad in a shapefile, geojson or geopkg of area boundaries (e.g. MSOA or LSOA boundaries) These can be downloaded from the ONS, the government, or other organisations.\nLoad in a .csv (delimited text layer) of counts using the same level of detail (e.g. if your shapefiles are for MSOA, you’ll need MSOA-level data at this point too)\n\n\nThis time, choose ‘No geometry’ in the geometry definition section.\n\n\nRight click on the MSOA shapefile layer in the layer tab and click ‘Properties…’\n\n\n\nChoose ‘Joins’ and then the plus button\n\n\n\nTell QGIS the layer to join to (our csv layer) and the names of the columns that should match in our two datasets\n\nIn this example the names are identical, but they can be different! It just matters whether the contents will have matching data.\n\nNow, when you select the layer that contains your area boundaries and head to the layer styling panel, you will be able to select the relevant value fields when creating a choropleth from this data (i.e. when you click into the ‘values’ dropdown).",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_filtering.html",
+    "href": "qgis_filtering.html",
+    "title": "11  Filtering Data in QGIS",
+    "section": "",
+    "text": "11.1 Working out what we have available to filter by\nTo work out what you want to filter by, it might be helpful to look at the attribute table for your layer.\nRight click on the layer in the ‘layers’ panel and choose ‘open attribute table’.\nThis will show you the full dataset within QGIS.\nHowever, while you can build a filter from within here, it’s not the easiest way.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_filtering.html#building-a-filter",
+    "href": "qgis_filtering.html#building-a-filter",
+    "title": "11  Filtering Data in QGIS",
+    "section": "11.2 Building a filter",
+    "text": "11.2 Building a filter\nRight click on the layer you are interested in in the ‘layers’ panel and choose ‘Filter’\n\nThis will bring up a ‘Query Builder’ page\n\nTo see what values exist for a column, click the column name in the ‘Fields’ list, then choose ‘All’ to see every category.\n\nYou can then build your filter clause\nDouble click on the column name in the ‘Fields’ to add that\nThen choose an operator\nThen choose a value from the ‘Values’ box by double clicking on it\n\nYou can click ‘test’ to see how many rows will remain in your dataset once the filter has been applied\n\nWhen you’re happy, click ‘OK’ and the dataset will be filtered.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_filtering.html#spotting-filters",
+    "href": "qgis_filtering.html#spotting-filters",
+    "title": "11  Filtering Data in QGIS",
+    "section": "11.3 Spotting filters",
+    "text": "11.3 Spotting filters\nYou can tell if a layer has been filtered by the icon at the end of its name in the filter panel.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_filtering.html#clearing-the-filter",
+    "href": "qgis_filtering.html#clearing-the-filter",
+    "title": "11  Filtering Data in QGIS",
+    "section": "11.4 Clearing the filter",
+    "text": "11.4 Clearing the filter\nTo remove the filter, open up the Filter options again (by right clicking on the layer in the layers panel and choosing ‘Filter’), choose ‘Clear’, then ‘OK’.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html",
+    "href": "qgis_print_layouts.html",
+    "title": "12  Print Layouts in QGIS",
+    "section": "",
+    "text": "12.1 Simple exports\nOn Windows, you can use the snipping tool.\nYou can also export the in-view portion of the map as either an image or a PDF",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html#simple-exports",
+    "href": "qgis_print_layouts.html#simple-exports",
+    "title": "12  Print Layouts in QGIS",
+    "section": "",
+    "text": "On windows 10, use 🪟+ Shift + S to open the snipping tool.\nOn windows 11, use the prt sc key",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html#print-layouts---why-bother",
+    "href": "qgis_print_layouts.html#print-layouts---why-bother",
+    "title": "12  Print Layouts in QGIS",
+    "section": "12.2 Print Layouts - why bother?",
+    "text": "12.2 Print Layouts - why bother?\nIf you want to include a title, legends, or multiple maps on one page from within QGIS, you will need to create a print layout.\nWe can build up to a map that shows multiple useful things.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html#creating-a-new-print-layout",
+    "href": "qgis_print_layouts.html#creating-a-new-print-layout",
+    "title": "12  Print Layouts in QGIS",
+    "section": "12.3 Creating a new print layout",
+    "text": "12.3 Creating a new print layout\nChoose project –&gt; New print layout.\n\nYou can have multiple print layouts per map, so it’s a good idea to give it a descriptive title\n\nThe print layout will open as a new window.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html#adding-in-a-map",
+    "href": "qgis_print_layouts.html#adding-in-a-map",
+    "title": "12  Print Layouts in QGIS",
+    "section": "12.4 Adding in a map",
+    "text": "12.4 Adding in a map\nFirst you will want to add a map by clicking on this icon in the list down the side.\n\nThese icons are key for moving around in your map and selecting elements of your print layout.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html#legends",
+    "href": "qgis_print_layouts.html#legends",
+    "title": "12  Print Layouts in QGIS",
+    "section": "12.5 Legends",
+    "text": "12.5 Legends\nYou may next want to add a legend.\n\nLike before, draw the legend onto the canvas.\n\n\n\n\n\n\nTip\n\n\n\nWith the legend selected on the canvas, you can choose ‘Only show items from inside linked maps’ to remove any parts of the legend that don’t relate to what is shown on the screen.\n\n\n\n12.5.1 Legend titles",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html#labels-and-titles",
+    "href": "qgis_print_layouts.html#labels-and-titles",
+    "title": "12  Print Layouts in QGIS",
+    "section": "12.6 Labels and Titles",
+    "text": "12.6 Labels and Titles\nYou may want to add labels or titles.\n\nThe contents has to be edited using the label box in the ‘item properties’ section.\n\nYou can adjust the font size by clicking on the ‘Font’ box inside the ‘Appearance’ section.\nOnce you have one label, you can copy and paste this to speed up creating additional labels.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html#attribution",
+    "href": "qgis_print_layouts.html#attribution",
+    "title": "12  Print Layouts in QGIS",
+    "section": "12.7 Attribution",
+    "text": "12.7 Attribution\nIf using the OpenStreetMap basemap that is built into QGIS, add a label like the following to comply with the licence:\n© OpenStreetMap contributors, licenced as CC BY-SA\nIt is also good practice to acknowledge the software with a label like Created in QGIS",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html#extending-your-print-layouts-further",
+    "href": "qgis_print_layouts.html#extending-your-print-layouts-further",
+    "title": "12  Print Layouts in QGIS",
+    "section": "12.8 Extending your print layouts further",
+    "text": "12.8 Extending your print layouts further\nThere are a range of additional things you can add to your print layouts, like\n\nimages (perhaps the logo of your organisation)\ntables of relevant data",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_print_layouts.html#exporting-print-layouts",
+    "href": "qgis_print_layouts.html#exporting-print-layouts",
+    "title": "12  Print Layouts in QGIS",
+    "section": "12.9 Exporting print layouts",
+    "text": "12.9 Exporting print layouts\nFrom within the print layout window, we can choose the “Layout” dropdown menu to find several different formats we can export our print layout in.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "qgis_exercises.html",
+    "href": "qgis_exercises.html",
+    "title": "13  Exercises - QGIS",
+    "section": "",
+    "text": "14 QGIS Exercise 1\nCreate a new QGIS file\nLoad in a basemap\nLoad in the STATS19 dataset (stats19_collisions_point_data_2022.csv)\nFilter to one particular police force\nCreate one (or more) layers using point data, choosing the field(s) you find interesting\nRemember that you can hide certain categories of data, change icons, add labels, filter…\n\n\n15 QGIS Exercise 2\nCreate a new QGIS file\nLoad in a basemap\nLet’s try creating some more maps for the STATS19 dataset.\nWe’re just going to use a geojson file that already has some counts per MSOA joined in. stats_19_counts_by_msoa_3857.geojson\nCreate at least one choropleth (from this file)\nTry out different filters, colour schemes and categorisation modes.\n\n\n16 QGIS Exercise 3\nCreate a new QGIS file\nLoad in a basemap\nTo account for the range in size of MSOA, we now have a new csv of data with standardised values (number of collisions per square kilometre, number of casualties per 1000 occupants).\nImport this csv as delimited data.\nImport the vector file of MSOAs\nJoin these layers together\nCreate a print layout that shows two maps side-by-side for your region.",
+    "crumbs": [
+      "Mapping in QGIS",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Exercises - QGIS</span>"
+    ]
+  },
+  {
+    "objectID": "introduction_mapping_in_python.html",
+    "href": "introduction_mapping_in_python.html",
+    "title": "Mapping in Python",
+    "section": "",
+    "text": "Creating maps in Python opens up a whole world of opportunities to you.\n\nYou can do every step in one place - you don’t have to move between different tools to clean and visualise your data\nYou can create reproducible analyses for different areas using similar code (for example, you could create and visualise a report per county programatically and schedule this to be rerun on a regular basis)\nYou can create interactive web applications that allow users to explore maps at their own pace and gain insights.\n\nBy the end of this section, you will be able to make all sorts of maps within Python and incorporate them into a range of outputs to enable other people to make use of them within or outside your organisation.\nLet’s start by taking a look at some example maps:\n\n\n\n\n\n\nClick here to take a look at a great example of an interactive healthcare map\n\n\n\n\n\n\n\n\n\n\nFurther reading\nNHS Digital - Principles and Visual Guidelines for Maps\n\n\nReferences",
+    "crumbs": [
+      "Mapping in Python"
+    ]
+  },
+  {
+    "objectID": "why_python_mapping.html",
+    "href": "why_python_mapping.html",
+    "title": "14  Why use python for maps?",
+    "section": "",
+    "text": "14.1 Wrangling and prep in one place\nBy doing your data wrangling and making your final maps all in one script, it’s a lot easier to adjust the calculations that feed into your map\nYou can use all of the useful techniques you’ve already learned for Pandas to filter your datasets, create additional columns, and more…",
+    "crumbs": [
+      "Mapping in Python",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Why use python for maps?</span>"
+    ]
+  },
+  {
+    "objectID": "why_python_mapping.html#same-code-multiple-maps",
+    "href": "why_python_mapping.html#same-code-multiple-maps",
+    "title": "14  Why use python for maps?",
+    "section": "14.2 Same code, multiple maps",
+    "text": "14.2 Same code, multiple maps\nBy using functions or loops, you can rapidly start to make maps to show different aspects of your data (6 lines of code actually made 25 maps here)\n\nYou can also use scripts (and reporting tools like Quarto, which we will cover in a later part of the course) to create large numbers of reports for different services or areas automatically",
+    "crumbs": [
+      "Mapping in Python",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Why use python for maps?</span>"
+    ]
+  },
+  {
+    "objectID": "why_python_mapping.html#interactivity-for-end-users",
+    "href": "why_python_mapping.html#interactivity-for-end-users",
+    "title": "14  Why use python for maps?",
+    "section": "14.3 Interactivity for end users",
+    "text": "14.3 Interactivity for end users\nBy using Python maps, you can build them into interactive web-based tools so they will be generated on-the-fly based on combinations your users choose\n(which we cover in a later module too!)",
+    "crumbs": [
+      "Mapping in Python",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Why use python for maps?</span>"
     ]
   }
 ]

@@ -11,8 +11,45 @@ glossary_setup_style()
 
 # QGIS Exercise 1
 
+Create a new QGIS file
+
+Load in a basemap
+
+Load in the STATS19 dataset (stats19_collisions_point_data_2022.csv)
+
+Filter to one particular police force
+
+Create one (or more) layers using point data, choosing the field(s) you find interesting
+
+Remember that you can hide certain categories of data, change icons, add labels, filter…
 
 # QGIS Exercise 2
 
+Create a new QGIS file
+
+Load in a basemap
+
+Let’s try creating some more maps for the STATS19 dataset.
+
+We’re just going to use a geojson file that already has some counts per MSOA joined in.
+`stats_19_counts_by_msoa_3857.geojson`
+
+Create at least one choropleth (from this file)
+
+Try out different filters, colour schemes and categorisation modes.
 
 # QGIS Exercise 3
+
+Create a new QGIS file
+
+Load in a basemap
+
+To account for the range in size of MSOA, we now have a new csv of data with standardised values (number of collisions per square kilometre, number of casualties per 1000 occupants).
+
+Import this csv as delimited data.
+
+Import the vector file of MSOAs
+
+Join these layers together
+
+Create a print layout that shows two maps side-by-side for your region.

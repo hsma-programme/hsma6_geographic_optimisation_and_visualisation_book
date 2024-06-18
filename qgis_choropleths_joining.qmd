@@ -1,0 +1,40 @@
+# Creating Choropleths in QGIS
+```{r, echo = FALSE}
+source("glossary_funcs.R")
+glossary_setup()
+```
+
+```{r, echo = FALSE, results='asis'}
+glossary_setup_style()
+```
+
+> “But the data in my organisation isn’t just sitting around in geopackage files…”
+
+1. Load in a shapefile, geojson or geopkg of area boundaries (e.g. MSOA or LSOA boundaries)
+These can be downloaded from the ONS, the government, or other organisations.
+
+2. Load in a .csv (delimited text layer) of counts using the same level of detail (e.g. if your shapefiles are for MSOA, you’ll need MSOA-level data at this point too)
+
+![](assets/2024-06-18-23-02-37.png)
+
+This time, choose ‘No geometry’ in the geometry definition section.
+
+![](assets/2024-06-18-23-02-56.png)
+
+3. Right click on the MSOA shapefile layer in the layer tab and click ‘Properties…’
+
+![](assets/2024-06-18-23-03-33.png)
+
+4. Choose ‘Joins’ and then the plus button
+
+![](assets/2024-06-18-23-04-05.png)
+
+5. Tell QGIS the layer to join to (our csv layer) and the names of the columns that should match in our two datasets
+
+In this example the names are identical, but they can be different! It just matters whether the contents will have matching data.
+
+![](assets/2024-06-18-23-04-42.png)
+
+Now, when you select the layer that contains your area boundaries and head to the layer styling panel, you will be able to select the relevant value fields when creating a choropleth from this data (i.e. when you click into the 'values' dropdown).
+
+![](assets/2024-06-18-23-05-07.png)

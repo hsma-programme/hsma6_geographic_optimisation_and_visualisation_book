@@ -7,3 +7,63 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+## Working out what we have available to filter by
+
+To work out what you want to filter by, it might be helpful to look at the attribute table for your layer.
+
+Right click on the layer in the 'layers' panel and choose 'open attribute table'.
+
+![](assets/2024-06-18-23-35-27.png)
+
+This will show you the full dataset within QGIS.
+
+![](assets/2024-06-18-23-36-00.png)
+
+However, while you can build a filter from within here, it’s not the easiest way.
+
+## Building a filter
+
+Right click on the layer you are interested in in the 'layers' panel and choose ‘Filter’
+
+![](assets/2024-06-18-23-37-09.png)
+
+This will bring up a ‘Query Builder’ page
+
+![](assets/2024-06-18-23-37-34.png)
+
+To see what values exist for a column, click the column name in the ‘Fields’ list, then choose ‘All’ to see every category.
+
+![](assets/2024-06-18-23-38-07.png)
+
+You can then build your filter clause
+
+Double click on the column name in the ‘Fields’ to add that
+
+Then choose an operator
+
+Then choose a value from the ‘Values’ box by double clicking on it
+
+![](assets/2024-06-18-23-38-31.png)
+
+You can click ‘test’ to see how many rows will remain in your dataset once the filter has been applied
+
+![](assets/2024-06-18-23-39-03.png)
+
+When you’re happy, click ‘OK’ and the dataset will be filtered.
+
+![](assets/2024-06-18-23-39-22.png)
+
+## Spotting filters
+
+You can tell if a layer has been filtered by the icon at the end of its name in the filter panel.
+
+![](assets/2024-06-18-23-40-46.png)
+
+## Clearing the filter
+
+To remove the filter, open up the Filter options again (by right clicking on the layer in the layers panel and choosing 'Filter'), choose ‘Clear’, then ‘OK’.
+
+![](assets/2024-06-18-23-40-13.png)
+
+![](assets/2024-06-18-23-40-26.png)

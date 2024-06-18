@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -165,6 +165,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./the_importance_of_standardisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Standardisation</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -179,19 +185,66 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_basemaps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_point_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_choropleth.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_choropleths_joining.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Filtering Data in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_print_layouts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Print Layouts in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qgis_exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercises - QGIS</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./introduction_mapping_in_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mapping in Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./why_python_mapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Why use python for maps?</span></span></a>
   </div>
 </li>
       </ul>
@@ -462,8 +515,8 @@ Click here to view the website without leaving the book!
 <figcaption>What are the correct coordinates for this national park in Brazil?</figcaption>
 </figure>
 </div>
-<div id="radio_RUMYJPNNYH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RUMYJPNNYH" value="" feedback="<b>Not quite! You've correctly identified that the latitude - the first number in the coordinate pair - is negative, as we are below the equator. However, as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>-20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_RUMYJPNNYH" value="" feedback="<b>Almost! You've the latitude - the first number in the coordinate pair - should be negative, as we are below the equator. However, you've got the second part of the coordinate pair (the longitude) correct - as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair is negative too.</b>"> <span>20.655, -49.205</span></label><label><input type="radio" autocomplete="off" name="radio_RUMYJPNNYH" value="" feedback="<b>Try again! The first number in the coordinate pair - the latitude - should be negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_RUMYJPNNYH" value="answer" feedback="<b>Correct! The first number in the coordinate pair - the latitude - is negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>-20.655, -49.205</span></label>
+<div id="radio_JGRKQVHWFM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JGRKQVHWFM" value="" feedback="<b>Not quite! You've correctly identified that the latitude - the first number in the coordinate pair - is negative, as we are below the equator. However, as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>-20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_JGRKQVHWFM" value="" feedback="<b>Almost! You've the latitude - the first number in the coordinate pair - should be negative, as we are below the equator. However, you've got the second part of the coordinate pair (the longitude) correct - as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair is negative too.</b>"> <span>20.655, -49.205</span></label><label><input type="radio" autocomplete="off" name="radio_JGRKQVHWFM" value="" feedback="<b>Try again! The first number in the coordinate pair - the latitude - should be negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>20.655, 49.205</span></label><label><input type="radio" autocomplete="off" name="radio_JGRKQVHWFM" value="answer" feedback="<b>Correct! The first number in the coordinate pair - the latitude - is negative, as we are below the equator. Then as we're to the left of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be negative too.</b>"> <span>-20.655, -49.205</span></label>
 </div>
 </section>
 <section id="question-2" class="level5 unnumbered">
@@ -474,8 +527,8 @@ Click here to view the website without leaving the book!
 <figcaption>What are the correct coordinates for this national park in Japan?</figcaption>
 </figure>
 </div>
-<div id="radio_HWJDNCXFTP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HWJDNCXFTP" value="" feedback="<b>Try again! The first number in the coordinate pair - the latitude - should be positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.</b>"> <span>-35.943, -138.764</span></label><label><input type="radio" autocomplete="off" name="radio_HWJDNCXFTP" value="answer" feedback="<b>Correct! The first number in the coordinate pair - the latitude - is positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.</b>"> <span>35.943, 138.764</span></label><label><input type="radio" autocomplete="off" name="radio_HWJDNCXFTP" value="" feedback="<b>Almost! Have another look at the order of the numbers. Remember that unlike a graph, where we write the horizontal coordinate and then the vertical coordinate, when we are working with maps we write the latitude - the vertical coordinate - first, and then we write the longitude - the horizontal coordinate - second. Latitude only goes up to a maximum of 90 degrees, but the first number here is 138! However, you're right that both of the coordinates here are positive - we are above the equator and to the right of the prime meridian.</b>"> <span>138.764, 35.943</span></label><label><input type="radio" autocomplete="off" name="radio_HWJDNCXFTP" value="" feedback="<b>Almost! You've correctly spotted that the first number in the coordinate pair - the latitude - should be positive, as we are above the equator. However, as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - should be positive too.</b>"> <span>35.943, -138.764</span></label>
+<div id="radio_YNBKWXXXPO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YNBKWXXXPO" value="" feedback="<b>Try again! The first number in the coordinate pair - the latitude - should be positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.</b>"> <span>-35.943, -138.764</span></label><label><input type="radio" autocomplete="off" name="radio_YNBKWXXXPO" value="answer" feedback="<b>Correct! The first number in the coordinate pair - the latitude - is positive, as we are above the equator. Then as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - will be positive too.</b>"> <span>35.943, 138.764</span></label><label><input type="radio" autocomplete="off" name="radio_YNBKWXXXPO" value="" feedback="<b>Almost! Have another look at the order of the numbers. Remember that unlike a graph, where we write the horizontal coordinate and then the vertical coordinate, when we are working with maps we write the latitude - the vertical coordinate - first, and then we write the longitude - the horizontal coordinate - second. Latitude only goes up to a maximum of 90 degrees, but the first number here is 138! However, you're right that both of the coordinates here are positive - we are above the equator and to the right of the prime meridian.</b>"> <span>138.764, 35.943</span></label><label><input type="radio" autocomplete="off" name="radio_YNBKWXXXPO" value="" feedback="<b>Almost! You've correctly spotted that the first number in the coordinate pair - the latitude - should be positive, as we are above the equator. However, as we're to the right of the prime meridian (the vertical line that goes through Greenwich in London, England), the second number in the coordinate pair - the longitude - should be positive too.</b>"> <span>35.943, -138.764</span></label>
 </div>
 </section>
 <section id="question-3" class="level5 unnumbered">
@@ -487,8 +540,8 @@ Click here to view the website without leaving the book!
 </figure>
 </div>
 <p><em>St Luke’s is part of the University of Exeter and is home to the PenCHORD team, who write the HSMA course!</em></p>
-<div id="radio_CXABPQARAT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CXABPQARAT" value="" feedback="<b>Not quite - we're above the equator (towards the North Pole), so the latitude will be positive. Also latitude will be written first - and because we're so close to the Prime Meridian, we'd expect latitude to be the smaller number here (quite close to zero). Have another go!</b>"> <span>-3.51, -50.722</span></label><label><input type="radio" autocomplete="off" name="radio_CXABPQARAT" value="" feedback="<b>I'm afraid that's not quite right! Remember, we're above the equator, so the first coordinate - the latitude - will be positive. Then as we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - the longitude will be negative.</b>"> <span>-50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_CXABPQARAT" value="answer" feedback="<b>Correct! Well done. The latitude is positive because we're above the equator, and the longitude is a small negative number as we are just to the left of the prime meridian.</b>"> <span>50.722, -3.51</span></label><label><input type="radio" autocomplete="off" name="radio_CXABPQARAT" value="" feedback="<b>Not quite! You're correct that the first coordinate - the latitude - will be positive as we're above the equator. However, notice that we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - so the longitude will be negative.</b>"> <span>50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_CXABPQARAT" value="" feedback="<b>Almost! Have a think about the size of the numbers. Remember that latitude - the distance from the equator - is written first, and goes from 0 at the equator to +- 180 at the poles. We're quite a long way up here, so we'd expect our figure for latitude to be a fairly large positive number. Then our longitude figure will be a fairly small negative number as we're only just to the left of the prime meridian (the vertical line that goes through Greenwich in London, England).</b>"> <span>-3.51, 50.722</span></label>
+<div id="radio_FRXEUCODEG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FRXEUCODEG" value="" feedback="<b>Not quite - we're above the equator (towards the North Pole), so the latitude will be positive. Also latitude will be written first - and because we're so close to the Prime Meridian, we'd expect latitude to be the smaller number here (quite close to zero). Have another go!</b>"> <span>-3.51, -50.722</span></label><label><input type="radio" autocomplete="off" name="radio_FRXEUCODEG" value="" feedback="<b>I'm afraid that's not quite right! Remember, we're above the equator, so the first coordinate - the latitude - will be positive. Then as we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - the longitude will be negative.</b>"> <span>-50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_FRXEUCODEG" value="answer" feedback="<b>Correct! Well done. The latitude is positive because we're above the equator, and the longitude is a small negative number as we are just to the left of the prime meridian.</b>"> <span>50.722, -3.51</span></label><label><input type="radio" autocomplete="off" name="radio_FRXEUCODEG" value="" feedback="<b>Not quite! You're correct that the first coordinate - the latitude - will be positive as we're above the equator. However, notice that we're to the left of the prime meridian - the vertical line that goes through Greenwich in London, England - so the longitude will be negative.</b>"> <span>50.722, 3.51</span></label><label><input type="radio" autocomplete="off" name="radio_FRXEUCODEG" value="" feedback="<b>Almost! Have a think about the size of the numbers. Remember that latitude - the distance from the equator - is written first, and goes from 0 at the equator to +- 180 at the poles. We're quite a long way up here, so we'd expect our figure for latitude to be a fairly large positive number. Then our longitude figure will be a fairly small negative number as we're only just to the left of the prime meridian (the vertical line that goes through Greenwich in London, England).</b>"> <span>-3.51, 50.722</span></label>
 </div>
 </section>
 </section>
@@ -716,678 +769,341 @@ Warning
 </main> <!-- /main -->
 <script>
 
-
-
 /* update total correct if #webex-total_correct exists */
-
 update_total_correct = function() {
-
   console.log("webex: update total_correct");
 
-
-
   var t = document.getElementsByClassName("webex-total_correct");
-
   for (var i = 0; i < t.length; i++) {
-
     p = t[i].parentElement;
-
     var correct = p.getElementsByClassName("webex-correct").length;
-
     var solvemes = p.getElementsByClassName("webex-solveme").length;
-
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-
     var selects = p.getElementsByClassName("webex-select").length;
 
-
-
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-
   }
-
 }
-
-
 
 /* webex-solution button toggling function */
-
 b_func = function() {
-
   console.log("webex: toggle hide");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('open')) {
-
     cl.remove("open");
-
   } else {
-
     cl.add("open");
-
   }
-
 }
-
-
 
 /* check answers */
-
 check_func = function() {
-
   console.log("webex: check answers");
-
   console.log(document.getElementsByClassName("webex-check"));
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('unchecked')) {
-
     cl.remove("unchecked");
-
     this.innerHTML = "Hide Answers";
 
-
-
     check_answer_box_nodelist = this.parentNode.childNodes
-
     console.log(check_answer_box_nodelist)
-
     for (let i = 0; i < check_answer_box_nodelist.length; i++) {
-
       var cl_inner = check_answer_box_nodelist[i].classList;
-
       console.log("Nodelist", i, ":", cl_inner);
-
       if (typeof cl_inner !== "undefined")
-
         {
-
           if (cl_inner.contains("feedback")) {
-
             {/* console.log(cl_inner.contains("feedback")) */}
-
             {/* console.log(check_answer_box_nodelist[i].style.display) */}
-
             check_answer_box_nodelist[i].style.display = "block"
-
           }
-
         }
 
-
-
       }
-
-
 
   } else {
-
     cl.add("unchecked");
-
     this.innerHTML = "Show Answers";
 
-
-
     check_answer_box_nodelist = this.parentNode.childNodes
-
     console.log(check_answer_box_nodelist)
-
     for (let i = 0; i < check_answer_box_nodelist.length; i++) {
-
       var cl_inner = check_answer_box_nodelist[i].classList;
-
       console.log("Nodelist", i, ":", cl_inner);
-
       if (typeof cl_inner !== "undefined")
-
         {
-
           if (cl_inner.contains("feedback")) {
-
             {/* console.log(cl_inner.contains("feedback")) */}
-
             {/* console.log(check_answer_box_nodelist[i].style.display) */}
-
             check_answer_box_nodelist[i].style.display = "none"
-
           }
-
         }
 
-
-
       }
-
-
 
   }
 
-
-
 }
 
-
-
 /* function for checking solveme answers */
-
 solveme_func = function(e) {
-
   console.log("webex: check solveme");
-
   {/* console.log(e) */}
-
   {/* console.log(this) */}
 
-
-
   var real_answers = JSON.parse(this.dataset.answer);
-
   var my_answer = this.value;
-
   var cl = this.classList;
-
-
 
   var feedback = (this.getAttribute("feedback"))
 
-
-
   if (document.getElementById('feedbackDiv'+this.id) === null){
 
-
-
     var feedbackDiv = document.createElement("p");
-
     feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-
     feedbackDiv.setAttribute("class", "feedback");
 
-
-
   } else {
-
-
 
     var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-
     feedbackDiv.innerHTML = "";
 
-
-
   }
-
-
 
   // Check if inside a 'check answers' box - if so and if answer box is
-
   // currently unchecked, ensure feedback is hidden
-
   if (this.parentElement.parentElement.classList.contains("unchecked")) {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "none"
-
   } else {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "block"
-
   }
-
-
 
   if (cl.contains("ignorecase")) {
-
     my_answer = my_answer.toLowerCase();
-
   }
-
   if (cl.contains("nospaces")) {
-
     my_answer = my_answer.replace(/ /g, "")
-
   }
-
-
 
   if (my_answer == "") {
-
     cl.remove("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else if (real_answers.includes(my_answer)) {
-
     cl.add("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else {
-
     cl.add("webex-incorrect");
-
     cl.remove("webex-correct");
-
     feedbackDiv.innerHTML = feedback;
-
   	this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
-
   }
-
-
 
   // match numeric answers within a specified tolerance
-
   if(this.dataset.tol > 0){
-
     var tol = JSON.parse(this.dataset.tol);
-
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-
     if (matches.reduce((a, b) => a + b, 0) > 0) {
-
       cl.add("webex-correct");
-
     } else {
-
       cl.remove("webex-correct");
-
       feedbackDiv.innerHTML = feedback;
-
   	  this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
-
     }
-
   }
-
-
 
   // added regex bit
-
   if (cl.contains("regex")){
-
     answer_regex = RegExp(real_answers.join("|"))
-
     if (answer_regex.test(my_answer)) {
-
       cl.add("webex-correct");
-
     }
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 /* function for checking select answers */
-
 select_func = function(e) {
-
   console.log("webex: check select");
 
-
-
   var cl = this.classList
-
   var feedback = (this[this.selectedIndex].getAttribute("feedback"))
 
-
-
   if (document.getElementById('feedbackDiv'+this.id) === null){
-
-
 
     var feedbackDiv = document.createElement("p");
-
     feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-
     feedbackDiv.setAttribute("class", "feedback");
 
-
-
   } else {
-
-
 
     var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-
     feedbackDiv.innerHTML = "";
 
-
-
   }
-
-
 
   feedbackDiv.innerHTML = feedback;
-
   this.parentNode.insertAdjacentElement('afterend', feedbackDiv);
 
-
-
   // Check if inside a 'check answers' box - if so and if answer box is
-
   // currently unchecked, ensure feedback is hidden
-
   if (this.parentElement.parentElement.classList.contains("unchecked")) {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "none"
-
   } else {
-
     {/* console.log(this.parentElement.parentElement.classList); */}
-
     feedbackDiv.style.display = "block"
-
   }
-
-
 
   /* add style */
-
   cl.remove("webex-incorrect");
-
   cl.remove("webex-correct");
-
   if (this.value == "answer") {
-
     cl.add("webex-correct");
-
   } else if (this.value != "blank") {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 /* function for checking radiogroups answers */
-
 radiogroups_func = function(e) {
-
   console.log("webex: check radiogroups");
 
-
-
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-
   var cl = checked_button.parentElement.classList;
-
   var labels = checked_button.parentElement.parentElement.children;
-
   var feedback = (checked_button.getAttribute("feedback"))
-
   if (feedback !== null & feedback !== "<b></b>") { feedback = feedback + "</br></br>" }
-
-
 
   if (document.getElementById('feedbackDiv'+this.id) === null){
 
-
-
     var feedbackDiv = document.createElement("div");
-
     feedbackDiv.setAttribute("id", "feedbackDiv"+this.id);
-
     feedbackDiv.setAttribute("class", "feedback");
-
-
 
   } else {
 
-
-
       var feedbackDiv = document.getElementById('feedbackDiv'+this.id)
-
       feedbackDiv.innerHTML = "";
-
-
 
   }
 
-
-
   const currentDiv = document.getElementById(this);
-
   feedbackDiv.innerHTML = feedback;
-
   this.insertAdjacentElement('afterend', feedbackDiv);
 
-
-
     // Check if inside a 'check answers' box - if so and if answer box is
-
   // currently unchecked, ensure feedback is hidden
-
   if (this.parentElement.classList.contains("unchecked")) {
-
       {/* console.log(this.parentElement.parentElement.classList); */}
-
       feedbackDiv.style.display = "none"
-
     } else {
-
       {/* console.log(this.parentElement.parentElement.classList); */}
-
       feedbackDiv.style.display = "block"
-
     }
-
-
-
 
 
   /* get rid of styles */
-
   for (i = 0; i < labels.length; i++) {
-
     labels[i].classList.remove("webex-incorrect");
-
     labels[i].classList.remove("webex-correct");
-
   }
-
-
 
   /* add style */
-
   if (checked_button.value == "answer") {
-
     cl.add("webex-correct");
-
   } else {
-
     cl.add("webex-incorrect");
-
   }
-
-
 
   update_total_correct();
-
 }
 
-
-
 window.onload = function() {
-
   console.log("webex onload");
-
   /* set up solution buttons */
-
   var buttons = document.getElementsByTagName("button");
 
-
-
   for (var i = 0; i < buttons.length; i++) {
-
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
-
       buttons[i].onclick = b_func;
-
     }
-
   }
 
-
-
   var check_sections = document.getElementsByClassName("webex-check");
-
   console.log("check:", check_sections.length);
-
   for (var i = 0; i < check_sections.length; i++) {
-
     check_sections[i].classList.add("unchecked");
-
     console.log(check_sections[i])
 
-
-
     let btn = document.createElement("button");
-
     btn.innerHTML = "Show Answers";
-
     btn.classList.add("webex-check-button");
-
     // check_func removes the 'unchecked' class from box
-
     // and updates the button text
-
     // subsequently recheck all possible question funcs
-
     // to ensure feedback gets shown or hidden as appropriate
-
     btn.onclick = check_func;
-
-
 
     check_sections[i].appendChild(btn);
 
-
-
     let spn = document.createElement("span");
-
     spn.classList.add("webex-total_correct");
-
     check_sections[i].appendChild(spn);
-
   }
-
-
 
   /* set up webex-solveme inputs */
-
   var solveme = document.getElementsByClassName("webex-solveme");
 
-
-
   for (var i = 0; i < solveme.length; i++) {
-
     /* make sure input boxes don't auto-anything */
-
     solveme[i].setAttribute("autocomplete","off");
-
     solveme[i].setAttribute("autocorrect", "off");
-
     solveme[i].setAttribute("autocapitalize", "off");
-
     solveme[i].setAttribute("spellcheck", "false");
-
     solveme[i].value = "";
 
-
-
     /* adjust answer for ignorecase or nospaces */
-
     var cl = solveme[i].classList;
-
     var real_answer = solveme[i].dataset.answer;
-
     if (cl.contains("ignorecase")) {
-
       real_answer = real_answer.toLowerCase();
-
     }
-
     if (cl.contains("nospaces")) {
-
       real_answer = real_answer.replace(/ /g, "");
-
     }
-
     solveme[i].dataset.answer = real_answer;
 
-
-
     /* attach checking function */
-
     solveme[i].onkeyup = solveme_func;
-
     solveme[i].onchange = solveme_func;
 
-
-
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
-
-
 
   /* set up radiogroups */
-
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
-
   for (var i = 0; i < radiogroups.length; i++) {
-
     radiogroups[i].onchange = radiogroups_func;
-
   }
-
-
 
   /* set up selects */
-
   var selects = document.getElementsByClassName("webex-select");
-
   for (var i = 0; i < selects.length; i++) {
-
     selects[i].onchange = select_func;
-
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 </script>
-
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1954,7 +1670,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

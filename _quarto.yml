@@ -13,19 +13,22 @@ book:
     chapters:
     - ct_crs.qmd
     - ct_filetypes.qmd
+    - the_importance_of_standardisation.qmd
   - part: introduction_mapping_with_qgis.qmd
     chapters:
     - qgis_setup.qmd
     - qgis_basemaps.qmd
     - qgis_point_data.qmd
-  #   - qgis_choropleth.qmd
-  #   - qgis_filtering.qmd
-  #   - qgis_print_layouts.qmd
+    - qgis_choropleth.qmd
+    - qgis_choropleths_joining.qmd
+    - qgis_filtering.qmd
+    - qgis_print_layouts.qmd
   #   - qgis_python.qmd
   #   - qgis_extensions.qmd
-  #   - qgis_exercises.qmd
-  # - part: introduction_mapping_in_python.qmd
-  #   chapters:
+    - qgis_exercises.qmd
+  - part: introduction_mapping_in_python.qmd
+    chapters:
+    - why_python_mapping.qmd
   #   - python_geopandas.qmd
   #   - python_geopandas_matplotlib.qmd
   #   - python_geopandas_leaflet.qmd

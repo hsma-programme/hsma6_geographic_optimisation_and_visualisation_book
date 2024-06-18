@@ -7,3 +7,108 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+There are quite a few ways to export your map.
+
+## Simple exports
+
+On Windows, you can use the snipping tool.
+
+- On windows 10, use 🪟+ Shift + S to open the snipping tool.
+- On windows 11, use the `prt sc` key
+
+![](assets/2024-06-18-23-22-26.png)
+
+You can also export the in-view portion of the map as either an image or a PDF
+
+![](assets/2024-06-18-23-22-46.png)
+
+## Print Layouts - why bother?
+
+If you want to include a title, legends, or multiple maps on one page from within QGIS, you will need to create a print layout.
+
+We can build up to a map that shows multiple useful things.
+
+![](assets/2024-06-18-23-29-53.png)
+
+## Creating a new print layout
+
+Choose project --> New print layout.
+
+![](assets/2024-06-18-23-23-30.png)
+
+You can have multiple print layouts per map, so it’s a good idea to give it a descriptive title
+
+![](assets/2024-06-18-23-23-51.png)
+
+The print layout will open as a new window.
+
+![](assets/2024-06-18-23-24-20.png)
+
+## Adding in a map
+
+First you will want to add a map by clicking on this icon in the list down the side.
+
+![](assets/2024-06-18-23-24-59.png)
+
+These icons are key for moving around in your map and selecting elements of your print layout.
+
+![](assets/2024-06-18-23-25-29.png)
+
+## Legends
+
+You may next want to add a legend.
+
+![](assets/2024-06-18-23-25-57.png)
+
+
+Like before, draw the legend onto the canvas.
+
+:::{.callout-tip}
+With the legend selected on the canvas, you can choose ‘Only show items from inside linked maps’ to remove any parts of the legend that don’t relate to what is shown on the screen.
+:::
+
+### Legend titles
+
+![](assets/2024-06-18-23-30-22.png)
+
+## Labels and Titles
+
+You may want to add labels or titles.
+
+![](assets/2024-06-18-23-26-45.png)
+
+The contents has to be edited using the label box in the ‘item properties’ section.
+
+![](assets/2024-06-18-23-27-12.png)
+
+You can adjust the font size by clicking on the ‘Font’ box inside the ‘Appearance’ section.
+
+Once you have one label, you can copy and paste this to speed up creating additional labels.
+
+![](assets/2024-06-18-23-27-28.png)
+
+
+## Attribution
+
+If using the OpenStreetMap basemap that is built into QGIS, add a label like the following to comply with the licence:
+
+© OpenStreetMap contributors, licenced as CC BY-SA
+
+It is also good practice to acknowledge the software with a label like
+Created in QGIS
+
+## Extending your print layouts further
+
+There are a range of additional things you can add to your print layouts, like
+
+- images (perhaps the logo of your organisation)
+- tables of relevant data
+
+![](assets/2024-06-18-23-31-23.png)
+
+## Exporting print layouts
+
+From within the print layout window, we can choose the "Layout" dropdown menu to find several different formats we can export our print layout in.
+
+![](assets/2024-06-18-23-31-51.png)

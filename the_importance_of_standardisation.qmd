@@ -1,0 +1,21 @@
+# Standardisation
+
+We might initially work with a dataset that hasn’t been standardised.
+
+Why might this be a problem?
+
+Patterns may be an artefact of population
+
+Areas with more people may just have higher values - but it may not be unusual given the number of people.
+
+Be careful with your interpretation!
+
+You could get around this in a few ways depending on your dataset.
+
+- You could adjust by the *size* of an area - say, looking at the number of incidents per square kilometre
+- You could provide a rate per 1,000 occupants
+- You could provide a % of the total occupants
+
+Estimates of LSOA populations can be found online.
+
+Using this information within SQL, Excel or (ideally) Python can help you to construct the most representative dataset and ensure you are not coming to incorrect conclusions.

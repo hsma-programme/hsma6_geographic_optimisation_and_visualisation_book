@@ -1,0 +1,32 @@
+# Why use python for maps?
+
+QGIS is a great bit of software that is worth knowing how to use.
+
+(We wouldn’t have taught it otherwise!)
+
+I quite often use it as my first port of call for a new dataset.
+
+But there are a lot of benefits to knowing how to create maps in Python too.
+
+## Wrangling and prep in one place
+
+By doing your data wrangling and making your final maps all in one script, it’s a lot easier to adjust the calculations that feed into your map
+
+You can use all of the useful techniques you’ve already learned for Pandas to filter your datasets, create additional columns, and more…
+
+## Same code, multiple maps
+
+By using functions or loops, you can rapidly start to make maps to show different aspects of your data
+(6 lines of code actually made 25 maps here)
+
+![](assets/2024-06-18-23-43-00.png)
+
+You can also use scripts (and reporting tools like Quarto, which we will cover in a later part of the course) to create large numbers of reports for different services or areas automatically
+
+## Interactivity for end users
+
+By using Python maps, you can build them into interactive web-based tools so they will be generated on-the-fly based on combinations your users choose
+
+(which we cover in a later module too!)
+
+![](assets/2024-06-18-23-43-31.png)

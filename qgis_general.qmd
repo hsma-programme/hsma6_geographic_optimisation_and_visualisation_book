@@ -1,0 +1,8 @@
+
+## Reordering layers
+
+So we can still see the location of our headquarters, we may need to reorder the layers.
+
+Click on a layer in the list and drag it around.
+
+Layers at the TOP of the list will appear over the top of layers at the BOTTOM of the list.
