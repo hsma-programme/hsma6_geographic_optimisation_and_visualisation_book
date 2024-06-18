@@ -638,5 +638,71 @@
       "Mapping in Python",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Why use python for maps?</span>"
     ]
+  },
+  {
+    "objectID": "python_geopandas.html",
+    "href": "python_geopandas.html",
+    "title": "15  Working With Travel Time Data in Python - the geopandas package",
+    "section": "",
+    "text": "15.1 The geometry column\nEvery Geopandas dataframe has a ‘geometry’ column (even if it’s not called that).\nVarious geopandas methods will then automatically apply to that geometry column without you having to specify that.\nFor example, the .plot() method of geopandas will plot the line, point or polygon data stored in the geometry column.",
+    "crumbs": [
+      "Mapping in Python",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Working With Travel Time Data in Python - the geopandas package</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas.html#the-geometry-column",
+    "href": "python_geopandas.html#the-geometry-column",
+    "title": "15  Working With Travel Time Data in Python - the geopandas package",
+    "section": "",
+    "text": "A reminder - types of data",
+    "crumbs": [
+      "Mapping in Python",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Working With Travel Time Data in Python - the geopandas package</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_reading_files.html",
+    "href": "python_geopandas_reading_files.html",
+    "title": "16  Reading files with Geopandas",
+    "section": "",
+    "text": "16.1 Importing geojsons, geopackages or shape files\nWhen working with prepackaged geographic data types, they will usually be stored in the GeoJSON format, the geopackage (gpkg) format, or as a .shp file.",
+    "crumbs": [
+      "Mapping in Python",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_reading_files.html#importing-geojsons-geopackages-or-shape-files",
+    "href": "python_geopandas_reading_files.html#importing-geojsons-geopackages-or-shape-files",
+    "title": "16  Reading files with Geopandas",
+    "section": "",
+    "text": "Warning\n\n\n\nShapefiles are a little more complex as they are a number of files with different extensions that all need to be distributed together - even though it’s only the file with the extension ‘.shp’ that we read in.\nGeojson and geopackages are often easier to distribute and download!\n\n\n\n16.1.1 Files stored locally\nYou can refer to a range of geographic data file types stored locally.\n\ncountries_gdf = geopandas.read_file(\"package.gpkg\")\n\n\n\n16.1.2 Files stored on the web\nYou can also directly refer to files stored on the web.\n\ndf = geopandas.read_file(\"http://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_land.geojson\")\n\n\n\n16.1.3 Zipped files\nYou can also directly refer to files stored as zip files by prefixing the file path with zip:///.\n\nstates = geopandas.read_file(\"zip:///Users/name/Downloads/cb_2017_us_state_500k.zip\")\n\nYou can read more about file imports in the geopandas documentation, which is embedded below.",
+    "crumbs": [
+      "Mapping in Python",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_reading_files.html#turning-existing-data-into-a-geodataframe",
+    "href": "python_geopandas_reading_files.html#turning-existing-data-into-a-geodataframe",
+    "title": "16  Reading files with Geopandas",
+    "section": "17.1 Turning existing data into a GeoDataFrame",
+    "text": "17.1 Turning existing data into a GeoDataFrame\nHowever - a lot of the time you may be extracting data from your data warehouse and turning this into a geodataframe.\nLet’s go back to our crime dataset from the QGIS section.\n\nimport pandas as pd\n\nsw_5forces_stop_and_search_df = pd.read_csv(\"https://raw.githubusercontent.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/sw_5forces_stop_and_search.csv\")\n\n# view the first row\nsw_5forces_stop_and_search_df.head(1)\n\n\n\n\n\n\n\n\n\nType\nDate\nPart of a policing operation\nPolicing operation\nLatitude\nLongitude\nGender\nAge range\nSelf-defined ethnicity\nOfficer-defined ethnicity\nLegislation\nObject of search\nOutcome\nOutcome linked to object of search\nRemoval of more than just outer clothing\nUnnamed: 15\n\n\n\n\n0\nPerson search\n2019-06-01T00:02:00+00:00\nNaN\nNaN\n51.496817\n-2.580971\nMale\n25-34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nPolice and Criminal Evidence Act 1984 (section 1)\nArticles for use in criminal damage\nArrest\nFalse\nFalse\nNaN\n\n\n\n\n\n\n\n\nHere we’ve imported it as a csv - but if we’d extracted data from a database and saved it as pandas dataframe, the following steps would be the same!\nSo let’s just check the type first.\n\ntype(sw_5forces_stop_and_search_df)\n\npandas.core.frame.DataFrame\n\n\nFirst, we need to know what the columns that identify the geometry are.\nIn this case, they are ‘Latitude’ and ‘Longitude’\nWe can now construct a geopandas geodataframe from this .csv file.\n\nsw_5forces_stop_and_search_gdf = geopandas.GeoDataFrame(\n    sw_5forces_stop_and_search_df, # Our pandas dataframe\n    geometry = geopandas.points_from_xy(\n        sw_5forces_stop_and_search_df['Longitude'], # Our 'x' column (horizontal position of points)\n        sw_5forces_stop_and_search_df['Latitude'] # Our 'y' column (vertical position of points)\n        ),\n    crs = 'EPSG:4326' # the coordinate reference system of the data - use EPSG:4326 if you are unsure\n    )\n\nLet’s view this new object.\n\nsw_5forces_stop_and_search_gdf.head()\n\n\n\n\n\n\n\n\n\nType\nDate\nPart of a policing operation\nPolicing operation\nLatitude\nLongitude\nGender\nAge range\nSelf-defined ethnicity\nOfficer-defined ethnicity\nLegislation\nObject of search\nOutcome\nOutcome linked to object of search\nRemoval of more than just outer clothing\nUnnamed: 15\ngeometry\n\n\n\n\n0\nPerson search\n2019-06-01T00:02:00+00:00\nNaN\nNaN\n51.496817\n-2.580971\nMale\n25-34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nPolice and Criminal Evidence Act 1984 (section 1)\nArticles for use in criminal damage\nArrest\nFalse\nFalse\nNaN\nPOINT (-2.58097 51.49682)\n\n\n1\nPerson search\n2019-06-01T01:15:00+00:00\nNaN\nNaN\n51.454085\n-2.599742\nMale\n25-34\nOther ethnic group - Not stated\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nTrue\nFalse\nNaN\nPOINT (-2.59974 51.45408)\n\n\n2\nPerson search\n2019-06-01T01:27:00+00:00\nNaN\nNaN\n50.983714\n-3.219592\nMale\n25-34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nNaN\nFalse\nNaN\nPOINT (-3.21959 50.98371)\n\n\n3\nPerson search\n2019-06-01T01:27:00+00:00\nNaN\nNaN\n50.983714\n-3.219592\nMale\nover 34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nNaN\nFalse\nNaN\nPOINT (-3.21959 50.98371)\n\n\n4\nPerson search\n2019-06-01T01:27:00+00:00\nNaN\nNaN\n50.983714\n-3.219592\nMale\nover 34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nNaN\nFalse\nNaN\nPOINT (-3.21959 50.98371)\n\n\n\n\n\n\n\n\nAnd let’s view the type of object it is.\n\ntype(sw_5forces_stop_and_search_gdf)\n\ngeopandas.geodataframe.GeoDataFrame",
+    "crumbs": [
+      "Mapping in Python",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_reading_files.html#joining-area-data-to-boundary-data",
+    "href": "python_geopandas_reading_files.html#joining-area-data-to-boundary-data",
+    "title": "16  Reading files with Geopandas",
+    "section": "17.2 Joining area data to boundary data",
+    "text": "17.2 Joining area data to boundary data\nWe can also combine pandas dataframes with geopandas dataframes.\nWhen might we want to do this?\nImagine we have a dataset of patients who are using a particular type of service.\nWe can use pandas to count the number of patients per LSOA.\nHowever - the LSOA code alone isn’t going to allow us to plot this dataset - it doesn’t contain the geometry.\nInstead, we\n\nimport a shapefile, geoJSON or geopackage of boundaries\njoin it to our pandas dataframe using a common column (like LSOA code)\n\nIf we join our dataframe to our geodataframe, the result will be a geodataframe - so you can make use of all the useful features of geodataframes.\n\nmy_lsoa_boundary_gdf = geopandas.read_file(\"lsoa_boundaries.gpkg\")\n\nmy_count_df = pd.read_csv(“counts_by_lsoa.csv”)\n\nLet’s imagine the geodataframe has a column called ‘LSOA11CD’\nThe count dataframe has a column called ‘LSOA’\n\nmy_final_df = pd.merge(\n    left=my_lsoa_boundary_gdf,\n    right=my_count_df,\n    left_on=”LSOA11CD”\n    right_on=”LSOA”\n    how=”right”\n)\n\n\n\n\n\n\n\nWarning\n\n\n\nWe need to be careful about the order we join things in to ensure we end up with the right type of object at the end.\n\n“The stand-alone merge function will work if the GeoDataFrame is in the left argument; if a DataFrame is in the left argument and a GeoDataFrame is in the right position, the result will no longer be a GeoDataFrame.” - https://geopandas.org/en/v0.8.0/mergingdata.html”\n\nThis would result in a geodataframe:\n\nmy_final_df = pd.merge(\n    left=my_lsoa_boundary_gdf,\n    right=my_count_df,\n    left_on=”LSOA11CD”\n    right_on=”LSOA”\n    how=”right”\n    )\n\nBut this would not.\n\nmy_final_df = pd.merge(\n    left=my_count_df,\n    left=my_lsoa_boundary_gdf,\n    left_on=”LSOA”\n    right_on=”LSOA11CD”\n    how=\"left\"\n)\n\n\n\n\n\n\n\n\n\nThe ‘how’ argument\n\n\n\nThe ‘how’ argument\nIf you set how = ‘left’, all of the rows from the geodataframe will be kept, even if there is no value in your dataframe of counts\nIf you set how = ‘right’, all of the rows from the counts dataframe will be kept, even if there is no value in your geodataframe Check you have no missing values in the ‘geometry’ column after this!\nIf you set how = ‘full’, all of the rows from both dataframes will be kept - so you may end up with empty geometry in some cases and/or empty counts in others",
+    "crumbs": [
+      "Mapping in Python",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
+    ]
   }
 ]

@@ -26,11 +26,14 @@ PLACEHOLDER
 However, standard pandas dataframes do not work well with key geographic data types. This is where the [geopandas](https://geopandas.org/en/stable/index.html) library comes in.
 
 Pandas takes multiple **series** of data and joins these together to make a **DataFrame**.
-TODO: EXPAND THIS SECTION
+
+![](assets/2024-06-18-23-46-28.png)
 
 Geopandas takes the Series object of pandas and expands it to be able to deal with point, line or polygon data.
 
-It adds in an ability to read various geographic data formats too, such as ESRI shapefiles, eopackages and geojson.
+![](assets/2024-06-18-23-46-52.png)
+
+It adds in an ability to read various geographic data formats too, such as ESRI shapefiles, geopackages and geojson.
 
 The magic of geopandas starts to become apparent when you need to filter and aggregate
 
@@ -44,5 +47,21 @@ Geopandas is known for compatability issues with other packages.
 
 If you install it into your **base python environment**, you may begin to experience odd behaviour or have issues [TODO: expand this section and get references]
 
+
+:::
+
+
+## The geometry column
+
+Every Geopandas dataframe has a ‘geometry’ column (even if it’s not called that).
+
+Various geopandas methods will then automatically apply to that geometry column without you having to specify that.
+
+For example, the .plot() method of geopandas will plot the line, point or polygon data stored in the geometry column.
+
+:::{.callout-note}
+#### A reminder - types of data
+
+![](assets/2024-06-18-23-47-48.png)
 
 :::

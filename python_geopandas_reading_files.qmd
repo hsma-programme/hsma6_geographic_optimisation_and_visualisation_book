@@ -1,0 +1,220 @@
+# Reading files with Geopandas
+
+Before doing anything else, we need to import the geopandas package!
+
+The geopandas team don't recommend using an alias (i.e. we're not going to shorten the way we refer to geopandas).
+
+```{python}
+import geopandas
+```
+
+## Importing geojsons, geopackages or shape files
+
+When working with prepackaged geographic data types, they will usually be stored in the GeoJSON format, the geopackage (gpkg) format, or as a .shp file.
+
+:::{.callout-warning}
+Shapefiles are a little more complex as they are a number of files with different extensions that all need to be distributed together - even though it's only the file with the extension '.shp' that we read in.
+
+Geojson and geopackages are often easier to distribute and download!
+:::
+
+### Files stored locally
+
+You can refer to a range of geographic data file types stored locally.
+
+```{python}
+#| eval: False
+countries_gdf = geopandas.read_file("package.gpkg")
+```
+
+### Files stored on the web
+
+You can also directly refer to files stored on the web.
+
+
+```{python}
+#| eval: False
+df = geopandas.read_file("http://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_land.geojson")
+```
+
+### Zipped files
+
+You can also directly refer to files stored as zip files by prefixing the file path with zip:///.
+
+```{python}
+#| eval: False
+states = geopandas.read_file("zip:///Users/name/Downloads/cb_2017_us_state_500k.zip")
+```
+
+You can read more about file imports in the geopandas documentation, which is embedded below.
+
+```{=html}
+<iframe width="780" height="500" src="https://geopandas.org/en/stable/docs/user_guide/io.html" title="IO in geopandas"></iframe>
+```
+
+# Exploring geopandas dataframes
+
+Once you’ve read it in, it looks a lot like a pandas dataframe!
+
+Even better, you can do all of your normal pandas commands with it - like ‘head’ to view the first 5 rows.
+
+```{python}
+import geopandas
+
+crime_figures = geopandas.read_file("https://github.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/raw/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/lsoa_2011_sw5forces_crime_figures.gpkg")
+
+crime_figures.head()
+```
+
+When we check the type of the dataframe, we will see that it has come through as a GeoDataFrame
+
+```{python}
+type(crime_figures)
+```
+
+## Turning existing data into a GeoDataFrame
+
+However - a lot of the time you may be extracting data from your data warehouse and turning this into a geodataframe.
+
+Let’s go back to our crime dataset from the QGIS section.
+
+```{python}
+import pandas as pd
+
+sw_5forces_stop_and_search_df = pd.read_csv("https://raw.githubusercontent.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/sw_5forces_stop_and_search.csv")
+
+# view the first row
+sw_5forces_stop_and_search_df.head(1)
+```
+
+Here we’ve imported it as a csv - but if we’d extracted data from a database and saved it as pandas dataframe, the following steps would be the same!
+
+So let's just check the type first.
+
+```{python}
+type(sw_5forces_stop_and_search_df)
+```
+
+First, we need to know what the columns that identify the geometry are.
+
+In this case, they are ‘Latitude’ and ‘Longitude’
+
+We can now construct a geopandas geodataframe from this .csv file.
+
+```{python}
+sw_5forces_stop_and_search_gdf = geopandas.GeoDataFrame(
+    sw_5forces_stop_and_search_df, # Our pandas dataframe
+    geometry = geopandas.points_from_xy(
+        sw_5forces_stop_and_search_df['Longitude'], # Our 'x' column (horizontal position of points)
+        sw_5forces_stop_and_search_df['Latitude'] # Our 'y' column (vertical position of points)
+        ),
+    crs = 'EPSG:4326' # the coordinate reference system of the data - use EPSG:4326 if you are unsure
+    )
+```
+
+Let's view this new object.
+
+```{python}
+sw_5forces_stop_and_search_gdf.head()
+```
+
+And let's view the type of object it is.
+
+```{python}
+type(sw_5forces_stop_and_search_gdf)
+```
+
+## Joining area data to boundary data
+
+We can also combine pandas dataframes with geopandas dataframes.
+
+When might we want to do this?
+
+Imagine we have a dataset of patients who are using a particular type of service.
+
+We can use pandas to count the number of patients per LSOA.
+
+However - the LSOA code alone isn’t going to allow us to plot this dataset - it doesn’t contain the geometry.
+
+Instead, we
+
+- import a shapefile, geoJSON or geopackage of boundaries
+- join it to our pandas dataframe using a common column (like LSOA code)
+
+If we join our dataframe to our geodataframe, the result will be a geodataframe - so you can make use of all the useful features of geodataframes.
+
+```{python}
+#| eval: False
+
+my_lsoa_boundary_gdf = geopandas.read_file("lsoa_boundaries.gpkg")
+
+my_count_df = pd.read_csv(“counts_by_lsoa.csv”)
+
+```
+
+Let’s imagine the geodataframe has a column called ‘LSOA11CD’
+
+The count dataframe has a column called ‘LSOA’
+
+```{python}
+#| eval: False
+
+my_final_df = pd.merge(
+	left=my_lsoa_boundary_gdf,
+    right=my_count_df,
+    left_on=”LSOA11CD”
+    right_on=”LSOA”
+    how=”right”
+)
+
+```
+
+:::{.callout-warning}
+
+We need to be careful about the order we join things in to ensure we end up with the right type of object at the end.
+
+> “The stand-alone merge function will work if the GeoDataFrame is in the left argument; if a DataFrame is in the left argument and a GeoDataFrame is in the right position, the result will no longer be a GeoDataFrame.” - https://geopandas.org/en/v0.8.0/mergingdata.html"
+
+This would result in a geodataframe:
+
+```{python}
+#| eval: False
+
+my_final_df = pd.merge(
+	left=my_lsoa_boundary_gdf,
+    right=my_count_df,
+    left_on=”LSOA11CD”
+    right_on=”LSOA”
+    how=”right”
+    )
+```
+
+But this would not.
+
+```{python}
+#| eval: False
+
+my_final_df = pd.merge(
+    left=my_count_df,
+    left=my_lsoa_boundary_gdf,
+    left_on=”LSOA”
+    right_on=”LSOA11CD”
+    how="left"
+)
+
+```
+:::
+
+
+:::{.callout-tip}
+#### The 'how' argument
+
+The ‘how’ argument
+
+If you set how = ‘left’, all of the rows from the geodataframe will be kept, even if there is no value in your dataframe of counts
+
+If you set how = ‘right’, all of the rows from the counts dataframe will be kept, even if there is no value in your geodataframe
+Check you have no missing values in the ‘geometry’ column after this!
+
+If you set how = ‘full’, all of the rows from both dataframes will be kept - so you may end up with empty geometry in some cases and/or empty counts in others
+:::

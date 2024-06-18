@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 14&nbsp; Why use python for maps?</title>
+<title>HSMA - Geographic Modelling and Visualisation - 15&nbsp; Working With Travel Time Data in Python - the geopandas package</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./python_geopandas.html" rel="next">
-<link href="./introduction_mapping_in_python.html" rel="prev">
+<link href="./python_geopandas_reading_files.html" rel="next">
+<link href="./why_python_mapping.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -98,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_in_python.html">Mapping in Python</a></li><li class="breadcrumb-item"><a href="./why_python_mapping.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Why use python for maps?</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_in_python.html">Mapping in Python</a></li><li class="breadcrumb-item"><a href="./python_geopandas.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -240,13 +240,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./why_python_mapping.html" class="sidebar-item-text sidebar-link active">
+  <a href="./why_python_mapping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Why use python for maps?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./python_geopandas.html" class="sidebar-item-text sidebar-link">
+  <a href="./python_geopandas.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></span></a>
   </div>
 </li>
@@ -268,18 +268,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#wrangling-and-prep-in-one-place" id="toc-wrangling-and-prep-in-one-place" class="nav-link active" data-scroll-target="#wrangling-and-prep-in-one-place"><span class="header-section-number">14.1</span> Wrangling and prep in one place</a></li>
-  <li><a href="#same-code-multiple-maps" id="toc-same-code-multiple-maps" class="nav-link" data-scroll-target="#same-code-multiple-maps"><span class="header-section-number">14.2</span> Same code, multiple maps</a></li>
-  <li><a href="#interactivity-for-end-users" id="toc-interactivity-for-end-users" class="nav-link" data-scroll-target="#interactivity-for-end-users"><span class="header-section-number">14.3</span> Interactivity for end users</a></li>
+  <li><a href="#the-geometry-column" id="toc-the-geometry-column" class="nav-link active" data-scroll-target="#the-geometry-column"><span class="header-section-number">15.1</span> The geometry column</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_in_python.html">Mapping in Python</a></li><li class="breadcrumb-item"><a href="./why_python_mapping.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Why use python for maps?</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_in_python.html">Mapping in Python</a></li><li class="breadcrumb-item"><a href="./python_geopandas.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Why use python for maps?</span></h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></h1>
 </div>
 
 
@@ -296,26 +294,105 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>QGIS is a great bit of software that is worth knowing how to use.</p>
-<p>(We wouldn’t have taught it otherwise!)</p>
-<p>I quite often use it as my first port of call for a new dataset.</p>
-<p>But there are a lot of benefits to knowing how to create maps in Python too.</p>
-<section id="wrangling-and-prep-in-one-place" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="wrangling-and-prep-in-one-place"><span class="header-section-number">14.1</span> Wrangling and prep in one place</h2>
-<p>By doing your data wrangling and making your final maps all in one script, it’s a lot easier to adjust the calculations that feed into your map</p>
-<p>You can use all of the useful techniques you’ve already learned for Pandas to filter your datasets, create additional columns, and more…</p>
-</section>
-<section id="same-code-multiple-maps" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="same-code-multiple-maps"><span class="header-section-number">14.2</span> Same code, multiple maps</h2>
-<p>By using functions or loops, you can rapidly start to make maps to show different aspects of your data (6 lines of code actually made 25 maps here)</p>
-<p><img src="assets/2024-06-18-23-43-00.png" class="img-fluid"></p>
-<p>You can also use scripts (and reporting tools like Quarto, which we will cover in a later part of the course) to create large numbers of reports for different services or areas automatically</p>
-</section>
-<section id="interactivity-for-end-users" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="interactivity-for-end-users"><span class="header-section-number">14.3</span> Interactivity for end users</h2>
-<p>By using Python maps, you can build them into interactive web-based tools so they will be generated on-the-fly based on combinations your users choose</p>
-<p>(which we cover in a later module too!)</p>
-<p><img src="assets/2024-06-18-23-43-31.png" class="img-fluid"></p>
+<style>
+a.glossary {
+  color: #8A1E1E;
+  text-decoration: underline;
+  cursor: help;
+  position: relative;
+}
+
+/* only needed for popup = "click" */
+/* popup-definition */
+a.glossary .def {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -100px;
+  background-color: #333;
+  color: white;
+  padding: 5px;
+  border-radius: 6px;
+}
+/* show on click */
+a.glossary:active .def {
+  display: inline-block;
+}
+/* triangle arrow */
+a.glossary:active .def::after {
+  content: ' ';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+</style>
+<p>Pandas is a popular library for working with <a class="glossary" title="Placeholder">tabular</a> data in Python.</p>
+<p>Flat files like csvs or imported data from relational databases (e.g.&nbsp;SQL data warehouses) can be manipulated with pandas to add</p>
+<p>A full introduction to pandas is outside of the scope of this book. However, a range of good tutorials exist.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click here for links to tutorials on data manipulation with pandas
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>PLACEHOLDER</p>
+</div>
+</div>
+</div>
+<p>However, standard pandas dataframes do not work well with key geographic data types. This is where the <a href="https://geopandas.org/en/stable/index.html">geopandas</a> library comes in.</p>
+<p>Pandas takes multiple <strong>series</strong> of data and joins these together to make a <strong>DataFrame</strong>.</p>
+<p><img src="assets/2024-06-18-23-46-28.png" class="img-fluid"></p>
+<p>Geopandas takes the Series object of pandas and expands it to be able to deal with point, line or polygon data.</p>
+<p><img src="assets/2024-06-18-23-46-52.png" class="img-fluid"></p>
+<p>It adds in an ability to read various geographic data formats too, such as ESRI shapefiles, geopackages and geojson.</p>
+<p>The magic of geopandas starts to become apparent when you need to filter and aggregate</p>
+<p>You can even visualise geographic data that’s stored in a geopandas geodataframe with a single command: <code>.plot()</code>!</p>
+<p>If you’re familiar with pandas, the good news is that working with geopandas will feel almost the same!</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A warning about geopandas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Geopandas is known for compatability issues with other packages.</p>
+<p>If you install it into your <strong>base python environment</strong>, you may begin to experience odd behaviour or have issues [TODO: expand this section and get references]</p>
+</div>
+</div>
+<section id="the-geometry-column" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="the-geometry-column"><span class="header-section-number">15.1</span> The geometry column</h2>
+<p>Every Geopandas dataframe has a ‘geometry’ column (even if it’s not called that).</p>
+<p>Various geopandas methods will then automatically apply to that geometry column without you having to specify that.</p>
+<p>For example, the .plot() method of geopandas will plot the line, point or polygon data stored in the geometry column.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A reminder - types of data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="assets/2024-06-18-23-47-48.png" class="img-fluid"></p>
+</div>
+</div>
 
 
 </section>
@@ -1213,13 +1290,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./introduction_mapping_in_python.html" class="pagination-link" aria-label="Mapping in Python">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Mapping in Python</span>
+      <a href="./why_python_mapping.html" class="pagination-link" aria-label="Why use python for maps?">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Why use python for maps?</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./python_geopandas.html" class="pagination-link" aria-label="Working With Travel Time Data in Python - the geopandas package">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./python_geopandas_reading_files.html" class="pagination-link" aria-label="Reading files with Geopandas">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reading files with Geopandas</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -29,7 +29,8 @@ book:
   - part: introduction_mapping_in_python.qmd
     chapters:
     - why_python_mapping.qmd
-  #   - python_geopandas.qmd
+    - python_geopandas.qmd
+    - python_geopandas_reading_files.qmd
   #   - python_geopandas_matplotlib.qmd
   #   - python_geopandas_leaflet.qmd
   #   - python_geopandas_kepler.qmd
