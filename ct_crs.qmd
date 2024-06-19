@@ -9,6 +9,16 @@ glossary_setup()
 glossary_setup_style()
 ```
 
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Uncomment to change widget colours:
+# style_widgets(
+#    # incorrect = "goldenrod", correct = "purple", highlight = "firebrick",
+#    feedback="mediumorchid"
+#    )
+```
+
 Every map ever created is **wrong**.
 
 A bold claim - but a true one! There is no way to take a spherical object like Earth and translate it to a flat object without compromising in some way.
@@ -36,7 +46,7 @@ Countries **far** from the equator - for example Northern Europe, Russia, the US
 ::: {.callout-note appearance="simple" collapse="true"}
 ### Click here to show an animation demonstrating the impact of the Mercator Projection on the relative size of different countries
 
-![Relative Size of Countries - Mercator Projection Distortion](images\worlds_animate_jakub_nowosad_cc_by_sa_4_0.gif)
+![Relative Size of Countries - Mercator Projection Distortion](images/worlds_animate_jakub_nowosad_cc_by_sa_4_0.gif)
 
 By Jakub Nowosad - Own Work;, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=73955926">Link</a>^[By Jakub Nowosad - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=73955926]
 :::
@@ -92,7 +102,7 @@ One of the most common ways to do this is with `r glossary("latitude")` and `r g
 
 Lines of latitude run parallel with the equator.
 
-![Latitude](images\crs_projections_latitude.png){.lightbox width=300}^[<a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons]
+![Latitude](images/crs_projections_latitude.png){.lightbox width=300}^[<a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons]
 
 Latitude has a value of 0 at the equator.
 
@@ -105,7 +115,7 @@ Latitude has a value of 0 at the equator.
 
 **Longitude** is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.
 
-![Longitude](images\crs_projections_longitude.png){.lightbox width=300}^[<a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons]
+![Longitude](images/crs_projections_longitude.png){.lightbox width=300}^[<a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons]
 
 Longitude has a value of 0 at the Prime Meridian (Greenwich).
 
@@ -118,7 +128,7 @@ West of the Prime Meridian, longitude gradually gets bigger but this time it is 
 
 The image below gives you a quick reference to how different points may be written.
 
-![](images\crs_projections_lat_long_cartesian.png)
+![](images/crs_projections_lat_long_cartesian.png)
 
 #### Writing coordinate pairs
 
@@ -130,7 +140,7 @@ Now, just to be confusing... it's the opposite way around to a standard graph.
 
 If you cast your mind back to school, you might remember being taught about writing a coordinate pair for a standard graph.
 
-![A cartesian coordinate plane](images\crs_projections_cartesian_grid_comparison.png){.lightbox width=400 }
+![A cartesian coordinate plane](images/crs_projections_cartesian_grid_comparison.png){.lightbox width=400 }
 
 When we write this, we write the position of the horizontal point (x) first, and then the vertical (y) point - so we write coordinates as (x, y). So for the graph above, this means the coordinates are (2, 5). You might have been taught to remember this as going 'along the corridor, then up the stairs'.
 
@@ -151,7 +161,7 @@ As it's the projection you're still going to commonly see (and probably use for 
 
 The lines of latitude and longitude are the white grid that's overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!
 
-![](images\Mercator_projection_Square.JPG){.lightbox width=600}
+![](images/Mercator_projection_Square.JPG){.lightbox width=600}
 
 All of the lines of longitude (running top to bottom) are parallel to each other - that is they stay the same distance apart the whole time.
 
@@ -171,7 +181,7 @@ In the Gall-Peters projection, the sizes of each rectangle made by the latitude 
 
 The rectangles are tall near the equator and get shorter as you go towards the North and South Poles.
 
-![](images\Gall–Peters_projection_SW.jpg){.lightbox width=600}
+![](images/Gall–Peters_projection_SW.jpg){.lightbox width=600}
 
 However, like the Mercator projection, the lines of latitude are parallel to each other, and the same is true of the lines of longitude.
 
@@ -185,7 +195,7 @@ Finally, let's look at the lines on the Winkel tripel projection.
 
 Nowadays, it's generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It's used in a lot of textbooks and it's the preferred projection for world maps made by the National Geographic Society.^[https://en.wikipedia.org/wiki/Winkel_tripel_projection]
 
-![](images\Winkel_triple_projection_SW.jpg){.lightbox width=600}
+![](images/Winkel_triple_projection_SW.jpg){.lightbox width=600}
 
 But notice that the lines of latitude and longitude are no longer straight!
 
@@ -201,7 +211,7 @@ In each of the questions below
 
 ##### Question 1 {.unnumbered}
 
-![What are the correct coordinates for this national park in Brazil?](images\crs_projections_q_national_park_brazil.png){.lightbox width=700}
+![What are the correct coordinates for this national park in Brazil?](images/crs_projections_q_national_park_brazil.png){.lightbox width=700}
 
 ```{r echo = FALSE}
 opts_brazil <- c(
@@ -223,7 +233,7 @@ feedback_brazil <- c(
 
 ##### Question 2 {.unnumbered}
 
-![What are the correct coordinates for this national park in Japan?](images\crs_projections_q_national_park_japan.png){.lightbox width=700}
+![What are the correct coordinates for this national park in Japan?](images/crs_projections_q_national_park_japan.png){.lightbox width=700}
 
 ```{r echo = FALSE}
 opts_japan <- c(
@@ -244,7 +254,7 @@ feedback_japan <- c(
 
 ##### Question 3 {.unnumbered}
 
-![What are the correct coordinates for St Luke's?](images\crs_projections_q_st_lukes.png){.lightbox width=700}
+![What are the correct coordinates for St Luke's?](images/crs_projections_q_st_lukes.png){.lightbox width=700}
 
 *St Luke's is part of the University of Exeter and is home to the PenCHORD team, who write the HSMA course!*
 

@@ -6,7 +6,9 @@ QGIS is a great bit of software that is worth knowing how to use.
 
 I quite often use it as my first port of call for a new dataset.
 
-But there are a lot of benefits to knowing how to create maps in Python too.
+But there are a lot of benefits to knowing how to create maps in Python too - creating maps in Python opens up a whole world of opportunities to you.
+
+By the end of this section, you will be able to make all sorts of maps within Python and incorporate them into a range of outputs to enable other people to make use of them within or outside your organisation.
 
 ## Wrangling and prep in one place
 
@@ -30,3 +32,20 @@ By using Python maps, you can build them into interactive web-based tools so the
 (which we cover in a later module too!)
 
 ![](assets/2024-06-18-23-43-31.png)
+
+
+## Examples
+
+::: {.callout-note appearance="simple" collapse="true"}
+
+#### Click here to take a look at a great example of an interactive healthcare map
+```{=html}
+<iframe width="780" height="550" src="https://fingertips.phe.org.uk/topic/public-health-dashboard/map-with-data" title="PHE"></iframe>
+```
+
+:::
+
+
+## Further reading
+
+[NHS Digital - Principles and Visual Guidelines for Maps](https://digital.nhs.uk/about-nhs-digital/corporate-information-and-documents/our-style-guidelines/visual-style-guide/maps)

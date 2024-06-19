@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 9&nbsp; Creating Choropleths in QGIS - Importing Boundaries</title>
+<title>HSMA - Geographic Modelling and Visualisation - 11&nbsp; Creating Choropleths in QGIS - Importing Boundaries</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -87,10 +87,22 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">HSMA - Geographic Modelling and Visualisation</span>
     </a>
   </div>
-        <div class="quarto-navbar-tools tools-end">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/hsma-programme/hsma6_geographic_optimisation_and_visualisation_book"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
@@ -98,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_choropleth.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS - Importing Boundaries</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Part 2 - Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_choropleth.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS - Importing Boundaries</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -143,8 +155,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./concepts_and_terms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Geographical Concepts and Terminology</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Part 1 - Geographic Concepts and Terms</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -152,28 +164,34 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./concepts_and_terms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Geographical Concepts and Terminology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ct_crs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projections and Coordinate Reference Systems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ct_filetypes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Geographic Data Filetypes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./the_importance_of_standardisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Standardisation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Standardisation</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./introduction_mapping_with_qgis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mapping in QGIS</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Part 2 - Mapping in QGIS</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -181,58 +199,64 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./introduction_mapping_with_qgis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Mapping in QGIS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./qgis_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_basemaps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_point_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_choropleth.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS - Importing Boundaries</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS - Importing Boundaries</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_choropleths_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Choropleths in QGIS - Joining Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Choropleths in QGIS - Joining Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_filtering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Filtering Data in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Filtering Data in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_print_layouts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Print Layouts in QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Print Layouts in QGIS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./qgis_exercises.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercises - QGIS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Exercises - QGIS</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./introduction_mapping_in_python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mapping in Python</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part 3 - Mapping in Python</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -241,19 +265,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./why_python_mapping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Why use python for maps?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Why use python for maps?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Working With Travel Time Data in Python - the geopandas package</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_geopandas_reading_files.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reading files with Geopandas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reading files with Geopandas</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,26 +292,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#reminder---whats-a-choropleth" id="toc-reminder---whats-a-choropleth" class="nav-link active" data-scroll-target="#reminder---whats-a-choropleth"><span class="header-section-number">9.1</span> Reminder - what’s a choropleth?</a></li>
-  <li><a href="#importing-a-premade-geodataset" id="toc-importing-a-premade-geodataset" class="nav-link" data-scroll-target="#importing-a-premade-geodataset"><span class="header-section-number">9.2</span> Importing a premade geodataset</a></li>
-  <li><a href="#adding-colour-to-our-choropleths" id="toc-adding-colour-to-our-choropleths" class="nav-link" data-scroll-target="#adding-colour-to-our-choropleths"><span class="header-section-number">9.3</span> Adding colour to our choropleths</a></li>
-  <li><a href="#adjusting-category-boundaries-and-the-number-of-categories-in-qgis" id="toc-adjusting-category-boundaries-and-the-number-of-categories-in-qgis" class="nav-link" data-scroll-target="#adjusting-category-boundaries-and-the-number-of-categories-in-qgis"><span class="header-section-number">9.4</span> Adjusting category boundaries and the number of categories in QGIS</a>
+  <li><a href="#reminder---whats-a-choropleth" id="toc-reminder---whats-a-choropleth" class="nav-link active" data-scroll-target="#reminder---whats-a-choropleth"><span class="header-section-number">11.1</span> Reminder - what’s a choropleth?</a></li>
+  <li><a href="#importing-a-premade-geodataset" id="toc-importing-a-premade-geodataset" class="nav-link" data-scroll-target="#importing-a-premade-geodataset"><span class="header-section-number">11.2</span> Importing a premade geodataset</a></li>
+  <li><a href="#adding-colour-to-our-choropleths" id="toc-adding-colour-to-our-choropleths" class="nav-link" data-scroll-target="#adding-colour-to-our-choropleths"><span class="header-section-number">11.3</span> Adding colour to our choropleths</a></li>
+  <li><a href="#adjusting-category-boundaries-and-the-number-of-categories-in-qgis" id="toc-adjusting-category-boundaries-and-the-number-of-categories-in-qgis" class="nav-link" data-scroll-target="#adjusting-category-boundaries-and-the-number-of-categories-in-qgis"><span class="header-section-number">11.4</span> Adjusting category boundaries and the number of categories in QGIS</a>
   <ul class="collapse">
-  <li><a href="#number-of-categories" id="toc-number-of-categories" class="nav-link" data-scroll-target="#number-of-categories"><span class="header-section-number">9.4.1</span> Number of categories</a></li>
-  <li><a href="#categorisation-type" id="toc-categorisation-type" class="nav-link" data-scroll-target="#categorisation-type"><span class="header-section-number">9.4.2</span> Categorisation type</a></li>
+  <li><a href="#number-of-categories" id="toc-number-of-categories" class="nav-link" data-scroll-target="#number-of-categories"><span class="header-section-number">11.4.1</span> Number of categories</a></li>
+  <li><a href="#categorisation-type" id="toc-categorisation-type" class="nav-link" data-scroll-target="#categorisation-type"><span class="header-section-number">11.4.2</span> Categorisation type</a></li>
   </ul></li>
-  <li><a href="#hiding-categories" id="toc-hiding-categories" class="nav-link" data-scroll-target="#hiding-categories"><span class="header-section-number">9.5</span> Hiding categories</a></li>
-  <li><a href="#changing-the-colourscheme" id="toc-changing-the-colourscheme" class="nav-link" data-scroll-target="#changing-the-colourscheme"><span class="header-section-number">9.6</span> Changing the Colourscheme</a></li>
-  <li><a href="#viewing-the-distribution" id="toc-viewing-the-distribution" class="nav-link" data-scroll-target="#viewing-the-distribution"><span class="header-section-number">9.7</span> Viewing the Distribution</a></li>
+  <li><a href="#hiding-categories" id="toc-hiding-categories" class="nav-link" data-scroll-target="#hiding-categories"><span class="header-section-number">11.5</span> Hiding categories</a></li>
+  <li><a href="#changing-the-colourscheme" id="toc-changing-the-colourscheme" class="nav-link" data-scroll-target="#changing-the-colourscheme"><span class="header-section-number">11.6</span> Changing the Colourscheme</a></li>
+  <li><a href="#viewing-the-distribution" id="toc-viewing-the-distribution" class="nav-link" data-scroll-target="#viewing-the-distribution"><span class="header-section-number">11.7</span> Viewing the Distribution</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_choropleth.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS - Importing Boundaries</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Part 2 - Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_choropleth.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS - Importing Boundaries</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS - Importing Boundaries</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Creating Choropleths in QGIS - Importing Boundaries</span></h1>
 </div>
 
 
@@ -343,8 +367,8 @@ a.glossary:active .def::after {
   border-color: #333 transparent transparent transparent;
 }
 </style>
-<section id="reminder---whats-a-choropleth" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="reminder---whats-a-choropleth"><span class="header-section-number">9.1</span> Reminder - what’s a choropleth?</h2>
+<section id="reminder---whats-a-choropleth" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="reminder---whats-a-choropleth"><span class="header-section-number">11.1</span> Reminder - what’s a choropleth?</h2>
 <blockquote class="blockquote">
 <p>“A choropleth map is a type of statistical thematic map… [where] color corresponding with an aggregate summary of a geographic characteristic … such as population density or per-capita income.</p>
 </blockquote>
@@ -362,8 +386,8 @@ a.glossary:active .def::after {
 <p>And the great news is that we can create these in QGIS.</p>
 <p><img src="assets/2024-06-18-22-35-57.png" class="img-fluid"></p>
 </section>
-<section id="importing-a-premade-geodataset" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="importing-a-premade-geodataset"><span class="header-section-number">9.2</span> Importing a premade geodataset</h2>
+<section id="importing-a-premade-geodataset" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="importing-a-premade-geodataset"><span class="header-section-number">11.2</span> Importing a premade geodataset</h2>
 <p>Sometimes we are lucky enough to have access to a dataset that contains a series of boundaries - so showing where the edges of a series of LSOAs, MSOAs, counties, or some other type of boundary are - as well as giving us some <em>counts</em> relating to those areas.</p>
 <p>Unlike our point data, which came in a csv (a type of delimited text file), when we’re working with data relating to <em>areas</em>, we’re going to be using a vector layer.</p>
 <p>Vector layers can come in a range of formats: <em>.shp (Shapefile) </em>.geojson (Geo JSON) *.gpkg (Geopackage)</p>
@@ -376,8 +400,8 @@ a.glossary:active .def::after {
 <p>You will now see a number of area boundaries, but at the moment, they are all the same colour - which isn’t much use!</p>
 <p><img src="assets/2024-06-18-22-40-15.png" class="img-fluid"></p>
 </section>
-<section id="adding-colour-to-our-choropleths" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="adding-colour-to-our-choropleths"><span class="header-section-number">9.3</span> Adding colour to our choropleths</h2>
+<section id="adding-colour-to-our-choropleths" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="adding-colour-to-our-choropleths"><span class="header-section-number">11.3</span> Adding colour to our choropleths</h2>
 <p>Previously we were working with data that had a certain number of categories per value.</p>
 <p>However, if we take a look at the attribute table for this layer, we can see we have numeric values - so instead we want a graduated symbology.</p>
 <p>This means values will be grouped together rather than having a separate category per value.</p>
@@ -394,18 +418,18 @@ a.glossary:active .def::after {
 <p>We now have our areas coloured by the number of shoplifting incidents. What do you notice about the categories it has set up for us?</p>
 <p><img src="assets/2024-06-18-22-44-22.png" class="img-fluid"></p>
 </section>
-<section id="adjusting-category-boundaries-and-the-number-of-categories-in-qgis" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="adjusting-category-boundaries-and-the-number-of-categories-in-qgis"><span class="header-section-number">9.4</span> Adjusting category boundaries and the number of categories in QGIS</h2>
-<section id="number-of-categories" class="level3" data-number="9.4.1">
-<h3 data-number="9.4.1" class="anchored" data-anchor-id="number-of-categories"><span class="header-section-number">9.4.1</span> Number of categories</h3>
+<section id="adjusting-category-boundaries-and-the-number-of-categories-in-qgis" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="adjusting-category-boundaries-and-the-number-of-categories-in-qgis"><span class="header-section-number">11.4</span> Adjusting category boundaries and the number of categories in QGIS</h2>
+<section id="number-of-categories" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="number-of-categories"><span class="header-section-number">11.4.1</span> Number of categories</h3>
 <p>First, let’s experiment with the number of categories and see if that helps.</p>
 <p>We can change this using the arrows next to the ‘classes’ box, or by typing in the number of classes we would like.</p>
 <p><img src="assets/2024-06-18-22-45-20.png" class="img-fluid"></p>
 <p>This can produce some odd behaviour when a lot of our groups have a very low number of values in!</p>
 <p>We seem to have multiple categories for ‘0’, each with a slightly different colour. That’s not ideal behaviour - though depending on your dataset, this might not occur, and the default categorisation method may work fine, in which case you can just play around with the number of classes.</p>
 </section>
-<section id="categorisation-type" class="level3" data-number="9.4.2">
-<h3 data-number="9.4.2" class="anchored" data-anchor-id="categorisation-type"><span class="header-section-number">9.4.2</span> Categorisation type</h3>
+<section id="categorisation-type" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="categorisation-type"><span class="header-section-number">11.4.2</span> Categorisation type</h3>
 <p>Let’s now try changing the classification mode.</p>
 <p>This adjusts the algorithm used by QGIS to work out the size of each category and where the boundary will be.</p>
 <p>Click in the ‘mode’ box.</p>
@@ -420,17 +444,17 @@ a.glossary:active .def::after {
 <p><img src="assets/2024-06-18-22-50-43.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="hiding-categories" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="hiding-categories"><span class="header-section-number">9.5</span> Hiding categories</h2>
+<section id="hiding-categories" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="hiding-categories"><span class="header-section-number">11.5</span> Hiding categories</h2>
 <p>Like with our categorised point data, we can untick layers in the layer styling panel to just show certain categories.</p>
 <p><img src="assets/2024-06-18-22-51-29.png" class="img-fluid"></p>
 </section>
-<section id="changing-the-colourscheme" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="changing-the-colourscheme"><span class="header-section-number">9.6</span> Changing the Colourscheme</h2>
+<section id="changing-the-colourscheme" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="changing-the-colourscheme"><span class="header-section-number">11.6</span> Changing the Colourscheme</h2>
 <p><img src="assets/2024-06-18-22-52-00.png" class="img-fluid"></p>
 </section>
-<section id="viewing-the-distribution" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="viewing-the-distribution"><span class="header-section-number">9.7</span> Viewing the Distribution</h2>
+<section id="viewing-the-distribution" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="viewing-the-distribution"><span class="header-section-number">11.7</span> Viewing the Distribution</h2>
 <p>If you go to ‘histogram’ and click ‘load values’, you will see the distribution of the values in the column you’re visualising, along with vertical lines showing the boundary of each category.</p>
 <p>This can be really helpful for understanding the distribution of your data…</p>
 <p>… but sometimes, like this, it’s really hard to see!</p>
@@ -1333,12 +1357,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./qgis_point_data.html" class="pagination-link" aria-label="Visualising Point Data in QGIS">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visualising Point Data in QGIS</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./qgis_choropleths_joining.html" class="pagination-link" aria-label="Choropleths in QGIS - Joining Data">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Choropleths in QGIS - Joining Data</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Choropleths in QGIS - Joining Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

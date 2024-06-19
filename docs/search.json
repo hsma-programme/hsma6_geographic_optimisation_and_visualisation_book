@@ -52,657 +52,672 @@
   {
     "objectID": "concepts_and_terms.html",
     "href": "concepts_and_terms.html",
-    "title": "Geographical Concepts and Terminology",
+    "title": "3  Geographical Concepts and Terminology",
     "section": "",
     "text": "Before you get started with making your own maps, it’s helpful to understand a few key concepts and terms.",
     "crumbs": [
-      "Geographical Concepts and Terminology"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Geographical Concepts and Terminology</span>"
     ]
   },
   {
     "objectID": "ct_crs.html",
     "href": "ct_crs.html",
-    "title": "3  Projections and Coordinate Reference Systems",
+    "title": "4  Projections and Coordinate Reference Systems",
     "section": "",
-    "text": "3.1 Projections\nIn summary, different projections are valuable for different reasons - but they can distort the sizes of countries quite significantly. Just how big these distortions are might surprise you…\nFor example, let’s look at Greenland and Africa on the world map you are probably familiar with.\nThis map uses the Mercator projection. Now, when our primary requirement for maps was trying to sail ships across the ocean, this map was fantastic. It allowed navigators to set a single constant bearing and get to where they needed to go, rather than constantly adjusting and risking huge errors if they made a single mistake along the way.\nActually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - in fact, a special variant of the Mercator projection, known as Web Mercator (a.k.a. WGS 84 Web Mercator, WGS 84/Pseudo-Mercator, EPSG:3857) is used by almost every major web mapping service, such as Bing, OpenStreetMap, and others - so it’s worth knowing about as you’ll use it a lot when you’re making interactive maps later in the course.2\nHowever, all versions of the Mercator projection have the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.\nCountries far from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than they are in reality. If you don’t know it’s happening, it can be quite a surprise to learn that certain countries really aren’t as big as you might have thought!",
+    "text": "4.1 Projections\nIn summary, different projections are valuable for different reasons - but they can distort the sizes of countries quite significantly. Just how big these distortions are might surprise you…\nFor example, let’s look at Greenland and Africa on the world map you are probably familiar with.\nThis map uses the Mercator projection. Now, when our primary requirement for maps was trying to sail ships across the ocean, this map was fantastic. It allowed navigators to set a single constant bearing and get to where they needed to go, rather than constantly adjusting and risking huge errors if they made a single mistake along the way.\nActually, to be fair to the Mercator projection, it still has benefits today for navigation with things like Google maps - in fact, a special variant of the Mercator projection, known as Web Mercator (a.k.a. WGS 84 Web Mercator, WGS 84/Pseudo-Mercator, EPSG:3857) is used by almost every major web mapping service, such as Bing, OpenStreetMap, and others - so it’s worth knowing about as you’ll use it a lot when you’re making interactive maps later in the course.2\nHowever, all versions of the Mercator projection have the rather unfortunate side effect of significantly distorting the apparent sizes of different countries.\nCountries far from the equator - for example Northern Europe, Russia, the US, Canada, and the North and South Poles - appear on the map to be much bigger than they are in reality. If you don’t know it’s happening, it can be quite a surprise to learn that certain countries really aren’t as big as you might have thought!",
     "crumbs": [
-      "Geographical Concepts and Terminology",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
     ]
   },
   {
     "objectID": "ct_crs.html#projections",
     "href": "ct_crs.html#projections",
-    "title": "3  Projections and Coordinate Reference Systems",
+    "title": "4  Projections and Coordinate Reference Systems",
     "section": "",
     "text": "Click here to show an animation demonstrating the impact of the Mercator Projection on the relative size of different countries\n\n\n\n\n\n\n\n\nRelative Size of Countries - Mercator Projection Distortion\n\n\nBy Jakub Nowosad - Own Work;, CC BY-SA 4.0, Link3\n\n\n\n\nOptional Exercise\nA great way to get your head around the impact of the Mercator projection on our understanding of the world is to use the website the true size of.\nTry the following out. Do the results surprise you? Does this change your sense of our world? Click ‘clear map’ after each exercise to get back to a blank map, or right click on the coloured shape of the country to remove it - Search for Russia and drag it onto the North of Africa. - Search for the United Kingdom and drag it onto Greenland. - Search for Canada and drag it onto Brazil.\n\n\n\n\n\n\nClick here to view the website without leaving the book!\n\n\n\n\n\n\n\n\n\n\n\nOptional Exercise\nYou can play around with some different projections at the metrocosm website.\nYou will notice that there are a large number of purple dots all over the maps on that website. Why are they there?\nOn a globe, all of those purple dots would be the same size. They are a good way of understanding how different projections distort the size or shape of different parts of the world.\nLook at each projection.\n\n\n\n\n\n\nClick here to view the website without leaving the book!",
     "crumbs": [
-      "Geographical Concepts and Terminology",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
     ]
   },
   {
     "objectID": "ct_crs.html#coordinate-reference-systems",
     "href": "ct_crs.html#coordinate-reference-systems",
-    "title": "3  Projections and Coordinate Reference Systems",
-    "section": "3.2 Coordinate Reference Systems",
-    "text": "3.2 Coordinate Reference Systems\nThe next thing to understand is how we divide the world up so we can all talk about it using the same language and find the same point on the map.\nOne of the most common ways to do this is with latitude and longitude.\n\n3.2.1 Latitude and longitude\nLatitude looks at how far a point is from the equator - you can also think of it as how close a point is to the North or South Pole.\nLines of latitude run parallel with the equator.\n4\nLatitude has a value of 0 at the equator.\n‘Above’ the equator - towards the North Pole - latitude gradually gets bigger, written as, for example, 70N, reaching a maximum of 90 North at the North pole.\n‘Below’ the equator - towards the South Pole - latitude gradually gets bigger, but this time it is written as, for example, 45S reaching a maximum of 90 South at the South pole.\nHowever - when you are using latitude on a computer, latitude South of the equator is often entered as a negative number instead.\nLongitude is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.\n5\nLongitude has a value of 0 at the Prime Meridian (Greenwich).\nEast of the Prime Meridian, longitude gradually gets bigger and is written as, for example, 60E, reaching a maximum of 180 on directly the opposite side of Earth.\nWest of the Prime Meridian, longitude gradually gets bigger but this time it is written as, for example, 30W, reaching a maximum of 180 on directly the opposite side of Earth.\nHowever - when you are using longitude on a computer, a longitude to the West of Greenwich is often entered as a negative number instead.\nThe image below gives you a quick reference to how different points may be written.\n\n\n3.2.1.1 Writing coordinate pairs\nAny point in the world can be identified by providing a figure for both latitude and longitude.\nHowever - it’s important to write them in the correct order, else you will end up somewhere very different!\nNow, just to be confusing… it’s the opposite way around to a standard graph.\nIf you cast your mind back to school, you might remember being taught about writing a coordinate pair for a standard graph.\n\n\n\nA cartesian coordinate plane\n\n\nWhen we write this, we write the position of the horizontal point (x) first, and then the vertical (y) point - so we write coordinates as (x, y). So for the graph above, this means the coordinates are (2, 5). You might have been taught to remember this as going ‘along the corridor, then up the stairs’.\nNow… it’s the opposite for latitude and longitude!\nLet’s say we have a latitude (the position vertically in relation to the equator - sort of equivalent to our y value above) of 7, and a longitude (the position horizontally in relation to the prime meridian - sort of equivalent to our x value above) of 15.\nWe’d write this as (7, 15) - not (15, 7) as you might have expected!\nSo just remember - it’s the opposite order to a graph!\n\n\n3.2.1.2 How do lines of latitude and longitude appear on different projections?\n\nMercator Projection\nAs it’s the projection you’re still going to commonly see (and probably use for most of the maps you create), let’s go back to the Mercator map projection.\nThe lines of latitude and longitude are the white grid that’s overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!\n\nAll of the lines of longitude (running top to bottom) are parallel to each other - that is they stay the same distance apart the whole time.\nAll of the lines of latitude (running left to right) are also parallel to each other.\nThe lines of latitude and longitude are at perfect right angles (also known as perpendicular) to each other.\nHere, each horizontal line represents a distance of 15 degrees north or south.\nHowever - if you look at the top of the map, you will notice that the lines get further and further apart - even though the gaps still represent 15 degrees.\nRemember what we said before about the Mercator projection making countries further from the equator appear bigger than they are? Well this is it in action!\n\n\nGall-Peters Projection\nIn the Gall-Peters projection, the sizes of each rectangle made by the latitude and longitude lines are quite different to the Mercator proejction.\nThe rectangles are tall near the equator and get shorter as you go towards the North and South Poles.\n\nHowever, like the Mercator projection, the lines of latitude are parallel to each other, and the same is true of the lines of longitude.\nThis means that the map can still be used to navigate with a constant bearing - unlike a projection where these lines are curved.\nGall-Peters maps are UNESCOs preferred map, and are quite common in UK schools.6\n\n\nWinkel Tripel\nFinally, let’s look at the lines on the Winkel tripel projection.\nNowadays, it’s generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It’s used in a lot of textbooks and it’s the preferred projection for world maps made by the National Geographic Society.7\n\nBut notice that the lines of latitude and longitude are no longer straight!\n\n\n\n3.2.1.3 Exercise: Getting Comfortable with Latitude and Longitude\nIt’s helpful to get a bit of a feeling for how latitude and longitude is written, as you’ll be dealing with it quite a lot in the datasets we will use later in this book.\nSo let’s work through a couple of questions.\nIn each of the questions below - the dotted line running vertically (from the top to the bottom of the image) is the prime meridian - the line that runs through Greenwich in London, England and is a longitude of 0. - the dotted line running horizontally (from the left to the right of the image) is the equator - the line that is a latitude of 0.\n\nQuestion 1\n\n\n\nWhat are the correct coordinates for this national park in Brazil?\n\n\n\n -20.655, 49.205 20.655, -49.205 20.655, 49.205 -20.655, -49.205\n\n\n\nQuestion 2\n\n\n\nWhat are the correct coordinates for this national park in Japan?\n\n\n\n -35.943, -138.764 35.943, 138.764 138.764, 35.943 35.943, -138.764\n\n\n\nQuestion 3\n\n\n\nWhat are the correct coordinates for St Luke’s?\n\n\nSt Luke’s is part of the University of Exeter and is home to the PenCHORD team, who write the HSMA course!\n\n -3.51, -50.722 -50.722, 3.51 50.722, -3.51 50.722, 3.51 -3.51, 50.722",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "4.2 Coordinate Reference Systems",
+    "text": "4.2 Coordinate Reference Systems\nThe next thing to understand is how we divide the world up so we can all talk about it using the same language and find the same point on the map.\nOne of the most common ways to do this is with latitude and longitude.\n\n4.2.1 Latitude and longitude\nLatitude looks at how far a point is from the equator - you can also think of it as how close a point is to the North or South Pole.\nLines of latitude run parallel with the equator.\n4\nLatitude has a value of 0 at the equator.\n‘Above’ the equator - towards the North Pole - latitude gradually gets bigger, written as, for example, 70N, reaching a maximum of 90 North at the North pole.\n‘Below’ the equator - towards the South Pole - latitude gradually gets bigger, but this time it is written as, for example, 45S reaching a maximum of 90 South at the South pole.\nHowever - when you are using latitude on a computer, latitude South of the equator is often entered as a negative number instead.\nLongitude is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.\n5\nLongitude has a value of 0 at the Prime Meridian (Greenwich).\nEast of the Prime Meridian, longitude gradually gets bigger and is written as, for example, 60E, reaching a maximum of 180 on directly the opposite side of Earth.\nWest of the Prime Meridian, longitude gradually gets bigger but this time it is written as, for example, 30W, reaching a maximum of 180 on directly the opposite side of Earth.\nHowever - when you are using longitude on a computer, a longitude to the West of Greenwich is often entered as a negative number instead.\nThe image below gives you a quick reference to how different points may be written.\n\n\n4.2.1.1 Writing coordinate pairs\nAny point in the world can be identified by providing a figure for both latitude and longitude.\nHowever - it’s important to write them in the correct order, else you will end up somewhere very different!\nNow, just to be confusing… it’s the opposite way around to a standard graph.\nIf you cast your mind back to school, you might remember being taught about writing a coordinate pair for a standard graph.\n\n\n\nA cartesian coordinate plane\n\n\nWhen we write this, we write the position of the horizontal point (x) first, and then the vertical (y) point - so we write coordinates as (x, y). So for the graph above, this means the coordinates are (2, 5). You might have been taught to remember this as going ‘along the corridor, then up the stairs’.\nNow… it’s the opposite for latitude and longitude!\nLet’s say we have a latitude (the position vertically in relation to the equator - sort of equivalent to our y value above) of 7, and a longitude (the position horizontally in relation to the prime meridian - sort of equivalent to our x value above) of 15.\nWe’d write this as (7, 15) - not (15, 7) as you might have expected!\nSo just remember - it’s the opposite order to a graph!\n\n\n4.2.1.2 How do lines of latitude and longitude appear on different projections?\n\nMercator Projection\nAs it’s the projection you’re still going to commonly see (and probably use for most of the maps you create), let’s go back to the Mercator map projection.\nThe lines of latitude and longitude are the white grid that’s overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!\n\nAll of the lines of longitude (running top to bottom) are parallel to each other - that is they stay the same distance apart the whole time.\nAll of the lines of latitude (running left to right) are also parallel to each other.\nThe lines of latitude and longitude are at perfect right angles (also known as perpendicular) to each other.\nHere, each horizontal line represents a distance of 15 degrees north or south.\nHowever - if you look at the top of the map, you will notice that the lines get further and further apart - even though the gaps still represent 15 degrees.\nRemember what we said before about the Mercator projection making countries further from the equator appear bigger than they are? Well this is it in action!\n\n\nGall-Peters Projection\nIn the Gall-Peters projection, the sizes of each rectangle made by the latitude and longitude lines are quite different to the Mercator proejction.\nThe rectangles are tall near the equator and get shorter as you go towards the North and South Poles.\n\nHowever, like the Mercator projection, the lines of latitude are parallel to each other, and the same is true of the lines of longitude.\nThis means that the map can still be used to navigate with a constant bearing - unlike a projection where these lines are curved.\nGall-Peters maps are UNESCOs preferred map, and are quite common in UK schools.6\n\n\nWinkel Tripel\nFinally, let’s look at the lines on the Winkel tripel projection.\nNowadays, it’s generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It’s used in a lot of textbooks and it’s the preferred projection for world maps made by the National Geographic Society.7\n\nBut notice that the lines of latitude and longitude are no longer straight!\n\n\n\n4.2.1.3 Exercise: Getting Comfortable with Latitude and Longitude\nIt’s helpful to get a bit of a feeling for how latitude and longitude is written, as you’ll be dealing with it quite a lot in the datasets we will use later in this book.\nSo let’s work through a couple of questions.\nIn each of the questions below - the dotted line running vertically (from the top to the bottom of the image) is the prime meridian - the line that runs through Greenwich in London, England and is a longitude of 0. - the dotted line running horizontally (from the left to the right of the image) is the equator - the line that is a latitude of 0.\n\nQuestion 1\n\n\n\nWhat are the correct coordinates for this national park in Brazil?\n\n\n\n -20.655, 49.205 20.655, -49.205 20.655, 49.205 -20.655, -49.205\n\n\n\nQuestion 2\n\n\n\nWhat are the correct coordinates for this national park in Japan?\n\n\n\n -35.943, -138.764 35.943, 138.764 138.764, 35.943 35.943, -138.764\n\n\n\nQuestion 3\n\n\n\nWhat are the correct coordinates for St Luke’s?\n\n\nSt Luke’s is part of the University of Exeter and is home to the PenCHORD team, who write the HSMA course!\n\n -3.51, -50.722 -50.722, 3.51 50.722, -3.51 50.722, 3.51 -3.51, 50.722",
     "crumbs": [
-      "Geographical Concepts and Terminology",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
     ]
   },
   {
     "objectID": "ct_crs.html#what-coordinate-reference-systems-are-in-use-in-the-uk",
     "href": "ct_crs.html#what-coordinate-reference-systems-are-in-use-in-the-uk",
-    "title": "3  Projections and Coordinate Reference Systems",
-    "section": "3.3 What coordinate reference systems are in use in the UK?",
-    "text": "3.3 What coordinate reference systems are in use in the UK?\nThe UK government provides the following guidelines on the usage of coordinate reference systems:\n\n\nuse British or Irish National Grid for data related to the UK and Northern Ireland\nuse ETRS89 (EPSG::4258) for Europe\nuse WGS84 for worldwide geographic location points\n\n\n\nYou can also combine these standards and/or add other CRS to meet your organisation’s requirements, for example, when you need greater accuracy for precision engineering decisions.\n\n\n3.3.1 The British National Grid\nGiven the government’s recommendation to use the BNG - which is also sometimes referred to as the Ordnance Survey National Grid reference system (OSBG) - you may come across datasets which make use of it, so it’s worth knowing how it works!\nRather than latitude and longitude, BNG uses Northings and Eastings.\nNorthing sand Estings will be given as a series of digits without decimal places.\nFor example, the location of the St Luke’s University campus (the home of HSMA!) using the BNG is 29297, 92456\n\nIn this, the Easting is 29297 and the Northing is 92456.\n\n\n\n\n\n\nWarning\n\n\n\nIt’s important to note that we give the Easting (the across) first, and the Northing (the up) second.\nThis is the opposite of using latitude and longitude!",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "4.3 What coordinate reference systems are in use in the UK?",
+    "text": "4.3 What coordinate reference systems are in use in the UK?\nThe UK government provides the following guidelines on the usage of coordinate reference systems:\n\n\nuse British or Irish National Grid for data related to the UK and Northern Ireland\nuse ETRS89 (EPSG::4258) for Europe\nuse WGS84 for worldwide geographic location points\n\n\n\nYou can also combine these standards and/or add other CRS to meet your organisation’s requirements, for example, when you need greater accuracy for precision engineering decisions.\n\n\n4.3.1 The British National Grid\nGiven the government’s recommendation to use the BNG - which is also sometimes referred to as the Ordnance Survey National Grid reference system (OSBG) - you may come across datasets which make use of it, so it’s worth knowing how it works!\nRather than latitude and longitude, BNG uses Northings and Eastings.\nNorthing sand Estings will be given as a series of digits without decimal places.\nFor example, the location of the St Luke’s University campus (the home of HSMA!) using the BNG is 29297, 92456\n\nIn this, the Easting is 29297 and the Northing is 92456.\n\n\n\n\n\n\nWarning\n\n\n\nIt’s important to note that we give the Easting (the across) first, and the Northing (the up) second.\nThis is the opposite of using latitude and longitude!",
     "crumbs": [
-      "Geographical Concepts and Terminology",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
     ]
   },
   {
     "objectID": "ct_crs.html#what-other-ways-do-we-determine-areas-within-the-uk",
     "href": "ct_crs.html#what-other-ways-do-we-determine-areas-within-the-uk",
-    "title": "3  Projections and Coordinate Reference Systems",
-    "section": "3.4 What other ways do we determine areas within the UK?",
-    "text": "3.4 What other ways do we determine areas within the UK?\n\n3.4.1 Postcodes\nPostcodes are a well-known way of splitting the UK up.\nPostcodes can be used at several different levels of resolution.\n\nPostcode areas are often quite large, sometimes spanning whole counties.\n^https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/British_postcode_areas_map.svg/450px-British_postcode_areas_map.svg.png\nIn contrast, a single exact postcode may only cover a handful of houses, so they are often not used when analysing healthcare data as there is too much of a risk of being able to identify an individual patient from their postcode.\n\n\n\n\n\n\nWarning\n\n\n\nThere are a lot of valid formats for postcodes, so they are not always the easiest to validate!\nYou may also find that they are input into software with a mixture of gaps between the first and second half (known as the outward code and inward code), so you may need to clean and standardise them before joining them to other datasets.\n\n\n\n\n\n\n\n\nTip\n\n\n\n is a great website for getting up-to-date information about postcodes and using this to supplement your data.\nFor example, you can find out which LSOA - a grouping we will talk about shortly - a postcode belongs to, which can help with aggregating your data for a different level of detail.\n\n\n\n\n3.4.2 Output Areas\nOutput Areas (OA), Lower Layer Super Output Areas (LSOA) and Middle Layer Super Output Areas (MSOA) are standardised geographical units that differ in area but have a roughly similar number of people living in each one.\n^ https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistical-geographies/, https://www.ons.gov.uk/methodology/geography/ukgeographies/censusgeographies/census2021\n\n3.4.2.1 OA\nOutput Areas (OA) are very small, with an average of circa 300 people per area.\nThey are so small that you will probably not work with them very often.\n\n\n3.4.2.2 LSOA\nLower Layer Super Output Areas (LSOA) are the medium size of area, with around 1500 people per LSOA.\n\n\n3.4.2.3 MSOA\nLower Layer Super Output Areas (LSOA) are the largest size of area, with around 8000 people per MSOA.\nThe map below shows MSOA boundaries (in red) overlaid over the LSOA boundaries (in blue).\n\nZooming in on a single MSOA, outlined in red, we can see that there are, in this case, four LSOAs within it - though this will not be exactly the same for each MSOA.\nYou can also wee here that one of the LSOAs is much larger than the other three, suggesting it is likely to be less densely populated.\n\n\n\n\n\n\n\nClick here to view an interactive map of MSOAs without leaving the book!\n\n\n\n\n\n\n\n\n\n\n\n\n3.4.3 Issues when working with output areas\n\n\n\n\n\n\nImportant\n\n\n\nDespite being somewhat standardised, there can still be very significant differences between areas in terms of the number of people living in them or the total land area covered.\nYou should always carefully consider whether you need to standardise the data in some way to account for this variation.\nYou can read more about this process in a later chapter.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nIt’s also worth paying attention to which year of output areas you are working with.\nA lot of older data will use 2011 boundaries, but the boundaries were refreshed in 2021. If trying to join older data to a newer file of boundaries, or vice-versa, you may find that some areas appear to be missing - so check the dates!\n\n\n\n\n3.4.4 Other groupings\n\n3.4.4.1 Local Authorities\nThere are county councils, which are quite large, and then these are often (though not always) subdivided into multiple district councils.\n^https://en.wikipedia.org/wiki/Local_government_in_England\n\n\n3.4.4.2 Healthcare Regions\nHealthcare regions in the UK frequently change.\n&lt;1996: Regional Health Authorities\n1996-2002: Health Authorities\n2002-2013: Strategic health authorities + primary care trusts\n2013-2022: CCGs\n2022-now (February 2024): Integrated care systems (integrated care board plus integrated care partnership)\n^https://geoportal.statistics.gov.uk/documents/ons::integrated-care-boards-april-2023-map-in-england/explore\n\n\n3.4.4.3 Ambulance Trusts\n^https://www.bbc.co.uk/news/health-16052725\n\n\n3.4.4.4 Police Forces\n^https://assets-hmicfrs.justiceinspectorates.gov.uk/uploads/police-force-map.pdf",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "4.4 What other ways do we determine areas within the UK?",
+    "text": "4.4 What other ways do we determine areas within the UK?\n\n4.4.1 Postcodes\nPostcodes are a well-known way of splitting the UK up.\nPostcodes can be used at several different levels of resolution.\n\nPostcode areas are often quite large, sometimes spanning whole counties.\n^https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/British_postcode_areas_map.svg/450px-British_postcode_areas_map.svg.png\nIn contrast, a single exact postcode may only cover a handful of houses, so they are often not used when analysing healthcare data as there is too much of a risk of being able to identify an individual patient from their postcode.\n\n\n\n\n\n\nWarning\n\n\n\nThere are a lot of valid formats for postcodes, so they are not always the easiest to validate!\nYou may also find that they are input into software with a mixture of gaps between the first and second half (known as the outward code and inward code), so you may need to clean and standardise them before joining them to other datasets.\n\n\n\n\n\n\n\n\nTip\n\n\n\n is a great website for getting up-to-date information about postcodes and using this to supplement your data.\nFor example, you can find out which LSOA - a grouping we will talk about shortly - a postcode belongs to, which can help with aggregating your data for a different level of detail.\n\n\n\n\n4.4.2 Output Areas\nOutput Areas (OA), Lower Layer Super Output Areas (LSOA) and Middle Layer Super Output Areas (MSOA) are standardised geographical units that differ in area but have a roughly similar number of people living in each one.\n^ https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistical-geographies/, https://www.ons.gov.uk/methodology/geography/ukgeographies/censusgeographies/census2021\n\n4.4.2.1 OA\nOutput Areas (OA) are very small, with an average of circa 300 people per area.\nThey are so small that you will probably not work with them very often.\n\n\n4.4.2.2 LSOA\nLower Layer Super Output Areas (LSOA) are the medium size of area, with around 1500 people per LSOA.\n\n\n4.4.2.3 MSOA\nLower Layer Super Output Areas (LSOA) are the largest size of area, with around 8000 people per MSOA.\nThe map below shows MSOA boundaries (in red) overlaid over the LSOA boundaries (in blue).\n\nZooming in on a single MSOA, outlined in red, we can see that there are, in this case, four LSOAs within it - though this will not be exactly the same for each MSOA.\nYou can also wee here that one of the LSOAs is much larger than the other three, suggesting it is likely to be less densely populated.\n\n\n\n\n\n\n\nClick here to view an interactive map of MSOAs without leaving the book!\n\n\n\n\n\n\n\n\n\n\n\n\n4.4.3 Issues when working with output areas\n\n\n\n\n\n\nImportant\n\n\n\nDespite being somewhat standardised, there can still be very significant differences between areas in terms of the number of people living in them or the total land area covered.\nYou should always carefully consider whether you need to standardise the data in some way to account for this variation.\nYou can read more about this process in a later chapter.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nIt’s also worth paying attention to which year of output areas you are working with.\nA lot of older data will use 2011 boundaries, but the boundaries were refreshed in 2021. If trying to join older data to a newer file of boundaries, or vice-versa, you may find that some areas appear to be missing - so check the dates!\n\n\n\n\n4.4.4 Other groupings\n\n4.4.4.1 Local Authorities\nThere are county councils, which are quite large, and then these are often (though not always) subdivided into multiple district councils.\n^https://en.wikipedia.org/wiki/Local_government_in_England\n\n\n4.4.4.2 Healthcare Regions\nHealthcare regions in the UK frequently change.\n&lt;1996: Regional Health Authorities\n1996-2002: Health Authorities\n2002-2013: Strategic health authorities + primary care trusts\n2013-2022: CCGs\n2022-now (February 2024): Integrated care systems (integrated care board plus integrated care partnership)\n^https://geoportal.statistics.gov.uk/documents/ons::integrated-care-boards-april-2023-map-in-england/explore\n\n\n4.4.4.3 Ambulance Trusts\n^https://www.bbc.co.uk/news/health-16052725\n\n\n4.4.4.4 Police Forces\n^https://assets-hmicfrs.justiceinspectorates.gov.uk/uploads/police-force-map.pdf",
     "crumbs": [
-      "Geographical Concepts and Terminology",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
     ]
   },
   {
     "objectID": "ct_crs.html#further-reading",
     "href": "ct_crs.html#further-reading",
-    "title": "3  Projections and Coordinate Reference Systems",
-    "section": "4.1 Further Reading",
-    "text": "4.1 Further Reading\n\n4.1.1 Understanding the size of countries\nhttps://mapfight.xyz/\nhttps://www.thetruesize.com/\n\n\n4.1.2 Projections\nA discussion of alternatives to Web Mercator - while it’s geared towards options available in ArcGis, it’s a great demonstration of some options\n\n\n4.1.3 Coordinate Reference Systems\nA gentle Introduction to GIS - Coordinate Reference Systems",
+    "title": "4  Projections and Coordinate Reference Systems",
+    "section": "5.1 Further Reading",
+    "text": "5.1 Further Reading\n\n5.1.1 Understanding the size of countries\nhttps://mapfight.xyz/\nhttps://www.thetruesize.com/\n\n\n5.1.2 Projections\nA discussion of alternatives to Web Mercator - while it’s geared towards options available in ArcGis, it’s a great demonstration of some options\n\n\n5.1.3 Coordinate Reference Systems\nA gentle Introduction to GIS - Coordinate Reference Systems",
     "crumbs": [
-      "Geographical Concepts and Terminology",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
     ]
   },
   {
     "objectID": "ct_crs.html#footnotes",
     "href": "ct_crs.html#footnotes",
-    "title": "3  Projections and Coordinate Reference Systems",
+    "title": "4  Projections and Coordinate Reference Systems",
     "section": "",
     "text": "Video Credit - Vox, Terms of Licence Use↩︎\nhttps://en.wikipedia.org/wiki/Web_Mercator_projection↩︎\nBy Jakub Nowosad - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=73955926↩︎\nDjexplo, CC0, via Wikimedia Commons↩︎\nDjexplo, CC0, via Wikimedia Commons↩︎\nHiggins, Hannah B. The Grid Book. Cambridge, Massachusetts: MIT Press, 2009. ISBN 9780262512404 p.94. “Embroiled in controversy from the start, the map is nonetheless widely used in the British school system and is promoted by the United Nations Educational and Scientific Cultural Organization (UNESCO) because of its ability to communicate visually the actual relative sizes of the various regions of the planet.”, via Wikipedia - https://en.wikipedia.org/wiki/Gall%E2%80%93Peters_projection↩︎\nhttps://en.wikipedia.org/wiki/Winkel_tripel_projection↩︎",
     "crumbs": [
-      "Geographical Concepts and Terminology",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projections and Coordinate Reference Systems</span>"
     ]
   },
   {
     "objectID": "ct_filetypes.html",
     "href": "ct_filetypes.html",
-    "title": "4  Geographic Data Filetypes",
+    "title": "5  Geographic Data Filetypes",
     "section": "",
     "text": "When working with geometry filetypes, they can define the boundaries of an area by storing a series of latitude and longitude pairs within them. This defines a polygon.",
     "crumbs": [
-      "Geographical Concepts and Terminology",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Geographic Data Filetypes</span>"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Geographic Data Filetypes</span>"
     ]
   },
   {
     "objectID": "the_importance_of_standardisation.html",
     "href": "the_importance_of_standardisation.html",
-    "title": "5  Standardisation",
+    "title": "6  Standardisation",
     "section": "",
     "text": "We might initially work with a dataset that hasn’t been standardised.\nWhy might this be a problem?\nPatterns may be an artefact of population\nAreas with more people may just have higher values - but it may not be unusual given the number of people.\nBe careful with your interpretation!\nYou could get around this in a few ways depending on your dataset.\n\nYou could adjust by the size of an area - say, looking at the number of incidents per square kilometre\nYou could provide a rate per 1,000 occupants\nYou could provide a % of the total occupants\n\nEstimates of LSOA populations can be found online.\nUsing this information within SQL, Excel or (ideally) Python can help you to construct the most representative dataset and ensure you are not coming to incorrect conclusions.",
     "crumbs": [
-      "Geographical Concepts and Terminology",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Standardisation</span>"
+      "Part 1 - Geographic Concepts and Terms",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Standardisation</span>"
     ]
   },
   {
     "objectID": "introduction_mapping_with_qgis.html",
     "href": "introduction_mapping_with_qgis.html",
-    "title": "Mapping in QGIS",
+    "title": "7  Mapping in QGIS",
     "section": "",
-    "text": "References",
+    "text": "8 References",
     "crumbs": [
-      "Mapping in QGIS"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mapping in QGIS</span>"
     ]
   },
   {
     "objectID": "introduction_mapping_with_qgis.html#footnotes",
     "href": "introduction_mapping_with_qgis.html#footnotes",
-    "title": "Mapping in QGIS",
+    "title": "7  Mapping in QGIS",
     "section": "",
     "text": "Ordnance Survey↩︎",
     "crumbs": [
-      "Mapping in QGIS"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Mapping in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_setup.html",
     "href": "qgis_setup.html",
-    "title": "6  Getting QGIS Ready to Use",
+    "title": "8  Getting QGIS Ready to Use",
     "section": "",
-    "text": "7.3 Selecting panels\nWhen you open up QGIS for the first time, a few of the different panels you will need to use are hidden by default.\nLet’s make sure we all have the same tools available\nClick “View” → “Panels”\nMake sure - “Browser”, - “Layer Styling” - and “Layers” all have a tick next to them\nNow our QGIS should look a bit like this, with the panels highlighted in orange (browser, layer styling and layers) all visible on the screen.",
+    "text": "9.3 Selecting panels\nWhen you open up QGIS for the first time, a few of the different panels you will need to use are hidden by default.\nLet’s make sure we all have the same tools available\nClick “View” → “Panels”\nMake sure - “Browser”, - “Layer Styling” - and “Layers” all have a tick next to them\nNow our QGIS should look a bit like this, with the panels highlighted in orange (browser, layer styling and layers) all visible on the screen.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_setup.html#device-requirements",
     "href": "qgis_setup.html#device-requirements",
-    "title": "6  Getting QGIS Ready to Use",
-    "section": "7.1 Device Requirements",
-    "text": "7.1 Device Requirements\nTo install QGIS, you will need a laptop or desktop computer running Windows, MacOS, or Linux.\nYou will not be able to install the software on a phone or tablet! While versions exist for these devices, they are aimed more at conducting fieldwork than doing the sort of task we’ll be covering in this course.",
+    "title": "8  Getting QGIS Ready to Use",
+    "section": "9.1 Device Requirements",
+    "text": "9.1 Device Requirements\nTo install QGIS, you will need a laptop or desktop computer running Windows, MacOS, or Linux.\nYou will not be able to install the software on a phone or tablet! While versions exist for these devices, they are aimed more at conducting fieldwork than doing the sort of task we’ll be covering in this course.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_setup.html#installing-qgis-1",
     "href": "qgis_setup.html#installing-qgis-1",
-    "title": "6  Getting QGIS Ready to Use",
-    "section": "7.2 Installing QGIS",
-    "text": "7.2 Installing QGIS\nQGIS is widely used across the globe, and is totally free, with the code for the program also made available.\nQGIS is used by tens of thousands of users - some statistics can be viewed here if you are interested.\nIf your organisation has had someone on the HSMA programme in the last few years, they will have been required to download QGIS, so the software may already be available in your organisation’s software centre. If so, click here to jump to the section on checking your version to ensure that the version you are running is suitable for the workshop.\nIf you are installing QGIS for the first time without using a software centre, head to this page - https://qgis.org/en/site/forusers/download.html - and click on the appropriate box for your operating system. The box may open automatically.\n\nWe would recommend going directly to this page rather than searching Google or Bing for QGIS as we know the link above is correct and you won’t redirected to a third-party download site - using the link provided above ensures you are getting the software directly from the QGIS team.\nDon’t worry if the version number doesn’t exactly match the screenshots below - it will just automatically download the most recent release, which will be fine for the course.\nMore detailed instructions for Windows are given below.\n\n7.2.1 Windows\nNote that installing the software will require administrator rights. If you are on a personal device this will not be a problem.\nIf you are installing it on your work device, please make sure you have gone through the appropriate processes with your IT department.\nClick on the green banner to download the installer.\n\nThe download will take roughly 5 to 15 minutes, depending on the speed of your internet.\nWhen the installer has downloaded, find the file in the folder you saved it to, and double click on the file.\nFollow the instructions in the window that appears to install QGIS on your device.\nWhen you reach the step below, it may appear to pause for a long time with the progress bar not filling up.\n\nIf this happens, check your windows taskbar for the following icon:\n\nThis is a pop-up for Windows user account control. You may need to click this and authorize the installer.\nThe process should then take a maximum of 10 minutes to complete.\n\nClick ‘Finish’. You should now be able to run QGIS from your start menu or an icon on your desktop.\nChecking the version of an existing QGIS install\nIf you are using an older version your organisation has approved, you may wish to check the version number.\nIf the version number is lower than 3.0, you may find the layout is a bit different to the version we use in the workshop.\nTo check the version this, open QGIS up, hover over ‘Help’ in the top menu bar, and then click ‘About’.\n\nThe top line will tell you which version of QGIS you are currently running.\n\nYou can also choose ‘Check QGIS Version’ from the same menu, but this isn’t quite as reliable!",
+    "title": "8  Getting QGIS Ready to Use",
+    "section": "9.2 Installing QGIS",
+    "text": "9.2 Installing QGIS\nQGIS is widely used across the globe, and is totally free, with the code for the program also made available.\nQGIS is used by tens of thousands of users - some statistics can be viewed here if you are interested.\nIf your organisation has had someone on the HSMA programme in the last few years, they will have been required to download QGIS, so the software may already be available in your organisation’s software centre. If so, click here to jump to the section on checking your version to ensure that the version you are running is suitable for the workshop.\nIf you are installing QGIS for the first time without using a software centre, head to this page - https://qgis.org/en/site/forusers/download.html - and click on the appropriate box for your operating system. The box may open automatically.\n\nWe would recommend going directly to this page rather than searching Google or Bing for QGIS as we know the link above is correct and you won’t redirected to a third-party download site - using the link provided above ensures you are getting the software directly from the QGIS team.\nDon’t worry if the version number doesn’t exactly match the screenshots below - it will just automatically download the most recent release, which will be fine for the course.\nMore detailed instructions for Windows are given below.\n\n9.2.1 Windows\nNote that installing the software will require administrator rights. If you are on a personal device this will not be a problem.\nIf you are installing it on your work device, please make sure you have gone through the appropriate processes with your IT department.\nClick on the green banner to download the installer.\n\nThe download will take roughly 5 to 15 minutes, depending on the speed of your internet.\nWhen the installer has downloaded, find the file in the folder you saved it to, and double click on the file.\nFollow the instructions in the window that appears to install QGIS on your device.\nWhen you reach the step below, it may appear to pause for a long time with the progress bar not filling up.\n\nIf this happens, check your windows taskbar for the following icon:\n\nThis is a pop-up for Windows user account control. You may need to click this and authorize the installer.\nThe process should then take a maximum of 10 minutes to complete.\n\nClick ‘Finish’. You should now be able to run QGIS from your start menu or an icon on your desktop.\nChecking the version of an existing QGIS install\nIf you are using an older version your organisation has approved, you may wish to check the version number.\nIf the version number is lower than 3.0, you may find the layout is a bit different to the version we use in the workshop.\nTo check the version this, open QGIS up, hover over ‘Help’ in the top menu bar, and then click ‘About’.\n\nThe top line will tell you which version of QGIS you are currently running.\n\nYou can also choose ‘Check QGIS Version’ from the same menu, but this isn’t quite as reliable!",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_setup.html#moving-around-qgis",
     "href": "qgis_setup.html#moving-around-qgis",
-    "title": "6  Getting QGIS Ready to Use",
-    "section": "7.4 Moving around QGIS",
-    "text": "7.4 Moving around QGIS\n\nTo move around your maps, you will need two key tools: move (pan) and zoom.\n\nHowever, if you’re using a mouse with a scroll wheel, you can use that instead of the zoom buttons. The zoom will be centred around the point your mouse is hovering over, which can be useful for getting to a certain point quickly!\nOr on a laptop trackpad, you can “pinch” outwards to zoom out, and inwards to zoom in.",
+    "title": "8  Getting QGIS Ready to Use",
+    "section": "9.4 Moving around QGIS",
+    "text": "9.4 Moving around QGIS\n\nTo move around your maps, you will need two key tools: move (pan) and zoom.\n\nHowever, if you’re using a mouse with a scroll wheel, you can use that instead of the zoom buttons. The zoom will be centred around the point your mouse is hovering over, which can be useful for getting to a certain point quickly!\nOr on a laptop trackpad, you can “pinch” outwards to zoom out, and inwards to zoom in.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_setup.html#starting-a-project",
     "href": "qgis_setup.html#starting-a-project",
-    "title": "6  Getting QGIS Ready to Use",
-    "section": "7.5 Starting a project",
-    "text": "7.5 Starting a project\nNow you will want to start a new project.\nClick “Project” → “New”\n\nNow it’s time to add our basemap - so head to the next chapter to find out how to do that.",
+    "title": "8  Getting QGIS Ready to Use",
+    "section": "9.5 Starting a project",
+    "text": "9.5 Starting a project\nNow you will want to start a new project.\nClick “Project” → “New”\n\nNow it’s time to add our basemap - so head to the next chapter to find out how to do that.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Getting QGIS Ready to Use</span>"
     ]
   },
   {
     "objectID": "qgis_basemaps.html",
     "href": "qgis_basemaps.html",
-    "title": "7  Adding a basemap in QGIS",
+    "title": "9  Adding a basemap in QGIS",
     "section": "",
-    "text": "7.1 The simplest way to get started\nQGIS has one basemap built in - so let’s load that in first.\nLook at the ‘Browser’ panel in QGIS, which will probably be on the left-hand side of your screen.\nClick on the arrow next to ‘XYZ Tiles’\nOR\nDouble click on the phrase ‘XYZ Tiles’\nNow double click on ‘OpenStreetMap’\nYou should now be presented with a zoomed-out map of the world - if you’ve been reading this book in order, you may recognise the Mercator projection! If you’re interested, you can go back and brush up on projections in Chapter 3.",
+    "text": "9.1 The simplest way to get started\nQGIS has one basemap built in - so let’s load that in first.\nLook at the ‘Browser’ panel in QGIS, which will probably be on the left-hand side of your screen.\nClick on the arrow next to ‘XYZ Tiles’\nOR\nDouble click on the phrase ‘XYZ Tiles’\nNow double click on ‘OpenStreetMap’\nYou should now be presented with a zoomed-out map of the world - if you’ve been reading this book in order, you may recognise the Mercator projection! If you’re interested, you can go back and brush up on projections in Chapter 4.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_basemaps.html#the-simplest-way-to-get-started",
     "href": "qgis_basemaps.html#the-simplest-way-to-get-started",
-    "title": "7  Adding a basemap in QGIS",
+    "title": "9  Adding a basemap in QGIS",
     "section": "",
-    "text": "Warning\n\n\n\nIt’s important that you credit OpenStreetMap when sharing this map in any way, in accordance with its licencing terms.\nThe licencing text you need to include is this:\n© OpenStreetMap contributors, licenced as CC BY-SA\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nYou can stop reading here and move onto Chapter 8 if you like! There you will learn about importing a dataset of points.\nHowever, if you want to use a different basemap to the default one provided by QGIS or are interested in learning about an alternate, less ‘busy’ looking basemap, then you can carry on to the sections below.",
+    "text": "Warning\n\n\n\nIt’s important that you credit OpenStreetMap when sharing this map in any way, in accordance with its licencing terms.\nThe licencing text you need to include is this:\n© OpenStreetMap contributors, licenced as CC BY-SA\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nYou can stop reading here and move onto Chapter 10 if you like! There you will learn about importing a dataset of points.\nHowever, if you want to use a different basemap to the default one provided by QGIS or are interested in learning about an alternate, less ‘busy’ looking basemap, then you can carry on to the sections below.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_basemaps.html#using-different-basemap-providers",
     "href": "qgis_basemaps.html#using-different-basemap-providers",
-    "title": "7  Adding a basemap in QGIS",
-    "section": "7.2 Using different basemap providers",
-    "text": "7.2 Using different basemap providers\nBy default, QGIS only offers OpenStreetMap basemap tiles.\nHowever, you can easily load in additional tiles.\n\n\n\n\n\n\nWarning\n\n\n\nMake sure to appropriately credit the providers of any basemap services you use when sharing your maps, even internally!\n\n\nTo add new basemaps, right click on ‘XYZ Tiles’ in the Browser and select ‘New Connection…’.\n\nHere, you can give your new map tiles any name you like.\n\nUnder the URL setting, enter one of the following URLS^https://astro-geo-gis.com/liaison/qgis-tutorials/customizing-map-tiles-in-qgis/\nGoogle Maps: http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}\n\nGoogle Hybrid (Satellite + Roads): https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}\nMore tiles can be obtained by some careful searching! But note that many tiles will require a API key and may require payment to use, so you will likely want to stick to the default OpenStreetMaps in most cases.",
+    "title": "9  Adding a basemap in QGIS",
+    "section": "9.2 Using different basemap providers",
+    "text": "9.2 Using different basemap providers\nBy default, QGIS only offers OpenStreetMap basemap tiles.\nHowever, you can easily load in additional tiles.\n\n\n\n\n\n\nWarning\n\n\n\nMake sure to appropriately credit the providers of any basemap services you use when sharing your maps, even internally!\n\n\nTo add new basemaps, right click on ‘XYZ Tiles’ in the Browser and select ‘New Connection…’.\n\nHere, you can give your new map tiles any name you like.\n\nUnder the URL setting, enter one of the following URLS^https://astro-geo-gis.com/liaison/qgis-tutorials/customizing-map-tiles-in-qgis/\nGoogle Maps: http://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}\n\nGoogle Hybrid (Satellite + Roads): https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}\nMore tiles can be obtained by some careful searching! But note that many tiles will require a API key and may require payment to use, so you will likely want to stick to the default OpenStreetMaps in most cases.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_basemaps.html#loading-in-a-basic-world-map-instead",
     "href": "qgis_basemaps.html#loading-in-a-basic-world-map-instead",
-    "title": "7  Adding a basemap in QGIS",
-    "section": "7.3 Loading in a basic world map instead",
-    "text": "7.3 Loading in a basic world map instead\nThere are a few situations in which you might want to use the approach below instead, which will give you a nice plain basemap at the end of it, like the image below. - you want your data to be the star of the show - you don’t have an internet connection available to download the OpenStreetMap tiles - you can’t use the OpenStreetMap tiles due to licencing restrictions\n\n\n\n\n\n\n\nWarning\n\n\n\nThis method gives you a map outline that isn’t of a very high resolution - i.e. the areas don’t follow the outline of the UK precisely. It’s fine if you’re using the map at a fairly zoomed-out level, but it might not be so much use if you want to really zoom in to your county or a particular city!\n\n\nStart a new project - you can either discard the changes to your previous project if you had a go at adding the OpenStreetMap basemap in, or you can save it somewhere for later.\nLook at the very bottom of your QGIS window. Down at the bottom you should see a box that says ‘Coordinate’.\n\nNormally this will show the coordinates of the point your mouse is hovering over.\nHowever, we can click on this box and do a neat trick!\nClick into the box and get rid of the coordinates - either by highlighting them and clicking ‘del’ or backspace to delete them all at once, or by clicking somewhere in the box and using a combination of those keys to get rid of any numbers and symbols.\n\nEnter ‘world’ into this box and click the ‘enter’ or ‘return’ key on your keyboard.\n\nVoila! Suddenly you have a world map.\n\n7.3.1 Cutting out unnecessary areas\nFor a lot of people on the HSMA course, you will only be interested in displaying data for the UK - or even just one nation within the UK.\nThis world map is split into different polygons.\nIf we click on the ‘select features by area’ button on the top toolbar, we can select individual polygons.\n\nHere I’ve selected only\n\nI can select additional areas by holding ‘shift’ and selecting an additional polygon. Here I’ve done this to select Ireland too.\n\nIf I click on Ireland again with shift held down, it will be deselected. However, if I click on a selected polygon without shift held down, I will lose all my prior selections, and only the most recently clicked on polygon will be highlighted.\nBut just selecting these doesn’t do much. We can see that other areas are still visible.\nIf we head over to the layers panel, which is probably on the left of your screen, you can see that it has a layer called ‘world map’.\nWith the polygon(s) you are interested in selected, right click on the ‘world map’ layer and select ‘Save Selected Features As’.\n\nThis will bring up the following dialog box.\n\nFrom the format box, you can select any of the options, but choosing ‘GeoPackage’ or ‘GeoJSON’ is a good idea as they output a single file that can be easily transferred into other software at a later date.\nYou can then enter a file name into the box below, which will be displayed in the next step, so make it something clear and useful. Clicking the three dots to the right of this box will open a standard operating system dialog box for saving the output file - but unusually, we don’t actually really care where it’s getting saved to! So you can really save it anywhere - though perhaps you might want to reuse this as a starting point in the future for different projects, so knowing where it’s gone could be handy.\nSo why aren’t we too worried about where it’s getting saved to? It’s because we’re interested in two other key things - the tickbox that says ‘Save only selected features’ and ‘Add saved file to map’.\nMake sure those are checked, and then click ‘Ok’.\nYou’ll now see a second layer - with the name you entered in the previous step and a new randomly-chosen colour. .\n\nWe can now untick the box next to the ‘World Map’ layer - or even right click and choose ‘Remove Layer’.\n\nNow we’ll just have a nice outline of the UK to work with, which will be nice and efficient and clear for our final output.\n\n\n\n7.3.2 Styling our custom map\nWith our new layer selected - you can tell it’s selected because the name will have a grey background in the ‘Layers’ panel, and if it’s not selected you can click on the name of it in the ‘Layers’ panel - we then want to take a look at it in the Layer Styling Panel.\n\n\n\n\n\n\nTip\n\n\n\nThis panel isn’t visible by default. If you followed the setup steps in the previous chapted, this should be on the right of your screen.\nIf you didn’t, you can make it show up by clicking the “View” button in the top menu, then “Panels” and click on “Layer Styling” - this should make a tick appear next it and the panel will open up on the right side of the screen.\n\n\nTo start with, let’s change the background colour of the map.\n\nClicking on the wide bar of colour with the label ‘Color’ brings up a colour picker.\n\nWe can drag the crosshair to a nice pale green - or any colour you like!\n\nThen click on the back arrow next to ‘Select Color’, near the top of the layer styling panel, to get back to the previous screen.\nNext, you’ll notice that we originally had ‘Fill’ selected. Click on ‘Simple Fill’ instead. It should show up by default, but if it doesn’t, click on the little black arrow to the left of the word ‘Fill’.\n\nYou can see thaat now we get some extra options available to us.\nFirst, let’s get rid of the black outline by clicking the dropdown next to ‘Stroke style’ and choosing ‘No Line’.\nNext, let’s add in a background colour.\nClick on the words ‘layer rendering’ towards the bottom of the layer styling panel.\n\nNext, tick the box ‘Draw effects’ and click on the yellow star to the right to change the options.\n\nTick ‘Outer Glow’ and set the following options.\nSpread = 200 Blur radius = 0 Single Color = Blue\n\nYou now have a a nice plain UK map to work from!",
+    "title": "9  Adding a basemap in QGIS",
+    "section": "9.3 Loading in a basic world map instead",
+    "text": "9.3 Loading in a basic world map instead\nThere are a few situations in which you might want to use the approach below instead, which will give you a nice plain basemap at the end of it, like the image below. - you want your data to be the star of the show - you don’t have an internet connection available to download the OpenStreetMap tiles - you can’t use the OpenStreetMap tiles due to licencing restrictions\n\n\n\n\n\n\n\nWarning\n\n\n\nThis method gives you a map outline that isn’t of a very high resolution - i.e. the areas don’t follow the outline of the UK precisely. It’s fine if you’re using the map at a fairly zoomed-out level, but it might not be so much use if you want to really zoom in to your county or a particular city!\n\n\nStart a new project - you can either discard the changes to your previous project if you had a go at adding the OpenStreetMap basemap in, or you can save it somewhere for later.\nLook at the very bottom of your QGIS window. Down at the bottom you should see a box that says ‘Coordinate’.\n\nNormally this will show the coordinates of the point your mouse is hovering over.\nHowever, we can click on this box and do a neat trick!\nClick into the box and get rid of the coordinates - either by highlighting them and clicking ‘del’ or backspace to delete them all at once, or by clicking somewhere in the box and using a combination of those keys to get rid of any numbers and symbols.\n\nEnter ‘world’ into this box and click the ‘enter’ or ‘return’ key on your keyboard.\n\nVoila! Suddenly you have a world map.\n\n9.3.1 Cutting out unnecessary areas\nFor a lot of people on the HSMA course, you will only be interested in displaying data for the UK - or even just one nation within the UK.\nThis world map is split into different polygons.\nIf we click on the ‘select features by area’ button on the top toolbar, we can select individual polygons.\n\nHere I’ve selected only\n\nI can select additional areas by holding ‘shift’ and selecting an additional polygon. Here I’ve done this to select Ireland too.\n\nIf I click on Ireland again with shift held down, it will be deselected. However, if I click on a selected polygon without shift held down, I will lose all my prior selections, and only the most recently clicked on polygon will be highlighted.\nBut just selecting these doesn’t do much. We can see that other areas are still visible.\nIf we head over to the layers panel, which is probably on the left of your screen, you can see that it has a layer called ‘world map’.\nWith the polygon(s) you are interested in selected, right click on the ‘world map’ layer and select ‘Save Selected Features As’.\n\nThis will bring up the following dialog box.\n\nFrom the format box, you can select any of the options, but choosing ‘GeoPackage’ or ‘GeoJSON’ is a good idea as they output a single file that can be easily transferred into other software at a later date.\nYou can then enter a file name into the box below, which will be displayed in the next step, so make it something clear and useful. Clicking the three dots to the right of this box will open a standard operating system dialog box for saving the output file - but unusually, we don’t actually really care where it’s getting saved to! So you can really save it anywhere - though perhaps you might want to reuse this as a starting point in the future for different projects, so knowing where it’s gone could be handy.\nSo why aren’t we too worried about where it’s getting saved to? It’s because we’re interested in two other key things - the tickbox that says ‘Save only selected features’ and ‘Add saved file to map’.\nMake sure those are checked, and then click ‘Ok’.\nYou’ll now see a second layer - with the name you entered in the previous step and a new randomly-chosen colour. .\n\nWe can now untick the box next to the ‘World Map’ layer - or even right click and choose ‘Remove Layer’.\n\nNow we’ll just have a nice outline of the UK to work with, which will be nice and efficient and clear for our final output.\n\n\n\n9.3.2 Styling our custom map\nWith our new layer selected - you can tell it’s selected because the name will have a grey background in the ‘Layers’ panel, and if it’s not selected you can click on the name of it in the ‘Layers’ panel - we then want to take a look at it in the Layer Styling Panel.\n\n\n\n\n\n\nTip\n\n\n\nThis panel isn’t visible by default. If you followed the setup steps in the previous chapted, this should be on the right of your screen.\nIf you didn’t, you can make it show up by clicking the “View” button in the top menu, then “Panels” and click on “Layer Styling” - this should make a tick appear next it and the panel will open up on the right side of the screen.\n\n\nTo start with, let’s change the background colour of the map.\n\nClicking on the wide bar of colour with the label ‘Color’ brings up a colour picker.\n\nWe can drag the crosshair to a nice pale green - or any colour you like!\n\nThen click on the back arrow next to ‘Select Color’, near the top of the layer styling panel, to get back to the previous screen.\nNext, you’ll notice that we originally had ‘Fill’ selected. Click on ‘Simple Fill’ instead. It should show up by default, but if it doesn’t, click on the little black arrow to the left of the word ‘Fill’.\n\nYou can see thaat now we get some extra options available to us.\nFirst, let’s get rid of the black outline by clicking the dropdown next to ‘Stroke style’ and choosing ‘No Line’.\nNext, let’s add in a background colour.\nClick on the words ‘layer rendering’ towards the bottom of the layer styling panel.\n\nNext, tick the box ‘Draw effects’ and click on the yellow star to the right to change the options.\n\nTick ‘Outer Glow’ and set the following options.\nSpread = 200 Blur radius = 0 Single Color = Blue\n\nYou now have a a nice plain UK map to work from!",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Adding a basemap in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html",
     "href": "qgis_point_data.html",
-    "title": "8  Visualising Point Data in QGIS",
+    "title": "10  Visualising Point Data in QGIS",
     "section": "",
-    "text": "9 Importing point data from a .csv file\nOur data is stored in what’s called a ‘.csv’ file\nA csv has columns of data separated by commas, like this:\naccident_index,longitude,latitude,date\nA001,-0.198224,51.486454,2023/01/01\nA002,0.105042,1.49883,2023/01/02\nA002,0.173482,51.451924,2023/01/04\nWhen we load it into a program like Excel, it turns it into a table we can read\nSo we can say that our file is a text file that is split - or ‘delimited’ - by commas\nSo we need to tell QGIS that!\nSelect ‘Layer’ → ‘Add Layer’ → ‘Add Delimited Text Layer…’\nClick on the three dots to open up the file browser\nNavigate to where your file is located.\nIt will automatically show only files that are delimited text. When you reach the file, either\nDouble click on the file OR single click on it, then click ‘Open’",
+    "text": "11 Importing point data from a .csv file\nOur data is stored in what’s called a ‘.csv’ file\nA csv has columns of data separated by commas, like this:\naccident_index,longitude,latitude,date\nA001,-0.198224,51.486454,2023/01/01\nA002,0.105042,1.49883,2023/01/02\nA002,0.173482,51.451924,2023/01/04\nWhen we load it into a program like Excel, it turns it into a table we can read\nSo we can say that our file is a text file that is split - or ‘delimited’ - by commas\nSo we need to tell QGIS that!\nSelect ‘Layer’ → ‘Add Layer’ → ‘Add Delimited Text Layer…’\nClick on the three dots to open up the file browser\nNavigate to where your file is located.\nIt will automatically show only files that are delimited text. When you reach the file, either\nDouble click on the file OR single click on it, then click ‘Open’",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html#setting-the-crs-of-our-data",
     "href": "qgis_point_data.html#setting-the-crs-of-our-data",
-    "title": "8  Visualising Point Data in QGIS",
-    "section": "9.1 Setting the CRS of our data",
-    "text": "9.1 Setting the CRS of our data\nNow we need to tell it what columns to use to determine the location of each point\nClick on ‘Geometry Definition’\n\nFirst, check that it has correctly picked up the ‘latitude’ and ‘longitude’ columns from the dataset\nIf our columns are named this in our input file, it should do this automatically.\n\nNow we need to select the correct geometry CRS.\nBut how do we know what is correct?\n\n\n\n\n\n\n\nTip\n\n\n\nWhat matters here is the CRS used in the data originally.\nIf it is different to the project CRS - which is explained below - then QGIS will reproject the data you import so it matches up with the project CRS.\nIf you are unsure what CRS has been used for your data, there are a few you can try, starting at the top of this list: - EPSG:4326 - WGS 84 - EPSG:3857 - WGS 84/Pseudo-Mercator - EPSG:32630 - WGS 84 / UTN zone 30N\nIt will usually be very obvious if it’s wrong, because your data will be in totally the wrong place!\nIf it’s wrong, then delete the layer by right clicking on it in the layers tab\n\n\n\n\n\n\n\n\nClick here to read more about selecting the right CRS for your project and the data you are importing\n\n\n\n\n\nThis seems like a bit of a boring topic - but I promise you it will save you some headaches down the line!\nIt doesn’t matter if you don’t fully understand all of this section right now - but if you import some data that keeps ending up in the wrong place, just think to yourself ’could this be because of the coordinate reference system? - and then come back and read this section again!\nHowever we start our project - whether that’s by using the OpenStreetMap basemap or doing something else - then there are a few things to note about the coordinate reference system of our QGIS project.\nWe can always look at the bottom-right corner of QGIS to see the coordinate reference system being used by our project.\n\nIf we click on that, it will bring up the project properties and open the ‘CRS’ part of the properties dialog automatically, which will look something like this.\n\nNow, here I’ve already imported the OpenStreetMap basemap as shown in the step above.\nNote that here what is selected is called EPSG:3857 - also known as WGS:84 / Pseudo-Mercator.\nIf we right click on ‘OpenStreetMap’ in the XYZ tiles and scroll down a bit, we can see that this is the CRS of the OpenStreetMap ‘tileset’ too.\n\nIt’s important to know what CRS your project is using as when you come to import data from other files, it may not be using the same reference system and the data will have to be transformed to ensure that the points or areas end up in the right place at the end!\n\nBut there’s a twist…\nIf I now create a new project and look at the CRS, we can see it’s different!\n\nAnd this is due to one of the default settings in QGIS.\nIf I go to “Settings” –&gt; “Options” –&gt; “CRS and Transforms” –&gt; “CRS Handling”, then you will spot some things about how QGIS deals with CRS options by default.\n\nWhat we can see is that the project CRS will be based on the CRS of the first layer added.\nSo if we load in the OpenStreetMap basemap first when we create a new project, our projection will be EPSG:3857 - also known as WGS:84 / Pseudo-Mercator.\nIf we load in some other data first - which you might decide to do once you’ve got a few projects under your belt, or you might do if you get started and only realise afterwards that you haven’t loaded your basemap in yet - then you might find that your project is not using the CRS you were expecting!\nNow - this isn’t a problem by itself - but it can cause confusion about what CRS you should use when you try and load in additional data!\nFor example, here I’ve loaded in a dataset relating to the United Kingdom. There should be some points on the UK… but where are they?\n\nWell, the only point I can see is in the sea off the coast of Africa!\nIf I zoom a really long way in, it turns out my points did load in - but they’re not anywhere near the UK on my basemap.\n\nSo what went wrong here?\nWhen I loaded this data in, I told QGIS to use the project CRS.\nBut that’s not what QGIS is expecting!\nIt wants me to tell it what the CRS is of the data I am loading in - it already knows what the project CRS is! It just needs to know what it’s loading in so it can work out how to translate between the two.\n\n\n\n\nOnce you’ve chosen the correct CRS, click ‘add’, then click ‘close’.\n\nOnce you’ve done this, your map should look something like this:\n\n\n\n\n\n\n\nExercise 1\n\n\n\nNow we’ve got a map, let’s take a few minutes to explore some of the patterns we can see.\nTry zooming in and moving around.\nMaybe explore an area you know, or look at the layout of roads in some of the areas with more or fewer accidents than others.",
+    "title": "10  Visualising Point Data in QGIS",
+    "section": "11.1 Setting the CRS of our data",
+    "text": "11.1 Setting the CRS of our data\nNow we need to tell it what columns to use to determine the location of each point\nClick on ‘Geometry Definition’\n\nFirst, check that it has correctly picked up the ‘latitude’ and ‘longitude’ columns from the dataset\nIf our columns are named this in our input file, it should do this automatically.\n\nNow we need to select the correct geometry CRS.\nBut how do we know what is correct?\n\n\n\n\n\n\n\nTip\n\n\n\nWhat matters here is the CRS used in the data originally.\nIf it is different to the project CRS - which is explained below - then QGIS will reproject the data you import so it matches up with the project CRS.\nIf you are unsure what CRS has been used for your data, there are a few you can try, starting at the top of this list: - EPSG:4326 - WGS 84 - EPSG:3857 - WGS 84/Pseudo-Mercator - EPSG:32630 - WGS 84 / UTN zone 30N\nIt will usually be very obvious if it’s wrong, because your data will be in totally the wrong place!\nIf it’s wrong, then delete the layer by right clicking on it in the layers tab\n\n\n\n\n\n\n\n\nClick here to read more about selecting the right CRS for your project and the data you are importing\n\n\n\n\n\nThis seems like a bit of a boring topic - but I promise you it will save you some headaches down the line!\nIt doesn’t matter if you don’t fully understand all of this section right now - but if you import some data that keeps ending up in the wrong place, just think to yourself ’could this be because of the coordinate reference system? - and then come back and read this section again!\nHowever we start our project - whether that’s by using the OpenStreetMap basemap or doing something else - then there are a few things to note about the coordinate reference system of our QGIS project.\nWe can always look at the bottom-right corner of QGIS to see the coordinate reference system being used by our project.\n\nIf we click on that, it will bring up the project properties and open the ‘CRS’ part of the properties dialog automatically, which will look something like this.\n\nNow, here I’ve already imported the OpenStreetMap basemap as shown in the step above.\nNote that here what is selected is called EPSG:3857 - also known as WGS:84 / Pseudo-Mercator.\nIf we right click on ‘OpenStreetMap’ in the XYZ tiles and scroll down a bit, we can see that this is the CRS of the OpenStreetMap ‘tileset’ too.\n\nIt’s important to know what CRS your project is using as when you come to import data from other files, it may not be using the same reference system and the data will have to be transformed to ensure that the points or areas end up in the right place at the end!\n\nBut there’s a twist…\nIf I now create a new project and look at the CRS, we can see it’s different!\n\nAnd this is due to one of the default settings in QGIS.\nIf I go to “Settings” –&gt; “Options” –&gt; “CRS and Transforms” –&gt; “CRS Handling”, then you will spot some things about how QGIS deals with CRS options by default.\n\nWhat we can see is that the project CRS will be based on the CRS of the first layer added.\nSo if we load in the OpenStreetMap basemap first when we create a new project, our projection will be EPSG:3857 - also known as WGS:84 / Pseudo-Mercator.\nIf we load in some other data first - which you might decide to do once you’ve got a few projects under your belt, or you might do if you get started and only realise afterwards that you haven’t loaded your basemap in yet - then you might find that your project is not using the CRS you were expecting!\nNow - this isn’t a problem by itself - but it can cause confusion about what CRS you should use when you try and load in additional data!\nFor example, here I’ve loaded in a dataset relating to the United Kingdom. There should be some points on the UK… but where are they?\n\nWell, the only point I can see is in the sea off the coast of Africa!\nIf I zoom a really long way in, it turns out my points did load in - but they’re not anywhere near the UK on my basemap.\n\nSo what went wrong here?\nWhen I loaded this data in, I told QGIS to use the project CRS.\nBut that’s not what QGIS is expecting!\nIt wants me to tell it what the CRS is of the data I am loading in - it already knows what the project CRS is! It just needs to know what it’s loading in so it can work out how to translate between the two.\n\n\n\n\nOnce you’ve chosen the correct CRS, click ‘add’, then click ‘close’.\n\nOnce you’ve done this, your map should look something like this:\n\n\n\n\n\n\n\nExercise 1\n\n\n\nNow we’ve got a map, let’s take a few minutes to explore some of the patterns we can see.\nTry zooming in and moving around.\nMaybe explore an area you know, or look at the layout of roads in some of the areas with more or fewer accidents than others.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html#styling-points",
     "href": "qgis_point_data.html#styling-points",
-    "title": "8  Visualising Point Data in QGIS",
-    "section": "9.2 Styling points",
-    "text": "9.2 Styling points\nNow we have the accidents, but there’s so many that it’s hard to tell much.\nLet’s try splitting them out by severity.\nSelect your imported layer of points - if you’re following along with the dataset, this will be called stats19_collision_2022_minimal layer - in the layer panel by clicking it.\nClick on ‘Single Symbol’ in the layer styling panel.\n\nIn the dropdown menu that appears, select ‘Categorized’\n\nYour layer styling panel should now look something like the image on the right\n\n\n\n\n\n\n\nHINT\n\n\n\nYour layer styling panel might be too narrow by default, which cuts off some rather important buttons!\nHover over the left edge of the layer styling panel until your cursor changes to this icon: &lt;–&gt;\nThen drag it to the left until it takes up about a quarter to a third of the page and shows all the buttons below.\n\n\n\nNow we want to tell it to categorize by one of the columns in our data.\nSelect ‘accident_severity’ from the list.\n\nThen click ‘Classify’.\n\nOnce clicked, our points will have different colours (maybe not these exact ones).\nYou can see the categories it has created in our layer styling panel.\n\n\n9.2.1 Hiding points\nWe can hide some of these points by clicking the checkboxes (ticks) to the left of the symbol colour in the Layer Styling panel.\n\n\n\n\n\n\n\nExercise 2\n\n\n\nTry changing the selected value and click ‘classify’ again. Explore some of the different things we have in the dataset.\nWhich work well as things to colour our points by?\nExperiment with hiding certain values by unticking them in the layer styling panel.\nHint: you will need to click ‘yes’ when it asks you if existing classes should be deleted before classification, otherwise you will end up with categories in your legend that aren’t being used.\n\n\n\n\n\n\n\nClick here to see some example answers to this step\n\n\n\n\n\n\n\n\nAccidents at 20mph vs 70mph\n\n\n\n\n\nAccidents involving 1 vehicle vs Accidents involving more than 5 vehicles\n\n\n\n\n\n\n\n\n\n9.2.2 Colour and size\nWith the layer selected, look at the layer styling panel.\nClick on one of the categorised symbols in the section with the headers ‘symbol’, ‘value’ and ‘legend’, then click on the symbol itself (marked 1. in the image below) to load a new page with options for point colour, opacity and size.\n\nNext, you can change the colour, size or opacity using the options highlighted in the box marked ‘2.’\nYou can then click the arrow marked ‘3.’ to return to the previous page.\n\nYour changes will automatically apply if the small box labelled ‘Live update’, which is next to the ‘Apply’ button at the very bottom of the layer styling panel, has a tick in it.\n\nExercise 3\nTry changing the size, colour and opacity of some points to make the important information stand out more for a chosen category of information.\nYou can also choose to hide some categories.\nThink about the story you want to try to tell with your map. What important things do you want someone who looks at your map to take away from it? How can you use size, colour and opacity to support this?\n\n\n\n\n\n\nClick here to see some example answers to this step\n\n\n\n\n\nHere, for a map where the accidents have been classified by severity, we have - Reduced opacity of less severe accidents (so full accident patterns can still be seen - we can still spot areas with more accidents overall - while making them less obvious) - Increased size of fatal accidents (so they stand out to the viewer) - Changed severe accidents to a colour more traditionally associated with ‘bad’\n\n\n\n\n:::\n\n\n\n9.2.3 Custom Markers",
+    "title": "10  Visualising Point Data in QGIS",
+    "section": "11.2 Styling points",
+    "text": "11.2 Styling points\nNow we have the accidents, but there’s so many that it’s hard to tell much.\nLet’s try splitting them out by severity.\nSelect your imported layer of points - if you’re following along with the dataset, this will be called stats19_collision_2022_minimal layer - in the layer panel by clicking it.\nClick on ‘Single Symbol’ in the layer styling panel.\n\nIn the dropdown menu that appears, select ‘Categorized’\n\nYour layer styling panel should now look something like the image on the right\n\n\n\n\n\n\n\nHINT\n\n\n\nYour layer styling panel might be too narrow by default, which cuts off some rather important buttons!\nHover over the left edge of the layer styling panel until your cursor changes to this icon: &lt;–&gt;\nThen drag it to the left until it takes up about a quarter to a third of the page and shows all the buttons below.\n\n\n\nNow we want to tell it to categorize by one of the columns in our data.\nSelect ‘accident_severity’ from the list.\n\nThen click ‘Classify’.\n\nOnce clicked, our points will have different colours (maybe not these exact ones).\nYou can see the categories it has created in our layer styling panel.\n\n\n11.2.1 Hiding points\nWe can hide some of these points by clicking the checkboxes (ticks) to the left of the symbol colour in the Layer Styling panel.\n\n\n\n\n\n\n\nExercise 2\n\n\n\nTry changing the selected value and click ‘classify’ again. Explore some of the different things we have in the dataset.\nWhich work well as things to colour our points by?\nExperiment with hiding certain values by unticking them in the layer styling panel.\nHint: you will need to click ‘yes’ when it asks you if existing classes should be deleted before classification, otherwise you will end up with categories in your legend that aren’t being used.\n\n\n\n\n\n\n\nClick here to see some example answers to this step\n\n\n\n\n\n\n\n\nAccidents at 20mph vs 70mph\n\n\n\n\n\nAccidents involving 1 vehicle vs Accidents involving more than 5 vehicles\n\n\n\n\n\n\n\n\n\n11.2.2 Colour and size\nWith the layer selected, look at the layer styling panel.\nClick on one of the categorised symbols in the section with the headers ‘symbol’, ‘value’ and ‘legend’, then click on the symbol itself (marked 1. in the image below) to load a new page with options for point colour, opacity and size.\n\nNext, you can change the colour, size or opacity using the options highlighted in the box marked ‘2.’\nYou can then click the arrow marked ‘3.’ to return to the previous page.\n\nYour changes will automatically apply if the small box labelled ‘Live update’, which is next to the ‘Apply’ button at the very bottom of the layer styling panel, has a tick in it.\n\nExercise 3\nTry changing the size, colour and opacity of some points to make the important information stand out more for a chosen category of information.\nYou can also choose to hide some categories.\nThink about the story you want to try to tell with your map. What important things do you want someone who looks at your map to take away from it? How can you use size, colour and opacity to support this?\n\n\n\n\n\n\nClick here to see some example answers to this step\n\n\n\n\n\nHere, for a map where the accidents have been classified by severity, we have - Reduced opacity of less severe accidents (so full accident patterns can still be seen - we can still spot areas with more accidents overall - while making them less obvious) - Increased size of fatal accidents (so they stand out to the viewer) - Changed severe accidents to a colour more traditionally associated with ‘bad’\n\n\n\n\n:::\n\n\n\n11.2.3 Custom Markers",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html#adding-labels-to-points",
     "href": "qgis_point_data.html#adding-labels-to-points",
-    "title": "8  Visualising Point Data in QGIS",
-    "section": "9.3 Adding labels to points",
-    "text": "9.3 Adding labels to points\nIn addition to changing the markers, we can add labels to our points.\nNow, simple labels can be a little hard to read, especially if we have a",
+    "title": "10  Visualising Point Data in QGIS",
+    "section": "11.3 Adding labels to points",
+    "text": "11.3 Adding labels to points\nIn addition to changing the markers, we can add labels to our points.\nNow, simple labels can be a little hard to read, especially if we have a",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_point_data.html#next-steps",
     "href": "qgis_point_data.html#next-steps",
-    "title": "8  Visualising Point Data in QGIS",
-    "section": "9.4 Next Steps",
-    "text": "9.4 Next Steps\nFor looking at individual roads, this approach is quite useful, but often there are so many accidents happening of a given type that it’s really hard to draw any conclusions about the country more widely.\nThis is where colouring regions of the map by some sort of count is quite useful - and this is what we will cover in the next chapter.",
+    "title": "10  Visualising Point Data in QGIS",
+    "section": "11.4 Next Steps",
+    "text": "11.4 Next Steps\nFor looking at individual roads, this approach is quite useful, but often there are so many accidents happening of a given type that it’s really hard to draw any conclusions about the country more widely.\nThis is where colouring regions of the map by some sort of count is quite useful - and this is what we will cover in the next chapter.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Visualising Point Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html",
     "href": "qgis_choropleth.html",
-    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
+    "title": "11  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "",
-    "text": "9.1 Reminder - what’s a choropleth?\nOr, in short, something a bit like this!\nAnd the great news is that we can create these in QGIS.",
+    "text": "11.1 Reminder - what’s a choropleth?\nOr, in short, something a bit like this!\nAnd the great news is that we can create these in QGIS.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#reminder---whats-a-choropleth",
     "href": "qgis_choropleth.html#reminder---whats-a-choropleth",
-    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
+    "title": "11  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "",
     "text": "“A choropleth map is a type of statistical thematic map… [where] color corresponding with an aggregate summary of a geographic characteristic … such as population density or per-capita income.\n\n\nChoropleth maps provide an easy way to visualize how a variable varies across a geographic area or show the level of variability within a region.\n\n\nA heat map or isarithmic map is similar but uses regions drawn according to the pattern of the variable, rather than the a priori geographic areas of choropleth maps.”\n\n\nhttps://en.wikipedia.org/wiki/Choropleth_map",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#importing-a-premade-geodataset",
     "href": "qgis_choropleth.html#importing-a-premade-geodataset",
-    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
-    "section": "9.2 Importing a premade geodataset",
-    "text": "9.2 Importing a premade geodataset\nSometimes we are lucky enough to have access to a dataset that contains a series of boundaries - so showing where the edges of a series of LSOAs, MSOAs, counties, or some other type of boundary are - as well as giving us some counts relating to those areas.\nUnlike our point data, which came in a csv (a type of delimited text file), when we’re working with data relating to areas, we’re going to be using a vector layer.\nVector layers can come in a range of formats: .shp (Shapefile) .geojson (Geo JSON) *.gpkg (Geopackage)\n(note: you can also get point data that’s a vector layer)\nFirst, we need to tell QGIS that we want to import a vector layer.\n\nNext, we click on the three small dots next to ‘source’ in the window that pops up to get our file picker.\n\nNotice there are no geometry settings here as the CRS is set within the file! So we can just click ‘Add’\nYou will now see a number of area boundaries, but at the moment, they are all the same colour - which isn’t much use!",
+    "title": "11  Creating Choropleths in QGIS - Importing Boundaries",
+    "section": "11.2 Importing a premade geodataset",
+    "text": "11.2 Importing a premade geodataset\nSometimes we are lucky enough to have access to a dataset that contains a series of boundaries - so showing where the edges of a series of LSOAs, MSOAs, counties, or some other type of boundary are - as well as giving us some counts relating to those areas.\nUnlike our point data, which came in a csv (a type of delimited text file), when we’re working with data relating to areas, we’re going to be using a vector layer.\nVector layers can come in a range of formats: .shp (Shapefile) .geojson (Geo JSON) *.gpkg (Geopackage)\n(note: you can also get point data that’s a vector layer)\nFirst, we need to tell QGIS that we want to import a vector layer.\n\nNext, we click on the three small dots next to ‘source’ in the window that pops up to get our file picker.\n\nNotice there are no geometry settings here as the CRS is set within the file! So we can just click ‘Add’\nYou will now see a number of area boundaries, but at the moment, they are all the same colour - which isn’t much use!",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#adding-colour-to-our-choropleths",
     "href": "qgis_choropleth.html#adding-colour-to-our-choropleths",
-    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
-    "section": "9.3 Adding colour to our choropleths",
-    "text": "9.3 Adding colour to our choropleths\nPreviously we were working with data that had a certain number of categories per value.\nHowever, if we take a look at the attribute table for this layer, we can see we have numeric values - so instead we want a graduated symbology.\nThis means values will be grouped together rather than having a separate category per value.\nThis is just a quick overview of the dataset in this section, opened up within QGIS. Notice that there is a row per LSOA, and some relevant counts for that LSOA stored in the later columns.\n\nNow we need to head to our layer styling panel. Where it says ‘no symbol’, click in the box and choose ‘graduated’.\n\nLike before, we need to choose the value we want to colour our areas by.\nWe’ve got quite a lot to choose from in this dataset.\nLet’s start by looking at Shoplifting.\nTo do this, we need to click on the small arrow at the far right-hand side of the ‘values’ box.\n\nOnce we’ve selected this, click the ‘classify’ button (if it does not automatically populate the white box with a series of colours and category boundaries).\nWe now have our areas coloured by the number of shoplifting incidents. What do you notice about the categories it has set up for us?",
+    "title": "11  Creating Choropleths in QGIS - Importing Boundaries",
+    "section": "11.3 Adding colour to our choropleths",
+    "text": "11.3 Adding colour to our choropleths\nPreviously we were working with data that had a certain number of categories per value.\nHowever, if we take a look at the attribute table for this layer, we can see we have numeric values - so instead we want a graduated symbology.\nThis means values will be grouped together rather than having a separate category per value.\nThis is just a quick overview of the dataset in this section, opened up within QGIS. Notice that there is a row per LSOA, and some relevant counts for that LSOA stored in the later columns.\n\nNow we need to head to our layer styling panel. Where it says ‘no symbol’, click in the box and choose ‘graduated’.\n\nLike before, we need to choose the value we want to colour our areas by.\nWe’ve got quite a lot to choose from in this dataset.\nLet’s start by looking at Shoplifting.\nTo do this, we need to click on the small arrow at the far right-hand side of the ‘values’ box.\n\nOnce we’ve selected this, click the ‘classify’ button (if it does not automatically populate the white box with a series of colours and category boundaries).\nWe now have our areas coloured by the number of shoplifting incidents. What do you notice about the categories it has set up for us?",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#adjusting-category-boundaries-and-the-number-of-categories-in-qgis",
     "href": "qgis_choropleth.html#adjusting-category-boundaries-and-the-number-of-categories-in-qgis",
-    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
-    "section": "9.4 Adjusting category boundaries and the number of categories in QGIS",
-    "text": "9.4 Adjusting category boundaries and the number of categories in QGIS\n\n9.4.1 Number of categories\nFirst, let’s experiment with the number of categories and see if that helps.\nWe can change this using the arrows next to the ‘classes’ box, or by typing in the number of classes we would like.\n\nThis can produce some odd behaviour when a lot of our groups have a very low number of values in!\nWe seem to have multiple categories for ‘0’, each with a slightly different colour. That’s not ideal behaviour - though depending on your dataset, this might not occur, and the default categorisation method may work fine, in which case you can just play around with the number of classes.\n\n\n9.4.2 Categorisation type\nLet’s now try changing the classification mode.\nThis adjusts the algorithm used by QGIS to work out the size of each category and where the boundary will be.\nClick in the ‘mode’ box.\nYou can see there are several options to choose from.\nLet’s try ‘equal interval’\n\n\nThis looks very different - is this a good option?\n\nHere, while our categories now are of consistent width (i.e. the number of values they encompass is the same), due to the way the values in this dataset are distributed - with a lot of low values and only a handful of higher ones - the map is quite hard to interpret again.\nSo a small change to the mode led to a large change in our legend!",
+    "title": "11  Creating Choropleths in QGIS - Importing Boundaries",
+    "section": "11.4 Adjusting category boundaries and the number of categories in QGIS",
+    "text": "11.4 Adjusting category boundaries and the number of categories in QGIS\n\n11.4.1 Number of categories\nFirst, let’s experiment with the number of categories and see if that helps.\nWe can change this using the arrows next to the ‘classes’ box, or by typing in the number of classes we would like.\n\nThis can produce some odd behaviour when a lot of our groups have a very low number of values in!\nWe seem to have multiple categories for ‘0’, each with a slightly different colour. That’s not ideal behaviour - though depending on your dataset, this might not occur, and the default categorisation method may work fine, in which case you can just play around with the number of classes.\n\n\n11.4.2 Categorisation type\nLet’s now try changing the classification mode.\nThis adjusts the algorithm used by QGIS to work out the size of each category and where the boundary will be.\nClick in the ‘mode’ box.\nYou can see there are several options to choose from.\nLet’s try ‘equal interval’\n\n\nThis looks very different - is this a good option?\n\nHere, while our categories now are of consistent width (i.e. the number of values they encompass is the same), due to the way the values in this dataset are distributed - with a lot of low values and only a handful of higher ones - the map is quite hard to interpret again.\nSo a small change to the mode led to a large change in our legend!",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#hiding-categories",
     "href": "qgis_choropleth.html#hiding-categories",
-    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
-    "section": "9.5 Hiding categories",
-    "text": "9.5 Hiding categories\nLike with our categorised point data, we can untick layers in the layer styling panel to just show certain categories.",
+    "title": "11  Creating Choropleths in QGIS - Importing Boundaries",
+    "section": "11.5 Hiding categories",
+    "text": "11.5 Hiding categories\nLike with our categorised point data, we can untick layers in the layer styling panel to just show certain categories.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#changing-the-colourscheme",
     "href": "qgis_choropleth.html#changing-the-colourscheme",
-    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
-    "section": "9.6 Changing the Colourscheme",
-    "text": "9.6 Changing the Colourscheme",
+    "title": "11  Creating Choropleths in QGIS - Importing Boundaries",
+    "section": "11.6 Changing the Colourscheme",
+    "text": "11.6 Changing the Colourscheme",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#viewing-the-distribution",
     "href": "qgis_choropleth.html#viewing-the-distribution",
-    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
-    "section": "9.7 Viewing the Distribution",
-    "text": "9.7 Viewing the Distribution\nIf you go to ‘histogram’ and click ‘load values’, you will see the distribution of the values in the column you’re visualising, along with vertical lines showing the boundary of each category.\nThis can be really helpful for understanding the distribution of your data…\n… but sometimes, like this, it’s really hard to see!",
+    "title": "11  Creating Choropleths in QGIS - Importing Boundaries",
+    "section": "11.7 Viewing the Distribution",
+    "text": "11.7 Viewing the Distribution\nIf you go to ‘histogram’ and click ‘load values’, you will see the distribution of the values in the column you’re visualising, along with vertical lines showing the boundary of each category.\nThis can be really helpful for understanding the distribution of your data…\n… but sometimes, like this, it’s really hard to see!",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleths_joining.html",
     "href": "qgis_choropleths_joining.html",
-    "title": "10  Choropleths in QGIS - Joining Data",
+    "title": "12  Choropleths in QGIS - Joining Data",
     "section": "",
     "text": "“But the data in my organisation isn’t just sitting around in geopackage files…”\n\n\nLoad in a shapefile, geojson or geopkg of area boundaries (e.g. MSOA or LSOA boundaries) These can be downloaded from the ONS, the government, or other organisations.\nLoad in a .csv (delimited text layer) of counts using the same level of detail (e.g. if your shapefiles are for MSOA, you’ll need MSOA-level data at this point too)\n\n\nThis time, choose ‘No geometry’ in the geometry definition section.\n\n\nRight click on the MSOA shapefile layer in the layer tab and click ‘Properties…’\n\n\n\nChoose ‘Joins’ and then the plus button\n\n\n\nTell QGIS the layer to join to (our csv layer) and the names of the columns that should match in our two datasets\n\nIn this example the names are identical, but they can be different! It just matters whether the contents will have matching data.\n\nNow, when you select the layer that contains your area boundaries and head to the layer styling panel, you will be able to select the relevant value fields when creating a choropleth from this data (i.e. when you click into the ‘values’ dropdown).",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Choropleths in QGIS - Joining Data</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Choropleths in QGIS - Joining Data</span>"
     ]
   },
   {
     "objectID": "qgis_filtering.html",
     "href": "qgis_filtering.html",
-    "title": "11  Filtering Data in QGIS",
+    "title": "13  Filtering Data in QGIS",
     "section": "",
-    "text": "11.1 Working out what we have available to filter by\nTo work out what you want to filter by, it might be helpful to look at the attribute table for your layer.\nRight click on the layer in the ‘layers’ panel and choose ‘open attribute table’.\nThis will show you the full dataset within QGIS.\nHowever, while you can build a filter from within here, it’s not the easiest way.",
+    "text": "13.1 Working out what we have available to filter by\nTo work out what you want to filter by, it might be helpful to look at the attribute table for your layer.\nRight click on the layer in the ‘layers’ panel and choose ‘open attribute table’.\nThis will show you the full dataset within QGIS.\nHowever, while you can build a filter from within here, it’s not the easiest way.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_filtering.html#building-a-filter",
     "href": "qgis_filtering.html#building-a-filter",
-    "title": "11  Filtering Data in QGIS",
-    "section": "11.2 Building a filter",
-    "text": "11.2 Building a filter\nRight click on the layer you are interested in in the ‘layers’ panel and choose ‘Filter’\n\nThis will bring up a ‘Query Builder’ page\n\nTo see what values exist for a column, click the column name in the ‘Fields’ list, then choose ‘All’ to see every category.\n\nYou can then build your filter clause\nDouble click on the column name in the ‘Fields’ to add that\nThen choose an operator\nThen choose a value from the ‘Values’ box by double clicking on it\n\nYou can click ‘test’ to see how many rows will remain in your dataset once the filter has been applied\n\nWhen you’re happy, click ‘OK’ and the dataset will be filtered.",
+    "title": "13  Filtering Data in QGIS",
+    "section": "13.2 Building a filter",
+    "text": "13.2 Building a filter\nRight click on the layer you are interested in in the ‘layers’ panel and choose ‘Filter’\n\nThis will bring up a ‘Query Builder’ page\n\nTo see what values exist for a column, click the column name in the ‘Fields’ list, then choose ‘All’ to see every category.\n\nYou can then build your filter clause\nDouble click on the column name in the ‘Fields’ to add that\nThen choose an operator\nThen choose a value from the ‘Values’ box by double clicking on it\n\nYou can click ‘test’ to see how many rows will remain in your dataset once the filter has been applied\n\nWhen you’re happy, click ‘OK’ and the dataset will be filtered.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_filtering.html#spotting-filters",
     "href": "qgis_filtering.html#spotting-filters",
-    "title": "11  Filtering Data in QGIS",
-    "section": "11.3 Spotting filters",
-    "text": "11.3 Spotting filters\nYou can tell if a layer has been filtered by the icon at the end of its name in the filter panel.",
+    "title": "13  Filtering Data in QGIS",
+    "section": "13.3 Spotting filters",
+    "text": "13.3 Spotting filters\nYou can tell if a layer has been filtered by the icon at the end of its name in the filter panel.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_filtering.html#clearing-the-filter",
     "href": "qgis_filtering.html#clearing-the-filter",
-    "title": "11  Filtering Data in QGIS",
-    "section": "11.4 Clearing the filter",
-    "text": "11.4 Clearing the filter\nTo remove the filter, open up the Filter options again (by right clicking on the layer in the layers panel and choosing ‘Filter’), choose ‘Clear’, then ‘OK’.",
+    "title": "13  Filtering Data in QGIS",
+    "section": "13.4 Clearing the filter",
+    "text": "13.4 Clearing the filter\nTo remove the filter, open up the Filter options again (by right clicking on the layer in the layers panel and choosing ‘Filter’), choose ‘Clear’, then ‘OK’.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Filtering Data in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html",
     "href": "qgis_print_layouts.html",
-    "title": "12  Print Layouts in QGIS",
+    "title": "14  Print Layouts in QGIS",
     "section": "",
-    "text": "12.1 Simple exports\nOn Windows, you can use the snipping tool.\nYou can also export the in-view portion of the map as either an image or a PDF",
+    "text": "14.1 Simple exports\nOn Windows, you can use the snipping tool.\nYou can also export the in-view portion of the map as either an image or a PDF",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html#simple-exports",
     "href": "qgis_print_layouts.html#simple-exports",
-    "title": "12  Print Layouts in QGIS",
+    "title": "14  Print Layouts in QGIS",
     "section": "",
     "text": "On windows 10, use 🪟+ Shift + S to open the snipping tool.\nOn windows 11, use the prt sc key",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html#print-layouts---why-bother",
     "href": "qgis_print_layouts.html#print-layouts---why-bother",
-    "title": "12  Print Layouts in QGIS",
-    "section": "12.2 Print Layouts - why bother?",
-    "text": "12.2 Print Layouts - why bother?\nIf you want to include a title, legends, or multiple maps on one page from within QGIS, you will need to create a print layout.\nWe can build up to a map that shows multiple useful things.",
+    "title": "14  Print Layouts in QGIS",
+    "section": "14.2 Print Layouts - why bother?",
+    "text": "14.2 Print Layouts - why bother?\nIf you want to include a title, legends, or multiple maps on one page from within QGIS, you will need to create a print layout.\nWe can build up to a map that shows multiple useful things.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html#creating-a-new-print-layout",
     "href": "qgis_print_layouts.html#creating-a-new-print-layout",
-    "title": "12  Print Layouts in QGIS",
-    "section": "12.3 Creating a new print layout",
-    "text": "12.3 Creating a new print layout\nChoose project –&gt; New print layout.\n\nYou can have multiple print layouts per map, so it’s a good idea to give it a descriptive title\n\nThe print layout will open as a new window.",
+    "title": "14  Print Layouts in QGIS",
+    "section": "14.3 Creating a new print layout",
+    "text": "14.3 Creating a new print layout\nChoose project –&gt; New print layout.\n\nYou can have multiple print layouts per map, so it’s a good idea to give it a descriptive title\n\nThe print layout will open as a new window.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html#adding-in-a-map",
     "href": "qgis_print_layouts.html#adding-in-a-map",
-    "title": "12  Print Layouts in QGIS",
-    "section": "12.4 Adding in a map",
-    "text": "12.4 Adding in a map\nFirst you will want to add a map by clicking on this icon in the list down the side.\n\nThese icons are key for moving around in your map and selecting elements of your print layout.",
+    "title": "14  Print Layouts in QGIS",
+    "section": "14.4 Adding in a map",
+    "text": "14.4 Adding in a map\nFirst you will want to add a map by clicking on this icon in the list down the side.\n\nThese icons are key for moving around in your map and selecting elements of your print layout.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html#legends",
     "href": "qgis_print_layouts.html#legends",
-    "title": "12  Print Layouts in QGIS",
-    "section": "12.5 Legends",
-    "text": "12.5 Legends\nYou may next want to add a legend.\n\nLike before, draw the legend onto the canvas.\n\n\n\n\n\n\nTip\n\n\n\nWith the legend selected on the canvas, you can choose ‘Only show items from inside linked maps’ to remove any parts of the legend that don’t relate to what is shown on the screen.\n\n\n\n12.5.1 Legend titles",
+    "title": "14  Print Layouts in QGIS",
+    "section": "14.5 Legends",
+    "text": "14.5 Legends\nYou may next want to add a legend.\n\nLike before, draw the legend onto the canvas.\n\n\n\n\n\n\nTip\n\n\n\nWith the legend selected on the canvas, you can choose ‘Only show items from inside linked maps’ to remove any parts of the legend that don’t relate to what is shown on the screen.\n\n\n\n14.5.1 Legend titles",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html#labels-and-titles",
     "href": "qgis_print_layouts.html#labels-and-titles",
-    "title": "12  Print Layouts in QGIS",
-    "section": "12.6 Labels and Titles",
-    "text": "12.6 Labels and Titles\nYou may want to add labels or titles.\n\nThe contents has to be edited using the label box in the ‘item properties’ section.\n\nYou can adjust the font size by clicking on the ‘Font’ box inside the ‘Appearance’ section.\nOnce you have one label, you can copy and paste this to speed up creating additional labels.",
+    "title": "14  Print Layouts in QGIS",
+    "section": "14.6 Labels and Titles",
+    "text": "14.6 Labels and Titles\nYou may want to add labels or titles.\n\nThe contents has to be edited using the label box in the ‘item properties’ section.\n\nYou can adjust the font size by clicking on the ‘Font’ box inside the ‘Appearance’ section.\nOnce you have one label, you can copy and paste this to speed up creating additional labels.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html#attribution",
     "href": "qgis_print_layouts.html#attribution",
-    "title": "12  Print Layouts in QGIS",
-    "section": "12.7 Attribution",
-    "text": "12.7 Attribution\nIf using the OpenStreetMap basemap that is built into QGIS, add a label like the following to comply with the licence:\n© OpenStreetMap contributors, licenced as CC BY-SA\nIt is also good practice to acknowledge the software with a label like Created in QGIS",
+    "title": "14  Print Layouts in QGIS",
+    "section": "14.7 Attribution",
+    "text": "14.7 Attribution\nIf using the OpenStreetMap basemap that is built into QGIS, add a label like the following to comply with the licence:\n© OpenStreetMap contributors, licenced as CC BY-SA\nIt is also good practice to acknowledge the software with a label like Created in QGIS",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html#extending-your-print-layouts-further",
     "href": "qgis_print_layouts.html#extending-your-print-layouts-further",
-    "title": "12  Print Layouts in QGIS",
-    "section": "12.8 Extending your print layouts further",
-    "text": "12.8 Extending your print layouts further\nThere are a range of additional things you can add to your print layouts, like\n\nimages (perhaps the logo of your organisation)\ntables of relevant data",
+    "title": "14  Print Layouts in QGIS",
+    "section": "14.8 Extending your print layouts further",
+    "text": "14.8 Extending your print layouts further\nThere are a range of additional things you can add to your print layouts, like\n\nimages (perhaps the logo of your organisation)\ntables of relevant data",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_print_layouts.html#exporting-print-layouts",
     "href": "qgis_print_layouts.html#exporting-print-layouts",
-    "title": "12  Print Layouts in QGIS",
-    "section": "12.9 Exporting print layouts",
-    "text": "12.9 Exporting print layouts\nFrom within the print layout window, we can choose the “Layout” dropdown menu to find several different formats we can export our print layout in.",
+    "title": "14  Print Layouts in QGIS",
+    "section": "14.9 Exporting print layouts",
+    "text": "14.9 Exporting print layouts\nFrom within the print layout window, we can choose the “Layout” dropdown menu to find several different formats we can export our print layout in.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Print Layouts in QGIS</span>"
     ]
   },
   {
     "objectID": "qgis_exercises.html",
     "href": "qgis_exercises.html",
-    "title": "13  Exercises - QGIS",
+    "title": "15  Exercises - QGIS",
     "section": "",
-    "text": "14 QGIS Exercise 1\nCreate a new QGIS file\nLoad in a basemap\nLoad in the STATS19 dataset (stats19_collisions_point_data_2022.csv)\nFilter to one particular police force\nCreate one (or more) layers using point data, choosing the field(s) you find interesting\nRemember that you can hide certain categories of data, change icons, add labels, filter…\n\n\n15 QGIS Exercise 2\nCreate a new QGIS file\nLoad in a basemap\nLet’s try creating some more maps for the STATS19 dataset.\nWe’re just going to use a geojson file that already has some counts per MSOA joined in. stats_19_counts_by_msoa_3857.geojson\nCreate at least one choropleth (from this file)\nTry out different filters, colour schemes and categorisation modes.\n\n\n16 QGIS Exercise 3\nCreate a new QGIS file\nLoad in a basemap\nTo account for the range in size of MSOA, we now have a new csv of data with standardised values (number of collisions per square kilometre, number of casualties per 1000 occupants).\nImport this csv as delimited data.\nImport the vector file of MSOAs\nJoin these layers together\nCreate a print layout that shows two maps side-by-side for your region.",
+    "text": "16 QGIS Exercise 1\nCreate a new QGIS file\nLoad in a basemap\nLoad in the STATS19 dataset (stats19_collisions_point_data_2022.csv)\nFilter to one particular police force\nCreate one (or more) layers using point data, choosing the field(s) you find interesting\nRemember that you can hide certain categories of data, change icons, add labels, filter…\n\n\n17 QGIS Exercise 2\nCreate a new QGIS file\nLoad in a basemap\nLet’s try creating some more maps for the STATS19 dataset.\nWe’re just going to use a geojson file that already has some counts per MSOA joined in. stats_19_counts_by_msoa_3857.geojson\nCreate at least one choropleth (from this file)\nTry out different filters, colour schemes and categorisation modes.\n\n\n18 QGIS Exercise 3\nCreate a new QGIS file\nLoad in a basemap\nTo account for the range in size of MSOA, we now have a new csv of data with standardised values (number of collisions per square kilometre, number of casualties per 1000 occupants).\nImport this csv as delimited data.\nImport the vector file of MSOAs\nJoin these layers together\nCreate a print layout that shows two maps side-by-side for your region.",
     "crumbs": [
-      "Mapping in QGIS",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Exercises - QGIS</span>"
-    ]
-  },
-  {
-    "objectID": "introduction_mapping_in_python.html",
-    "href": "introduction_mapping_in_python.html",
-    "title": "Mapping in Python",
-    "section": "",
-    "text": "Creating maps in Python opens up a whole world of opportunities to you.\n\nYou can do every step in one place - you don’t have to move between different tools to clean and visualise your data\nYou can create reproducible analyses for different areas using similar code (for example, you could create and visualise a report per county programatically and schedule this to be rerun on a regular basis)\nYou can create interactive web applications that allow users to explore maps at their own pace and gain insights.\n\nBy the end of this section, you will be able to make all sorts of maps within Python and incorporate them into a range of outputs to enable other people to make use of them within or outside your organisation.\nLet’s start by taking a look at some example maps:\n\n\n\n\n\n\nClick here to take a look at a great example of an interactive healthcare map\n\n\n\n\n\n\n\n\n\n\nFurther reading\nNHS Digital - Principles and Visual Guidelines for Maps\n\n\nReferences",
-    "crumbs": [
-      "Mapping in Python"
+      "Part 2 - Mapping in QGIS",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Exercises - QGIS</span>"
     ]
   },
   {
     "objectID": "why_python_mapping.html",
     "href": "why_python_mapping.html",
-    "title": "14  Why use python for maps?",
+    "title": "16  Why use python for maps?",
     "section": "",
-    "text": "14.1 Wrangling and prep in one place\nBy doing your data wrangling and making your final maps all in one script, it’s a lot easier to adjust the calculations that feed into your map\nYou can use all of the useful techniques you’ve already learned for Pandas to filter your datasets, create additional columns, and more…",
+    "text": "16.1 Wrangling and prep in one place\nBy doing your data wrangling and making your final maps all in one script, it’s a lot easier to adjust the calculations that feed into your map\nYou can use all of the useful techniques you’ve already learned for Pandas to filter your datasets, create additional columns, and more…",
     "crumbs": [
-      "Mapping in Python",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Why use python for maps?</span>"
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Why use python for maps?</span>"
     ]
   },
   {
     "objectID": "why_python_mapping.html#same-code-multiple-maps",
     "href": "why_python_mapping.html#same-code-multiple-maps",
-    "title": "14  Why use python for maps?",
-    "section": "14.2 Same code, multiple maps",
-    "text": "14.2 Same code, multiple maps\nBy using functions or loops, you can rapidly start to make maps to show different aspects of your data (6 lines of code actually made 25 maps here)\n\nYou can also use scripts (and reporting tools like Quarto, which we will cover in a later part of the course) to create large numbers of reports for different services or areas automatically",
+    "title": "16  Why use python for maps?",
+    "section": "16.2 Same code, multiple maps",
+    "text": "16.2 Same code, multiple maps\nBy using functions or loops, you can rapidly start to make maps to show different aspects of your data (6 lines of code actually made 25 maps here)\n\nYou can also use scripts (and reporting tools like Quarto, which we will cover in a later part of the course) to create large numbers of reports for different services or areas automatically",
     "crumbs": [
-      "Mapping in Python",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Why use python for maps?</span>"
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Why use python for maps?</span>"
     ]
   },
   {
     "objectID": "why_python_mapping.html#interactivity-for-end-users",
     "href": "why_python_mapping.html#interactivity-for-end-users",
-    "title": "14  Why use python for maps?",
-    "section": "14.3 Interactivity for end users",
-    "text": "14.3 Interactivity for end users\nBy using Python maps, you can build them into interactive web-based tools so they will be generated on-the-fly based on combinations your users choose\n(which we cover in a later module too!)",
+    "title": "16  Why use python for maps?",
+    "section": "16.3 Interactivity for end users",
+    "text": "16.3 Interactivity for end users\nBy using Python maps, you can build them into interactive web-based tools so they will be generated on-the-fly based on combinations your users choose\n(which we cover in a later module too!)",
     "crumbs": [
-      "Mapping in Python",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Why use python for maps?</span>"
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Why use python for maps?</span>"
+    ]
+  },
+  {
+    "objectID": "why_python_mapping.html#examples",
+    "href": "why_python_mapping.html#examples",
+    "title": "16  Why use python for maps?",
+    "section": "16.4 Examples",
+    "text": "16.4 Examples\n\n\n\n\n\n\nClick here to take a look at a great example of an interactive healthcare map",
+    "crumbs": [
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Why use python for maps?</span>"
+    ]
+  },
+  {
+    "objectID": "why_python_mapping.html#further-reading",
+    "href": "why_python_mapping.html#further-reading",
+    "title": "16  Why use python for maps?",
+    "section": "16.5 Further reading",
+    "text": "16.5 Further reading\nNHS Digital - Principles and Visual Guidelines for Maps",
+    "crumbs": [
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Why use python for maps?</span>"
     ]
   },
   {
     "objectID": "python_geopandas.html",
     "href": "python_geopandas.html",
-    "title": "15  Working With Travel Time Data in Python - the geopandas package",
+    "title": "17  Working With Travel Time Data in Python - the geopandas package",
     "section": "",
-    "text": "15.1 The geometry column\nEvery Geopandas dataframe has a ‘geometry’ column (even if it’s not called that).\nVarious geopandas methods will then automatically apply to that geometry column without you having to specify that.\nFor example, the .plot() method of geopandas will plot the line, point or polygon data stored in the geometry column.",
+    "text": "17.1 The geometry column\nEvery Geopandas dataframe has a ‘geometry’ column (even if it’s not called that).\nVarious geopandas methods will then automatically apply to that geometry column without you having to specify that.\nFor example, the .plot() method of geopandas will plot the line, point or polygon data stored in the geometry column.",
     "crumbs": [
-      "Mapping in Python",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Working With Travel Time Data in Python - the geopandas package</span>"
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Working With Travel Time Data in Python - the geopandas package</span>"
     ]
   },
   {
     "objectID": "python_geopandas.html#the-geometry-column",
     "href": "python_geopandas.html#the-geometry-column",
-    "title": "15  Working With Travel Time Data in Python - the geopandas package",
+    "title": "17  Working With Travel Time Data in Python - the geopandas package",
     "section": "",
     "text": "A reminder - types of data",
     "crumbs": [
-      "Mapping in Python",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Working With Travel Time Data in Python - the geopandas package</span>"
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Working With Travel Time Data in Python - the geopandas package</span>"
     ]
   },
   {
     "objectID": "python_geopandas_reading_files.html",
     "href": "python_geopandas_reading_files.html",
-    "title": "16  Reading files with Geopandas",
+    "title": "18  Reading files with Geopandas",
     "section": "",
-    "text": "16.1 Importing geojsons, geopackages or shape files\nWhen working with prepackaged geographic data types, they will usually be stored in the GeoJSON format, the geopackage (gpkg) format, or as a .shp file.",
+    "text": "18.1 Importing geojsons, geopackages or shape files\nWhen working with prepackaged geographic data types, they will usually be stored in the GeoJSON format, the geopackage (gpkg) format, or as a .shp file.",
     "crumbs": [
-      "Mapping in Python",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
     ]
   },
   {
     "objectID": "python_geopandas_reading_files.html#importing-geojsons-geopackages-or-shape-files",
     "href": "python_geopandas_reading_files.html#importing-geojsons-geopackages-or-shape-files",
-    "title": "16  Reading files with Geopandas",
+    "title": "18  Reading files with Geopandas",
     "section": "",
-    "text": "Warning\n\n\n\nShapefiles are a little more complex as they are a number of files with different extensions that all need to be distributed together - even though it’s only the file with the extension ‘.shp’ that we read in.\nGeojson and geopackages are often easier to distribute and download!\n\n\n\n16.1.1 Files stored locally\nYou can refer to a range of geographic data file types stored locally.\n\ncountries_gdf = geopandas.read_file(\"package.gpkg\")\n\n\n\n16.1.2 Files stored on the web\nYou can also directly refer to files stored on the web.\n\ndf = geopandas.read_file(\"http://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_land.geojson\")\n\n\n\n16.1.3 Zipped files\nYou can also directly refer to files stored as zip files by prefixing the file path with zip:///.\n\nstates = geopandas.read_file(\"zip:///Users/name/Downloads/cb_2017_us_state_500k.zip\")\n\nYou can read more about file imports in the geopandas documentation, which is embedded below.",
+    "text": "Warning\n\n\n\nShapefiles are a little more complex as they are a number of files with different extensions that all need to be distributed together - even though it’s only the file with the extension ‘.shp’ that we read in.\nGeojson and geopackages are often easier to distribute and download!\n\n\n\n18.1.1 Files stored locally\nYou can refer to a range of geographic data file types stored locally.\n\ncountries_gdf = geopandas.read_file(\"package.gpkg\")\n\n\n\n18.1.2 Files stored on the web\nYou can also directly refer to files stored on the web.\n\ndf = geopandas.read_file(\"http://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_land.geojson\")\n\n\n\n18.1.3 Zipped files\nYou can also directly refer to files stored as zip files by prefixing the file path with zip:///.\n\nstates = geopandas.read_file(\"zip:///Users/name/Downloads/cb_2017_us_state_500k.zip\")\n\nYou can read more about file imports in the geopandas documentation, which is embedded below.",
     "crumbs": [
-      "Mapping in Python",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
     ]
   },
   {
     "objectID": "python_geopandas_reading_files.html#turning-existing-data-into-a-geodataframe",
     "href": "python_geopandas_reading_files.html#turning-existing-data-into-a-geodataframe",
-    "title": "16  Reading files with Geopandas",
-    "section": "17.1 Turning existing data into a GeoDataFrame",
-    "text": "17.1 Turning existing data into a GeoDataFrame\nHowever - a lot of the time you may be extracting data from your data warehouse and turning this into a geodataframe.\nLet’s go back to our crime dataset from the QGIS section.\n\nimport pandas as pd\n\nsw_5forces_stop_and_search_df = pd.read_csv(\"https://raw.githubusercontent.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/sw_5forces_stop_and_search.csv\")\n\n# view the first row\nsw_5forces_stop_and_search_df.head(1)\n\n\n\n\n\n\n\n\n\nType\nDate\nPart of a policing operation\nPolicing operation\nLatitude\nLongitude\nGender\nAge range\nSelf-defined ethnicity\nOfficer-defined ethnicity\nLegislation\nObject of search\nOutcome\nOutcome linked to object of search\nRemoval of more than just outer clothing\nUnnamed: 15\n\n\n\n\n0\nPerson search\n2019-06-01T00:02:00+00:00\nNaN\nNaN\n51.496817\n-2.580971\nMale\n25-34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nPolice and Criminal Evidence Act 1984 (section 1)\nArticles for use in criminal damage\nArrest\nFalse\nFalse\nNaN\n\n\n\n\n\n\n\n\nHere we’ve imported it as a csv - but if we’d extracted data from a database and saved it as pandas dataframe, the following steps would be the same!\nSo let’s just check the type first.\n\ntype(sw_5forces_stop_and_search_df)\n\npandas.core.frame.DataFrame\n\n\nFirst, we need to know what the columns that identify the geometry are.\nIn this case, they are ‘Latitude’ and ‘Longitude’\nWe can now construct a geopandas geodataframe from this .csv file.\n\nsw_5forces_stop_and_search_gdf = geopandas.GeoDataFrame(\n    sw_5forces_stop_and_search_df, # Our pandas dataframe\n    geometry = geopandas.points_from_xy(\n        sw_5forces_stop_and_search_df['Longitude'], # Our 'x' column (horizontal position of points)\n        sw_5forces_stop_and_search_df['Latitude'] # Our 'y' column (vertical position of points)\n        ),\n    crs = 'EPSG:4326' # the coordinate reference system of the data - use EPSG:4326 if you are unsure\n    )\n\nLet’s view this new object.\n\nsw_5forces_stop_and_search_gdf.head()\n\n\n\n\n\n\n\n\n\nType\nDate\nPart of a policing operation\nPolicing operation\nLatitude\nLongitude\nGender\nAge range\nSelf-defined ethnicity\nOfficer-defined ethnicity\nLegislation\nObject of search\nOutcome\nOutcome linked to object of search\nRemoval of more than just outer clothing\nUnnamed: 15\ngeometry\n\n\n\n\n0\nPerson search\n2019-06-01T00:02:00+00:00\nNaN\nNaN\n51.496817\n-2.580971\nMale\n25-34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nPolice and Criminal Evidence Act 1984 (section 1)\nArticles for use in criminal damage\nArrest\nFalse\nFalse\nNaN\nPOINT (-2.58097 51.49682)\n\n\n1\nPerson search\n2019-06-01T01:15:00+00:00\nNaN\nNaN\n51.454085\n-2.599742\nMale\n25-34\nOther ethnic group - Not stated\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nTrue\nFalse\nNaN\nPOINT (-2.59974 51.45408)\n\n\n2\nPerson search\n2019-06-01T01:27:00+00:00\nNaN\nNaN\n50.983714\n-3.219592\nMale\n25-34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nNaN\nFalse\nNaN\nPOINT (-3.21959 50.98371)\n\n\n3\nPerson search\n2019-06-01T01:27:00+00:00\nNaN\nNaN\n50.983714\n-3.219592\nMale\nover 34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nNaN\nFalse\nNaN\nPOINT (-3.21959 50.98371)\n\n\n4\nPerson search\n2019-06-01T01:27:00+00:00\nNaN\nNaN\n50.983714\n-3.219592\nMale\nover 34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nNaN\nFalse\nNaN\nPOINT (-3.21959 50.98371)\n\n\n\n\n\n\n\n\nAnd let’s view the type of object it is.\n\ntype(sw_5forces_stop_and_search_gdf)\n\ngeopandas.geodataframe.GeoDataFrame",
+    "title": "18  Reading files with Geopandas",
+    "section": "19.1 Turning existing data into a GeoDataFrame",
+    "text": "19.1 Turning existing data into a GeoDataFrame\nHowever - a lot of the time you may be extracting data from your data warehouse and turning this into a geodataframe.\nLet’s go back to our crime dataset from the QGIS section.\n\nimport pandas as pd\n\nsw_5forces_stop_and_search_df = pd.read_csv(\"https://raw.githubusercontent.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/sw_5forces_stop_and_search.csv\")\n\n# view the first row\nsw_5forces_stop_and_search_df.head(1)\n\n\n\n\n\n\n\n\n\nType\nDate\nPart of a policing operation\nPolicing operation\nLatitude\nLongitude\nGender\nAge range\nSelf-defined ethnicity\nOfficer-defined ethnicity\nLegislation\nObject of search\nOutcome\nOutcome linked to object of search\nRemoval of more than just outer clothing\nUnnamed: 15\n\n\n\n\n0\nPerson search\n2019-06-01T00:02:00+00:00\nNaN\nNaN\n51.496817\n-2.580971\nMale\n25-34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nPolice and Criminal Evidence Act 1984 (section 1)\nArticles for use in criminal damage\nArrest\nFalse\nFalse\nNaN\n\n\n\n\n\n\n\n\nHere we’ve imported it as a csv - but if we’d extracted data from a database and saved it as pandas dataframe, the following steps would be the same!\nSo let’s just check the type first.\n\ntype(sw_5forces_stop_and_search_df)\n\npandas.core.frame.DataFrame\n\n\nFirst, we need to know what the columns that identify the geometry are.\nIn this case, they are ‘Latitude’ and ‘Longitude’\nWe can now construct a geopandas geodataframe from this .csv file.\n\nsw_5forces_stop_and_search_gdf = geopandas.GeoDataFrame(\n    sw_5forces_stop_and_search_df, # Our pandas dataframe\n    geometry = geopandas.points_from_xy(\n        sw_5forces_stop_and_search_df['Longitude'], # Our 'x' column (horizontal position of points)\n        sw_5forces_stop_and_search_df['Latitude'] # Our 'y' column (vertical position of points)\n        ),\n    crs = 'EPSG:4326' # the coordinate reference system of the data - use EPSG:4326 if you are unsure\n    )\n\nLet’s view this new object.\n\nsw_5forces_stop_and_search_gdf.head()\n\n\n\n\n\n\n\n\n\nType\nDate\nPart of a policing operation\nPolicing operation\nLatitude\nLongitude\nGender\nAge range\nSelf-defined ethnicity\nOfficer-defined ethnicity\nLegislation\nObject of search\nOutcome\nOutcome linked to object of search\nRemoval of more than just outer clothing\nUnnamed: 15\ngeometry\n\n\n\n\n0\nPerson search\n2019-06-01T00:02:00+00:00\nNaN\nNaN\n51.496817\n-2.580971\nMale\n25-34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nPolice and Criminal Evidence Act 1984 (section 1)\nArticles for use in criminal damage\nArrest\nFalse\nFalse\nNaN\nPOINT (-2.58097 51.49682)\n\n\n1\nPerson search\n2019-06-01T01:15:00+00:00\nNaN\nNaN\n51.454085\n-2.599742\nMale\n25-34\nOther ethnic group - Not stated\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nTrue\nFalse\nNaN\nPOINT (-2.59974 51.45408)\n\n\n2\nPerson search\n2019-06-01T01:27:00+00:00\nNaN\nNaN\n50.983714\n-3.219592\nMale\n25-34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nNaN\nFalse\nNaN\nPOINT (-3.21959 50.98371)\n\n\n3\nPerson search\n2019-06-01T01:27:00+00:00\nNaN\nNaN\n50.983714\n-3.219592\nMale\nover 34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nNaN\nFalse\nNaN\nPOINT (-3.21959 50.98371)\n\n\n4\nPerson search\n2019-06-01T01:27:00+00:00\nNaN\nNaN\n50.983714\n-3.219592\nMale\nover 34\nWhite - English/Welsh/Scottish/Northern Irish/...\nWhite\nMisuse of Drugs Act 1971 (section 23)\nControlled drugs\nA no further action disposal\nNaN\nFalse\nNaN\nPOINT (-3.21959 50.98371)\n\n\n\n\n\n\n\n\nAnd let’s view the type of object it is.\n\ntype(sw_5forces_stop_and_search_gdf)\n\ngeopandas.geodataframe.GeoDataFrame",
     "crumbs": [
-      "Mapping in Python",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
     ]
   },
   {
     "objectID": "python_geopandas_reading_files.html#joining-area-data-to-boundary-data",
     "href": "python_geopandas_reading_files.html#joining-area-data-to-boundary-data",
-    "title": "16  Reading files with Geopandas",
-    "section": "17.2 Joining area data to boundary data",
-    "text": "17.2 Joining area data to boundary data\nWe can also combine pandas dataframes with geopandas dataframes.\nWhen might we want to do this?\nImagine we have a dataset of patients who are using a particular type of service.\nWe can use pandas to count the number of patients per LSOA.\nHowever - the LSOA code alone isn’t going to allow us to plot this dataset - it doesn’t contain the geometry.\nInstead, we\n\nimport a shapefile, geoJSON or geopackage of boundaries\njoin it to our pandas dataframe using a common column (like LSOA code)\n\nIf we join our dataframe to our geodataframe, the result will be a geodataframe - so you can make use of all the useful features of geodataframes.\n\nmy_lsoa_boundary_gdf = geopandas.read_file(\"lsoa_boundaries.gpkg\")\n\nmy_count_df = pd.read_csv(“counts_by_lsoa.csv”)\n\nLet’s imagine the geodataframe has a column called ‘LSOA11CD’\nThe count dataframe has a column called ‘LSOA’\n\nmy_final_df = pd.merge(\n    left=my_lsoa_boundary_gdf,\n    right=my_count_df,\n    left_on=”LSOA11CD”\n    right_on=”LSOA”\n    how=”right”\n)\n\n\n\n\n\n\n\nWarning\n\n\n\nWe need to be careful about the order we join things in to ensure we end up with the right type of object at the end.\n\n“The stand-alone merge function will work if the GeoDataFrame is in the left argument; if a DataFrame is in the left argument and a GeoDataFrame is in the right position, the result will no longer be a GeoDataFrame.” - https://geopandas.org/en/v0.8.0/mergingdata.html”\n\nThis would result in a geodataframe:\n\nmy_final_df = pd.merge(\n    left=my_lsoa_boundary_gdf,\n    right=my_count_df,\n    left_on=”LSOA11CD”\n    right_on=”LSOA”\n    how=”right”\n    )\n\nBut this would not.\n\nmy_final_df = pd.merge(\n    left=my_count_df,\n    left=my_lsoa_boundary_gdf,\n    left_on=”LSOA”\n    right_on=”LSOA11CD”\n    how=\"left\"\n)\n\n\n\n\n\n\n\n\n\nThe ‘how’ argument\n\n\n\nThe ‘how’ argument\nIf you set how = ‘left’, all of the rows from the geodataframe will be kept, even if there is no value in your dataframe of counts\nIf you set how = ‘right’, all of the rows from the counts dataframe will be kept, even if there is no value in your geodataframe Check you have no missing values in the ‘geometry’ column after this!\nIf you set how = ‘full’, all of the rows from both dataframes will be kept - so you may end up with empty geometry in some cases and/or empty counts in others",
+    "title": "18  Reading files with Geopandas",
+    "section": "19.2 Joining area data to boundary data",
+    "text": "19.2 Joining area data to boundary data\nWe can also combine pandas dataframes with geopandas dataframes.\nWhen might we want to do this?\nImagine we have a dataset of patients who are using a particular type of service.\nWe can use pandas to count the number of patients per LSOA.\nHowever - the LSOA code alone isn’t going to allow us to plot this dataset - it doesn’t contain the geometry.\nInstead, we\n\nimport a shapefile, geoJSON or geopackage of boundaries\njoin it to our pandas dataframe using a common column (like LSOA code)\n\nIf we join our dataframe to our geodataframe, the result will be a geodataframe - so you can make use of all the useful features of geodataframes.\n\nmy_lsoa_boundary_gdf = geopandas.read_file(\"lsoa_boundaries.gpkg\")\n\nmy_count_df = pd.read_csv(“counts_by_lsoa.csv”)\n\nLet’s imagine the geodataframe has a column called ‘LSOA11CD’\nThe count dataframe has a column called ‘LSOA’\n\nmy_final_df = pd.merge(\n    left=my_lsoa_boundary_gdf,\n    right=my_count_df,\n    left_on=”LSOA11CD”\n    right_on=”LSOA”\n    how=”right”\n)\n\n\n\n\n\n\n\nWarning\n\n\n\nWe need to be careful about the order we join things in to ensure we end up with the right type of object at the end.\n\n“The stand-alone merge function will work if the GeoDataFrame is in the left argument; if a DataFrame is in the left argument and a GeoDataFrame is in the right position, the result will no longer be a GeoDataFrame.” - https://geopandas.org/en/v0.8.0/mergingdata.html”\n\nThis would result in a geodataframe:\n\nmy_final_df = pd.merge(\n    left=my_lsoa_boundary_gdf,\n    right=my_count_df,\n    left_on=”LSOA11CD”\n    right_on=”LSOA”\n    how=”right”\n    )\n\nBut this would not.\n\nmy_final_df = pd.merge(\n    left=my_count_df,\n    left=my_lsoa_boundary_gdf,\n    left_on=”LSOA”\n    right_on=”LSOA11CD”\n    how=\"left\"\n)\n\n\n\n\n\n\n\n\n\nThe ‘how’ argument\n\n\n\nThe ‘how’ argument\nIf you set how = ‘left’, all of the rows from the geodataframe will be kept, even if there is no value in your dataframe of counts\nIf you set how = ‘right’, all of the rows from the counts dataframe will be kept, even if there is no value in your geodataframe Check you have no missing values in the ‘geometry’ column after this!\nIf you set how = ‘full’, all of the rows from both dataframes will be kept - so you may end up with empty geometry in some cases and/or empty counts in others",
     "crumbs": [
-      "Mapping in Python",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Reading files with Geopandas</span>"
     ]
   }
 ]

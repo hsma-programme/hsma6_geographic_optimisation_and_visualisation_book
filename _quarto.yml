@@ -9,13 +9,15 @@ book:
   - index.qmd
   - intro.qmd
   - what_geographic_problems_health_etc.qmd
-  - part: concepts_and_terms.qmd
+  - part: "Part 1 - Geographic Concepts and Terms"
     chapters:
+    - concepts_and_terms.qmd
     - ct_crs.qmd
     - ct_filetypes.qmd
     - the_importance_of_standardisation.qmd
-  - part: introduction_mapping_with_qgis.qmd
+  - part: "Part 2 - Mapping in QGIS"
     chapters:
+    - introduction_mapping_with_qgis.qmd
     - qgis_setup.qmd
     - qgis_basemaps.qmd
     - qgis_point_data.qmd
@@ -26,7 +28,7 @@ book:
   #   - qgis_python.qmd
   #   - qgis_extensions.qmd
     - qgis_exercises.qmd
-  - part: introduction_mapping_in_python.qmd
+  - part: "Part 3 - Mapping in Python"
     chapters:
     - why_python_mapping.qmd
     - python_geopandas.qmd
@@ -35,25 +37,30 @@ book:
   #   - python_geopandas_leaflet.qmd
   #   - python_geopandas_kepler.qmd
   #   - python_mapping_exercises.qmd
-  # - part: mapping_travel_times.qmd
+  # - part: "Part 4 - Mapping Travel Times"
   #   chapters:
+  #   - mapping_travel_times.qmd
   #   - mtt_working_with_lsoa_travel_time_data.qmd
   #   - mtt_mapping_travel_times_qgis.qmd
   #   - mtt_mapping_travel_times_python.qmd
   #   - mtt_travel_time_apis.qmd
   #   - mtt_travel_time_exercises.qmd
-  # - part: intro_facility_location.qmd
+  # - part: "Part 5 - Facility Location Problems"
   #   chapters:
+  #   - intro_facility_location.qmd
   #   - fl_bruteforce_solutions.qmd
   #   - fl_limits_of_computation.qmd
   #   - fl_evolutionary_algorithms.qmd
   #   - fl_genetic_algorithms.qmd
   #   - fl_facility_location_exercises.qmd
-  # - part: introduction_travelling_salesman_vrp.qmd
+  # - part: "Part 5 - Routing and Scheduling Problems"
   #   chapters:
+  #   - introduction_travelling_salesman_vrp.qmd
   #   - tsvrp_travelling_salesman.qmd
   #   - tsvrp_vehicle_routing_problem.qmd
   #   - tsvrp_exercises.qmd
+  # - part: "Part 6 - Geospatial Statistics"
+  # - part: "Part 7 - Advanced Facility Location Problems"
   # - conclusion.qmd
   # - resources_additional_reading.qmd
   cover-image: resources/logos/hsma_logo_transparent_background_large.png
@@ -64,6 +71,10 @@ book:
   navbar:
     search: false
     background: '#8A1E1E'
+    right:
+      - icon: github
+        href: https://github.com/hsma-programme/hsma6_geographic_optimisation_and_visualisation_book
+        aria-label: GitHub
   sidebar:
     search: true
     style: docked
