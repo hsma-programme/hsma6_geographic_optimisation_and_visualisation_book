@@ -1,4 +1,4 @@
-# Creating Choropleths in QGIS
+# Choropleths in QGIS - Joining Data
 ```{r, echo = FALSE}
 source("glossary_funcs.R")
 glossary_setup()

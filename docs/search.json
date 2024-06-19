@@ -335,100 +335,100 @@
   {
     "objectID": "qgis_choropleth.html",
     "href": "qgis_choropleth.html",
-    "title": "9  Creating Choropleths in QGIS",
+    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "",
     "text": "9.1 Reminder - what’s a choropleth?\nOr, in short, something a bit like this!\nAnd the great news is that we can create these in QGIS.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#reminder---whats-a-choropleth",
     "href": "qgis_choropleth.html#reminder---whats-a-choropleth",
-    "title": "9  Creating Choropleths in QGIS",
+    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "",
     "text": "“A choropleth map is a type of statistical thematic map… [where] color corresponding with an aggregate summary of a geographic characteristic … such as population density or per-capita income.\n\n\nChoropleth maps provide an easy way to visualize how a variable varies across a geographic area or show the level of variability within a region.\n\n\nA heat map or isarithmic map is similar but uses regions drawn according to the pattern of the variable, rather than the a priori geographic areas of choropleth maps.”\n\n\nhttps://en.wikipedia.org/wiki/Choropleth_map",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#importing-a-premade-geodataset",
     "href": "qgis_choropleth.html#importing-a-premade-geodataset",
-    "title": "9  Creating Choropleths in QGIS",
+    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "9.2 Importing a premade geodataset",
     "text": "9.2 Importing a premade geodataset\nSometimes we are lucky enough to have access to a dataset that contains a series of boundaries - so showing where the edges of a series of LSOAs, MSOAs, counties, or some other type of boundary are - as well as giving us some counts relating to those areas.\nUnlike our point data, which came in a csv (a type of delimited text file), when we’re working with data relating to areas, we’re going to be using a vector layer.\nVector layers can come in a range of formats: .shp (Shapefile) .geojson (Geo JSON) *.gpkg (Geopackage)\n(note: you can also get point data that’s a vector layer)\nFirst, we need to tell QGIS that we want to import a vector layer.\n\nNext, we click on the three small dots next to ‘source’ in the window that pops up to get our file picker.\n\nNotice there are no geometry settings here as the CRS is set within the file! So we can just click ‘Add’\nYou will now see a number of area boundaries, but at the moment, they are all the same colour - which isn’t much use!",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#adding-colour-to-our-choropleths",
     "href": "qgis_choropleth.html#adding-colour-to-our-choropleths",
-    "title": "9  Creating Choropleths in QGIS",
+    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "9.3 Adding colour to our choropleths",
     "text": "9.3 Adding colour to our choropleths\nPreviously we were working with data that had a certain number of categories per value.\nHowever, if we take a look at the attribute table for this layer, we can see we have numeric values - so instead we want a graduated symbology.\nThis means values will be grouped together rather than having a separate category per value.\nThis is just a quick overview of the dataset in this section, opened up within QGIS. Notice that there is a row per LSOA, and some relevant counts for that LSOA stored in the later columns.\n\nNow we need to head to our layer styling panel. Where it says ‘no symbol’, click in the box and choose ‘graduated’.\n\nLike before, we need to choose the value we want to colour our areas by.\nWe’ve got quite a lot to choose from in this dataset.\nLet’s start by looking at Shoplifting.\nTo do this, we need to click on the small arrow at the far right-hand side of the ‘values’ box.\n\nOnce we’ve selected this, click the ‘classify’ button (if it does not automatically populate the white box with a series of colours and category boundaries).\nWe now have our areas coloured by the number of shoplifting incidents. What do you notice about the categories it has set up for us?",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#adjusting-category-boundaries-and-the-number-of-categories-in-qgis",
     "href": "qgis_choropleth.html#adjusting-category-boundaries-and-the-number-of-categories-in-qgis",
-    "title": "9  Creating Choropleths in QGIS",
+    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "9.4 Adjusting category boundaries and the number of categories in QGIS",
     "text": "9.4 Adjusting category boundaries and the number of categories in QGIS\n\n9.4.1 Number of categories\nFirst, let’s experiment with the number of categories and see if that helps.\nWe can change this using the arrows next to the ‘classes’ box, or by typing in the number of classes we would like.\n\nThis can produce some odd behaviour when a lot of our groups have a very low number of values in!\nWe seem to have multiple categories for ‘0’, each with a slightly different colour. That’s not ideal behaviour - though depending on your dataset, this might not occur, and the default categorisation method may work fine, in which case you can just play around with the number of classes.\n\n\n9.4.2 Categorisation type\nLet’s now try changing the classification mode.\nThis adjusts the algorithm used by QGIS to work out the size of each category and where the boundary will be.\nClick in the ‘mode’ box.\nYou can see there are several options to choose from.\nLet’s try ‘equal interval’\n\n\nThis looks very different - is this a good option?\n\nHere, while our categories now are of consistent width (i.e. the number of values they encompass is the same), due to the way the values in this dataset are distributed - with a lot of low values and only a handful of higher ones - the map is quite hard to interpret again.\nSo a small change to the mode led to a large change in our legend!",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#hiding-categories",
     "href": "qgis_choropleth.html#hiding-categories",
-    "title": "9  Creating Choropleths in QGIS",
+    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "9.5 Hiding categories",
     "text": "9.5 Hiding categories\nLike with our categorised point data, we can untick layers in the layer styling panel to just show certain categories.",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#changing-the-colourscheme",
     "href": "qgis_choropleth.html#changing-the-colourscheme",
-    "title": "9  Creating Choropleths in QGIS",
+    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "9.6 Changing the Colourscheme",
     "text": "9.6 Changing the Colourscheme",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleth.html#viewing-the-distribution",
     "href": "qgis_choropleth.html#viewing-the-distribution",
-    "title": "9  Creating Choropleths in QGIS",
+    "title": "9  Creating Choropleths in QGIS - Importing Boundaries",
     "section": "9.7 Viewing the Distribution",
     "text": "9.7 Viewing the Distribution\nIf you go to ‘histogram’ and click ‘load values’, you will see the distribution of the values in the column you’re visualising, along with vertical lines showing the boundary of each category.\nThis can be really helpful for understanding the distribution of your data…\n… but sometimes, like this, it’s really hard to see!",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Creating Choropleths in QGIS - Importing Boundaries</span>"
     ]
   },
   {
     "objectID": "qgis_choropleths_joining.html",
     "href": "qgis_choropleths_joining.html",
-    "title": "10  Creating Choropleths in QGIS",
+    "title": "10  Choropleths in QGIS - Joining Data",
     "section": "",
     "text": "“But the data in my organisation isn’t just sitting around in geopackage files…”\n\n\nLoad in a shapefile, geojson or geopkg of area boundaries (e.g. MSOA or LSOA boundaries) These can be downloaded from the ONS, the government, or other organisations.\nLoad in a .csv (delimited text layer) of counts using the same level of detail (e.g. if your shapefiles are for MSOA, you’ll need MSOA-level data at this point too)\n\n\nThis time, choose ‘No geometry’ in the geometry definition section.\n\n\nRight click on the MSOA shapefile layer in the layer tab and click ‘Properties…’\n\n\n\nChoose ‘Joins’ and then the plus button\n\n\n\nTell QGIS the layer to join to (our csv layer) and the names of the columns that should match in our two datasets\n\nIn this example the names are identical, but they can be different! It just matters whether the contents will have matching data.\n\nNow, when you select the layer that contains your area boundaries and head to the layer styling panel, you will be able to select the relevant value fields when creating a choropleth from this data (i.e. when you click into the ‘values’ dropdown).",
     "crumbs": [
       "Mapping in QGIS",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Creating Choropleths in QGIS</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Choropleths in QGIS - Joining Data</span>"
     ]
   },
   {

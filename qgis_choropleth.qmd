@@ -1,4 +1,4 @@
-# Creating Choropleths in QGIS
+# Creating Choropleths in QGIS - Importing Boundaries
 ```{r, echo = FALSE}
 source("glossary_funcs.R")
 glossary_setup()
