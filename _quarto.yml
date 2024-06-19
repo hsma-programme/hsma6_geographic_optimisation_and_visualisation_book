@@ -8,6 +8,7 @@ book:
   chapters:
   - index.qmd
   - intro.qmd
+  - webexercises.qmd
   - what_geographic_problems_health_etc.qmd
   - part: Part 1 - Geographic Concepts and Terms
     chapters:

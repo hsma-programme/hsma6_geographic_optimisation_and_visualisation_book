@@ -1,23 +1,25 @@
 # Projections and Coordinate Reference Systems {#sec-projections-crs}
 
-```{r, echo = FALSE}
-source("glossary_funcs.R")
-glossary_setup()
-```
-
 ```{r, echo = FALSE, results='asis'}
-glossary_setup_style()
-```
-
-```{r, echo = FALSE, results='asis'}
+#| label: setupwebex
 knitr::opts_chunk$set(echo = FALSE)
-library(webexercises)
 
 # Uncomment to change widget colours:
 # style_widgets(
 #    # incorrect = "goldenrod", correct = "purple", highlight = "firebrick",
 #    feedback="mediumorchid"
 #    )
+```
+
+```{r}
+#| label: glossary_funcs
+source("glossary_funcs.R")
+glossary_setup()
+```
+
+```{r, results='asis'}
+#| label: glossary_style_setup
+glossary_setup_style()
 ```
 
 Every map ever created is **wrong**.
@@ -56,21 +58,12 @@ By Jakub Nowosad - Own Work;, <a href="https://creativecommons.org/licenses/by-s
 
 A great way to get your head around the impact of the Mercator projection on our understanding of the world is to use the website [the true size of](https://www.thetruesize.com/).
 
-Try the following out. Do the results surprise you? Does this change your sense of our world?
+Head to that website and try the following out. Do the results surprise you? Does this change your sense of our world?
 *Click 'clear map' after each exercise to get back to a blank map, or right click on the coloured shape of the country to remove it*
 - Search for Russia and drag it onto the North of Africa.
 - Search for the United Kingdom and drag it onto Greenland.
 - Search for Canada and drag it onto Brazil.
 
-::: {.callout-note appearance="simple" collapse="true"}
-
-#### Click here to view the website without leaving the book!
-
-```{=html}
-<iframe width="780" height="700" src="https://www.thetruesize.com/" title="Metrocosm"></iframe>
-```
-
-:::
 
 ### Optional Exercise {.unnumbered}
 
@@ -82,14 +75,6 @@ On a globe, all of those purple dots would be the same size. They are a good way
 
 Look at each projection.
 
-::: {.callout-note appearance="simple" collapse="true"}
-#### Click here to view the website without leaving the book!
-
-```{=html}
-<iframe width="780" height="550" src="http://metrocosm.com/compare-map-projections.html" title="Metrocosm"></iframe>
-```
-
-:::
 
 ## Coordinate Reference Systems
 
@@ -103,7 +88,7 @@ One of the most common ways to do this is with `r glossary("latitude")` and `r g
 
 Lines of latitude run parallel with the equator.
 
-![Latitude](images/crs_projections_latitude.png){.lightbox width=300}^[<a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons]
+![Latitude](images/crs_projections_latitude.png)^[<a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons]
 
 Latitude has a value of 0 at the equator.
 
@@ -116,7 +101,7 @@ Latitude has a value of 0 at the equator.
 
 **Longitude** is the horizontal distance of a point away from the prime Meridian - a particular line that runs from the North Pole to the South Pole through Greenwich, London.
 
-![Longitude](images/crs_projections_longitude.png){.lightbox width=300}^[<a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons]
+![Longitude](images/crs_projections_longitude.png)^[<a href="https://commons.wikimedia.org/wiki/File:Latitude_and_Longitude_of_the_Earth_fr.svg">Djexplo</a>, CC0, via Wikimedia Commons]
 
 Longitude has a value of 0 at the Prime Meridian (Greenwich).
 
@@ -141,7 +126,7 @@ Now, just to be confusing... it's the opposite way around to a standard graph.
 
 If you cast your mind back to school, you might remember being taught about writing a coordinate pair for a standard graph.
 
-![A cartesian coordinate plane](images/crs_projections_cartesian_grid_comparison.png){.lightbox width=400 }
+![A cartesian coordinate plane](images/crs_projections_cartesian_grid_comparison.png)
 
 When we write this, we write the position of the horizontal point (x) first, and then the vertical (y) point - so we write coordinates as (x, y). So for the graph above, this means the coordinates are (2, 5). You might have been taught to remember this as going 'along the corridor, then up the stairs'.
 
@@ -162,7 +147,7 @@ As it's the projection you're still going to commonly see (and probably use for 
 
 The lines of latitude and longitude are the white grid that's overlaid on the map, with the horizontal red line being the equator. Notice that all of the lines are totally straight!
 
-![](images/Mercator_projection_Square.JPG){.lightbox width=600}
+![](images/Mercator_projection_Square.JPG)
 
 All of the lines of longitude (running top to bottom) are parallel to each other - that is they stay the same distance apart the whole time.
 
@@ -182,7 +167,7 @@ In the Gall-Peters projection, the sizes of each rectangle made by the latitude 
 
 The rectangles are tall near the equator and get shorter as you go towards the North and South Poles.
 
-![](images/Gall–Peters_projection_SW.jpg){.lightbox width=600}
+![](images/Gall–Peters_projection_SW.jpg)
 
 However, like the Mercator projection, the lines of latitude are parallel to each other, and the same is true of the lines of longitude.
 
@@ -196,7 +181,7 @@ Finally, let's look at the lines on the Winkel tripel projection.
 
 Nowadays, it's generally agreed that the Winkel Tripel is a projection that provides a nice balance between not distorting the countries further from the equator too much while also ensuring the shapes of each country are not distorted. It's used in a lot of textbooks and it's the preferred projection for world maps made by the National Geographic Society.^[https://en.wikipedia.org/wiki/Winkel_tripel_projection]
 
-![](images/Winkel_triple_projection_SW.jpg){.lightbox width=600}
+![](images/Winkel_triple_projection_SW.jpg)
 
 But notice that the lines of latitude and longitude are no longer straight!
 
@@ -212,9 +197,10 @@ In each of the questions below
 
 ##### Question 1 {.unnumbered}
 
-![What are the correct coordinates for this national park in Brazil?](images/crs_projections_q_national_park_brazil.png){.lightbox width=700}
+![What are the correct coordinates for this national park in Brazil?](images/crs_projections_q_national_park_brazil.png)
 
-```{r echo = FALSE}
+```{r}
+#| label: brazil
 opts_brazil <- c(
     "-20.655, 49.205",
    "20.655, -49.205",
@@ -234,9 +220,10 @@ feedback_brazil <- c(
 
 ##### Question 2 {.unnumbered}
 
-![What are the correct coordinates for this national park in Japan?](images/crs_projections_q_national_park_japan.png){.lightbox width=700}
+![What are the correct coordinates for this national park in Japan?](images/crs_projections_q_national_park_japan.png)
 
-```{r echo = FALSE}
+```{r}
+#| label: japan
 opts_japan <- c(
     "-35.943, -138.764",
     answer="35.943, 138.764",
@@ -255,11 +242,12 @@ feedback_japan <- c(
 
 ##### Question 3 {.unnumbered}
 
-![What are the correct coordinates for St Luke's?](images/crs_projections_q_st_lukes.png){.lightbox width=700}
+![What are the correct coordinates for St Luke's?](images/crs_projections_q_st_lukes.png)
 
 *St Luke's is part of the University of Exeter and is home to the PenCHORD team, who write the HSMA course!*
 
-```{r echo = FALSE}
+```{r}
+#| label: stlukes
 opts_stlukes <- c(
     "-3.51, -50.722",
    "-50.722, 3.51",
@@ -326,7 +314,7 @@ Postcodes can be used at several different levels of resolution.
 
 Postcode areas are often quite large, sometimes spanning whole counties.
 
-![](images/crs_uk_postcodes.png){.lightbox}^https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/British_postcode_areas_map.svg/450px-British_postcode_areas_map.svg.png
+![](images/crs_uk_postcodes.png)^https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/British_postcode_areas_map.svg/450px-British_postcode_areas_map.svg.png
 
 In contrast, a single exact postcode may only cover a handful of houses, so they are often not used when analysing healthcare data as there is too much of a risk of being able to identify an individual patient from their postcode.
 
@@ -372,15 +360,10 @@ You can also wee here that one of the LSOAs is much larger than the other three,
 
 ![](images/crs_lsoa_msoa_zoomed.png)
 
-::: {.callout-note appearance="simple" collapse="true"}
+Click [here](https://houseofcommonslibrary.github.io/msoanames/map/) to view an interactive map of MSOAs without leaving the book!
 
-##### Click here to view an interactive map of MSOAs without leaving the book!
 
-```{=html}
-<iframe width="780" height="700" src="https://houseofcommonslibrary.github.io/msoanames/map/
-" title="MSOA Map"></iframe>
-```
-:::
+
 
 ### Issues when working with output areas
 
@@ -405,7 +388,7 @@ A lot of older data will use 2011 boundaries, but the boundaries were refreshed 
 
 There are county councils, which are quite large, and then these are often (though not always) subdivided into multiple district councils.
 
-![](images/crs_local_authorities.png){.lightbox}^https://en.wikipedia.org/wiki/Local_government_in_England
+![](images/crs_local_authorities.png)^https://en.wikipedia.org/wiki/Local_government_in_England
 
 #### Healthcare Regions
 
@@ -422,16 +405,16 @@ Healthcare regions in the UK frequently change.
 2022-now (February 2024): Integrated care systems
 (integrated care board plus integrated care partnership)
 
-![](images/crs_icb.png){.lightbox}^https://geoportal.statistics.gov.uk/documents/ons::integrated-care-boards-april-2023-map-in-england/explore
+![](images/crs_icb.png)^https://geoportal.statistics.gov.uk/documents/ons::integrated-care-boards-april-2023-map-in-england/explore
 
 #### Ambulance Trusts
 
-![](images/crs_ambulance_trusts.png){.lightbox}^https://www.bbc.co.uk/news/health-16052725
+![](images/crs_ambulance_trusts.png)^https://www.bbc.co.uk/news/health-16052725
 
 
 #### Police Forces
 
-![](images/crs_police_forces.png){.lightbox}^https://assets-hmicfrs.justiceinspectorates.gov.uk/uploads/police-force-map.pdf
+![](images/crs_police_forces.png)^https://assets-hmicfrs.justiceinspectorates.gov.uk/uploads/police-force-map.pdf
 
 
 # References and Further Reading

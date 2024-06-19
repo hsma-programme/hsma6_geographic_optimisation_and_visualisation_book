@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 9&nbsp; Getting QGIS Ready to Use</title>
+<title>HSMA - Geographic Modelling and Visualisation - 2&nbsp; Webexercises</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./qgis_basemaps.html" rel="next">
-<link href="./introduction_mapping_with_qgis.html" rel="prev">
+<link href="./what_geographic_problems_health_etc.html" rel="next">
+<link href="./intro.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -110,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Part 2 - Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_setup.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./webexercises.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Webexercises</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -149,7 +183,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./webexercises.html" class="sidebar-item-text sidebar-link">
+  <a href="./webexercises.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Webexercises</span></span></a>
   </div>
 </li>
@@ -211,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./qgis_setup.html" class="sidebar-item-text sidebar-link active">
+  <a href="./qgis_setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></span></a>
   </div>
 </li>
@@ -298,18 +332,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#selecting-panels" id="toc-selecting-panels" class="nav-link active" data-scroll-target="#selecting-panels"><span class="header-section-number">10.3</span> Selecting panels</a></li>
-  <li><a href="#moving-around-qgis" id="toc-moving-around-qgis" class="nav-link" data-scroll-target="#moving-around-qgis"><span class="header-section-number">10.4</span> Moving around QGIS</a></li>
-  <li><a href="#starting-a-project" id="toc-starting-a-project" class="nav-link" data-scroll-target="#starting-a-project"><span class="header-section-number">10.5</span> Starting a project</a></li>
+  <li><a href="#example-questions" id="toc-example-questions" class="nav-link active" data-scroll-target="#example-questions"><span class="header-section-number">2.1</span> Example Questions</a>
+  <ul class="collapse">
+  <li><a href="#fill-in-the-blanks-fitb" id="toc-fill-in-the-blanks-fitb" class="nav-link" data-scroll-target="#fill-in-the-blanks-fitb"><span class="header-section-number">2.1.1</span> Fill-In-The-Blanks (<code>fitb()</code>)</a></li>
+  <li><a href="#multiple-choice-mcq" id="toc-multiple-choice-mcq" class="nav-link" data-scroll-target="#multiple-choice-mcq"><span class="header-section-number">2.1.2</span> Multiple Choice (<code>mcq()</code>)</a></li>
+  <li><a href="#true-or-false-torf" id="toc-true-or-false-torf" class="nav-link" data-scroll-target="#true-or-false-torf"><span class="header-section-number">2.1.3</span> True or False (<code>torf()</code>)</a></li>
+  <li><a href="#longer-mcqs-longmcq" id="toc-longer-mcqs-longmcq" class="nav-link" data-scroll-target="#longer-mcqs-longmcq"><span class="header-section-number">2.1.4</span> Longer MCQs (<code>longmcq()</code>)</a></li>
+  </ul></li>
+  <li><a href="#checked-sections" id="toc-checked-sections" class="nav-link" data-scroll-target="#checked-sections"><span class="header-section-number">2.2</span> Checked sections</a></li>
+  <li><a href="#hidden-solutions-and-hints" id="toc-hidden-solutions-and-hints" class="nav-link" data-scroll-target="#hidden-solutions-and-hints"><span class="header-section-number">2.3</span> Hidden solutions and hints</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction_mapping_with_qgis.html">Part 2 - Mapping in QGIS</a></li><li class="breadcrumb-item"><a href="./qgis_setup.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Getting QGIS Ready to Use</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Webexercises</span></h1>
 </div>
 
 
@@ -326,127 +366,139 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<style>
-a.glossary {
-  color: #8A1E1E;
-  text-decoration: underline;
-  cursor: help;
-  position: relative;
-}
-
-/* only needed for popup = "click" */
-/* popup-definition */
-a.glossary .def {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  width: 200px;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -100px;
-  background-color: #333;
-  color: white;
-  padding: 5px;
-  border-radius: 6px;
-}
-/* show on click */
-a.glossary:active .def {
-  display: inline-block;
-}
-/* triangle arrow */
-a.glossary:active .def::after {
-  content: ' ';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #333 transparent transparent transparent;
-}
-</style>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>This is a Web Exercise template created by the <a href="http://www.psy.gla.ac.uk">psychology teaching team at the University of Glasgow</a>, based on ideas from <a href="https://software-carpentry.org/lessons/">Software Carpentry</a>. This template shows how instructors can easily create interactive web documents that students can use in self-guided learning.</p>
+<p>The <code>{webexercises}</code> package provides a number of functions that you use in <a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">inline R code</a> or through code chunk options to create HTML widgets (text boxes, pull down menus, buttons that reveal hidden content). Examples are given below. Render this file to HTML to see how it works.</p>
+<p><strong>NOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser.</strong></p>
+<section id="example-questions" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="example-questions"><span class="header-section-number">2.1</span> Example Questions</h2>
+<section id="fill-in-the-blanks-fitb" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="fill-in-the-blanks-fitb"><span class="header-section-number">2.1.1</span> Fill-In-The-Blanks (<code>fitb()</code>)</h3>
+<p>Create fill-in-the-blank questions using <code>fitb()</code>, providing the answer as the first argument.</p>
+<ul>
+<li>2 + 2 is <input id="4989364831128" class="webex-solveme nospaces" size="1" data-answer="[&quot;4&quot;]"></li>
+</ul>
+<p>You can also create these questions dynamically, using variables from your R session.</p>
+<ul>
+<li>The square root of 9 is: <input id="7665403625598" class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]"></li>
+</ul>
+<p>The blanks are case-sensitive; if you don’t care about case, use the argument <code>ignore_case = TRUE</code>.</p>
+<ul>
+<li>What is the letter after D? <input id="7554296575854" class="webex-solveme nospaces ignorecase" size="1" data-answer="[&quot;E&quot;]"></li>
+</ul>
+<p>If you want to ignore differences in whitespace use, use the argument <code>ignore_ws = TRUE</code> (which is the default) and include spaces in your answer anywhere they could be acceptable.</p>
+<ul>
+<li>How do you load the tidyverse package? <input id="6712793169245" class="webex-solveme nospaces" size="20" data-answer="[&quot;library( tidyverse )&quot;,&quot;library( \&quot;tidyverse\&quot; )&quot;,&quot;library( 'tidyverse' )&quot;]"></li>
+</ul>
+<p>You can set more than one possible correct answer by setting the answers as a vector.</p>
+<ul>
+<li>Type a vowel: <input id="7583717130827" class="webex-solveme nospaces ignorecase" size="1" data-answer="[&quot;A&quot;,&quot;E&quot;,&quot;I&quot;,&quot;O&quot;,&quot;U&quot;]"></li>
+</ul>
+<p>You can use regular expressions to test answers against more complex rules.</p>
+<ul>
+<li>Type any 3 letters: <input id="3266160807220" class="webex-solveme nospaces regex" size="3" data-answer="[&quot;^[a-zA-Z]{3}$&quot;]"></li>
+</ul>
+<p>You can provide feedback that will appear when an incorrect answer is typed in.</p>
+<ul>
+<li>What is 1 + 3 x 2: <input id="2177973037731" class="webex-solveme nospaces" size="1" feedback="<b>Not quite - think about the order of operations.</b>" data-answer="[&quot;7&quot;]"></li>
+</ul>
+<p>However, where the answer is longer than 1 letter, you may wish to use it in conjunction with the ‘checked sections’ function (see below) to prevent the feedback from being displayed prematurely.</p>
+<ul>
+<li>Type in the word ‘long’: <input id="5436215972281" class="webex-solveme nospaces" size="4" feedback="<b>See, this does not work quite as well.</b>" data-answer="[&quot;long&quot;]"></li>
+</ul>
+</section>
+<section id="multiple-choice-mcq" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="multiple-choice-mcq"><span class="header-section-number">2.1.2</span> Multiple Choice (<code>mcq()</code>)</h3>
+<ul>
+<li>“Never gonna give you up, never gonna: <select id="3194783766071" class="webex-select"><option value="blank"></option><option value="">let you go</option><option value="">turn you down</option><option value="">run away</option><option value="answer">let you down</option></select>”</li>
+<li>“I <select id="4481966117541" class="webex-select"><option value="blank"></option><option value="answer">bless the rains</option><option value="">guess it rains</option><option value="">sense the rain</option></select> down in Africa” -Toto</li>
+</ul>
+<p>You can also optionally pass a vector of feedback to the multiple choice question. The feedback will appear below the box when an answer is selected.</p>
+<ul>
+<li>What is 20 - 2 x 4? <select id="4314329008725" class="webex-select"><option value="blank"></option><option value="" feedback="<b>Not quite - remember the order of operations. What part of the sum do you need to do first?</b>">72</option><option value="answer" feedback="<b>Great job! You followed the order of operations by doing the multiplication before the subtraction.</b>">12</option></select></li>
+</ul>
+<p>If present, the feedback vector must be the same length as the options vector and the order must match up with the order of the options vector. However, you can pass an empty string “” if you don’t want any feedback to show for certain options.</p>
+<ul>
+<li>What has changed in the year 3000? <select id="3717081301093" class="webex-select"><option value="blank"></option><option value="answer" feedback="<b></b>">Not much, but they live underwater</option><option value="" feedback="<b>Go and listen to the definitive song on the subject and report back!</b>">Everything</option><option value="" feedback="<b>Wait, really? They don't? Well, that's thoroughly disappointing.</b>">Nothing - I can’t believe they don’t have hoverboards yet</option></select></li>
+</ul>
+</section>
+<section id="true-or-false-torf" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="true-or-false-torf"><span class="header-section-number">2.1.3</span> True or False (<code>torf()</code>)</h3>
+<ul>
+<li>True or False? You can permute values in a vector using <code>sample()</code>. <select id="1632037493715" class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></li>
+</ul>
+<p>You can also add feedback to True or False questions. To do this, just pass in a vector of feedback - the first item is the feedback for the ‘TRUE’ option, and the second is for the ‘FALSE’ option.</p>
+<p>True or False? The month of April has 31 days. <select id="4189095895726" class="webex-select"><option value="blank"></option><option value="" feedback="<b>That's not quite right. Remember the rhyme - 30 days has September, *April* June and November!</b>">TRUE</option><option value="answer" feedback="<b>Well done! April - along with September, June and November - has 30 days. February has 28 or 29 (depending on whether it's a leap year), and the rest have 31.</b>">FALSE</option></select></p>
+</section>
+<section id="longer-mcqs-longmcq" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="longer-mcqs-longmcq"><span class="header-section-number">2.1.4</span> Longer MCQs (<code>longmcq()</code>)</h3>
+<p>When your answers are very long, sometimes a drop-down select box gets formatted oddly. You can use <code>longmcq()</code> to deal with this. Since the answers are long, It’s probably best to set up the options inside an R chunk with <code>echo=FALSE</code>.</p>
+<p><strong>What is a p-value?</strong></p>
+<div id="radio_YCUOLQSBVI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YCUOLQSBVI" value=""> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_YCUOLQSBVI" value="answer"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_YCUOLQSBVI" value=""> <span>the probability of making an error in your conclusion</span></label>
 </div>
-<div class="callout-title-container flex-fill">
-Click here for help with installing QGIS
+<p>You can also add feedback to long multiple choice questions.</p>
+<div id="radio_XYXJIVTOIG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XYXJIVTOIG" value="" feedback="<b>Not quite - have another go</b>"> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_XYXJIVTOIG" value="answer" feedback="<b>Correct! This is a really important definition to get comfortable with.</b>"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_XYXJIVTOIG" value="" feedback="<b>Not quite - try again.</b>"> <span>the probability of making an error in your conclusion</span></label>
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+<p><strong>What is true about a 95% confidence interval of the mean?</strong></p>
+<div id="radio_BJCSQLDYOL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BJCSQLDYOL" value=""> <span>there is a 95% probability that the true mean lies within this range</span></label><label><input type="radio" autocomplete="off" name="radio_BJCSQLDYOL" value="answer"> <span>if you repeated the process many times, 95% of intervals calculated in this way contain the true mean</span></label><label><input type="radio" autocomplete="off" name="radio_BJCSQLDYOL" value=""> <span>95% of the data fall within this range</span></label>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<section id="installing-qgis" class="level1 callout-body-container callout-body" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Installing QGIS</h1>
-<section id="device-requirements" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="device-requirements"><span class="header-section-number">10.1</span> Device Requirements</h2>
-<p>To install QGIS, you will need a laptop or desktop computer running Windows, MacOS, or Linux.</p>
-<p>You will not be able to install the software on a phone or tablet! While versions exist for these devices, they are aimed more at conducting fieldwork than doing the sort of task we’ll be covering in this course.</p>
-</section>
-<section id="installing-qgis-1" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="installing-qgis-1"><span class="header-section-number">10.2</span> Installing QGIS</h2>
-<p>QGIS is widely used across the globe, and is totally free, with the code for the program also made available.</p>
-<p>QGIS is used by tens of thousands of users - some statistics can be viewed here if you are interested.</p>
-<p>If your organisation has had someone on the HSMA programme in the last few years, they will have been required to download QGIS, so the software may already be available in your organisation’s software centre. If so, click here to jump to the section on checking your version to ensure that the version you are running is suitable for the workshop.</p>
-<p>If you are installing QGIS for the first time without using a software centre, head to this page - https://qgis.org/en/site/forusers/download.html - and click on the appropriate box for your operating system. The box may open automatically.</p>
-<p><img src="images/qgis_install.png" class="img-fluid"></p>
-<p>We would recommend going directly to this page rather than searching Google or Bing for QGIS as we know the link above is correct and you won’t redirected to a third-party download site - using the link provided above ensures you are getting the software directly from the QGIS team.</p>
-<p>Don’t worry if the version number doesn’t exactly match the screenshots below - it will just automatically download the most recent release, which will be fine for the course.</p>
-<p>More detailed instructions for Windows are given below.</p>
-<section id="windows" class="level3" data-number="10.2.1">
-<h3 data-number="10.2.1" class="anchored" data-anchor-id="windows"><span class="header-section-number">10.2.1</span> Windows</h3>
-<p>Note that installing the software will require administrator rights. If you are on a personal device this will not be a problem.</p>
-<p>If you are installing it on your work device, please make sure you have gone through the appropriate processes with your IT department.</p>
-<p>Click on the green banner to download the installer.</p>
-<p><img src="images/qgis_windows.png" class="img-fluid"></p>
-<p>The download will take roughly 5 to 15 minutes, depending on the speed of your internet.</p>
-<p>When the installer has downloaded, find the file in the folder you saved it to, and double click on the file.</p>
-<p>Follow the instructions in the window that appears to install QGIS on your device.</p>
-<p>When you reach the step below, it may appear to pause for a long time with the progress bar not filling up.</p>
-<p><img src="images/qgis_windows_setup.png" class="img-fluid"></p>
-<p>If this happens, check your windows taskbar for the following icon:</p>
-<p><img src="images/qgis_windows_account_control.png" class="img-fluid"></p>
-<p>This is a pop-up for Windows user account control. You may need to click this and authorize the installer.</p>
-<p>The process should then take a maximum of 10 minutes to complete.</p>
-<p><img src="images/qgis_windows_install_complete.png" class="img-fluid"></p>
-<p>Click ‘Finish’. You should now be able to run QGIS from your start menu or an icon on your desktop.</p>
-<p>Checking the version of an existing QGIS install</p>
-<p>If you are using an older version your organisation has approved, you may wish to check the version number.</p>
-<p>If the version number is lower than 3.0, you may find the layout is a bit different to the version we use in the workshop.</p>
-<p>To check the version this, open QGIS up, hover over ‘Help’ in the top menu bar, and then click ‘About’.</p>
-<p><img src="images/qgis_existing_version_check_version.png" class="img-fluid"></p>
-<p>The top line will tell you which version of QGIS you are currently running.</p>
-<p><img src="images/qgis_existing_version_check_version_part_2.png" class="img-fluid"></p>
-<p>You can also choose ‘Check QGIS Version’ from the same menu, but this isn’t quite as reliable!</p>
+<p>Not every option needs to have feedback - but you need to pass an empty string so that the feedback vector is the same length as the options vector. If randomising the order, you need to make sure you apply the same ordering to the opts and feedback vectors.</p>
+<div id="radio_DXUPIHVIGZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DXUPIHVIGZ" value="" feedback="<b>Not quite - you get data falling outside of this. Think more about the true mean.</b>"> <span>95% of the data fall within this range</span></label><label><input type="radio" autocomplete="off" name="radio_DXUPIHVIGZ" value="" feedback="<b>This is a common misconception - but it's not quite right.</b>"> <span>there is a 95% probability that the true mean lies within this range</span></label><label><input type="radio" autocomplete="off" name="radio_DXUPIHVIGZ" value="answer" feedback="<b></b>"> <span>if you repeated the process many times, 95% of intervals calculated in this way contain the true mean</span></label>
+</div>
 </section>
 </section>
-</section>
+<section id="checked-sections" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="checked-sections"><span class="header-section-number">2.2</span> Checked sections</h2>
+<p>Create sections with the class <code>webex-check</code> to add a button that hides feedback until it is pressed. Add the class <code>webex-box</code> to draw a box around the section (or use your own styles).</p>
+<div class="webex-check webex-box">
+<p>I am going to learn a lot: <select id="2559932664691" class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p>
+What is a p-value?
+<div id="radio_FKSRRSRQND" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FKSRRSRQND" value=""> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_FKSRRSRQND" value="answer"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_FKSRRSRQND" value=""> <span>the probability of making an error in your conclusion</span></label>
 </div>
 </div>
-<section id="selecting-panels" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="selecting-panels"><span class="header-section-number">10.3</span> Selecting panels</h2>
-<p>When you open up QGIS for the first time, a few of the different panels you will need to use are hidden by default.</p>
-<p><img src="images/qgis_blank.png" class="img-fluid"></p>
-<p>Let’s make sure we all have the same tools available</p>
-<p>Click <strong>“View”</strong> → <strong>“Panels”</strong></p>
-<p>Make sure - “Browser”, - “Layer Styling” - and “Layers” all have a tick next to them</p>
-<p><img src="images/qgis_panels.png" class="img-fluid"></p>
-<p>Now our QGIS should look a bit like this, with the panels highlighted in orange (browser, layer styling and layers) all visible on the screen.</p>
+<p>You can provide feedback within these and it won’t display until the ‘check answers’ button is clicked.</p>
+<div class="webex-check webex-box">
+<p>I am going to learn a lot: <select id="6618257533528" class="webex-select"><option value="blank"></option><option value="answer" feedback="<b>Yes! That's what we like to see.</b>">TRUE</option><option value="" feedback="<b>I look forward to proving you wrong!</b>">FALSE</option></select></p>
+<p>Type in the word ‘long’: <input id="9147030066367" class="webex-solveme nospaces" size="4" feedback="<b>See, this does not work quite as well.</b>" data-answer="[&quot;long&quot;]"></p>
+What is a p-value?
+<div id="radio_KPGKQRALMF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KPGKQRALMF" value="" feedback="<b>Not quite - have another go</b>"> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_KPGKQRALMF" value="answer" feedback="<b>Correct! This is a really important definition to get comfortable with.</b>"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_KPGKQRALMF" value="" feedback="<b>Not quite - try again.</b>"> <span>the probability of making an error in your conclusion</span></label>
+</div>
+</div>
 </section>
-<section id="moving-around-qgis" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="moving-around-qgis"><span class="header-section-number">10.4</span> Moving around QGIS</h2>
-<p><img src="images/qgis_panels_shown.png" class="img-fluid"></p>
-<p>To move around your maps, you will need two key tools: move (pan) and zoom.</p>
-<p><img src="images/qgis_panzoom.png" class="img-fluid"></p>
-<p>However, if you’re using a mouse with a scroll wheel, you can use that instead of the zoom buttons. The zoom will be centred around the point your mouse is hovering over, which can be useful for getting to a certain point quickly!</p>
-<p>Or on a laptop trackpad, you can “pinch” outwards to zoom out, and inwards to zoom in.</p>
-</section>
-<section id="starting-a-project" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="starting-a-project"><span class="header-section-number">10.5</span> Starting a project</h2>
-<p>Now you will want to start a new project.</p>
-<p>Click <strong>“Project”</strong> → <strong>“New”</strong></p>
-<p><img src="images/qgis_new_project.png" class="img-fluid"></p>
-<p>Now it’s time to add our basemap - so head to the next chapter to find out how to do that.</p>
+<section id="hidden-solutions-and-hints" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="hidden-solutions-and-hints"><span class="header-section-number">2.3</span> Hidden solutions and hints</h2>
+<p>You can fence off a solution area that will be hidden behind a button using <code>hide()</code> before the solution and <code>unhide()</code> after, each as inline R code. Pass the text you want to appear on the button to the <code>hide()</code> function.</p>
+<p>If the solution is a code chunk, instead of using <code>hide()</code> and <code>unhide()</code>, simply set the <code>webex.hide</code> chunk option to TRUE, or set it to the string you wish to display on the button.</p>
+<p><strong>Recreate the scatterplot below, using the built-in <code>cars</code> dataset.</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="webexercises_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+I need a hint
+</button>
+<p>See the documentation for <code>plot()</code> (<code>?plot</code>)</p>
+</div>
+<!-- note: you could also just set webex.hide to TRUE -->
+<div class="cell" data-webex.hide="Click here to see the solution">
+<div class="webex-solution">
+<button>
+Click here to see the solution
+</button>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars<span class="sc">$</span>speed, cars<span class="sc">$</span>dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 
 
 </section>
@@ -1344,13 +1396,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./introduction_mapping_with_qgis.html" class="pagination-link" aria-label="Mapping in QGIS">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mapping in QGIS</span></span>
+      <a href="./intro.html" class="pagination-link" aria-label="Welcome!">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Welcome!</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./qgis_basemaps.html" class="pagination-link" aria-label="Adding a basemap in QGIS">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adding a basemap in QGIS</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./what_geographic_problems_health_etc.html" class="pagination-link" aria-label="Types of Geographic Problems">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Types of Geographic Problems</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
