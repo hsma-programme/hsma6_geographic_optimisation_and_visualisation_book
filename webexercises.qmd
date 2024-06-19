@@ -6,10 +6,7 @@ title: "Webexercises"
 knitr::opts_chunk$set(echo = FALSE)
 
 # Uncomment to change widget colours:
-# style_widgets(
-#    # incorrect = "goldenrod", correct = "purple", highlight = "firebrick",
-#    feedback="mediumorchid"
-#    )
+#style_widgets(incorrect = "goldenrod", correct = "purple", highlight = "firebrick")
 ```
 
 This is a Web Exercise template created by the [psychology teaching team at the University of Glasgow](http://www.psy.gla.ac.uk), based on ideas from [Software Carpentry](https://software-carpentry.org/lessons/). This template shows how instructors can easily create interactive web documents that students can use in self-guided learning.
