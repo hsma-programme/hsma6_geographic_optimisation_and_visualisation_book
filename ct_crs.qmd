@@ -11,6 +11,7 @@ glossary_setup_style()
 
 ```{r, echo = FALSE, results='asis'}
 knitr::opts_chunk$set(echo = FALSE)
+library(webexercises)
 
 # Uncomment to change widget colours:
 # style_widgets(
