@@ -1,3 +1,9 @@
+---
+filters:
+  - pyodide
+---
+
+
 # Static Maps with Matplotlib
 
 ```{r, echo = FALSE}
@@ -7,4 +13,821 @@ glossary_setup()
 
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
+```
+
+For all of the code on this page, we need to first import geopandas.
+
+We will also load in matplotlib so we can modify the default plots that are created by geopandas, and pandas so we can import and manipulate tabular data files.
+
+```{python}
+import geopandas
+import matplotlib.pyplot as plt
+import pandas as pd
+```
+
+## Simple plots with the geopandas plot method
+
+### Choropleths
+
+Geopandas has a great built-in method for quickly plotting your data.
+
+Just call .plot() on your dataframe!
+
+```{python}
+lsoa_2011_crime_figures_df = geopandas.read_file("https://github.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/raw/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/lsoa_2011_sw5forces_crime_figures.gpkg")
+
+lsoa_2011_crime_figures_df.plot()
+```
+
+### Point data
+
+The `.plot` method works for point data too.
+
+```{python}
+sw_5forces_stop_and_search_df = pd.read_csv("https://github.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/raw/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/sw_5forces_stop_and_search.csv")
+
+sw_5forces_stop_and_search_gdf = geopandas.GeoDataFrame(
+    sw_5forces_stop_and_search_df, # Our pandas dataframe
+    geometry = geopandas.points_from_xy(
+        sw_5forces_stop_and_search_df['Longitude'], # Our 'x' column (horizontal position of points)
+        sw_5forces_stop_and_search_df['Latitude'] # Our 'y' column (vertical position of points)
+        ),
+    crs = 'EPSG:4326' # the coordinate reference system of the data - use EPSG:4326 if you are unsure
+    )
+
+sw_5forces_stop_and_search_gdf.plot()
+```
+
+## Colouring maps by a column
+
+### Choropleths
+
+You can also pass a column name to colour the plot by the values in that column…
+
+Let's see what columns we can choose from.
+
+```{python}
+lsoa_2011_crime_figures_df.columns
+```
+
+Let's plot the 'other crime' counts by LSOA.
+
+Though depending on your dataset, you may struggle to see the impact!
+
+```{python}
+lsoa_2011_crime_figures_df.plot(column="sw_5forces_street_by_lsoa_Other crime")
+```
+
+You can change the column name to explore different elements of your data.
+
+### Point data
+
+Passing in a column name to the `.plot` method works for point data as well!
+
+Note that we can pass in `column=` before the column name, or we can just pass it in like in the cell below.
+
+As long as it is the *first* argument we pass in, Geopandas will recognise that it is the column we want to colour our geometry data by.
+
+```{python}
+sw_5forces_stop_and_search_gdf.plot("Gender")
+```
+
+
+## Basemaps
+A basemap - a recognisable map behind our points - will help our viewers understand what’s going on.
+
+First, we need to import an additional library called contextily.
+
+The standard alias the documentation recommends is `cx`
+
+```{python}
+import contextily as cx
+```
+
+Let's add our first basemap.
+
+```{python}
+ax = sw_5forces_stop_and_search_gdf.plot()
+
+cx.add_basemap(
+    ax, # the figure we created using our plot method
+    crs=sw_5forces_stop_and_search_gdf.crs.to_string(), # we can pull the CRS out of the geodataframe!
+    zoom=8 # zoom level
+    )
+```
+
+### Zoom level in basemaps
+
+Changing the zoom level will increase the quality of the map - but at the cost of longer load times.
+
+**Zoom level: 4**
+
+```{python}
+ax = sw_5forces_stop_and_search_gdf.plot()
+
+cx.add_basemap(
+    ax,
+    crs=sw_5forces_stop_and_search_gdf.crs.to_string(),
+    zoom=4 # zoom level
+    )
+```
+
+
+**Zoom level: 10**
+
+```{python}
+ax = sw_5forces_stop_and_search_gdf.plot()
+
+cx.add_basemap(
+    ax,
+    crs=sw_5forces_stop_and_search_gdf.crs.to_string(),
+    zoom=10 # zoom level
+    )
+```
+
+## Coordinate reference systems and plots
+
+:::{.tooltip-hint}
+But why does the UK look a bit wider than usual?
+
+It’s because of our old friend the CRS.
+
+We used EPSG:4326 to import our data.
+
+Now, when we look online, we’ll see lots of recommendations to use the British National Grid - EPSG:27700 - when plotting data concerning the uk.
+
+Let’s first try that by changing our import statement - will this work?
+
+```{python}
+sw_5forces_stop_and_search_gdf_27700 = geopandas.GeoDataFrame(
+    sw_5forces_stop_and_search_df, # Our pandas dataframe
+    geometry = geopandas.points_from_xy(
+        sw_5forces_stop_and_search_df['Longitude'], # Our 'x' column (horizontal position of points)
+        sw_5forces_stop_and_search_df['Latitude'] # Our 'y' column (vertical position of points)
+        ),
+    crs = 'EPSG:27700'
+    )
+
+sw_5forces_stop_and_search_gdf_27700.plot()
+
+
+```
+
+Now our new map appears a bit… sea-y.
+
+Which is fine if this is a map of crimes committed by pirates, but I’m pretty sure this isn’t.
+
+This is because the BNSSG (EPSG:27700) expects coordinates in Northings and Eastings - not Latitude and Longitude!
+
+If our dataset contains those as columns, we can go ahead and pass those in to the .points_from_xy() column and everything will be fine.
+
+```{python}
+#| eval: False
+my_gdf = geopandas.GeoDataFrame(
+    my_df, # Our pandas dataframe
+    geometry = geopandas.points_from_xy(
+        my_df['Eastings'], # Our 'x' column (horizontal position of points)
+        my_df['Northings'] # Our 'y' column (vertical position of points)
+        ),
+    crs = 'EPSG:27700' # British National Grid
+)
+```
+
+Instead, we will need to use the `to_crs()` method.
+:::
+
+### Changing CRS
+
+If our dataset only has latitude and longitude, but we want it in Northings and Eastings (and the relevant projection too), then we need to transform our dataset.
+
+We could try and look them up - but the easiest option is to transform our existing geodataframe to use a different CRS.
+
+We use the .to_crs() method for this.
+
+```{python}
+sw_5forces_stop_and_search_gdf = sw_5forces_stop_and_search_gdf.to_crs("EPSG:27700")
+
+ax = sw_5forces_stop_and_search_gdf.plot()
+
+cx.add_basemap(
+    ax, # the figure we created using our plot method
+    crs=sw_5forces_stop_and_search_gdf.crs.to_string(), # we can pull the CRS out of the geodataframe!
+    zoom=8 # zoom level
+    )
+```
+
+This now looks closer to the printed maps we are used to seeing.
+
+![](assets/2024-06-19-22-55-51.png)
+
+## Legends
+
+Remember that the point colours weren't much use before? Well, we can fix that by asking the plot method for a legend.
+
+```{python}
+ax = sw_5forces_stop_and_search_gdf.plot(column="Gender", legend=True)
+
+cx.add_basemap(
+    ax,
+    crs=sw_5forces_stop_and_search_gdf.crs.to_string(),
+    zoom=6
+    )
+```
+
+## Customising your plots with matplotlib
+
+Now, when we use the .plot() method, geopandas is calling on our old friend matplotlib to do the plotting.
+
+The benefit of this is that we can use lots of standard matplotlib techniques to make our plots shine!
+
+### Turning off axis labels
+
+First, let’s turn off the axis labels.
+
+```{python}
+ax = sw_5forces_stop_and_search_gdf.plot(column="Gender", legend=True)
+
+cx.add_basemap(
+    ax,
+    crs=sw_5forces_stop_and_search_gdf.crs.to_string(),
+    zoom=6
+    )
+
+# Turn off the numbers and axis tick marks around the edge of the map
+ax.axis('off')
+```
+
+### Adjusting Map Size
+
+Now, it’s a bit tricky to see much here at the moment.
+
+How can we make the plot bigger?
+
+We just pass the ‘figsize’ argument to the original .plot() method.
+
+This is a ‘tuple’ containing two numbers.
+
+The horizontal width
+
+The vertical height
+
+
+```{python}
+ax = sw_5forces_stop_and_search_gdf.plot(
+    column="Gender",
+    legend=True,
+    figsize=(10, 10)
+    )
+
+cx.add_basemap(
+    ax,
+    crs=sw_5forces_stop_and_search_gdf.crs.to_string(),
+    zoom=7
+    )
+
+# Turn off the numbers and axis tick marks around the edge of the map
+ax.axis('off')
+```
+
+## Adjusting map extent
+
+If we look really really closely, it looks like some areas of this map might not be purple…
+
+```{python}
+ax = lsoa_2011_crime_figures_df.plot(
+    column="sw_5forces_street_by_lsoa_Total number crimes",
+    legend=True
+    )
+```
+
+### Zooming
+
+By using the matplotlib methods for setting the x and y axis limits, we can zoom our map in to a particular region.
+
+It’s helpful to start off with the axis ticks visible so you can work out the range you need to set.
+
+Note that the legend extends beyond what we’re seeing in this section of the map - it’s still based on this dataframe!
+
+If this was a problem, we would filter the dataframe instead.
+
+```{python}
+ax = lsoa_2011_crime_figures_df.plot(
+    column="sw_5forces_street_by_lsoa_Total number crimes",
+    legend=True
+    )
+
+ax.set_xlim(285000,300000)
+ax.set_ylim(85000,100000)
+```
+
+### Adjusting map extent (filtering a dataframe by coordinates)
+
+Here, we’ve used the same coordinates but applied it directly to the dataframe.
+
+Our legend and colourschemes are not based on the maximum values in the area of interest - not the whole dataset.
+
+But notice we’ve lost the surrounding LSOAs that don’t intersect with or exist entirely inside the box we’ve specified!
+
+We need to use [the `cx` method from Geopandas](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.cx.html). This stands for 'coordinate indexer'.
+
+:::{.callout-warning}
+`.cx` is not related to the `contextily` package - they just unfortunately have the same names!
+:::
+
+```{python}
+xmin, xmax = 285000,300000
+ymin, ymax = 85000,100000
+lsoa_2011_crime_figures_df_exeter = lsoa_2011_crime_figures_df.cx[xmin:xmax, ymin:ymax]
+
+ax = lsoa_2011_crime_figures_df_exeter.plot(
+    column="sw_5forces_street_by_lsoa_Total number crimes",
+    legend=True
+    )
+```
+
+:::{.callout-tip}
+
+We could pass our limits in directly to the cx method instead - it's just a bit easier to keep track of them externally.
+
+```{python}
+lsoa_2011_crime_figures_df_exeter = lsoa_2011_crime_figures_df.cx[285000:300000, 85000:100000]
+
+ax = lsoa_2011_crime_figures_df_exeter.plot(
+    column="sw_5forces_street_by_lsoa_Total number crimes",
+    legend=True
+    )
+```
+
+:::
+
+## Opacity (transparency)
+
+It would be quite useful to have some context on our map of exactly where this subset is.
+
+But if we just overlay it, it’s not that helpful.
+
+(Notice that I’ve turned the zoom value right up - because we’re looking at a smaller area now, this doesn’t impact the load time so much)
+
+### Choropleths
+
+```{python}
+xmin, xmax = 290000,295000
+ymin, ymax = 91000,95000
+lsoa_2011_crime_figures_df_exeter = lsoa_2011_crime_figures_df.cx[xmin:xmax, ymin:ymax]
+
+ax = lsoa_2011_crime_figures_df_exeter.plot(
+    column="sw_5forces_street_by_lsoa_Total number crimes",
+    legend=True,
+    figsize=(10,7),
+    alpha=0.4 # Add this - max is 1, values closer to 0 are more transparent
+    )
+
+cx.add_basemap(
+    ax,
+    crs=lsoa_2011_crime_figures_df_exeter.crs.to_string(),
+    zoom=13
+    )
+
+ax.axis('off')
+```
+
+### Point data
+
+The command is identical for point data.
+
+```{python}
+xmin, xmax = 300000,350000
+ymin, ymax = 100000,150000
+sw_5forces_stop_and_search_gdf_subset = sw_5forces_stop_and_search_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = sw_5forces_stop_and_search_gdf_subset.plot(
+    column="Gender",
+    legend=True,
+    figsize=(10, 7),
+    cmap="bwr", # Set a colourmap here
+    alpha=0.3
+    )
+
+cx.add_basemap(
+    ax,
+    crs=sw_5forces_stop_and_search_gdf_subset.crs.to_string(),
+    zoom=12
+    )
+
+ax.axis('off')
+```
+
+## Colourschemes
+
+The cmap argument allows us to change the colourscheme that will be used for the plot.
+
+```{python}
+xmin, xmax = 290000,295000
+ymin, ymax = 91000,95000
+lsoa_2011_crime_figures_df_exeter = lsoa_2011_crime_figures_df.cx[xmin:xmax, ymin:ymax]
+
+ax = lsoa_2011_crime_figures_df_exeter.plot(
+    column="sw_5forces_street_by_lsoa_Total number crimes",
+    legend=True,
+    figsize=(10,7),
+    cmap="Reds",
+    alpha=0.7
+    )
+
+cx.add_basemap(
+    ax,
+    crs=lsoa_2011_crime_figures_df_exeter.crs.to_string(),
+    zoom=15
+    )
+
+ax.axis('off')
+```
+
+### Point data
+
+Once again, this is the same for point data.
+
+We can see the different categories a lot more clearly now!
+
+```{python}
+xmin, xmax = 300000,350000
+ymin, ymax = 100000,150000
+sw_5forces_stop_and_search_gdf_subset = sw_5forces_stop_and_search_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = sw_5forces_stop_and_search_gdf_subset.plot(
+    column="Gender",
+    legend=True,
+    figsize=(10, 7),
+    cmap="bwr", # Set a colourmap here
+    alpha=0.3
+    )
+
+cx.add_basemap(
+    ax,
+    crs=sw_5forces_stop_and_search_gdf_subset.crs.to_string(),
+    zoom=12
+    )
+
+ax.axis('off')
+```
+
+### Finding colourscheme parameters
+
+A full list of colourmaps can be found in the matplotlib documentation:
+
+https://matplotlib.org/stable/users/explain/colors/colormaps.html
+
+![](assets/2024-06-19-23-05-54.png)
+
+Qualitative colourmaps are good for categories.
+
+## Showing polygon boundaries
+
+We can set the edgecolor argument in the .plot() method to make the boundaries of each LSOA more distinct in this plot.
+
+You can also pass the linewidth parameter to adjust this further.
+
+```{python}
+xmin, xmax = 290000,295000
+ymin, ymax = 91000,95000
+lsoa_2011_crime_figures_df_exeter = lsoa_2011_crime_figures_df.cx[xmin:xmax, ymin:ymax]
+
+ax = lsoa_2011_crime_figures_df_exeter.plot(
+    column="sw_5forces_street_by_lsoa_Total number crimes",
+    legend=True,
+    figsize=(10,7),
+    edgecolor='black', # Let's add an edgecolour while we're at it!
+    cmap="Reds",
+    linewidth=2,
+    alpha=0.7
+    )
+
+cx.add_basemap(
+    ax,
+    crs=lsoa_2011_crime_figures_df_exeter.crs.to_string(),
+    zoom=15
+    )
+
+ax.axis('off')
+```
+
+## Point sizes
+
+We can also adjust the size of different points.
+
+Here is a map with the default point size set.
+
+We're going to first load in a new dataset.
+
+```{python}
+gp_list = pd.read_csv("https://github.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/raw/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/gp_surgery_locations_plus_patient_list_size.csv")
+
+gp_list_gdf = geopandas.GeoDataFrame(
+    gp_list, # Our pandas dataframe
+    geometry = geopandas.points_from_xy(
+        gp_list['result_eastings'], # Our 'x' column (horizontal position of points)
+        gp_list['result_northings'] # Our 'y' column (vertical position of points)
+        ),
+    crs = 'EPSG:27700'
+    )
+```
+
+### Adjusting all markers to the same size
+
+We can adjust the `markersize` parameter to adjust how big each marker is.
+
+
+```{python}
+ax = gp_list_gdf.plot(
+    figsize=(11, 8),
+    markersize=5,
+    alpha=0.5
+    )
+
+cx.add_basemap(
+    ax,
+    crs=gp_list_gdf.crs.to_string(),
+    zoom=6
+    )
+
+```
+
+### Adjusting point sizes by a value in a dataframe
+
+We can also pass in a column to have marker sizes that relate to a particular value.
+
+You may need to divide or multiply the values in that column so that the marker sizes are reasonable for your map.
+
+```{python}
+ax = gp_list_gdf.plot(
+    figsize=(11, 8),
+    markersize=gp_list_gdf['Total List Size']/1000,
+    alpha=0.5
+    )
+
+cx.add_basemap(
+    ax,
+    crs=gp_list_gdf.crs.to_string(),
+    zoom=6
+    )
+```
+
+:::{.callout-warning}
+
+If we didn't adjust the markersizes by a factor here, our map would be unusable!
+
+```{python}
+ax = gp_list_gdf.plot(
+    figsize=(11, 8),
+    markersize=gp_list_gdf['Total List Size'],
+    alpha=0.5
+    )
+
+cx.add_basemap(
+    ax,
+    crs=gp_list_gdf.crs.to_string(),
+    zoom=6
+    )
+```
+:::
+
+### Adding a title
+
+It’s easy to add a title to the plot as well.
+
+We could use a format string with this to adjust it based on another value (e.g. titles for different regions in a for loop, or including an average or summary value per map)
+
+```{python}
+xmin, xmax = 80000,350000
+ymin, ymax = 0,150000
+gp_list_gdf_sw = gp_list_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = gp_list_gdf_sw.plot(
+    figsize=(11, 8),
+    markersize=gp_list_gdf_sw['Total List Size']/500,
+    alpha=0.8
+    )
+
+cx.add_basemap(
+    ax,
+    crs=gp_list_gdf_sw.crs.to_string(),
+    zoom=9
+    )
+
+# Add a title to our map
+plt.title("GP Practices in the South West\nMarker Size Reflects Total Practice List Size")
+
+ax.axis('off')
+```
+
+:::{.callout-tip}
+In matplotlib plots, use the special character
+
+\n
+
+to put a line break in your title.
+
+:::
+
+## Point Labels
+
+Labels are a little more complex - we need to use a for loop to iterate through each row in our dataframe and look at the position and text.
+
+### Basic labels
+
+```{python}
+xmin, xmax = 285000,298000
+ymin, ymax = 62000,69000
+gp_list_gdf_torbay = gp_list_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = gp_list_gdf_torbay.plot(
+    figsize=(11, 8),
+    markersize=gp_list_gdf_torbay['Total List Size']/100,
+    alpha=0.8
+    )
+
+for x, y, label in zip(gp_list_gdf_torbay.geometry.x, gp_list_gdf_torbay.geometry.y, gp_list_gdf_torbay.name):
+    ax.annotate(label, xy=(x, y), xytext=(-3, -3), textcoords="offset points")
+
+ax.set_xlim(xmin, xmax)
+ax.set_ylim(ymin, ymax)
+
+cx.add_basemap(
+    ax,
+    crs=gp_list_gdf_torbay.crs.to_string(),
+    zoom=14
+    )
+
+plt.title("GP Practices in Torbay")
+```
+
+### Wrapping labels to reduce overlap
+
+The textwrap library can help us to make better labels.
+
+```{python}
+import textwrap
+```
+
+
+The textwrap.fill method wraps the labels at the number of characters (letters/spaces/numbers etc) that we specify - here, 15.
+
+```{python}
+xmin, xmax = 285000,298000
+ymin, ymax = 62000,69000
+gp_list_gdf_torbay = gp_list_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = gp_list_gdf_torbay.plot(
+    figsize=(11, 8),
+    markersize=gp_list_gdf_torbay['Total List Size']/100,
+    alpha=0.8
+    )
+
+for x, y, label in zip(gp_list_gdf_torbay.geometry.x, gp_list_gdf_torbay.geometry.y, gp_list_gdf_torbay.name):
+    wrapped_label = textwrap.fill(label,15).title()
+    ax.annotate(wrapped_label, xy=(x, y), xytext=(-3, -3), textcoords="offset points")
+
+ax.set_xlim(xmin, xmax)
+ax.set_ylim(ymin, ymax)
+
+cx.add_basemap(
+    ax,
+    crs=gp_list_gdf_torbay.crs.to_string(),
+    zoom=14
+    )
+
+plt.title("GP Practices in Torbay")
+```
+
+### Intelligent placement of labels
+
+We can take this even further with the adjustText library to automatically place labels that don’t overlap each other
+
+```{python}
+from adjustText import adjust_text
+```
+
+Note that we are importing a single function from the adjustText library with the code above.
+
+```{python}
+xmin, xmax = 285000,298000
+ymin, ymax = 62000,69000
+gp_list_gdf_torbay = gp_list_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = gp_list_gdf_torbay.plot(
+    figsize=(14, 9),
+    markersize=gp_list_gdf_torbay['Total List Size']/100,
+    alpha=0.8
+    )
+
+texts = []
+
+for x, y, label in zip(gp_list_gdf_torbay.geometry.x, gp_list_gdf_torbay.geometry.y, gp_list_gdf_torbay.name):
+    wrapped_label = textwrap.fill(label,15).title()
+    texts.append(plt.text(x, y, wrapped_label))
+
+# Add a title to our map
+plt.title("GP Practices in Torbay")
+
+ax.set_xlim(xmin, xmax)
+ax.set_ylim(ymin, ymax)
+
+cx.add_basemap(
+    ax,
+    crs=gp_list_gdf_torbay.crs.to_string(),
+    zoom=13
+    )
+
+adjust_text(
+    texts,
+    force_explode=(0.05,0.05),
+    arrowprops=dict(arrowstyle="-", color='k', lw=1),
+    time_lim=5
+    )
+
+```
+
+It won’t always be perfect - but it can be an improvement over not using this adjustment.
+
+You can tweak various parameters within your `adjust_text` function call to change the outcome.
+
+- `force_explode` affects the force with which points will be pushed away from their origin
+- `time_lim` changes how long it will spend trying to avoid overlap
+
+More parameters can be found in the documentation for the `adjustText` library.
+
+## Subplots
+
+Subplots are a powerful way to map multiple columns at once.
+
+If you haven't already, make sure you import matplotlib with the following code.
+
+```{python}
+#| eval: False
+import matplotlib.pyplot as plt
+```
+
+First, we set up empty subplots using this standard line of matplotlib code.
+
+We set the number of rows, the number of columns, and the overall figure size.,
+
+
+```{python}
+fig, axs = plt.subplots(2, 3, figsize=(20, 15))
+```
+
+![](assets/2024-06-19-23-28-08.png)
+
+How can we choose what we loop over?
+
+The first round through will look like this
+
+![](assets/2024-06-19-23-28-41.png)
+
+The second time like this
+
+![](assets/2024-06-19-23-29-03.png)
+
+and so on.
+
+### Code to create subplots for a series of columns in a dataframe
+
+```{python}
+xmin, xmax = 290000,295000
+ymin, ymax = 91000,95000
+lsoa_2011_crime_figures_df_exeter = lsoa_2011_crime_figures_df.cx[xmin:xmax, ymin:ymax]
+
+lsoa_2011_crime_figures_df_exeter = lsoa_2011_crime_figures_df_exeter.rename(columns=
+    {
+        'sw_5forces_street_by_lsoa_Anti-social behaviour': 'Anti-social behaviour',
+        'sw_5forces_street_by_lsoa_Bicycle theft': 'Bicycle theft',
+        'sw_5forces_street_by_lsoa_Burglary': 'Burglary',
+        'sw_5forces_street_by_lsoa_Criminal damage and arson': 'Criminal damage and arson',
+        'sw_5forces_street_by_lsoa_Drugs': 'Drugs',
+        'sw_5forces_street_by_lsoa_Total number crimes': 'Total number crimes'
+    }
+)
+
+cols = ['Anti-social behaviour', 'Bicycle theft', 'Burglary', 'Criminal damage and arson',
+        'Drugs', 'Total number crimes']
+
+fig, axs = plt.subplots(2, 3, figsize=(20, 15))
+
+for i, ax in enumerate(fig.axes):
+    lsoa_2011_crime_figures_df_exeter.plot(cols[i], cmap="RdYlGn_r", legend=True, ax=ax)
+
+    ax.axis('off')
+
+    ax.title.set_text(cols[i])
+```
+
+## Saving maps
+
+When you’re done working on your map, you can save this to an image file (e.g. jpg, png)
+
+You could even do this in a loop and use the column name to determine the filename…
+
+```{python}
+#| eval: False
+plt.savefig("bike_theft_plot.jpg")
 ```

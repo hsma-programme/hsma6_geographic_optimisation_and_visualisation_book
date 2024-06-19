@@ -320,6 +320,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Reading files with Geopandas</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_geopandas_matplotlib.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Static Maps with Matplotlib</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -375,78 +381,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="fill-in-the-blanks-fitb"><span class="header-section-number">2.1.1</span> Fill-In-The-Blanks (<code>fitb()</code>)</h3>
 <p>Create fill-in-the-blank questions using <code>fitb()</code>, providing the answer as the first argument.</p>
 <ul>
-<li>2 + 2 is <input id="4989364831128" class="webex-solveme nospaces" size="1" data-answer="[&quot;4&quot;]"></li>
+<li>2 + 2 is <input id="2083936500057" class="webex-solveme nospaces" size="1" data-answer="[&quot;4&quot;]"></li>
 </ul>
 <p>You can also create these questions dynamically, using variables from your R session.</p>
 <ul>
-<li>The square root of 9 is: <input id="7665403625598" class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]"></li>
+<li>The square root of 49 is: <input id="2748822406101" class="webex-solveme nospaces" size="1" data-answer="[&quot;7&quot;]"></li>
 </ul>
 <p>The blanks are case-sensitive; if you don’t care about case, use the argument <code>ignore_case = TRUE</code>.</p>
 <ul>
-<li>What is the letter after D? <input id="7554296575854" class="webex-solveme nospaces ignorecase" size="1" data-answer="[&quot;E&quot;]"></li>
+<li>What is the letter after D? <input id="1382499513148" class="webex-solveme nospaces ignorecase" size="1" data-answer="[&quot;E&quot;]"></li>
 </ul>
 <p>If you want to ignore differences in whitespace use, use the argument <code>ignore_ws = TRUE</code> (which is the default) and include spaces in your answer anywhere they could be acceptable.</p>
 <ul>
-<li>How do you load the tidyverse package? <input id="6712793169245" class="webex-solveme nospaces" size="20" data-answer="[&quot;library( tidyverse )&quot;,&quot;library( \&quot;tidyverse\&quot; )&quot;,&quot;library( 'tidyverse' )&quot;]"></li>
+<li>How do you load the tidyverse package? <input id="5683843828268" class="webex-solveme nospaces" size="20" data-answer="[&quot;library( tidyverse )&quot;,&quot;library( \&quot;tidyverse\&quot; )&quot;,&quot;library( 'tidyverse' )&quot;]"></li>
 </ul>
 <p>You can set more than one possible correct answer by setting the answers as a vector.</p>
 <ul>
-<li>Type a vowel: <input id="7583717130827" class="webex-solveme nospaces ignorecase" size="1" data-answer="[&quot;A&quot;,&quot;E&quot;,&quot;I&quot;,&quot;O&quot;,&quot;U&quot;]"></li>
+<li>Type a vowel: <input id="52499993215" class="webex-solveme nospaces ignorecase" size="1" data-answer="[&quot;A&quot;,&quot;E&quot;,&quot;I&quot;,&quot;O&quot;,&quot;U&quot;]"></li>
 </ul>
 <p>You can use regular expressions to test answers against more complex rules.</p>
 <ul>
-<li>Type any 3 letters: <input id="3266160807220" class="webex-solveme nospaces regex" size="3" data-answer="[&quot;^[a-zA-Z]{3}$&quot;]"></li>
+<li>Type any 3 letters: <input id="9368556631220" class="webex-solveme nospaces regex" size="3" data-answer="[&quot;^[a-zA-Z]{3}$&quot;]"></li>
 </ul>
 <p>You can provide feedback that will appear when an incorrect answer is typed in.</p>
 <ul>
-<li>What is 1 + 3 x 2: <input id="2177973037731" class="webex-solveme nospaces" size="1" feedback="<b>Not quite - think about the order of operations.</b>" data-answer="[&quot;7&quot;]"></li>
+<li>What is 1 + 3 x 2: <input id="1066396274854" class="webex-solveme nospaces" size="1" feedback="<b>Not quite - think about the order of operations.</b>" data-answer="[&quot;7&quot;]"></li>
 </ul>
 <p>However, where the answer is longer than 1 letter, you may wish to use it in conjunction with the ‘checked sections’ function (see below) to prevent the feedback from being displayed prematurely.</p>
 <ul>
-<li>Type in the word ‘long’: <input id="5436215972281" class="webex-solveme nospaces" size="4" feedback="<b>See, this does not work quite as well.</b>" data-answer="[&quot;long&quot;]"></li>
+<li>Type in the word ‘long’: <input id="4441834450775" class="webex-solveme nospaces" size="4" feedback="<b>See, this does not work quite as well.</b>" data-answer="[&quot;long&quot;]"></li>
 </ul>
 </section>
 <section id="multiple-choice-mcq" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="multiple-choice-mcq"><span class="header-section-number">2.1.2</span> Multiple Choice (<code>mcq()</code>)</h3>
 <ul>
-<li>“Never gonna give you up, never gonna: <select id="3194783766071" class="webex-select"><option value="blank"></option><option value="">let you go</option><option value="">turn you down</option><option value="">run away</option><option value="answer">let you down</option></select>”</li>
-<li>“I <select id="4481966117541" class="webex-select"><option value="blank"></option><option value="answer">bless the rains</option><option value="">guess it rains</option><option value="">sense the rain</option></select> down in Africa” -Toto</li>
+<li>“Never gonna give you up, never gonna: <select id="1566812477357" class="webex-select"><option value="blank"></option><option value="">let you go</option><option value="">turn you down</option><option value="">run away</option><option value="answer">let you down</option></select>”</li>
+<li>“I <select id="2896626026074" class="webex-select"><option value="blank"></option><option value="answer">bless the rains</option><option value="">guess it rains</option><option value="">sense the rain</option></select> down in Africa” -Toto</li>
 </ul>
 <p>You can also optionally pass a vector of feedback to the multiple choice question. The feedback will appear below the box when an answer is selected.</p>
 <ul>
-<li>What is 20 - 2 x 4? <select id="4314329008725" class="webex-select"><option value="blank"></option><option value="" feedback="<b>Not quite - remember the order of operations. What part of the sum do you need to do first?</b>">72</option><option value="answer" feedback="<b>Great job! You followed the order of operations by doing the multiplication before the subtraction.</b>">12</option></select></li>
+<li>What is 20 - 2 x 4? <select id="9409275884678" class="webex-select"><option value="blank"></option><option value="" feedback="<b>Not quite - remember the order of operations. What part of the sum do you need to do first?</b>">72</option><option value="answer" feedback="<b>Great job! You followed the order of operations by doing the multiplication before the subtraction.</b>">12</option></select></li>
 </ul>
 <p>If present, the feedback vector must be the same length as the options vector and the order must match up with the order of the options vector. However, you can pass an empty string “” if you don’t want any feedback to show for certain options.</p>
 <ul>
-<li>What has changed in the year 3000? <select id="3717081301093" class="webex-select"><option value="blank"></option><option value="answer" feedback="<b></b>">Not much, but they live underwater</option><option value="" feedback="<b>Go and listen to the definitive song on the subject and report back!</b>">Everything</option><option value="" feedback="<b>Wait, really? They don't? Well, that's thoroughly disappointing.</b>">Nothing - I can’t believe they don’t have hoverboards yet</option></select></li>
+<li>What has changed in the year 3000? <select id="295442552631" class="webex-select"><option value="blank"></option><option value="answer" feedback="<b></b>">Not much, but they live underwater</option><option value="" feedback="<b>Go and listen to the definitive song on the subject and report back!</b>">Everything</option><option value="" feedback="<b>Wait, really? They don't? Well, that's thoroughly disappointing.</b>">Nothing - I can’t believe they don’t have hoverboards yet</option></select></li>
 </ul>
 </section>
 <section id="true-or-false-torf" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="true-or-false-torf"><span class="header-section-number">2.1.3</span> True or False (<code>torf()</code>)</h3>
 <ul>
-<li>True or False? You can permute values in a vector using <code>sample()</code>. <select id="1632037493715" class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></li>
+<li>True or False? You can permute values in a vector using <code>sample()</code>. <select id="4452782708834" class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></li>
 </ul>
 <p>You can also add feedback to True or False questions. To do this, just pass in a vector of feedback - the first item is the feedback for the ‘TRUE’ option, and the second is for the ‘FALSE’ option.</p>
-<p>True or False? The month of April has 31 days. <select id="4189095895726" class="webex-select"><option value="blank"></option><option value="" feedback="<b>That's not quite right. Remember the rhyme - 30 days has September, *April* June and November!</b>">TRUE</option><option value="answer" feedback="<b>Well done! April - along with September, June and November - has 30 days. February has 28 or 29 (depending on whether it's a leap year), and the rest have 31.</b>">FALSE</option></select></p>
+<p>True or False? The month of April has 31 days. <select id="2355277785287" class="webex-select"><option value="blank"></option><option value="" feedback="<b>That's not quite right. Remember the rhyme - 30 days has September, *April* June and November!</b>">TRUE</option><option value="answer" feedback="<b>Well done! April - along with September, June and November - has 30 days. February has 28 or 29 (depending on whether it's a leap year), and the rest have 31.</b>">FALSE</option></select></p>
 </section>
 <section id="longer-mcqs-longmcq" class="level3" data-number="2.1.4">
 <h3 data-number="2.1.4" class="anchored" data-anchor-id="longer-mcqs-longmcq"><span class="header-section-number">2.1.4</span> Longer MCQs (<code>longmcq()</code>)</h3>
 <p>When your answers are very long, sometimes a drop-down select box gets formatted oddly. You can use <code>longmcq()</code> to deal with this. Since the answers are long, It’s probably best to set up the options inside an R chunk with <code>echo=FALSE</code>.</p>
 <p><strong>What is a p-value?</strong></p>
-<div id="radio_YCUOLQSBVI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YCUOLQSBVI" value=""> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_YCUOLQSBVI" value="answer"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_YCUOLQSBVI" value=""> <span>the probability of making an error in your conclusion</span></label>
+<div id="radio_YSLRBJNWBM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YSLRBJNWBM" value=""> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_YSLRBJNWBM" value="answer"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_YSLRBJNWBM" value=""> <span>the probability of making an error in your conclusion</span></label>
 </div>
 <p>You can also add feedback to long multiple choice questions.</p>
-<div id="radio_XYXJIVTOIG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XYXJIVTOIG" value="" feedback="<b>Not quite - have another go</b>"> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_XYXJIVTOIG" value="answer" feedback="<b>Correct! This is a really important definition to get comfortable with.</b>"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_XYXJIVTOIG" value="" feedback="<b>Not quite - try again.</b>"> <span>the probability of making an error in your conclusion</span></label>
+<div id="radio_CGUBBOXFHI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CGUBBOXFHI" value="" feedback="<b>Not quite - have another go</b>"> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_CGUBBOXFHI" value="answer" feedback="<b>Correct! This is a really important definition to get comfortable with.</b>"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_CGUBBOXFHI" value="" feedback="<b>Not quite - try again.</b>"> <span>the probability of making an error in your conclusion</span></label>
 </div>
 <p><strong>What is true about a 95% confidence interval of the mean?</strong></p>
-<div id="radio_BJCSQLDYOL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BJCSQLDYOL" value=""> <span>there is a 95% probability that the true mean lies within this range</span></label><label><input type="radio" autocomplete="off" name="radio_BJCSQLDYOL" value="answer"> <span>if you repeated the process many times, 95% of intervals calculated in this way contain the true mean</span></label><label><input type="radio" autocomplete="off" name="radio_BJCSQLDYOL" value=""> <span>95% of the data fall within this range</span></label>
+<div id="radio_LOZUMAMOOT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LOZUMAMOOT" value=""> <span>95% of the data fall within this range</span></label><label><input type="radio" autocomplete="off" name="radio_LOZUMAMOOT" value=""> <span>there is a 95% probability that the true mean lies within this range</span></label><label><input type="radio" autocomplete="off" name="radio_LOZUMAMOOT" value="answer"> <span>if you repeated the process many times, 95% of intervals calculated in this way contain the true mean</span></label>
 </div>
 <p>Not every option needs to have feedback - but you need to pass an empty string so that the feedback vector is the same length as the options vector. If randomising the order, you need to make sure you apply the same ordering to the opts and feedback vectors.</p>
-<div id="radio_DXUPIHVIGZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DXUPIHVIGZ" value="" feedback="<b>Not quite - you get data falling outside of this. Think more about the true mean.</b>"> <span>95% of the data fall within this range</span></label><label><input type="radio" autocomplete="off" name="radio_DXUPIHVIGZ" value="" feedback="<b>This is a common misconception - but it's not quite right.</b>"> <span>there is a 95% probability that the true mean lies within this range</span></label><label><input type="radio" autocomplete="off" name="radio_DXUPIHVIGZ" value="answer" feedback="<b></b>"> <span>if you repeated the process many times, 95% of intervals calculated in this way contain the true mean</span></label>
+<div id="radio_IABRPOKBBQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IABRPOKBBQ" value="answer" feedback="<b></b>"> <span>if you repeated the process many times, 95% of intervals calculated in this way contain the true mean</span></label><label><input type="radio" autocomplete="off" name="radio_IABRPOKBBQ" value="" feedback="<b>This is a common misconception - but it's not quite right.</b>"> <span>there is a 95% probability that the true mean lies within this range</span></label><label><input type="radio" autocomplete="off" name="radio_IABRPOKBBQ" value="" feedback="<b>Not quite - you get data falling outside of this. Think more about the true mean.</b>"> <span>95% of the data fall within this range</span></label>
 </div>
 </section>
 </section>
@@ -454,19 +460,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.2" class="anchored" data-anchor-id="checked-sections"><span class="header-section-number">2.2</span> Checked sections</h2>
 <p>Create sections with the class <code>webex-check</code> to add a button that hides feedback until it is pressed. Add the class <code>webex-box</code> to draw a box around the section (or use your own styles).</p>
 <div class="webex-check webex-box">
-<p>I am going to learn a lot: <select id="2559932664691" class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p>
+<p>I am going to learn a lot: <select id="8333732753608" class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p>
 What is a p-value?
-<div id="radio_FKSRRSRQND" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FKSRRSRQND" value=""> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_FKSRRSRQND" value="answer"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_FKSRRSRQND" value=""> <span>the probability of making an error in your conclusion</span></label>
+<div id="radio_LBLCQJNZLQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LBLCQJNZLQ" value=""> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_LBLCQJNZLQ" value="answer"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_LBLCQJNZLQ" value=""> <span>the probability of making an error in your conclusion</span></label>
 </div>
 </div>
 <p>You can provide feedback within these and it won’t display until the ‘check answers’ button is clicked.</p>
 <div class="webex-check webex-box">
-<p>I am going to learn a lot: <select id="6618257533528" class="webex-select"><option value="blank"></option><option value="answer" feedback="<b>Yes! That's what we like to see.</b>">TRUE</option><option value="" feedback="<b>I look forward to proving you wrong!</b>">FALSE</option></select></p>
-<p>Type in the word ‘long’: <input id="9147030066367" class="webex-solveme nospaces" size="4" feedback="<b>See, this does not work quite as well.</b>" data-answer="[&quot;long&quot;]"></p>
+<p>I am going to learn a lot: <select id="4639200108711" class="webex-select"><option value="blank"></option><option value="answer" feedback="<b>Yes! That's what we like to see.</b>">TRUE</option><option value="" feedback="<b>I look forward to proving you wrong!</b>">FALSE</option></select></p>
+<p>Type in the word ‘long’: <input id="9010174500024" class="webex-solveme nospaces" size="4" feedback="<b>See, this does not work quite as well.</b>" data-answer="[&quot;long&quot;]"></p>
 What is a p-value?
-<div id="radio_KPGKQRALMF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KPGKQRALMF" value="" feedback="<b>Not quite - have another go</b>"> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_KPGKQRALMF" value="answer" feedback="<b>Correct! This is a really important definition to get comfortable with.</b>"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_KPGKQRALMF" value="" feedback="<b>Not quite - try again.</b>"> <span>the probability of making an error in your conclusion</span></label>
+<div id="radio_QNOMVZQENM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QNOMVZQENM" value="" feedback="<b>Not quite - have another go</b>"> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_QNOMVZQENM" value="answer" feedback="<b>Correct! This is a really important definition to get comfortable with.</b>"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_QNOMVZQENM" value="" feedback="<b>Not quite - try again.</b>"> <span>the probability of making an error in your conclusion</span></label>
 </div>
 </div>
 </section>

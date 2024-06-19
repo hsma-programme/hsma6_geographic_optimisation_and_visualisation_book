@@ -32,6 +32,10 @@ book:
     - why_python_mapping.qmd
     - python_geopandas.qmd
     - python_geopandas_reading_files.qmd
+    - python_geopandas_matplotlib.qmd
+    #- python_leaflet_point_data.qmd
+    #- python_leaflet_choropleths.qmd
+    #- python_leaflet_extensions.qmd
   cover-image: resources/logos/hsma_logo_transparent_background_large.png
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true
