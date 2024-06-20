@@ -884,5 +884,82 @@
       "Part 3 - Mapping in Python",
       "<span class='chapter-number'>19</span>  <span class='chapter-title'>Static Maps with Matplotlib</span>"
     ]
+  },
+  {
+    "objectID": "python_geopandas_folium_intro.html",
+    "href": "python_geopandas_folium_intro.html",
+    "title": "20  Interactive Maps - Setting Up",
+    "section": "",
+    "text": "20.1 Why use interactive plots?\nVery often, a static plot is a really good way to display geographic data.\nYou have total control over the output and what to highlight to your stakeholders\n… but what if they’re interested in getting a closer look at those other areas with a higher rate that we haven’t provided a zoomed-in map for?\nIn the map below, we’ve provided an inset map for one of the more dense regions, but we can see at least two more that it would be valuable to interrogate further.\nIf you are doing a single report where you have time and space to craft it around what you are seeing in the data, a static map can really help direct and drive the narrative you want to tell.\nHowever, with regular reports and dashboards, this may not work so well. Here, interactive maps can really shine by allowing your end users to explore the regions or points of interest - no matter where or how densely-packed they may be.",
+    "crumbs": [
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Interactive Maps - Setting Up</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_folium_intro.html#why-use-interactive-plots",
+    "href": "python_geopandas_folium_intro.html#why-use-interactive-plots",
+    "title": "20  Interactive Maps - Setting Up",
+    "section": "",
+    "text": "20.1.1 Libraries for interactive mapping\nLeaflet.js is an open-source JavaScript library for maps.\nHowever, we don’t want to have to deal with writing things in JavaScript, or have to work out how to turn the output into something that Python can understand and display.\nInstead, we use the folium Python library, which acts as a bridge between Python and Leaflet.js.\nBefore making any interactive maps, we run\n\nimport folium",
+    "crumbs": [
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Interactive Maps - Setting Up</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_folium_intro.html#setting-up-a-base-map",
+    "href": "python_geopandas_folium_intro.html#setting-up-a-base-map",
+    "title": "20  Interactive Maps - Setting Up",
+    "section": "20.2 Setting up a base map",
+    "text": "20.2 Setting up a base map\nWe start by importing folium\nThen we set up a base map.\nNotice we’re using lat/long to determine where the map starts.\n\n# Create the blank map object\nbike_crime_map_interactive = folium.Map(\n    location=[55, -3.5],\n    zoom_start=5.25,\n    tiles='cartodbpositron'\n    )\n\n# Display the map object\nbike_crime_map_interactive\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n20.2.1 Changing the zoom\nChanging the zoom parameter affects how zoomed in we are when the map initially loads.\n\n# Create the blank map object\nbike_crime_map_interactive = folium.Map(\n    location=[55, -3.5],\n    zoom_start=8,\n    tiles='cartodbpositron'\n    )\n\n# Display the map object\nbike_crime_map_interactive\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n\n20.2.2 Changing the starting location\nChanging either the latitude or longitude changes where we are when we load the map.\n\n# Create the blank map object\nbike_crime_map_interactive = folium.Map(\n    location=[51.5, -3.5],\n    zoom_start=8,\n    tiles='cartodbpositron'\n    )\n\n# Display the map object\nbike_crime_map_interactive\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n\n20.2.3 Basemap tiles\nWe can adjust the look of the basemap by changing the tile argument.\n\n# Create the blank map object\nbike_crime_map_interactive = folium.Map(\n    location=[51.5, -3.5],\n    zoom_start=8,\n    tiles='OpenStreetMap'\n    )\n\n# Display the map object\nbike_crime_map_interactive\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n# Create the blank map object\nbike_crime_map_interactive = folium.Map(\n    location=[51.5, -3.5],\n    zoom_start=8,\n    tiles='cartodbdark_matter'\n    )\n\n# Display the map object\nbike_crime_map_interactive\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook",
+    "crumbs": [
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Interactive Maps - Setting Up</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_folium_point_data.html",
+    "href": "python_geopandas_folium_point_data.html",
+    "title": "21  Interactive Maps - Point Data",
+    "section": "",
+    "text": "21.1 Custom markers",
+    "crumbs": [
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Interactive Maps - Point Data</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_folium_point_data.html#custom-markers",
+    "href": "python_geopandas_folium_point_data.html#custom-markers",
+    "title": "21  Interactive Maps - Point Data",
+    "section": "",
+    "text": "21.1.1 Web markers\nWe can pass in a custom marker from the fontawesome library in the for loop.\n\ngp_map_web_icon = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nfor coordinates in geo_df_list:\n     gp_map_web_icon = gp_map_web_icon.add_child(\n        folium.Marker(\n            location=coordinates,\n            icon=folium.Icon(icon=\"user-md\", prefix='fa', color=\"black\")\n            )\n     )\n\ngp_map_web_icon\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n\n\n\n\n\nWarning\n\n\n\nAs of Feb 2024, this only supports fontawesome v4 - this link will show you all available icons: https://fontawesome.com/v4/icons/\n\n\n\n\n21.1.2 Markers stored locally\nIf we want to use an icon stored on our local machine, we have to do it slightly differently.\nWhile it seems inefficient to remake the icon each time inside the loop, it won’t work otherwise!\n\ngp_map_local_icon = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nfor coordinates in geo_df_list:\n    custom_icon = folium.features.CustomIcon(\n        \"resources/logos/hsma_logo_transparent_background_small.png\",\n        icon_size=(24,24)\n    )\n\n    gp_map_local_icon = gp_map_local_icon.add_child(\n        folium.Marker(\n            location=coordinates,\n            icon=custom_icon\n            )\n     )\n\ngp_map_local_icon\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook",
+    "crumbs": [
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Interactive Maps - Point Data</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_folium_point_data.html#tooltips",
+    "href": "python_geopandas_folium_point_data.html#tooltips",
+    "title": "21  Interactive Maps - Point Data",
+    "section": "21.2 Tooltips",
+    "text": "21.2 Tooltips\nWe can also add in tooltips - here we need to use enumerate(our_list) instead of just our_list so that we get a counter as well.\nThe first time through the loop, i will be 0. This means in the tooltip we pull out the name column (the GP surgery name) and then pull back the 0th row of the dataframe, which will correspond to the 0th point in our geo_df list.\n\n\n\n\n\n\nTip\n\n\n\nRemember - Python starts counting from 0, not 1!\n\n\nWe then repeat this for the 1st, 2nd, 3rd and so on.\nTooltips will then appear when hovering over.\n\n\n\n\n\n\nWarning\n\n\n\nWe use the .values attribute of our column to return a list of values. Accessing the values directly could cause a problem in filtered dataframes as the index will not start from 0. Using .values will ensure we always have a list that we can iterate through as expected.\n\n\n\ngp_map_tooltip = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nfor i, coordinates in enumerate(geo_df_list):\n\n    gp_map_tooltip = gp_map_tooltip.add_child(\n        folium.Marker(\n            location=coordinates,\n            tooltip=gp_list_gdf_sw['name'].values[i]\n            )\n     )\n\ngp_map_tooltip\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n21.2.1 More complex tooltips\nWe could use an f-string to create a more complex tooltip from multiple columns of our dataframe.\n\n\n\n\n\n\nTip\n\n\n\nUse &lt;br&gt; to get a line break. It’s sort of the web equivalent of \\n.\n\n\n\ngp_map_complex_tooltip = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nfor i, coordinates in enumerate(geo_df_list):\n\n    gp_map_complex_tooltip = gp_map_complex_tooltip.add_child(\n        folium.Marker(\n            location=coordinates,\n            tooltip=f\"{gp_list_gdf_sw['name'].values[i].title()}&lt;br&gt;List Size: {gp_list_gdf_sw['Total List Size'].values[i]:.0f}\"\n            )\n     )\n\ngp_map_complex_tooltip\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook",
+    "crumbs": [
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Interactive Maps - Point Data</span>"
+    ]
+  },
+  {
+    "objectID": "python_geopandas_folium_point_data.html#heatmaps",
+    "href": "python_geopandas_folium_point_data.html#heatmaps",
+    "title": "21  Interactive Maps - Point Data",
+    "section": "21.3 Heatmaps",
+    "text": "21.3 Heatmaps\nBy using a Folium plugin, we can create a heatmap from point data.\n\nfrom folium import plugins\n\ngp_map_heatmap = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=15,\n    blur=5)\n\nheatmap_layer.add_to(gp_map_heatmap)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f9e9a4af130&gt;\n\ngp_map_heatmap\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n21.3.1 Radius and blur\nChanging the radius and blur parameters can have a significant impact on the display.\n\nfrom folium import plugins\n\ngp_map_heatmap_2 = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=10,\n    blur=5)\n\nheatmap_layer.add_to(gp_map_heatmap_2)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f9e9a31d4b0&gt;\n\ngp_map_heatmap_2\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\nfrom folium import plugins\n\ngp_map_heatmap_3 = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=10,\n    blur=10)\n\nheatmap_layer.add_to(gp_map_heatmap_3)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f9e9a478160&gt;\n\ngp_map_heatmap_3\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n\n21.3.2 Initial zoom with heatmaps\nAnd zooming out a long way can turn it into a complete mess regardless of your settings!\n\nfrom folium import plugins\n\ngp_map_heatmap_4 = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=5,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=15,\n    blur=5)\n\nheatmap_layer.add_to(gp_map_heatmap_4)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f9e9a31f100&gt;\n\ngp_map_heatmap_4\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook",
+    "crumbs": [
+      "Part 3 - Mapping in Python",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Interactive Maps - Point Data</span>"
+    ]
   }
 ]

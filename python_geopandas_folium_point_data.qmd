@@ -1,0 +1,297 @@
+# Interactive Maps - Point Data
+
+```{r, echo = FALSE}
+source("glossary_funcs.R")
+glossary_setup()
+```
+
+```{r, echo = FALSE, results='asis'}
+glossary_setup_style()
+```
+
+:::{.callout-note}
+Let's first load in the dataset we will be working with.
+
+```{python}
+import pandas as pd
+import geopandas
+
+gp_list = pd.read_csv("https://github.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/raw/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/gp_surgery_locations_plus_patient_list_size.csv")
+
+gp_list_gdf = geopandas.GeoDataFrame(
+    gp_list, # Our pandas dataframe
+    geometry = geopandas.points_from_xy(
+        gp_list['result_eastings'], # Our 'x' column (horizontal position of points)
+        gp_list['result_northings'] # Our 'y' column (vertical position of points)
+        ),
+    crs = 'EPSG:27700'
+    )
+
+# Convert to 4326 (lat/long) for working with Folium
+gp_list_gdf = gp_list_gdf.to_crs('EPSG:4326')
+
+# reduce to the southwest to not overload Folium
+xmin, xmax = -6.449974,-2.717735
+ymin, ymax =  49.814737,51.246969
+gp_list_gdf_sw = gp_list_gdf.cx[xmin:xmax, ymin:ymax]
+
+```
+:::
+
+To load in point data we
+1. Filter out instances in our dataframe with no geometry (they’ll cause problems!)
+
+2. Make a list from the geometry column to iterate through
+
+3. Use a for loop at add markers to our empty folium map
+
+
+Let's do step 1 and 2 first - the data prep steps.
+
+```{python}
+# Filter out instances with no geometry
+gp_list_gdf_sw = gp_list_gdf_sw[~gp_list_gdf_sw['geometry'].is_empty]
+
+# Create a geometry list from the GeoDataFrame
+geo_df_list = [[point.xy[1][0], point.xy[0][0]] for point in gp_list_gdf_sw.geometry]
+
+```
+
+Now let's make the map.
+
+```{python}
+import folium
+
+# Make the empty map
+gp_map_interactive = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=8,
+    tiles='openstreetmap',
+    )
+
+# Add markers to the map
+for coordinates in geo_df_list:
+     gp_map_interactive = gp_map_interactive.add_child(
+        folium.Marker(
+            location=coordinates
+            )
+     )
+
+gp_map_interactive
+```
+
+## Custom markers
+
+### Web markers
+
+We can pass in a custom marker from the fontawesome library in the for loop.
+
+```{python}
+gp_map_web_icon = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=8,
+    tiles='openstreetmap',
+    )
+
+for coordinates in geo_df_list:
+     gp_map_web_icon = gp_map_web_icon.add_child(
+        folium.Marker(
+            location=coordinates,
+            icon=folium.Icon(icon="user-md", prefix='fa', color="black")
+            )
+     )
+
+gp_map_web_icon
+```
+
+:::{.callout-warning}
+
+As of Feb 2024, this only supports fontawesome v4 - this link will show you all available icons: https://fontawesome.com/v4/icons/
+
+:::
+
+
+### Markers stored locally
+
+If we want to use an icon stored on our local machine, we have to do it slightly differently.
+
+While it seems inefficient to remake the icon each time inside the loop, it won’t work otherwise!
+
+```{python}
+gp_map_local_icon = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=8,
+    tiles='openstreetmap',
+    )
+
+for coordinates in geo_df_list:
+    custom_icon = folium.features.CustomIcon(
+        "resources/logos/hsma_logo_transparent_background_small.png",
+        icon_size=(24,24)
+    )
+
+    gp_map_local_icon = gp_map_local_icon.add_child(
+        folium.Marker(
+            location=coordinates,
+            icon=custom_icon
+            )
+     )
+
+gp_map_local_icon
+```
+
+
+## Tooltips
+
+We can also add in tooltips - here we need to use `enumerate(our_list)` instead of just `our_list` so that we get a counter as well.
+
+The first time through the loop, `i` will be 0. This means in the tooltip we pull out the `name` column (the GP surgery name) and then pull back the 0th row of the dataframe, which will correspond to the 0th point in our geo_df list.
+
+:::{.callout-tip}
+Remember - Python starts counting from 0, not 1!
+:::
+
+We then repeat this for the 1st, 2nd, 3rd and so on.
+
+Tooltips will then appear when hovering over.
+
+:::{.callout-warning}
+We use the `.values` attribute of our column to return a list of values.
+Accessing the values directly could cause a problem in filtered dataframes as the index will not start from 0. Using `.values` will ensure we always have a list that we can iterate through as expected.
+:::
+
+```{python}
+#| label: tooltip
+gp_map_tooltip = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=8,
+    tiles='openstreetmap',
+    )
+
+for i, coordinates in enumerate(geo_df_list):
+
+    gp_map_tooltip = gp_map_tooltip.add_child(
+        folium.Marker(
+            location=coordinates,
+            tooltip=gp_list_gdf_sw['name'].values[i]
+            )
+     )
+
+gp_map_tooltip
+```
+
+### More complex tooltips
+
+We could use an f-string to create a more complex tooltip from multiple columns of our dataframe.
+
+:::{.callout-tip}
+Use \<br> to get a line break. It’s sort of the web equivalent of \\n.
+:::
+
+```{python}
+#| label: complex_tooltip
+gp_map_complex_tooltip = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=8,
+    tiles='openstreetmap',
+    )
+
+for i, coordinates in enumerate(geo_df_list):
+
+    gp_map_complex_tooltip = gp_map_complex_tooltip.add_child(
+        folium.Marker(
+            location=coordinates,
+            tooltip=f"{gp_list_gdf_sw['name'].values[i].title()}<br>List Size: {gp_list_gdf_sw['Total List Size'].values[i]:.0f}"
+            )
+     )
+
+gp_map_complex_tooltip
+```
+
+## Heatmaps
+
+By using a Folium plugin, we can create a heatmap from point data.
+
+```{python}
+from folium import plugins
+
+gp_map_heatmap = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=8,
+    tiles='openstreetmap',
+    )
+
+heatmap_layer = plugins.HeatMap(
+    geo_df_list,
+    radius=15,
+    blur=5)
+
+heatmap_layer.add_to(gp_map_heatmap)
+
+gp_map_heatmap
+```
+
+### Radius and blur
+
+Changing the radius and blur parameters can have a significant impact on the display.
+
+```{python}
+from folium import plugins
+
+gp_map_heatmap_2 = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=8,
+    tiles='openstreetmap',
+    )
+
+heatmap_layer = plugins.HeatMap(
+    geo_df_list,
+    radius=10,
+    blur=5)
+
+heatmap_layer.add_to(gp_map_heatmap_2)
+
+gp_map_heatmap_2
+```
+
+```{python}
+from folium import plugins
+
+gp_map_heatmap_3 = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=8,
+    tiles='openstreetmap',
+    )
+
+heatmap_layer = plugins.HeatMap(
+    geo_df_list,
+    radius=10,
+    blur=10)
+
+heatmap_layer.add_to(gp_map_heatmap_3)
+
+gp_map_heatmap_3
+```
+
+### Initial zoom with heatmaps
+
+And zooming out a long way can turn it into a complete mess regardless of your settings!
+
+```{python}
+from folium import plugins
+
+gp_map_heatmap_4 = folium.Map(
+    location=[50.7, -4.2],
+    zoom_start=5,
+    tiles='openstreetmap',
+    )
+
+heatmap_layer = plugins.HeatMap(
+    geo_df_list,
+    radius=15,
+    blur=5)
+
+heatmap_layer.add_to(gp_map_heatmap_4)
+
+gp_map_heatmap_4
+```

@@ -1,0 +1,47 @@
+# Interactive Maps - Choropleths
+
+```{r, echo = FALSE}
+source("glossary_funcs.R")
+glossary_setup()
+```
+
+```{r, echo = FALSE, results='asis'}
+glossary_setup_style()
+```
+
+```{python}
+import pandas as pd
+import geopandas
+
+lsoa_2011_crime_figures_df = geopandas.read_file("https://github.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/raw/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/lsoa_2011_sw5forces_crime_figures.gpkg")
+
+lsoa_2011_crime_figures_df_devon=lsoa_2011_crime_figures_df.cx[250000:350000, 0:150000]
+```
+
+
+We can also create choropleths in Folium.
+
+As with point data, we start by importing Folium and creating a basemap.
+
+We then create a new choropleth layer and add this to the basemap.
+
+```{python}
+import folium
+
+#create base map
+bike_crime_map_interactive = folium.Map(
+    location=[50.71671, -3.50668],
+    zoom_start=9,
+    tiles='cartodbpositron'
+    )
+
+# create and add choropleth map
+choropleth = folium.Choropleth(
+    geo_data=lsoa_2011_crime_figures_df_devon, # dataframe with geometry in it
+    data=lsoa_2011_crime_figures_df_devon, # dataframe with data in - may be the same dataframe or a different one
+    columns=['LSOA11NM', 'sw_5forces_street_by_lsoa_Bicycle theft'], # [key (field for geometry), field to plot]
+    key_on='feature.properties.LSOA11NM'
+    )
+
+choropleth.add_to(bike_crime_map_interactive)
+```
