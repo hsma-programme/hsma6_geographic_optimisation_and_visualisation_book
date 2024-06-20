@@ -9,6 +9,8 @@ glossary_setup()
 glossary_setup_style()
 ```
 
+Let's first load in, filter and inspect the dataset we will be using for these choropleths.
+
 ```{python}
 import pandas as pd
 import geopandas
@@ -16,8 +18,11 @@ import geopandas
 lsoa_2011_crime_figures_df = geopandas.read_file("https://github.com/hsma-programme/h6_3b_advanced_qgis_mapping_python/raw/main/h6_3b_advanced_qgis_and_mapping_in_python/example_code/lsoa_2011_sw5forces_crime_figures.gpkg")
 
 lsoa_2011_crime_figures_df_devon=lsoa_2011_crime_figures_df.cx[250000:350000, 0:150000]
+
+lsoa_2011_crime_figures_df.head()
 ```
 
+## Creating choropleths
 
 We can also create choropleths in Folium.
 
@@ -43,5 +48,158 @@ choropleth = folium.Choropleth(
     key_on='feature.properties.LSOA11NM'
     )
 
-choropleth.add_to(bike_crime_map_interactive)
+choropleth = choropleth.add_to(bike_crime_map_interactive)
+
+bike_crime_map_interactive
+```
+
+### Adding complexity
+
+We can pass in additional arguments to the `folium.Choropleth()` call to tweak the display further.
+
+`fill_colour` takes a matplotlib colourmap string to change the colours used for the scale.
+
+`fill_opacity` affects how see-through (transparent) the choropleth layer is. This is a value between 0 and 1, with 1 being totally opaque and 0 being totally see-through.
+
+`line_weight` affects the thickness of the outlines around different boundaries.
+
+`legend_name` adjusts the label attached to the legend.
+
+`highlight` highlights the LSOA shape when mouse pointer enters it if set to `True`; it defaults to `False`.
+
+`smooth_factor` affects how simplified the boundaries of each region will be; 0 ensures no simplification occurs.
+
+```{python}
+#create base map
+bike_crime_map_interactive = folium.Map(
+    location=[50.71671, -3.50668],
+    zoom_start=9,
+    tiles='cartodbpositron'
+    )
+
+# create and add choropleth map
+choropleth = folium.Choropleth(
+    geo_data=lsoa_2011_crime_figures_df_devon, # dataframe with geometry in it
+    data=lsoa_2011_crime_figures_df_devon, # dataframe with data in - may be the same dataframe or a different one
+    columns=['LSOA11NM', 'sw_5forces_street_by_lsoa_Bicycle theft'], # [key (field for geometry), field to plot]
+    key_on='feature.properties.LSOA11NM',
+    fill_color='OrRd',
+    fill_opacity=0.4,
+    line_weight=0.3,
+    legend_name='Bicycle Thefts',
+    highlight=True, # highlight the LSOA shape when mouse pointer enters it
+    smooth_factor=0
+    )
+
+choropleth = choropleth.add_to(bike_crime_map_interactive)
+
+bike_crime_map_interactive
+```
+
+## Tooltips
+
+Simple tooltips can be added with this code, passing in the column of interest as well as the region label:
+
+```{python}
+#| eval: True
+choropleth = choropleth.geojson.add_child(
+    folium.features.GeoJsonTooltip(
+        ['LSOA11NM', 'sw_5forces_street_by_lsoa_Bicycle theft'],
+        labels=True
+        )
+)
+```
+
+Here is the full code.
+
+```{python}
+#create base map
+bike_crime_map_interactive = folium.Map(
+    location=[50.71671, -3.50668],
+    zoom_start=9,
+    tiles='cartodbpositron'
+    )
+
+# create and add choropleth map
+choropleth = folium.Choropleth(
+    geo_data=lsoa_2011_crime_figures_df_devon, # dataframe with geometry in it
+    data=lsoa_2011_crime_figures_df_devon, # dataframe with data in - may be the same dataframe or a different one
+    columns=['LSOA11NM', 'sw_5forces_street_by_lsoa_Bicycle theft'], # [key (field for geometry), field to plot]
+    key_on='feature.properties.LSOA11NM',
+    fill_color='OrRd',
+    fill_opacity=0.4,
+    line_weight=0.3,
+    legend_name='Bicycle Thefts',
+    highlight=True, # highlight the LSOA shape when mouse pointer enters it
+    smooth_factor=0
+    )
+
+choropleth = choropleth.add_to(bike_crime_map_interactive)
+
+choropleth = choropleth.geojson.add_child(
+    folium.features.GeoJsonTooltip(
+        ['LSOA11NM', 'sw_5forces_street_by_lsoa_Bicycle theft'],
+        labels=True
+        )
+)
+
+bike_crime_map_interactive
+
+```
+
+### Adding additional columns to choropleths
+
+By adding additional columns to the list we pass in to the `folium.features.GeoJsonTooltip()` function, we can include as many additional columns as we would like in our choropleth.
+
+For example:
+
+```{python}
+#| eval: False
+choropleth.geojson.add_child(
+    folium.features.GeoJsonTooltip(
+        ['LSOA11NM',
+        'sw_5forces_street_by_lsoa_Bicycle theft',
+        'sw_5forces_street_by_lsoa_Total number crimes'],
+        labels=True
+        )
+)
+```
+
+Here is the full code.
+
+```{python}
+#create base map
+bike_crime_map_interactive = folium.Map(
+    location=[50.71671, -3.50668],
+    zoom_start=9,
+    tiles='cartodbpositron'
+    )
+
+# create and add choropleth map
+choropleth = folium.Choropleth(
+    geo_data=lsoa_2011_crime_figures_df_devon, # dataframe with geometry in it
+    data=lsoa_2011_crime_figures_df_devon, # dataframe with data in - may be the same dataframe or a different one
+    columns=['LSOA11NM', 'sw_5forces_street_by_lsoa_Bicycle theft'], # [key (field for geometry), field to plot]
+    key_on='feature.properties.LSOA11NM',
+    fill_color='OrRd',
+    fill_opacity=0.4,
+    line_weight=0.3,
+    legend_name='Bicycle Thefts',
+    highlight=True, # highlight the LSOA shape when mouse pointer enters it
+    smooth_factor=0
+    )
+
+choropleth = choropleth.add_to(bike_crime_map_interactive)
+
+choropleth = choropleth.geojson.add_child(
+    folium.features.GeoJsonTooltip(
+        ['LSOA11NM',
+        'sw_5forces_street_by_lsoa_Bicycle theft',
+        'sw_5forces_street_by_lsoa_Total number crimes'],
+        labels=True
+        )
+)
+
+bike_crime_map_interactive
+
 ```

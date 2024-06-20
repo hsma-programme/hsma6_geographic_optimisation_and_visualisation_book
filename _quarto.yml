@@ -35,7 +35,7 @@ book:
     - python_geopandas_matplotlib.qmd
     - python_geopandas_folium_intro.qmd
     - python_geopandas_folium_point_data.qmd
-    #- python_geopandas_folium_choropleths.qmd
+    - python_geopandas_folium_choropleths.qmd
     #- python_geopandas_folium_extensions.qmd
   cover-image: resources/logos/hsma_logo_transparent_background_large.png
   favicon: resources/logos/hsma_logo_transparent_background_large.png

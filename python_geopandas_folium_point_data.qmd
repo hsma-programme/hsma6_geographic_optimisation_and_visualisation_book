@@ -30,11 +30,13 @@ gp_list_gdf = geopandas.GeoDataFrame(
 # Convert to 4326 (lat/long) for working with Folium
 gp_list_gdf = gp_list_gdf.to_crs('EPSG:4326')
 
+# Filter out instances with no 'list' (e.g. things like specialist clinics)
+gp_list = gp_list[~gp_list['Total List Size'].isna()]
+
 # reduce to the southwest to not overload Folium
 xmin, xmax = -6.449974,-2.717735
 ymin, ymax =  49.814737,51.246969
 gp_list_gdf_sw = gp_list_gdf.cx[xmin:xmax, ymin:ymax]
-
 ```
 :::
 
@@ -127,7 +129,7 @@ gp_map_local_icon = folium.Map(
 for coordinates in geo_df_list:
     custom_icon = folium.features.CustomIcon(
         "resources/logos/hsma_logo_transparent_background_small.png",
-        icon_size=(24,24)
+        icon_size=(48,48)
     )
 
     gp_map_local_icon = gp_map_local_icon.add_child(
