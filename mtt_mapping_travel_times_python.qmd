@@ -8,3 +8,402 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+
+## Working with precalculated travel matrices
+
+You may be able to find useful datasets that other people have created of common lookups you may need to do.
+
+This is the travel time from every LSOA in the country to every hospital in the country (by car, assuming there is no traffic)
+
+:::{.callout-tip}
+You’ll need to check whether the data is in hours, minutes or seconds! It may vary depending on the web service used and other processing.
+:::
+
+![](assets/2024-06-22-10-05-47.png)
+
+In this dataset,
+
+Rows = LSOA
+
+Columns = Postcodes of Hospital and Clinic Sites
+
+Cell = travel time from LSOA to hospital/clinic (minutes)
+
+### Calculating the shortest travel time
+
+Let’s look at an example of how to take a matrix like this and calculate the shortest travel time to a site from each LSOA.
+
+We’ve been given a dataset containing postcodes of hospitals with 24-hour A&E departments within 50 miles of the centre of Birmingham.
+
+Let's first import the packages we'll be needing.
+
+```{python}
+#| label: package_imports
+import pandas as pd
+import geopandas
+import matplotlib.pyplot as plt
+import requests
+import contextily as cx
+```
+
+```{python}
+#| echo: False
+#| label: df_hospitals_setup
+birmingham_area_hospitals_df = pd.DataFrame([
+    {'postcode': 'B18 7QH', 'name': 'City Hospital'},
+    {'postcode': 'B15 2TH', 'name': 'Queen Elizabeth Hospital Birmingham'},
+    {'postcode': 'B9 5SS', 'name': 'Heartlands Hospital '},
+    {'postcode': 'B71 4HJ', 'name': 'Sandwell District General Hospital'},
+    {'postcode': 'B75 7RR', 'name': ' Good Hope Hospital'},
+    {'postcode': 'WS2 9PS', 'name': 'Manor Hospital'},
+    {'postcode': 'DY1 2HQ', 'name': 'Russells Hall Hospital'},
+    {'postcode': 'WV10 0QP', 'name': 'New Cross Hospital'},
+    {'postcode': 'B98 7UB', 'name': 'Alexandra Hospital'},
+    {'postcode': 'CV10 7DJ', 'name': 'George Eliot Hospital'},
+    {'postcode': 'CV34 5BW', 'name': ' Warwick Hospital'},
+    {'postcode': 'CV2 2DX', 'name': 'University Hospital (Coventry)'},
+    {'postcode': 'WR5 1DD', 'name': 'Worcestershire Royal Hospital'},
+    {'postcode': 'ST16 3SA', 'name': 'Stafford Hospital'},
+    {'postcode': 'TF1 6TF', 'name': 'Princess Royal Hospital'},
+    {'postcode': 'LE1 5WW', 'name': 'Leicester Royal Infirmary'},
+    {'postcode': 'DE22 3NE', 'name': 'Royal Derby Hospital'},
+    {'postcode': 'OX16 9AL', 'name': 'Horton General Hospital'},
+    {'postcode': 'ST4 6QG', 'name': 'Royal Stoke University Hospital'},
+    {'postcode': 'SY3 8XQ', 'name': 'Royal Shrewsbury Hospital'}
+ ])
+```
+
+```{python}
+#| eval: True
+#| label: show_hospital_df
+birmingham_area_hospitals_df
+```
+
+We know the extent we are interested in, and need to visualise the current areas with longer journey times.
+
+We've got a precalculated travel matrix of car times available to us, showing the distance to any hospital in the UK from any LSOA in the UK.
+
+```{python}
+#| label: travel_matrix
+car_travel_time_lookup = pd.read_csv("https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/travel_matrix_minutes.zip")
+```
+
+:::{.callout-tip}
+When distances relate to LSOAs, MSOAs or postcodes, they will often relate to the **centroid** of that region (the centre point).
+
+Remember - MSOAs and LSOAs (and even some postcodes) can cover a fairly large area. Datasets exist of *population-weighted centroids*, which may be more appropriate to use.
+:::
+
+The first thing we’re going to do is make a new dataframe that only contains the columns for the relevant hospitals.
+
+:::{.callout-warning}
+Always be very careful with **boundary issues**
+
+In this case we've been told to only visualise their shortest journey to any one of the hospitals in this list. But someone at the edge of the region showing a very short journey time could be just down the road from a different hospital not in our dataset!
+:::
+
+```{python}
+#| label: trim_travel_df
+car_travel_time_lookup_birmingham_hospitals = car_travel_time_lookup.loc[
+    # keep all of the rows
+    :,
+    # keep the LSOA column and columns for relevant hospitals
+    ['LSOA'] + birmingham_area_hospitals_df.postcode.to_list()
+    ]
+
+car_travel_time_lookup_birmingham_hospitals.head()
+```
+
+Now, we want to return the shortest travel time to any of these hospitals.
+
+So what we need is the smallest value in any of the columns - except the LSOA name!
+
+So first, let’s change the LSOA name to be our index.
+
+This means it will be ignored when we try to look for the minimum travel time.
+
+
+```{python}
+#| label: set_index
+car_travel_time_lookup_birmingham_hospitals = car_travel_time_lookup_birmingham_hospitals.set_index('LSOA')
+
+car_travel_time_lookup_birmingham_hospitals
+```
+
+Now we can calculate the row-wise minimum
+(i.e. look across the columns and find the smallest value for that row)
+And turn this into a new column.
+
+```{python}
+#| label: shortest_travel_time
+car_travel_time_lookup_birmingham_hospitals['shortest'] = (
+    # axis = 1 means row-wise minimum (instead of columnwise)
+    car_travel_time_lookup_birmingham_hospitals.min(axis=1)
+)
+
+car_travel_time_lookup_birmingham_hospitals.head()
+```
+
+Now we need to join this to some kind of geometry - as at the moment we have the name of each LSOA, but no way of plotting them.
+
+We don’t really know where they are until we import something like a geojson, geopkg or shapefile.
+
+```{python}
+#| label: lsoa_geojson
+lsoa_geojson_path = 'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'
+
+lsoa_boundaries = geopandas.read_file(lsoa_geojson_path)
+```
+
+Let’s just plot this to check it’s what we’re expecting and what the CRS is.
+
+This looks like it’s using the British National Grid system.
+
+(we can tell because the range is 0 to ~ 700,000 in each direction rather than numbers < 100 if it was latitude and longitude)
+
+
+```{python}
+#| label: plot_boundary_file
+lsoa_boundaries.plot()
+```
+
+### Joining the travel times to geometry data
+
+Now it’s time to join it to the travel time data per LSOA.
+
+We use the pandas merge() function.
+
+:::{.callout-tip}
+Note that we pass in the lsoa boundaries geodataframe first out of the two dataframes - this ensures the output will be a geopandas file and not get converted to a standard dataframe.
+:::
+
+:::{.callout-tip}
+Side note: we are resetting the index of our travel time dataframe so that LSOA11NM is a column, not an index (i.e. our row identifiers are 0, 1, 2, 3 etc., not the names of the LSOAs).
+:::
+
+```{python}
+#| label: bham_gdf_nearest
+nearest_hospital_travel_bham_gdf = pd.merge(
+    lsoa_boundaries,
+    car_travel_time_lookup_birmingham_hospitals.reset_index(),
+    left_on="LSOA11NM",
+    right_on="LSOA",
+    how="right"
+)
+```
+
+We’re doing a right join, which means every row in the car_travel_time_lookup_birmingham_hospitals dataframe will be kept, even if there isn’t a match in the lsoa_boundaries file.
+
+![](assets/2024-06-22-10-34-10.png)
+
+### Plotting the travel times
+
+Now let’s try plotting this!
+
+It looks like the travel times are shortest around Birmingham - which makes perfect sense as we’ve only been checking against the hospitals in Birmingham!
+
+```{python}
+#| label: plot_gdf_nearest
+nearest_hospital_travel_bham_gdf.plot(
+    column='shortest',
+    legend=True
+    )
+```
+
+### Refining the travel time plot
+
+#### Adjusting the plot boundaries
+
+Let’s zoom in a bit so we’re not giving misleading information.
+
+:::{.callout-warning}
+If we just zoom, the scale of our output isn’t very helpful.
+
+This is because the legend is based on the entire dataframe, which still includes those distant regions, even if they aren’t shown in the final plot.
+
+```{python}
+#| label: zoom_bad
+xmin, xmax = 370000, 420000
+ymin, ymax = 250000, 310000
+
+ax = nearest_hospital_travel_bham_gdf.plot(
+    column='shortest',
+    legend=True
+    )
+
+ax.set_xlim(xmin, xmax)
+ax.set_ylim(ymin, ymax)
+```
+:::
+
+Remember the .cx method for filtering down to just those regions within a boundary box?
+
+If we use that first, our plot becomes a lot more informative!
+
+```{python}
+#| label: plot_filter_gdf
+xmin, xmax = 370000, 420000
+ymin, ymax = 250000, 310000
+
+nearest_hospital_travel_bham_gdf_filter = nearest_hospital_travel_bham_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = nearest_hospital_travel_bham_gdf_filter.plot(
+    column='shortest',
+    legend=True
+    )
+
+```
+
+Would it look better with some whitespace around the edge of the map to make it clear what area we are considering?
+
+#### Extending the plot extent back out
+
+We can make the matplotlib limits slightly different to the boundary box to achieve this.
+
+```{python}
+#| label: filter_gdf
+xmin, xmax = 370000, 420000
+ymin, ymax = 250000, 310000
+
+nearest_hospital_travel_bham_gdf_filter = nearest_hospital_travel_bham_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = nearest_hospital_travel_bham_gdf_filter.plot(
+    column='shortest',
+    legend=True
+    )
+
+ax.set_xlim(xmin-20000, xmax+20000)
+ax.set_ylim(ymin-20000, ymax+20000)
+```
+
+#### Changing the colourschemes
+
+Let’s experiment with a different colourscheme.
+
+```{python}
+#| label: colorscheme
+xmin, xmax = 370000, 420000
+ymin, ymax = 250000, 310000
+
+nearest_hospital_travel_bham_gdf_filter = nearest_hospital_travel_bham_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = nearest_hospital_travel_bham_gdf_filter.plot(
+    column='shortest',
+    legend=True,
+    cmap="Reds"
+    )
+
+ax.set_xlim(xmin-20000, xmax+20000)
+ax.set_ylim(ymin-20000, ymax+20000)
+```
+
+#### Adding in points to show the possible destinations
+
+Let’s make use of the postcodes.io web API.
+
+We import requests to help us interact with the API.
+
+We pass a list of postcodes to the relevant web address.
+
+
+```{python}
+#| label: postcodes_lookup
+postcode_lookup = requests.post(
+        "https://api.postcodes.io/postcodes",
+        json={"postcodes": birmingham_area_hospitals_df['postcode'].tolist()}
+    )
+
+postcode_lookup
+```
+
+Then we turn it into a dataframe and join it to our hospital df.
+
+```{python}
+# label: convert_postocde_json_to_df
+postcode_lookup = pd.json_normalize(postcode_lookup.json()['result'], sep='_')
+
+postcode_lookup
+```
+
+```{python}
+#| label: join_gdf_point
+birmingham_area_hospitals_df = pd.merge(
+    birmingham_area_hospitals_df,
+    postcode_lookup,
+    left_on="postcode",
+    right_on="query"
+)
+```
+
+Then we’ll turn the output into a geodataframe.
+
+Because our original dataset was in eastings/northings, we can use those columns from our postcodes.io lookup result, and tell geopandas that we’re using EPSG:27700
+
+```{python}
+#| label: create_gdf_point
+birmingham_area_hospitals_gdf = geopandas.GeoDataFrame(
+    birmingham_area_hospitals_df,
+    geometry = geopandas.points_from_xy(
+        birmingham_area_hospitals_df['result_eastings'],
+        birmingham_area_hospitals_df['result_northings']
+        ),
+    crs = 'EPSG:27700'
+    )
+```
+
+Now we can plot the points to check the results look roughly correct.
+
+```{python}
+#| label: add_basemap_point_plot
+ax = birmingham_area_hospitals_gdf.plot()
+
+cx.add_basemap(
+    ax,
+    crs=birmingham_area_hospitals_gdf.crs.to_string(),
+    zoom=9
+    )
+```
+
+Now we can add these points to our map.
+
+First we plot the choropleth.
+
+By passing the ax argument - remembering that we called our initial plot object ax - we make sure it plots these as an extra layer - not a totally new plot!
+
+```{python}
+# label: plot_points_and_choropleth
+xmin, xmax = 380000, 440000
+ymin, ymax = 250000, 310000
+
+nearest_hospital_travel_bham_gdf_filter = nearest_hospital_travel_bham_gdf.cx[xmin:xmax, ymin:ymax]
+
+ax = nearest_hospital_travel_bham_gdf_filter.plot(
+    column='shortest',
+    cmap="Reds",
+    legend=True,
+    edgecolor="black",
+    linewidth=0.5,
+    alpha=0.6,
+    figsize=(12,12)
+    )
+
+ax.set_xlim(xmin-20000, xmax+20000)
+ax.set_ylim(ymin-20000, ymax+20000)
+
+hospital_points = birmingham_area_hospitals_gdf.plot(
+    ax=ax,
+    color='black',
+    markersize=50
+    )
+
+cx.add_basemap(
+    ax,
+    crs=nearest_hospital_travel_bham_gdf.crs.to_string(),
+    zoom=10
+    )
+
+plt.title("Travel Time (minutes - by car) to Nearest Hospitals with A&E Department\nBirmingham Area")
+ax.axis('off')
+
+```

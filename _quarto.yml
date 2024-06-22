@@ -37,6 +37,10 @@ book:
     - python_geopandas_folium_point_data.qmd
     - python_geopandas_folium_choropleths.qmd
     #- python_geopandas_folium_extensions.qmd
+  - part: Part 4 - Working with Travel Times
+    chapters:
+    - mapping_travel_times.qmd
+    - mtt_mapping_travel_times_python.qmd
   cover-image: resources/logos/hsma_logo_transparent_background_large.png
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true
