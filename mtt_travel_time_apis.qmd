@@ -144,6 +144,7 @@ with open("routingpy_api_key.txt", "r") as file:
 
 ```{python}
 #| label: example_simple_rp
+#| eval: False
 import routingpy as rp
 
 ors_api = rp.ORS(api_key=ors_api_key)
@@ -723,22 +724,38 @@ location_matrix = ors_api.matrix(
     metrics=["distance", "duration"]
     )
 
+# turn the output into a dataframe
 brighton_travel_matrix = pd.DataFrame(
     location_matrix.durations,
     columns=[f"Site {i+1}" for i in range(len(destinations_indices))],
     index=brighton_lsoas_with_coords.name
     )
 
+# calculate the shortest travel time
 brighton_travel_matrix['shortest'] = brighton_travel_matrix.min(axis=1)
 
+# join travel data to geometry data
 nearest_site_travel_brighton_gdf = pd.merge(
     left=lsoa_boundaries,
     right=brighton_travel_matrix.reset_index(),
     left_on = "LSOA11NM",
     right_on = "name"
 )
+
+# create column with shortest travel time in minutes (converted from seconds)
 nearest_site_travel_brighton_gdf["shortest_minutes"] = nearest_site_travel_brighton_gdf["shortest"] / 60
 
+# create geodataframe of site locations for plotting
+brighton_sites = geopandas.GeoDataFrame(
+    [f"Site {i+1}" for i in range(len(destinations_indices))],
+    geometry = geopandas.points_from_xy(
+        [i[1] for i in locations],
+        [i[0] for i in locations]
+        ),
+    crs = 'EPSG:4326' # as our current dataset is in BNG (northings/eastings)
+    )
+
+# plot travel times as choropleth
 ax = nearest_site_travel_brighton_gdf.plot(
     "shortest_minutes",
     legend=True,
@@ -749,17 +766,22 @@ ax = nearest_site_travel_brighton_gdf.plot(
     figsize=(12,6)
     )
 
+# plot potential hospitals/sites as point layer
 hospital_points = (brighton_sites.to_crs('EPSG:27700')).plot(ax=ax, color='magenta', markersize=60)
 
+# add basemap
 cx.add_basemap(ax, crs=nearest_site_travel_brighton_gdf.crs.to_string(), zoom=14)
 
+# Add site labels
 for x, y, label in zip(brighton_sites.to_crs('EPSG:27700').geometry.x,
                       brighton_sites.to_crs('EPSG:27700').geometry.y,
                       brighton_sites.to_crs('EPSG:27700')[0]):
     ax.annotate(label, xy=(x,y), xytext=(10,3), textcoords="offset points", bbox=dict(facecolor='white'))
 
+# Turn off axis coordinate markings
 ax = ax.axis('off')
 
+# Add title to whole plot
 plt.title("Travel Time (minutes - driving) to nearest proposed site in Brighton")
 ```
 
