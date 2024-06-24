@@ -635,6 +635,7 @@ If you need to request more than 2500 combinations (e.g. 250 LSOAs * 10 sites, o
 :::
 
 ```{python}
+#| label: full_code
 import pandas as pd
 import geopandas
 import routingpy as rp

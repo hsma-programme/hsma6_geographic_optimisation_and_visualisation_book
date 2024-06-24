@@ -1148,5 +1148,82 @@
       "Part 4 - Working with Travel Times",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>Lookup Up Travel Times Using APIs</span>"
     ]
+  },
+  {
+    "objectID": "intro_facility_location.html",
+    "href": "intro_facility_location.html",
+    "title": "25  An Introduction to Facility Location Problems",
+    "section": "",
+    "text": "25.1 An example: sexual health clinics in Hampshire\nMeskarian R, Penn ML, Williams S, Monks T (2017) A facility location model for analysis of current and future demand for sexual health services. PLoS ONE 12(8): e0183942.\nhttps://doi.org/10.1371/journal.pone.0183942\nThe project aimed to assist in planning the sexual health service provision in Hampshire.\nThe project aimed to reduce the number of clinics while maintaining/improving service access\nThere were 278 ‘demand points’ where people could be coming from - these were all of the postcode sectors.",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>An Introduction to Facility Location Problems</span>"
+    ]
+  },
+  {
+    "objectID": "intro_facility_location.html#an-example-sexual-health-clinics-in-hampshire",
+    "href": "intro_facility_location.html#an-example-sexual-health-clinics-in-hampshire",
+    "title": "25  An Introduction to Facility Location Problems",
+    "section": "",
+    "text": "They forecast future demand for different aspects of the service over the next 3–5 years, based on population age and gender projections published by the council.\nThey performed a facility location analysis based on the current and forecasted demand to identify an optimal number of clinics and their geographic location.\n\n\n\n\n\n\n\n25.1.1 Findings\nThe clinic locations could be reduced from 28 to 20 and still keep 90% of all patient journeys by public transport (e.g. by bus or train) to a clinic within 30 minutes.\nThe number of clinics could be further reduced to 8 if the travel time is based on car travel times within 15 minutes.\n\n\n25.1.2 Limitations\nThe public transport analysis assumed everyone would travel by public transport - but this is unrealistic (and census data showed over 85% of the population across the county having access to 1+ cars)\n\n\n25.1.3 Diminishing returns",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>An Introduction to Facility Location Problems</span>"
+    ]
+  },
+  {
+    "objectID": "intro_facility_location.html#formulating-location-allocation-problems",
+    "href": "intro_facility_location.html#formulating-location-allocation-problems",
+    "title": "25  An Introduction to Facility Location Problems",
+    "section": "25.2 Formulating location allocation problems",
+    "text": "25.2 Formulating location allocation problems\n\n25.2.1 Discrete vs continuous models\nIn discrete models, it is assumed that demands can be aggregated to a finite number of discrete points.\nTo achieve this, a region could be split up into a series of points (e.g. the central point of postcodes or LSOAs)\nThey also assume that there is a finite set of candidate locations where facilities will be placed.\n\nThe alternative is continuous models, where locations could be anywhere within a range - we don’t cover this!\n\n\n\n25.2.2 Types of location allocation problem",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>An Introduction to Facility Location Problems</span>"
+    ]
+  },
+  {
+    "objectID": "intro_facility_location.html#p-median-problems",
+    "href": "intro_facility_location.html#p-median-problems",
+    "title": "25  An Introduction to Facility Location Problems",
+    "section": "25.3 p-median problems",
+    "text": "25.3 p-median problems\nA p-median problem is basically just one where we care about\nlocating p services (so p could be 1, 2, 3, 5, 25 - whatever!)\nin such a way that the weighted average travel time (or distance) of users is minimized\n\n25.3.1 Understanding how p-median problems work\nFirst, let’s imagine we have a single hospital site.\n\n\n25.3.1.1 Simple averages\n\n\n\n\n25.3.1.2 Why weighted averages?\n\n\n\n25.3.1.3 Calculating weighted averages\n\nBut what if the demand was distributed differently?\n\nIf this was the demand distribution instead, then this might not be such a good location for the hospital\n\n\n25.3.1.4 The impact of weighted averages\nCompare our unweighted average\n\nTo the weighted averages\n\n\n\n\n25.3.2 Limitations of p-median problems\nHowever - one problem with this approach is that it doesn’t look at the maximum travel time.\nFor certain services, like accident and emergency, stroke units, or anything else where being able to get to a service within a certain length of time is crucial, then you may be less concerned about minimizing the average length.\nInstead, you may care more about ensuring that everyone in your catchment area isn’t more than a certain number of miles or minutes away.\n\n\n\n\n\n\n\nWarning\n\n\n\nJust focussing on the weighted average time can lead to an inequitable solution.",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>An Introduction to Facility Location Problems</span>"
+    ]
+  },
+  {
+    "objectID": "intro_facility_location.html#other-problem-types",
+    "href": "intro_facility_location.html#other-problem-types",
+    "title": "25  An Introduction to Facility Location Problems",
+    "section": "25.4 Other problem types",
+    "text": "25.4 Other problem types\n\n\n\n\n\n\nTip\n\n\n\nWe focus on the p-median problem in the course - but it’s useful to know what the other types are.\n\n\n\n25.4.1 Location set covering problem\nWhat is the minimum number of facilities (and their locations) so that all people have at least one facility within a given maximum distance (or time)\n\n\n25.4.2 Maximal covering location problem\nHow can we locate the facilities in such a way that as few people as possible don’t have a service within the target distance (or time)\n\n\n\n\n\n\nTip\n\n\n\nIf we cannot cover all demands because it’s too expensive to do so, the model leans towards covering areas that generate lots of demand rather than those that generate less.",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>An Introduction to Facility Location Problems</span>"
+    ]
+  },
+  {
+    "objectID": "intro_facility_location.html#presenting-outputs",
+    "href": "intro_facility_location.html#presenting-outputs",
+    "title": "25  An Introduction to Facility Location Problems",
+    "section": "25.5 Presenting outputs",
+    "text": "25.5 Presenting outputs\nIn reality, you might care about all of these to some extent!\nYou might find that your best solution to the p-median problem has a really long maximum travel time…\nBut your second best solution actually has a much more reasonable maximum travel time.\n\nMake sure you’re not omitting this information when presenting the output to stakeholders!\nIt can be crucial to help them make an informed, fair and safe decision.\nYou could even consider ranking possible combinations by multiple methods and then seeing which has the lowest overall rank (indicating the best performance against multiple objectives)",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>An Introduction to Facility Location Problems</span>"
+    ]
+  },
+  {
+    "objectID": "intro_facility_location.html#references",
+    "href": "intro_facility_location.html#references",
+    "title": "25  An Introduction to Facility Location Problems",
+    "section": "25.6 References",
+    "text": "25.6 References\nCar icons created by fjstudio - Flaticon (https://www.flaticon.com/free-icons/car)",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>An Introduction to Facility Location Problems</span>"
+    ]
   }
 ]
