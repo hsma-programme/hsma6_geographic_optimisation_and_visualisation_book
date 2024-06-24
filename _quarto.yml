@@ -45,8 +45,8 @@ book:
   - part: Part 5 - Facility Location Problems
     chapters:
     - intro_facility_location.qmd
-    #- fl_limits_of_computation.qmd
-    #- fl_brutefoce_solutions.qmd
+    - fl_site_combinations.qmd
+    - fl_problems_coding.qmd
   cover-image: resources/logos/hsma_logo_transparent_background_large.png
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true

@@ -1,0 +1,731 @@
+# Using code to solve facility location problems
+
+Right - now we know the combinations we want to test and how long it takes to get to each clinic location, we’ll need some sort of demand figures.
+
+## Demand data
+
+Chances are your demand isn’t spread evenly across your potential service user catchment area.
+
+- Maybe certain LSOAs have more people of childbearing age, so maternity and paediatric services will get more demand from those areas
+- Maybe certain LSOAs have an older population, so stroke services are more centred around there
+- Maybe other LSOAs have a higher incidence of obesity, so you might expect more demand for type 2 diabetes services and retinopathy clinics
+
+Your demand data can be formatted quite simply!
+
+You just want to make sure that you’re using the same level of location data as in your travel matrix (e.g. they need to both use LSOA, or both use postcode sectors - not a mixture)
+
+![](assets/2024-06-24-19-17-30.png)
+
+:::{.callout-warning}
+You might use historic demand figures as your starting point.
+
+But always consider…
+
+- If you seem to have areas with no historic demand, is this actually a pattern, or is it just that the historic numbers are small and there’s an element of chance?
+- Is there some preexisting bias or issue with access that you might be perpetuating by using the historic figures?
+
+How can you deal with these issues?
+
+If you’re using historic data, can you bring in more years?
+
+Alternatively, you could explore what happens when you just weight demand by the number of people in each LSOA.
+
+If your service only covers a certain age range, you can find LSOA-level figures estimating the proportion of the population in that age group.
+
+![](assets/2024-06-24-19-18-13.png)
+
+You might also just make predictions of demand based off something else.
+- Number of people in a target age demographic or of a particular gender in your LSOAs, multiplied by some factor
+    - (e.g. 20% of women aged 18-34)
+
+Just always consider whether what you’re doing is
+
+- appropriate
+- sensible
+- transparent
+- justifiable
+
+Make it clear what data you have used and why!
+
+Make the limitations of your conclusions explicit.
+:::
+
+## Evaluating the weighted average travel time
+
+Right! We’ve got everything we need - except a way to evaluate the weighted average travel time…
+
+Cast your mind back many many slides - when we present our options, we want to give more weight to the travel times from areas that have higher demand.
+
+![](assets/2024-06-24-19-19-04.png)
+
+Let’s write some code to do this.
+
+It’s something we’re going to want to reuse quite a lot - so we can turn it into a class with…
+
+**Attributes**
+
+- our travel dataframe
+- our demand dataframe
+
+**Methods**
+
+- Evaluate a solution
+    - Limit the travel dataframe to a subset of candidate locations
+    - Work out the smallest value per location (the ‘minimum cost’)
+    - Return a dataframe with demand and min cost per region
+- Return the weighted average for the solution
+- Return the unweighted average for the solution
+- Return the maximum travel time for any locations in the solution
+
+:::{.callout-info}
+The FacilityLocationObjective code is modified from the Metapy library created by Tom Monks
+
+[https://github.com/health-data-science-OR/healthcare-logistics/tree/master/optimisation/metapy](https://github.com/health-data-science-OR/healthcare-logistics/tree/master/optimisation/metapy)
+:::
+
+#### The __init__ method
+
+```{python}
+#| eval: False
+class FacilityLocationObjective:
+    def __init__(self, demand, travel_matrix, merge_col, demand_col):
+        '''
+        Store the demand and travel times
+
+        Args:
+            demand: pd.DataFrame:
+
+            travel_matrix: pd.DataFrame:
+        '''
+        self.demand = demand.set_index(merge_col)
+        self.travel_matrix = travel_matrix.set_index(merge_col)
+        self.demand_col = demand_col
+```
+
+**demand** is our dataframe containing demand sources (e.g. LSOAs) as rows and the demand (e.g. yearly patients coming from that LSOA) as the single column
+
+**merge_col** is the name of the column that is consistent between our demand and travel dataframes
+
+**travel_matrix** is the dataframe with demand sources as rows and potential service locations as columns, with the travel cost (time) as the values in the cells
+
+**demand_col** is a string referring to the column that contains the demand value in the demand dataframe
+
+#### The evaluate_solution method
+
+This method, given a list of sites in the form of their column indices (e.g. [1, 4, 5] for sites 2, 5 and 6), will return a dataframe with the demand and minimum travel time per row for this potential solution.
+
+```{python}
+#| eval: False
+    def evaluate_solution(self, site_list):
+        '''
+        Args:
+            site_list: list: column indices of solution to evaluate
+                            (to apply to travel matrix)
+
+        Returns:
+            Pandas dataframe to pass to evaluation functions
+
+        '''
+
+        active_facilities = self.travel_matrix.iloc[:, site_list].copy()
+
+        # Assume travel to closest facility
+        # Need to drop the column that contains
+        active_facilities['min_cost'] = active_facilities.min(axis=1)
+
+
+        # Merge demand and travel times into a single DataFrame
+        problem = self.demand.merge(active_facilities,
+                                    left_index=True, right_index=True,
+                                    how='inner')
+
+        return problem.reset_index()
+```
+
+#### The generate_solution_metrics method
+
+This method, given a list of sites in the form of their column indices (e.g. [1, 4, 5] for sites 2, 5 and 6)
+- Runs the evaluate_solution method
+- Returns a range of metrics relating to the
+
+```{python}
+#| eval: False
+    def generate_solution_metrics(self, site_list):
+        '''
+        Calculates the weighted average travel time for selected sites
+
+        Args:
+            site_list: list or np.array: A list of site IDs as a list or array (e.g. [0, 3, 4])
+            merge_col: string: The column name to use for merging the data.
+            n_patients_or_referrals_col: string: The column name to use for the number of patients or referrals.
+
+        Returns:
+            A tuple containing the problem and the maximum travel time.
+        '''
+        problem = self.evaluate_solution(site_list)
+
+        # Return weighted average
+        weighted_average = np.average(problem['min_cost'], weights=problem[self.demand_col])
+        unweighted_average = np.average(problem['min_cost'])
+        max_travel = np.max(problem['min_cost'])
+
+        return {
+            'site_indices': site_list,
+            'site_names': ", ".join(self.travel_matrix.columns[site_list].tolist()),
+            'weighted_average': weighted_average,
+            'unweighted_average': unweighted_average,
+            'max': max_travel,
+            'problem_df': problem
+        }
+```
+
+:::{.callout-tip collapse="True"}
+### Click here to view the whole class
+
+```{python}
+# Tweaked WeightedAverageObjective from Metapy package
+# https://github.com/health-data-science-OR/healthcare-logistics/tree/master/optimisation/metapy
+# Credit: Tom Monks
+
+class FacilityLocationObjective:
+    '''
+    Encapsulates logic for calculation of
+    metrics in a simple facility location problem
+
+    Demand and travel matrices must have a common column
+
+    demand: pd.dataframe:  Two column dataframe. One column should be labels for the
+    demand locations (e.g. LSOA identifiers, postcodes). Second column should contain
+    demand figures of some kind (e.g. number of historical cases)
+    If demand assumed to be equal, all values in this column could be 1.
+
+    travel_matrix: pd.dataframe: dataframe with columns representing sites
+    and rows representing locations demand will come from.
+    One column should be labels for the demand locations (e.g. LSOA identifiers, postcodes).
+    All other values will be either distance or time in float form.
+    No additional columns of information must be included or they will be used as part of the
+    calculation of the lowest-cost solution, which may lead to incorrect results.
+    '''
+    def __init__(self, demand, travel_matrix, merge_col, demand_col):
+        '''
+        Store the demand and travel times
+
+        Args:
+            demand: pd.DataFrame:
+
+            travel_matrix: pd.DataFrame:
+        '''
+        self.demand = demand.set_index(merge_col)
+        self.travel_matrix = travel_matrix.set_index(merge_col)
+        self.demand_col = demand_col
+
+
+    def evaluate_solution(self, site_list):
+        '''
+        Calculates the
+
+        Args:
+            site_list: list: column indices of solution to evaluate
+                            (to apply to travel matrix)
+
+        Returns:
+            Pandas dataframe to pass to evaluation functions
+
+        '''
+
+        active_facilities = self.travel_matrix.iloc[:, site_list].copy()
+
+        # Assume travel to closest facility
+        # Need to drop the column that contains
+        active_facilities['min_cost'] = active_facilities.min(axis=1)
+
+
+        # Merge demand and travel times into a single DataFrame
+        problem = self.demand.merge(active_facilities,
+                                    left_index=True, right_index=True,
+                                    how='inner')
+
+        return problem.reset_index()
+
+
+    def generate_solution_metrics(self, site_list):
+        '''
+        Calculates the weighted average travel time for selected sites
+
+        Args:
+            site_list: list or np.array: A list of site IDs as a list or array (e.g. [0, 3, 4])
+            merge_col: string: The column name to use for merging the data.
+            n_patients_or_referrals_col: string: The column name to use for the number of patients or referrals.
+
+        Returns:
+            A tuple containing the problem and the maximum travel time.
+        '''
+        problem = self.evaluate_solution(site_list)
+
+        # Return weighted average
+        weighted_average = np.average(problem['min_cost'], weights=problem[self.demand_col])
+        unweighted_average = np.average(problem['min_cost'])
+        max_travel = np.max(problem['min_cost'])
+
+        return {
+            'site_indices': site_list,
+            'site_names': ", ".join(self.travel_matrix.columns[site_list].tolist()),
+            'weighted_average': weighted_average,
+            'unweighted_average': unweighted_average,
+            'max': max_travel,
+            'problem_df': problem
+        }
+```
+
+### Setting up an instance of this class
+
+Let's first import the packages we will need throughout this section.
+
+```{python}
+import pandas as pd
+import geopandas
+import contextily as cx
+import matplotlib.pyplot as plt
+```
+
+We need to
+- import a dataset of demand
+- import (or create) a geodataframe of site locations
+- and import (or create) a travel matrix for this combination of sites and demand sources
+
+```{python}
+brighton_demand = pd.read_csv("https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/brighton_demand.csv").drop(columns=["Unnamed: 0"])
+brighton_demand.head()
+```
+
+```{python}
+brighton_sites = geopandas.read_file("https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/brighton_sites.geojson")
+brighton_sites.head()
+```
+
+```{python}
+brighton_travel = pd.read_csv("https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/brighton_travel_matrix_driving.csv").drop(columns=["Unnamed: 0"])
+brighton_travel.head()
+```
+
+Finally, we bring in our LSOA boundaries for plotting later.
+
+```{python}
+lsoa_boundaries = geopandas.read_file("https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson")
+lsoa_boundaries.head()
+```
+
+We will then pass the travel and demand datasets into our `FacilityLocationObjective`; the site df will be used afterwards.
+
+```{python}
+location_problem_brighton = FacilityLocationObjective(
+    demand=brighton_demand,
+    travel_matrix=brighton_travel,
+    merge_col="LSOA",
+    demand_col="demand"
+    )
+```
+
+![](assets/2024-06-24-19-27-49.png)
+
+### Outputs
+
+#### evaluate_solution
+
+This is the output of the evaluate_solution method.
+
+![](assets/2024-06-24-19-29-00.png)
+
+And now we can easily pass in a range of solutions - including with different numbers of sites.
+
+Note the column names changing to reflect the site indices we are passing in.
+
+![](assets/2024-06-24-19-29-31.png)
+
+Now we bring in our code from an earlier chapter to calculate every possible combination of a certain number of facilities.
+
+```{python}
+from itertools import combinations
+import numpy as np
+
+def all_combinations(n_facilities, p):
+    facility = np.arange(n_facilities, dtype=np.uint8)
+    return [np.array(a) for a in combinations(facility, p)]
+```
+
+We could even loop through this to find every combination with every possible number of facilities…
+
+```{python}
+
+possible_combinations_brighton = all_combinations(
+    len(location_problem_brighton.travel_matrix.columns),
+    4
+    )
+
+possible_combinations_brighton
+
+```
+
+
+### Obtaining solution metrics in a loop
+
+Now we can loop through every possible combination and save the outputs.
+
+```{python}
+outputs = []
+
+for possible_solution in possible_combinations_brighton:
+    outputs.append(
+        location_problem_brighton.generate_solution_metrics(
+        possible_solution
+    )
+)
+```
+
+And easily turn our list of dictionaries into a dataframe!
+
+```{python}
+pd.DataFrame(outputs)
+```
+
+Then it’s easy to find the best combinations and tidy up the output table.
+
+```{python}
+pd.DataFrame(outputs).sort_values('weighted_average').round(1)
+```
+
+And, since we stored the combinations in our dataframe too, we can easily pull this out by chaining together a few steps.
+
+```{python}
+pd.DataFrame(outputs).sort_values('weighted_average').head(1)['site_names'].values
+```
+
+### Plotting the best solution
+
+We can now put this all together with the map plotting skills we’ve learned over the last few sessions.
+
+When plotting our sites as well, we can ensure we are only plotting the sites included in our solution - see the highlighted sections of the code below.
+
+![](assets/2024-06-24-22-00-36.png)
+
+:::{.callout-info}
+Let's explore what the output of the first line of code is:
+
+```{python}
+best_solution = pd.DataFrame(outputs).sort_values('weighted_average').head(1)
+best_solution_df = best_solution['problem_df'].values[0]
+
+best_solution_df
+```
+
+This line then ensures we’re just pulling out the site indices for the best sites, and filtering our site dataframe to just those.
+
+```{python}
+brighton_sites_bng = brighton_sites.to_crs('EPSG:27700').iloc[best_solution["site_indices"].values[0]]
+
+brighton_sites_bng
+```
+:::
+
+Now let's do the plotting.
+
+```{python}
+
+best_solution_df = pd.DataFrame(outputs).sort_values('weighted_average').head(1)['problem_df'].values[0]
+
+nearest_site_travel_brighton_gdf = pd.merge(
+    lsoa_boundaries,
+    best_solution_df,
+    right_on = "LSOA",
+    left_on = "LSOA11NM"
+)
+
+nearest_site_travel_brighton_gdf["min_cost_minutes"] = nearest_site_travel_brighton_gdf["min_cost"] / 60
+
+ax = nearest_site_travel_brighton_gdf.plot(
+    "min_cost_minutes",
+    legend=True,
+    cmap="Blues",
+    alpha=0.7,
+    edgecolor="black",
+    linewidth=0.5,
+    figsize=(12,6)
+    )
+
+brighton_sites_bng = brighton_sites.to_crs('EPSG:27700').iloc[best_solution["site_indices"].values[0]]
+
+hospital_points = brighton_sites_bng.plot(ax=ax, color='magenta', markersize=60)
+
+cx.add_basemap(ax, crs=nearest_site_travel_brighton_gdf.crs.to_string(), zoom=14)
+
+for x, y, label in zip(brighton_sites_bng.geometry.x,
+                      brighton_sites_bng.geometry.y,
+                      brighton_sites_bng.site):
+    ax.annotate(label, xy=(x,y), xytext=(10,3), textcoords="offset points", bbox=dict(facecolor='white'))
+
+ax.axis('off')
+
+plt.title("Travel Time (driving - minutes) for best sites in Brighton")
+```
+
+### Plotting all solutions
+
+And then it doesn’t take much effort to create a map showing weighted average travel times for every possible solution!
+
+The key thing is that we just iterate through our dataframe of all solutions - pulling one row out at a time.
+
+If we order them by weighted average first, the map in the top left is the best solution.
+
+Then it’s just our usual plot code - making sure to specify the axis we are plotting on to.
+
+Another benefit of saving all these different things is that we can then easily add the weighted average travel time to the title of each plot!
+
+```{python}
+fig, axs = plt.subplots(3, 5, figsize=(30, 15))
+
+for i, ax in enumerate(fig.axes):
+
+    solution = pd.DataFrame(outputs).sort_values('weighted_average').iloc[[i]]
+    solution_df = solution['problem_df'].values[0]
+
+    nearest_site_travel_brighton_gdf = pd.merge(
+        lsoa_boundaries,
+        solution_df,
+        right_on = "LSOA",
+        left_on = "LSOA11NM"
+    )
+
+    nearest_site_travel_brighton_gdf["min_cost_minutes"] = nearest_site_travel_brighton_gdf["min_cost"] / 60
+
+    ax = nearest_site_travel_brighton_gdf.plot(
+        "min_cost_minutes",
+        legend=True,
+        cmap="Blues",
+        alpha=0.7,
+        edgecolor="black",
+        linewidth=0.5,
+        figsize=(12,6),
+        ax=ax
+        )
+
+    brighton_sites_bng = brighton_sites.to_crs('EPSG:27700').iloc[solution["site_indices"].values[0]]
+
+    hospital_points = brighton_sites_bng.plot(ax=ax, color='magenta', markersize=60)
+
+    for x, y, label in zip(brighton_sites_bng.geometry.x,
+                        brighton_sites_bng.geometry.y,
+                        brighton_sites_bng.site):
+        ax.annotate(label, xy=(x,y), xytext=(10,3), textcoords="offset points", bbox=dict(facecolor='white'))
+
+    ax.axis('off')
+
+    weighted_travel_time_solution = solution["weighted_average"].values[0]
+    weighted_travel_time_solution_minutes = (weighted_travel_time_solution / 60).round(2)
+
+    ax.set_title(f"Weighted Average:\n{weighted_travel_time_solution_minutes} minutes")
+```
+
+### Other ways to display the output
+
+Consider other ways to display the outputs too.
+
+```{python}
+import plotly.express as px
+
+outputs_df = pd.DataFrame(outputs)
+outputs_df['weighted_average_minutes'] = (outputs_df['weighted_average']/60).round(2)
+
+px.bar(
+    data_frame=outputs_df.sort_values("weighted_average_minutes", ascending=False),
+    y="site_names",
+    x="weighted_average_minutes",
+    title="Possible Site Combinations"
+)
+```
+
+
+## Full Code Example
+
+Finally, here is a full copyable code example for this section.
+
+```{python}
+from itertools import combinations
+import numpy as np
+import pandas as pd
+import geopandas
+import contextily as cx
+import matplotlib.pyplot as plt
+
+# Tweaked WeightedAverageObjective from Metapy package
+# https://github.com/health-data-science-OR/healthcare-logistics/tree/master/optimisation/metapy
+# Credit: Tom Monks
+
+class FacilityLocationObjective:
+    '''
+    Encapsulates logic for calculation of
+    metrics in a simple facility location problem
+
+    Demand and travel matrices must have a common column
+
+    demand: pd.dataframe:  Two column dataframe. One column should be labels for the
+    demand locations (e.g. LSOA identifiers, postcodes). Second column should contain
+    demand figures of some kind (e.g. number of historical cases)
+    If demand assumed to be equal, all values in this column could be 1.
+
+    travel_matrix: pd.dataframe: dataframe with columns representing sites
+    and rows representing locations demand will come from.
+    One column should be labels for the demand locations (e.g. LSOA identifiers, postcodes).
+    All other values will be either distance or time in float form.
+    No additional columns of information must be included or they will be used as part of the
+    calculation of the lowest-cost solution, which may lead to incorrect results.
+    '''
+    def __init__(self, demand, travel_matrix, merge_col, demand_col):
+        '''
+        Store the demand and travel times
+
+        Args:
+            demand: pd.DataFrame:
+
+            travel_matrix: pd.DataFrame:
+        '''
+        self.demand = demand.set_index(merge_col)
+        self.travel_matrix = travel_matrix.set_index(merge_col)
+        self.demand_col = demand_col
+
+
+    def evaluate_solution(self, site_list):
+        '''
+        Calculates the
+
+        Args:
+            site_list: list: column indices of solution to evaluate
+                            (to apply to travel matrix)
+
+        Returns:
+            Pandas dataframe to pass to evaluation functions
+
+        '''
+
+        active_facilities = self.travel_matrix.iloc[:, site_list].copy()
+
+        # Assume travel to closest facility
+        # Need to drop the column that contains
+        active_facilities['min_cost'] = active_facilities.min(axis=1)
+
+
+        # Merge demand and travel times into a single DataFrame
+        problem = self.demand.merge(active_facilities,
+                                    left_index=True, right_index=True,
+                                    how='inner')
+
+        return problem.reset_index()
+
+
+    def generate_solution_metrics(self, site_list):
+        '''
+        Calculates the weighted average travel time for selected sites
+
+        Args:
+            site_list: list or np.array: A list of site IDs as a list or array (e.g. [0, 3, 4])
+            merge_col: string: The column name to use for merging the data.
+            n_patients_or_referrals_col: string: The column name to use for the number of patients or referrals.
+
+        Returns:
+            A tuple containing the problem and the maximum travel time.
+        '''
+        problem = self.evaluate_solution(site_list)
+
+        # Return weighted average
+        weighted_average = np.average(problem['min_cost'], weights=problem[self.demand_col])
+        unweighted_average = np.average(problem['min_cost'])
+        max_travel = np.max(problem['min_cost'])
+
+        return {
+            'site_indices': site_list,
+            'site_names': ", ".join(self.travel_matrix.columns[site_list].tolist()),
+            'weighted_average': weighted_average,
+            'unweighted_average': unweighted_average,
+            'max': max_travel,
+            'problem_df': problem
+        }
+
+def all_combinations(n_facilities, p):
+    facility = np.arange(n_facilities, dtype=np.uint8)
+    return [np.array(a) for a in combinations(facility, p)]
+
+brighton_demand = pd.read_csv("https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/brighton_demand.csv").drop(columns=["Unnamed: 0"])
+
+brighton_sites = geopandas.read_file("https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/brighton_sites.geojson")
+
+brighton_travel = pd.read_csv("https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/brighton_travel_matrix_driving.csv").drop(columns=["Unnamed: 0"])
+
+lsoa_boundaries = geopandas.read_file("https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson")
+
+location_problem_brighton = FacilityLocationObjective(
+    demand=brighton_demand,
+    travel_matrix=brighton_travel,
+    merge_col="LSOA",
+    demand_col="demand"
+    )
+
+possible_combinations_brighton = all_combinations(
+    len(location_problem_brighton.travel_matrix.columns),
+    4
+    )
+
+outputs = []
+
+for possible_solution in possible_combinations_brighton:
+    outputs.append(
+        location_problem_brighton.generate_solution_metrics(
+        possible_solution
+    )
+)
+
+best_solution = pd.DataFrame(outputs).sort_values('weighted_average').head(1)
+best_solution_df = best_solution['problem_df'].values[0]
+
+fig, axs = plt.subplots(3, 5, figsize=(30, 15))
+
+for i, ax in enumerate(fig.axes):
+
+    solution = pd.DataFrame(outputs).sort_values('weighted_average').iloc[[i]]
+    solution_df = solution['problem_df'].values[0]
+
+    nearest_site_travel_brighton_gdf = pd.merge(
+        lsoa_boundaries,
+        solution_df,
+        right_on = "LSOA",
+        left_on = "LSOA11NM"
+    )
+
+    nearest_site_travel_brighton_gdf["min_cost_minutes"] = nearest_site_travel_brighton_gdf["min_cost"] / 60
+
+    ax = nearest_site_travel_brighton_gdf.plot(
+        "min_cost_minutes",
+        legend=True,
+        cmap="Blues",
+        alpha=0.7,
+        edgecolor="black",
+        linewidth=0.5,
+        figsize=(12,6),
+        ax=ax
+        )
+
+    brighton_sites_bng = brighton_sites.to_crs('EPSG:27700').iloc[solution["site_indices"].values[0]]
+
+    hospital_points = brighton_sites_bng.plot(ax=ax, color='magenta', markersize=60)
+
+    for x, y, label in zip(brighton_sites_bng.geometry.x,
+                        brighton_sites_bng.geometry.y,
+                        brighton_sites_bng.site):
+        ax.annotate(label, xy=(x,y), xytext=(10,3), textcoords="offset points", bbox=dict(facecolor='white'))
+
+    ax.axis('off')
+
+    weighted_travel_time_solution = solution["weighted_average"].values[0]
+    weighted_travel_time_solution_minutes = (weighted_travel_time_solution / 60).round(2)
+
+    ax.set_title(f"Weighted Average:\n{weighted_travel_time_solution_minutes} minutes")
+
+```
