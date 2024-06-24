@@ -1,4 +1,11 @@
+---
+execute:
+  eval: false
+---
+
 # Lookup Up Travel Times Using APIs
+
+
 ```{r, echo = FALSE}
 source("glossary_funcs.R")
 glossary_setup()

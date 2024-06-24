@@ -41,7 +41,7 @@ book:
     chapters:
     - mapping_travel_times.qmd
     - mtt_mapping_travel_times_python.qmd
-    #- mtt_travel_time_apis.qmd
+    - mtt_travel_time_apis.qmd
   - part: Part 5 - Facility Location Problems
     chapters:
     - intro_facility_location.qmd

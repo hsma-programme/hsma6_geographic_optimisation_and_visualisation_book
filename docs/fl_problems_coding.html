@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 27&nbsp; Using code to solve facility location problems</title>
+<title>HSMA - Geographic Modelling and Visualisation - 28&nbsp; Using code to solve facility location problems</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -162,7 +162,7 @@ require(['plotly'], function(Plotly) {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./fl_problems_coding.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./fl_problems_coding.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -379,6 +379,12 @@ require(['plotly'], function(Plotly) {
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Visualising Travel Times in Python</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mtt_travel_time_apis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Lookup Up Travel Times Using APIs</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -393,19 +399,19 @@ require(['plotly'], function(Plotly) {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_facility_location.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_site_combinations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_problems_coding.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></span></a>
   </div>
 </li>
       </ul>
@@ -420,26 +426,26 @@ require(['plotly'], function(Plotly) {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#demand-data" id="toc-demand-data" class="nav-link active" data-scroll-target="#demand-data"><span class="header-section-number">27.1</span> Demand data</a></li>
-  <li><a href="#evaluating-the-weighted-average-travel-time" id="toc-evaluating-the-weighted-average-travel-time" class="nav-link" data-scroll-target="#evaluating-the-weighted-average-travel-time"><span class="header-section-number">27.2</span> Evaluating the weighted average travel time</a>
+  <li><a href="#demand-data" id="toc-demand-data" class="nav-link active" data-scroll-target="#demand-data"><span class="header-section-number">28.1</span> Demand data</a></li>
+  <li><a href="#evaluating-the-weighted-average-travel-time" id="toc-evaluating-the-weighted-average-travel-time" class="nav-link" data-scroll-target="#evaluating-the-weighted-average-travel-time"><span class="header-section-number">28.2</span> Evaluating the weighted average travel time</a>
   <ul class="collapse">
-  <li><a href="#setting-up-an-instance-of-this-class" id="toc-setting-up-an-instance-of-this-class" class="nav-link" data-scroll-target="#setting-up-an-instance-of-this-class"><span class="header-section-number">27.2.1</span> Setting up an instance of this class</a></li>
-  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs"><span class="header-section-number">27.2.2</span> Outputs</a></li>
-  <li><a href="#obtaining-solution-metrics-in-a-loop" id="toc-obtaining-solution-metrics-in-a-loop" class="nav-link" data-scroll-target="#obtaining-solution-metrics-in-a-loop"><span class="header-section-number">27.2.3</span> Obtaining solution metrics in a loop</a></li>
-  <li><a href="#plotting-the-best-solution" id="toc-plotting-the-best-solution" class="nav-link" data-scroll-target="#plotting-the-best-solution"><span class="header-section-number">27.2.4</span> Plotting the best solution</a></li>
-  <li><a href="#plotting-all-solutions" id="toc-plotting-all-solutions" class="nav-link" data-scroll-target="#plotting-all-solutions"><span class="header-section-number">27.2.5</span> Plotting all solutions</a></li>
-  <li><a href="#other-ways-to-display-the-output" id="toc-other-ways-to-display-the-output" class="nav-link" data-scroll-target="#other-ways-to-display-the-output"><span class="header-section-number">27.2.6</span> Other ways to display the output</a></li>
+  <li><a href="#setting-up-an-instance-of-this-class" id="toc-setting-up-an-instance-of-this-class" class="nav-link" data-scroll-target="#setting-up-an-instance-of-this-class"><span class="header-section-number">28.2.1</span> Setting up an instance of this class</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs"><span class="header-section-number">28.2.2</span> Outputs</a></li>
+  <li><a href="#obtaining-solution-metrics-in-a-loop" id="toc-obtaining-solution-metrics-in-a-loop" class="nav-link" data-scroll-target="#obtaining-solution-metrics-in-a-loop"><span class="header-section-number">28.2.3</span> Obtaining solution metrics in a loop</a></li>
+  <li><a href="#plotting-the-best-solution" id="toc-plotting-the-best-solution" class="nav-link" data-scroll-target="#plotting-the-best-solution"><span class="header-section-number">28.2.4</span> Plotting the best solution</a></li>
+  <li><a href="#plotting-all-solutions" id="toc-plotting-all-solutions" class="nav-link" data-scroll-target="#plotting-all-solutions"><span class="header-section-number">28.2.5</span> Plotting all solutions</a></li>
+  <li><a href="#other-ways-to-display-the-output" id="toc-other-ways-to-display-the-output" class="nav-link" data-scroll-target="#other-ways-to-display-the-output"><span class="header-section-number">28.2.6</span> Other ways to display the output</a></li>
   </ul></li>
-  <li><a href="#full-code-example" id="toc-full-code-example" class="nav-link" data-scroll-target="#full-code-example"><span class="header-section-number">27.3</span> Full Code Example</a></li>
+  <li><a href="#full-code-example" id="toc-full-code-example" class="nav-link" data-scroll-target="#full-code-example"><span class="header-section-number">28.3</span> Full Code Example</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./fl_problems_coding.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./fl_problems_coding.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></h1>
+<h1 class="title"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></h1>
 </div>
 
 
@@ -457,8 +463,8 @@ require(['plotly'], function(Plotly) {
 
 
 <p>Right - now we know the combinations we want to test and how long it takes to get to each clinic location, we’ll need some sort of demand figures.</p>
-<section id="demand-data" class="level2" data-number="27.1">
-<h2 data-number="27.1" class="anchored" data-anchor-id="demand-data"><span class="header-section-number">27.1</span> Demand data</h2>
+<section id="demand-data" class="level2" data-number="28.1">
+<h2 data-number="28.1" class="anchored" data-anchor-id="demand-data"><span class="header-section-number">28.1</span> Demand data</h2>
 <p>Chances are your demand isn’t spread evenly across your potential service user catchment area.</p>
 <ul>
 <li>Maybe certain LSOAs have more people of childbearing age, so maternity and paediatric services will get more demand from those areas</li>
@@ -502,8 +508,8 @@ Warning
 </div>
 </div>
 </section>
-<section id="evaluating-the-weighted-average-travel-time" class="level2" data-number="27.2">
-<h2 data-number="27.2" class="anchored" data-anchor-id="evaluating-the-weighted-average-travel-time"><span class="header-section-number">27.2</span> Evaluating the weighted average travel time</h2>
+<section id="evaluating-the-weighted-average-travel-time" class="level2" data-number="28.2">
+<h2 data-number="28.2" class="anchored" data-anchor-id="evaluating-the-weighted-average-travel-time"><span class="header-section-number">28.2</span> Evaluating the weighted average travel time</h2>
 <p>Right! We’ve got everything we need - except a way to evaluate the weighted average travel time…</p>
 <p>Cast your mind back many many slides - when we present our options, we want to give more weight to the travel times from areas that have higher demand.</p>
 <p><img src="assets/2024-06-24-19-19-04.png" class="img-fluid"></p>
@@ -528,16 +534,11 @@ Warning
 </ul>
 <div class="callout-info">
 <p>The FacilityLocationObjective code is modified from the Metapy library created by Tom Monks</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://github.com/health-data-science-OR/healthcare-logistics/tree/master/optimisation/metapy.png" class="img-fluid figure-img"></p>
-<figcaption>https://github.com/health-data-science-OR/healthcare-logistics/tree/master/optimisation/metapy</figcaption>
-</figure>
+<p><a href="https://github.com/health-data-science-OR/healthcare-logistics/tree/master/optimisation/metapy">https://github.com/health-data-science-OR/healthcare-logistics/tree/master/optimisation/metapy</a></p>
 </div>
-</div>
-<section id="the-init-method" class="level4" data-number="27.2.0.1">
-<h4 data-number="27.2.0.1" class="anchored" data-anchor-id="the-init-method"><span class="header-section-number">27.2.0.1</span> The <strong>init</strong> method</h4>
-<div id="ebebd102" class="cell" data-execution_count="1">
+<section id="the-init-method" class="level4" data-number="28.2.0.1">
+<h4 data-number="28.2.0.1" class="anchored" data-anchor-id="the-init-method"><span class="header-section-number">28.2.0.1</span> The <strong>init</strong> method</h4>
+<div id="125aac5a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FacilityLocationObjective:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, demand, travel_matrix, merge_col, demand_col):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">'''</span></span>
@@ -557,10 +558,10 @@ Warning
 <p><strong>travel_matrix</strong> is the dataframe with demand sources as rows and potential service locations as columns, with the travel cost (time) as the values in the cells</p>
 <p><strong>demand_col</strong> is a string referring to the column that contains the demand value in the demand dataframe</p>
 </section>
-<section id="the-evaluate_solution-method" class="level4" data-number="27.2.0.2">
-<h4 data-number="27.2.0.2" class="anchored" data-anchor-id="the-evaluate_solution-method"><span class="header-section-number">27.2.0.2</span> The evaluate_solution method</h4>
+<section id="the-evaluate_solution-method" class="level4" data-number="28.2.0.2">
+<h4 data-number="28.2.0.2" class="anchored" data-anchor-id="the-evaluate_solution-method"><span class="header-section-number">28.2.0.2</span> The evaluate_solution method</h4>
 <p>This method, given a list of sites in the form of their column indices (e.g.&nbsp;[1, 4, 5] for sites 2, 5 and 6), will return a dataframe with the demand and minimum travel time per row for this potential solution.</p>
-<div id="dc2c7307" class="cell" data-execution_count="2">
+<div id="68506a31" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> evaluate_solution(<span class="va">self</span>, site_list):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">'''</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
@@ -587,10 +588,10 @@ Warning
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> problem.reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-generate_solution_metrics-method" class="level4" data-number="27.2.0.3">
-<h4 data-number="27.2.0.3" class="anchored" data-anchor-id="the-generate_solution_metrics-method"><span class="header-section-number">27.2.0.3</span> The generate_solution_metrics method</h4>
+<section id="the-generate_solution_metrics-method" class="level4" data-number="28.2.0.3">
+<h4 data-number="28.2.0.3" class="anchored" data-anchor-id="the-generate_solution_metrics-method"><span class="header-section-number">28.2.0.3</span> The generate_solution_metrics method</h4>
 <p>This method, given a list of sites in the form of their column indices (e.g.&nbsp;[1, 4, 5] for sites 2, 5 and 6) - Runs the evaluate_solution method - Returns a range of metrics relating to the</p>
-<div id="68ba9e0f" class="cell" data-execution_count="3">
+<div id="fd90b23e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generate_solution_metrics(<span class="va">self</span>, site_list):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="co">'''</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">        Calculates the weighted average travel time for selected sites</span></span>
@@ -619,8 +620,8 @@ Warning
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">'problem_df'</span>: problem</span>
 <span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>:::{.tip-callout collapse=“True”} ### Click here to view the whole class</p>
-<div id="459941f8" class="cell" data-execution_count="4">
+<p>:::{.callout-tip collapse=“True”} ### Click here to view the whole class</p>
+<div id="5a07377a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tweaked WeightedAverageObjective from Metapy package</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://github.com/health-data-science-OR/healthcare-logistics/tree/master/optimisation/metapy</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Credit: Tom Monks</span></span>
@@ -715,17 +716,17 @@ Warning
 <span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>        }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="setting-up-an-instance-of-this-class" class="level3" data-number="27.2.1">
-<h3 data-number="27.2.1" class="anchored" data-anchor-id="setting-up-an-instance-of-this-class"><span class="header-section-number">27.2.1</span> Setting up an instance of this class</h3>
+<section id="setting-up-an-instance-of-this-class" class="level3" data-number="28.2.1">
+<h3 data-number="28.2.1" class="anchored" data-anchor-id="setting-up-an-instance-of-this-class"><span class="header-section-number">28.2.1</span> Setting up an instance of this class</h3>
 <p>Let’s first import the packages we will need throughout this section.</p>
-<div id="560e5de1" class="cell" data-execution_count="5">
+<div id="9a3879ae" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextily <span class="im">as</span> cx</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We need to - import a dataset of demand - import (or create) a geodataframe of site locations - and import (or create) a travel matrix for this combination of sites and demand sources</p>
-<div id="eaffaa08" class="cell" data-execution_count="6">
+<div id="a63bdcb5" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>brighton_demand <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/brighton_demand.csv"</span>).drop(columns<span class="op">=</span>[<span class="st">"Unnamed: 0"</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>brighton_demand.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -774,7 +775,7 @@ Warning
 </div>
 </div>
 </div>
-<div id="fd215ffe" class="cell" data-execution_count="7">
+<div id="3edcc8f1" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>brighton_sites <span class="op">=</span> geopandas.read_file(<span class="st">"https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/brighton_sites.geojson"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>brighton_sites.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -823,7 +824,7 @@ Warning
 </div>
 </div>
 </div>
-<div id="32d4d0db" class="cell" data-execution_count="8">
+<div id="d027d0ea" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>brighton_travel <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/brighton_travel_matrix_driving.csv"</span>).drop(columns<span class="op">=</span>[<span class="st">"Unnamed: 0"</span>])</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>brighton_travel.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -903,7 +904,7 @@ Warning
 </div>
 </div>
 <p>Finally, we bring in our LSOA boundaries for plotting later.</p>
-<div id="4c0c71b6" class="cell" data-execution_count="9">
+<div id="959a7a5d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lsoa_boundaries <span class="op">=</span> geopandas.read_file(<span class="st">"https://raw.githubusercontent.com/hsma-programme/h6_3d_facility_location_problems/main/h6_3d_facility_location_problems/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>lsoa_boundaries.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -1001,7 +1002,7 @@ Warning
 </div>
 </div>
 <p>We will then pass the travel and demand datasets into our <code>FacilityLocationObjective</code>; the site df will be used afterwards.</p>
-<div id="b69e7a9f" class="cell" data-execution_count="10">
+<div id="343d01ec" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>location_problem_brighton <span class="op">=</span> FacilityLocationObjective(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    demand<span class="op">=</span>brighton_demand,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    travel_matrix<span class="op">=</span>brighton_travel,</span>
@@ -1011,17 +1012,17 @@ Warning
 </div>
 <p><img src="assets/2024-06-24-19-27-49.png" class="img-fluid"></p>
 </section>
-<section id="outputs" class="level3" data-number="27.2.2">
-<h3 data-number="27.2.2" class="anchored" data-anchor-id="outputs"><span class="header-section-number">27.2.2</span> Outputs</h3>
-<section id="evaluate_solution" class="level4" data-number="27.2.2.1">
-<h4 data-number="27.2.2.1" class="anchored" data-anchor-id="evaluate_solution"><span class="header-section-number">27.2.2.1</span> evaluate_solution</h4>
+<section id="outputs" class="level3" data-number="28.2.2">
+<h3 data-number="28.2.2" class="anchored" data-anchor-id="outputs"><span class="header-section-number">28.2.2</span> Outputs</h3>
+<section id="evaluate_solution" class="level4" data-number="28.2.2.1">
+<h4 data-number="28.2.2.1" class="anchored" data-anchor-id="evaluate_solution"><span class="header-section-number">28.2.2.1</span> evaluate_solution</h4>
 <p>This is the output of the evaluate_solution method.</p>
 <p><img src="assets/2024-06-24-19-29-00.png" class="img-fluid"></p>
 <p>And now we can easily pass in a range of solutions - including with different numbers of sites.</p>
 <p>Note the column names changing to reflect the site indices we are passing in.</p>
 <p><img src="assets/2024-06-24-19-29-31.png" class="img-fluid"></p>
 <p>Now we bring in our code from an earlier chapter to calculate every possible combination of a certain number of facilities.</p>
-<div id="1e502c16" class="cell" data-execution_count="11">
+<div id="a406d964" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> combinations</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1030,7 +1031,7 @@ Warning
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [np.array(a) <span class="cf">for</span> a <span class="kw">in</span> combinations(facility, p)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We could even loop through this to find every combination with every possible number of facilities…</p>
-<div id="6796158a" class="cell" data-execution_count="12">
+<div id="a6d32fe3" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>possible_combinations_brighton <span class="op">=</span> all_combinations(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">len</span>(location_problem_brighton.travel_matrix.columns),</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span></span>
@@ -1057,10 +1058,10 @@ Warning
 </div>
 </section>
 </section>
-<section id="obtaining-solution-metrics-in-a-loop" class="level3" data-number="27.2.3">
-<h3 data-number="27.2.3" class="anchored" data-anchor-id="obtaining-solution-metrics-in-a-loop"><span class="header-section-number">27.2.3</span> Obtaining solution metrics in a loop</h3>
+<section id="obtaining-solution-metrics-in-a-loop" class="level3" data-number="28.2.3">
+<h3 data-number="28.2.3" class="anchored" data-anchor-id="obtaining-solution-metrics-in-a-loop"><span class="header-section-number">28.2.3</span> Obtaining solution metrics in a loop</h3>
 <p>Now we can loop through every possible combination and save the outputs.</p>
-<div id="7ae99562" class="cell" data-execution_count="13">
+<div id="5e6f6d59" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>outputs <span class="op">=</span> []</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> possible_solution <span class="kw">in</span> possible_combinations_brighton:</span>
@@ -1071,7 +1072,7 @@ Warning
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And easily turn our list of dictionaries into a dataframe!</p>
-<div id="ad6324ae" class="cell" data-execution_count="14">
+<div id="d20647a1" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(outputs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -1234,7 +1235,7 @@ Warning
 </div>
 </div>
 <p>Then it’s easy to find the best combinations and tidy up the output table.</p>
-<div id="542845d1" class="cell" data-execution_count="15">
+<div id="572070d8" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(outputs).sort_values(<span class="st">'weighted_average'</span>).<span class="bu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
@@ -1397,21 +1398,21 @@ Warning
 </div>
 </div>
 <p>And, since we stored the combinations in our dataframe too, we can easily pull this out by chaining together a few steps.</p>
-<div id="ee293728" class="cell" data-execution_count="16">
+<div id="d0be5cb5" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(outputs).sort_values(<span class="st">'weighted_average'</span>).head(<span class="dv">1</span>)[<span class="st">'site_names'</span>].values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>array(['Site 1, Site 3, Site 4, Site 5'], dtype=object)</code></pre>
 </div>
 </div>
 </section>
-<section id="plotting-the-best-solution" class="level3" data-number="27.2.4">
-<h3 data-number="27.2.4" class="anchored" data-anchor-id="plotting-the-best-solution"><span class="header-section-number">27.2.4</span> Plotting the best solution</h3>
+<section id="plotting-the-best-solution" class="level3" data-number="28.2.4">
+<h3 data-number="28.2.4" class="anchored" data-anchor-id="plotting-the-best-solution"><span class="header-section-number">28.2.4</span> Plotting the best solution</h3>
 <p>We can now put this all together with the map plotting skills we’ve learned over the last few sessions.</p>
 <p>When plotting our sites as well, we can ensure we are only plotting the sites included in our solution - see the highlighted sections of the code below.</p>
 <p><img src="assets/2024-06-24-22-00-36.png" class="img-fluid"></p>
 <div class="callout-info">
 <p>Let’s explore what the output of the first line of code is:</p>
-<div id="be9e4c57" class="cell" data-execution_count="17">
+<div id="7a3c8db8" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>best_solution <span class="op">=</span> pd.DataFrame(outputs).sort_values(<span class="st">'weighted_average'</span>).head(<span class="dv">1</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>best_solution_df <span class="op">=</span> best_solution[<span class="st">'problem_df'</span>].values[<span class="dv">0</span>]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1554,7 +1555,7 @@ Warning
 </div>
 </div>
 <p>This line then ensures we’re just pulling out the site indices for the best sites, and filtering our site dataframe to just those.</p>
-<div id="ccfa63b9" class="cell" data-execution_count="18">
+<div id="44abd740" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>brighton_sites_bng <span class="op">=</span> brighton_sites.to_crs(<span class="st">'EPSG:27700'</span>).iloc[best_solution[<span class="st">"site_indices"</span>].values[<span class="dv">0</span>]]</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>brighton_sites_bng</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1601,7 +1602,7 @@ Warning
 </div>
 </div>
 <p>Now let’s do the plotting.</p>
-<div id="81e4ce80" class="cell" data-execution_count="19">
+<div id="faeb8df0" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>best_solution_df <span class="op">=</span> pd.DataFrame(outputs).sort_values(<span class="st">'weighted_average'</span>).head(<span class="dv">1</span>)[<span class="st">'problem_df'</span>].values[<span class="dv">0</span>]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>nearest_site_travel_brighton_gdf <span class="op">=</span> pd.merge(</span>
@@ -1649,14 +1650,14 @@ Warning
 </div>
 </div>
 </section>
-<section id="plotting-all-solutions" class="level3" data-number="27.2.5">
-<h3 data-number="27.2.5" class="anchored" data-anchor-id="plotting-all-solutions"><span class="header-section-number">27.2.5</span> Plotting all solutions</h3>
+<section id="plotting-all-solutions" class="level3" data-number="28.2.5">
+<h3 data-number="28.2.5" class="anchored" data-anchor-id="plotting-all-solutions"><span class="header-section-number">28.2.5</span> Plotting all solutions</h3>
 <p>And then it doesn’t take much effort to create a map showing weighted average travel times for every possible solution!</p>
 <p>The key thing is that we just iterate through our dataframe of all solutions - pulling one row out at a time.</p>
 <p>If we order them by weighted average first, the map in the top left is the best solution.</p>
 <p>Then it’s just our usual plot code - making sure to specify the axis we are plotting on to.</p>
 <p>Another benefit of saving all these different things is that we can then easily add the weighted average travel time to the title of each plot!</p>
-<div id="b0d9736f" class="cell" data-execution_count="20">
+<div id="d6c29a3c" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">30</span>, <span class="dv">15</span>))</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(fig.axes):</span>
@@ -1708,10 +1709,10 @@ Warning
 </div>
 </div>
 </section>
-<section id="other-ways-to-display-the-output" class="level3" data-number="27.2.6">
-<h3 data-number="27.2.6" class="anchored" data-anchor-id="other-ways-to-display-the-output"><span class="header-section-number">27.2.6</span> Other ways to display the output</h3>
+<section id="other-ways-to-display-the-output" class="level3" data-number="28.2.6">
+<h3 data-number="28.2.6" class="anchored" data-anchor-id="other-ways-to-display-the-output"><span class="header-section-number">28.2.6</span> Other ways to display the output</h3>
 <p>Consider other ways to display the outputs too.</p>
-<div id="a16ba5bb" class="cell" data-execution_count="21">
+<div id="c8003d28" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>outputs_df <span class="op">=</span> pd.DataFrame(outputs)</span>
@@ -1724,9 +1725,9 @@ Warning
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Possible Site Combinations"</span></span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>                            <div id="265e2422-8895-44fa-ac2a-3dee2bc63059" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("265e2422-8895-44fa-ac2a-3dee2bc63059")) {                    Plotly.newPlot(                        "265e2422-8895-44fa-ac2a-3dee2bc63059",                        [{"alignmentgroup":"True","hovertemplate":"weighted_average_minutes=%{x}\u003cbr\u003esite_names=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[7.67,6.91,6.83,6.66,6.63,6.33,6.24,6.14,6.05,5.28,5.23,5.22,5.2,5.11,5.08],"xaxis":"x","y":["Site 1, Site 2, Site 5, Site 6","Site 1, Site 4, Site 5, Site 6","Site 1, Site 2, Site 4, Site 6","Site 2, Site 4, Site 5, Site 6","Site 1, Site 2, Site 4, Site 5","Site 2, Site 3, Site 5, Site 6","Site 1, Site 2, Site 3, Site 5","Site 1, Site 2, Site 3, Site 6","Site 1, Site 3, Site 5, Site 6","Site 2, Site 3, Site 4, Site 5","Site 1, Site 3, Site 4, Site 6","Site 1, Site 2, Site 3, Site 4","Site 2, Site 3, Site 4, Site 6","Site 3, Site 4, Site 5, Site 6","Site 1, Site 3, Site 4, Site 5"],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"weighted_average_minutes"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"site_names"}},"legend":{"tracegroupgap":0},"title":{"text":"Possible Site Combinations"},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
+<div>                            <div id="34053474-100f-4897-9bef-3f259cabbeb4" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("34053474-100f-4897-9bef-3f259cabbeb4")) {                    Plotly.newPlot(                        "34053474-100f-4897-9bef-3f259cabbeb4",                        [{"alignmentgroup":"True","hovertemplate":"weighted_average_minutes=%{x}\u003cbr\u003esite_names=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[7.67,6.91,6.83,6.66,6.63,6.33,6.24,6.14,6.05,5.28,5.23,5.22,5.2,5.11,5.08],"xaxis":"x","y":["Site 1, Site 2, Site 5, Site 6","Site 1, Site 4, Site 5, Site 6","Site 1, Site 2, Site 4, Site 6","Site 2, Site 4, Site 5, Site 6","Site 1, Site 2, Site 4, Site 5","Site 2, Site 3, Site 5, Site 6","Site 1, Site 2, Site 3, Site 5","Site 1, Site 2, Site 3, Site 6","Site 1, Site 3, Site 5, Site 6","Site 2, Site 3, Site 4, Site 5","Site 1, Site 3, Site 4, Site 6","Site 1, Site 2, Site 3, Site 4","Site 2, Site 3, Site 4, Site 6","Site 3, Site 4, Site 5, Site 6","Site 1, Site 3, Site 4, Site 5"],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"weighted_average_minutes"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"site_names"}},"legend":{"tracegroupgap":0},"title":{"text":"Possible Site Combinations"},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
                             
-var gd = document.getElementById('265e2422-8895-44fa-ac2a-3dee2bc63059');
+var gd = document.getElementById('34053474-100f-4897-9bef-3f259cabbeb4');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -1753,10 +1754,10 @@ if (outputEl) {{
 </div>
 </section>
 </section>
-<section id="full-code-example" class="level2" data-number="27.3">
-<h2 data-number="27.3" class="anchored" data-anchor-id="full-code-example"><span class="header-section-number">27.3</span> Full Code Example</h2>
+<section id="full-code-example" class="level2" data-number="28.3">
+<h2 data-number="28.3" class="anchored" data-anchor-id="full-code-example"><span class="header-section-number">28.3</span> Full Code Example</h2>
 <p>Finally, here is a full copyable code example for this section.</p>
-<div id="6fdf3488" class="cell" data-execution_count="22">
+<div id="d6efa828" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> combinations</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -2841,7 +2842,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./fl_site_combinations.html" class="pagination-link" aria-label="Calculating combinations of sites">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
