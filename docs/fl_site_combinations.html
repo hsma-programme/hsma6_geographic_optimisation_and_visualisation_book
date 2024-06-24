@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 26&nbsp; Calculating combinations of sites</title>
+<title>HSMA - Geographic Modelling and Visualisation - 27&nbsp; Calculating combinations of sites</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -233,7 +233,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"id":1,"code":"from itertools import combinations\n\ndef all_combinations(n_facilities, p):\n    facility = np.arange(n_facilities, dtype=np.uint8)\n    return [np.array(a) for a in combinations(facility, p)]","options":{"message":"true","context":"interactive","results":"markup","out-height":"","warning":"true","autorun":"","fig-height":5,"dpi":72,"out-width":"700px","label":"","fig-cap":"","comment":"","read-only":"false","fig-width":7,"classes":"","output":"true"}}];
+globalThis.qpyodideCellDetails = [{"id":1,"code":"from itertools import combinations\n\ndef all_combinations(n_facilities, p):\n    facility = np.arange(n_facilities, dtype=np.uint8)\n    return [np.array(a) for a in combinations(facility, p)]","options":{"dpi":72,"comment":"","read-only":"false","message":"true","output":"true","warning":"true","label":"","out-width":"700px","fig-cap":"","results":"markup","autorun":"","fig-height":5,"classes":"","context":"interactive","out-height":"","fig-width":7}}];
 
 
 </script>
@@ -462,7 +462,7 @@ globalThis._qpyodideGetInstance = function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./fl_site_combinations.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./fl_site_combinations.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -679,6 +679,12 @@ globalThis._qpyodideGetInstance = function() {
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Visualising Travel Times in Python</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mtt_travel_time_apis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Lookup Up Travel Times Using APIs</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -693,19 +699,19 @@ globalThis._qpyodideGetInstance = function() {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_facility_location.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_site_combinations.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_problems_coding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></span></a>
   </div>
 </li>
       </ul>
@@ -720,15 +726,15 @@ globalThis._qpyodideGetInstance = function() {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#representing-possible-combinations-of-sites" id="toc-representing-possible-combinations-of-sites" class="nav-link active" data-scroll-target="#representing-possible-combinations-of-sites"><span class="header-section-number">26.1</span> Representing possible combinations of sites</a>
+  <li><a href="#representing-possible-combinations-of-sites" id="toc-representing-possible-combinations-of-sites" class="nav-link active" data-scroll-target="#representing-possible-combinations-of-sites"><span class="header-section-number">27.1</span> Representing possible combinations of sites</a>
   <ul class="collapse">
-  <li><a href="#translating-the-problem-for-a-computer" id="toc-translating-the-problem-for-a-computer" class="nav-link" data-scroll-target="#translating-the-problem-for-a-computer"><span class="header-section-number">26.1.1</span> Translating the problem for a computer</a></li>
-  <li><a href="#using-the-itertools-package-for-calculating-combinations" id="toc-using-the-itertools-package-for-calculating-combinations" class="nav-link" data-scroll-target="#using-the-itertools-package-for-calculating-combinations"><span class="header-section-number">26.1.2</span> Using the itertools package for calculating combinations</a></li>
-  <li><a href="#larger-problems" id="toc-larger-problems" class="nav-link" data-scroll-target="#larger-problems"><span class="header-section-number">26.1.3</span> Larger problems</a></li>
+  <li><a href="#translating-the-problem-for-a-computer" id="toc-translating-the-problem-for-a-computer" class="nav-link" data-scroll-target="#translating-the-problem-for-a-computer"><span class="header-section-number">27.1.1</span> Translating the problem for a computer</a></li>
+  <li><a href="#using-the-itertools-package-for-calculating-combinations" id="toc-using-the-itertools-package-for-calculating-combinations" class="nav-link" data-scroll-target="#using-the-itertools-package-for-calculating-combinations"><span class="header-section-number">27.1.2</span> Using the itertools package for calculating combinations</a></li>
+  <li><a href="#larger-problems" id="toc-larger-problems" class="nav-link" data-scroll-target="#larger-problems"><span class="header-section-number">27.1.3</span> Larger problems</a></li>
   </ul></li>
-  <li><a href="#calculating-the-number-of-combinations" id="toc-calculating-the-number-of-combinations" class="nav-link" data-scroll-target="#calculating-the-number-of-combinations"><span class="header-section-number">26.2</span> Calculating the number of combinations</a></li>
-  <li><a href="#limitations-of-brute-force-problems" id="toc-limitations-of-brute-force-problems" class="nav-link" data-scroll-target="#limitations-of-brute-force-problems"><span class="header-section-number">26.3</span> Limitations of brute-force problems</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">26.4</span> References</a></li>
+  <li><a href="#calculating-the-number-of-combinations" id="toc-calculating-the-number-of-combinations" class="nav-link" data-scroll-target="#calculating-the-number-of-combinations"><span class="header-section-number">27.2</span> Calculating the number of combinations</a></li>
+  <li><a href="#limitations-of-brute-force-problems" id="toc-limitations-of-brute-force-problems" class="nav-link" data-scroll-target="#limitations-of-brute-force-problems"><span class="header-section-number">27.3</span> Limitations of brute-force problems</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">27.4</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -745,9 +751,9 @@ globalThis._qpyodideGetInstance = function() {
   });
 </script>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./fl_site_combinations.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./fl_site_combinations.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></h1>
+<h1 class="title"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></h1>
 </div>
 
 
@@ -826,21 +832,21 @@ a.glossary:active .def::after {
 <p><img src="assets/2024-06-24-18-58-18.png" class="img-fluid"></p>
 <p>But now, we want to work out the shortest distance depending on which clinics are available</p>
 <p><img src="assets/2024-06-24-18-58-41.png" class="img-fluid"></p>
-<section id="representing-possible-combinations-of-sites" class="level2" data-number="26.1">
-<h2 data-number="26.1" class="anchored" data-anchor-id="representing-possible-combinations-of-sites"><span class="header-section-number">26.1</span> Representing possible combinations of sites</h2>
+<section id="representing-possible-combinations-of-sites" class="level2" data-number="27.1">
+<h2 data-number="27.1" class="anchored" data-anchor-id="representing-possible-combinations-of-sites"><span class="header-section-number">27.1</span> Representing possible combinations of sites</h2>
 <p>We then need to be able to represent these as an integer array</p>
 <p>Let’s say we currently have four locations we deliver routine health screenings from.</p>
 <p>Due to constraints, we’re going to have to cut it down to three.</p>
 <p><img src="assets/2024-06-24-18-59-10.png" class="img-fluid"></p>
 <p><img src="assets/2024-06-24-18-59-35.png" class="img-fluid"></p>
-<section id="translating-the-problem-for-a-computer" class="level3" data-number="26.1.1">
-<h3 data-number="26.1.1" class="anchored" data-anchor-id="translating-the-problem-for-a-computer"><span class="header-section-number">26.1.1</span> Translating the problem for a computer</h3>
+<section id="translating-the-problem-for-a-computer" class="level3" data-number="27.1.1">
+<h3 data-number="27.1.1" class="anchored" data-anchor-id="translating-the-problem-for-a-computer"><span class="header-section-number">27.1.1</span> Translating the problem for a computer</h3>
 <p><img src="assets/2024-06-24-18-59-52.png" class="img-fluid"></p>
 <p>In our code, we will write this as a list of lists.</p>
 <p><img src="assets/2024-06-24-19-00-07.png" class="img-fluid"></p>
 </section>
-<section id="using-the-itertools-package-for-calculating-combinations" class="level3" data-number="26.1.2">
-<h3 data-number="26.1.2" class="anchored" data-anchor-id="using-the-itertools-package-for-calculating-combinations"><span class="header-section-number">26.1.2</span> Using the itertools package for calculating combinations</h3>
+<section id="using-the-itertools-package-for-calculating-combinations" class="level3" data-number="27.1.2">
+<h3 data-number="27.1.2" class="anchored" data-anchor-id="using-the-itertools-package-for-calculating-combinations"><span class="header-section-number">27.1.2</span> Using the itertools package for calculating combinations</h3>
 <p>And in fact, we won’t actually write it ourselves at all…</p>
 <p>We’ll get the combinations function from the itertools package to do that for us - via a custom function.</p>
 <div id="qpyodide-insertion-location-1"></div>
@@ -848,15 +854,15 @@ a.glossary:active .def::after {
 <p><code>n_facilities</code> is the number of candidate locations where you could place facilities (e.g.&nbsp;clinics).</p>
 <p><code>p</code> is the number of clinics to place. This must be less than <code>n_facilities</code>.</p>
 <p>This will return all possible combinations of clinic indices.</p>
-<section id="how-is-this-function-working" class="level4 callout-info" data-number="26.1.2.1">
-<h4 data-number="26.1.2.1" class="anchored" data-anchor-id="how-is-this-function-working"><span class="header-section-number">26.1.2.1</span> How is this function working?</h4>
+<section id="how-is-this-function-working" class="level4 callout-info" data-number="27.1.2.1">
+<h4 data-number="27.1.2.1" class="anchored" data-anchor-id="how-is-this-function-working"><span class="header-section-number">27.1.2.1</span> How is this function working?</h4>
 <p><img src="assets/2024-06-24-19-10-38.png" class="img-fluid"></p>
 <p><img src="assets/2024-06-24-19-10-49.png" class="img-fluid"></p>
 <p><img src="assets/2024-06-24-19-11-01.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="larger-problems" class="level3" data-number="26.1.3">
-<h3 data-number="26.1.3" class="anchored" data-anchor-id="larger-problems"><span class="header-section-number">26.1.3</span> Larger problems</h3>
+<section id="larger-problems" class="level3" data-number="27.1.3">
+<h3 data-number="27.1.3" class="anchored" data-anchor-id="larger-problems"><span class="header-section-number">27.1.3</span> Larger problems</h3>
 <p>It turns out someone forgot to tell us about one of the practices!</p>
 <p>But they are still just looking to drop it down to 3 practices.</p>
 <p>So how many combinations can we get now?</p>
@@ -869,8 +875,8 @@ a.glossary:active .def::after {
 <p>But just how big can the number of combinations get?</p>
 </section>
 </section>
-<section id="calculating-the-number-of-combinations" class="level2" data-number="26.2">
-<h2 data-number="26.2" class="anchored" data-anchor-id="calculating-the-number-of-combinations"><span class="header-section-number">26.2</span> Calculating the number of combinations</h2>
+<section id="calculating-the-number-of-combinations" class="level2" data-number="27.2">
+<h2 data-number="27.2" class="anchored" data-anchor-id="calculating-the-number-of-combinations"><span class="header-section-number">27.2</span> Calculating the number of combinations</h2>
 <p>We can use the formula below to work out the total number of possible combinations in a scenario where the order of options doesn’t matter and you can’t repeat options in an answer.</p>
 <p><img src="assets/2024-06-24-19-13-04.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -894,8 +900,8 @@ Tip
 </div>
 <p><img src="assets/2024-06-24-19-13-37.png" class="img-fluid"></p>
 </section>
-<section id="limitations-of-brute-force-problems" class="level2" data-number="26.3">
-<h2 data-number="26.3" class="anchored" data-anchor-id="limitations-of-brute-force-problems"><span class="header-section-number">26.3</span> Limitations of brute-force problems</h2>
+<section id="limitations-of-brute-force-problems" class="level2" data-number="27.3">
+<h2 data-number="27.3" class="anchored" data-anchor-id="limitations-of-brute-force-problems"><span class="header-section-number">27.3</span> Limitations of brute-force problems</h2>
 <p>The key thing to note is that the number of combinations can get out of hand very quickly…</p>
 <p>If you’re working at the level of a single trust, or with some fairly centralised services for an ICB, you’ll probably be ok.</p>
 <p><img src="assets/2024-06-24-19-14-11.png" class="img-fluid"></p>
@@ -918,8 +924,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="references" class="level2" data-number="26.4">
-<h2 data-number="26.4" class="anchored" data-anchor-id="references"><span class="header-section-number">26.4</span> References</h2>
+<section id="references" class="level2" data-number="27.4">
+<h2 data-number="27.4" class="anchored" data-anchor-id="references"><span class="header-section-number">27.4</span> References</h2>
 <p>Icons created by Pixel perfect - Flaticon: https://www.flaticon.com/packs/nature-46</p>
 
 
@@ -1819,12 +1825,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./intro_facility_location.html" class="pagination-link" aria-label="An Introduction to Facility Location Problems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./fl_problems_coding.html" class="pagination-link" aria-label="Using code to solve facility location problems">
-        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

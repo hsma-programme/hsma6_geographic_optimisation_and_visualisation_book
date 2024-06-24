@@ -956,7 +956,7 @@
     "href": "python_geopandas_folium_point_data.html#heatmaps",
     "title": "21  Interactive Maps - Point Data",
     "section": "21.3 Heatmaps",
-    "text": "21.3 Heatmaps\nBy using a Folium plugin, we can create a heatmap from point data.\n\nfrom folium import plugins\n\ngp_map_heatmap = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=15,\n    blur=5)\n\nheatmap_layer.add_to(gp_map_heatmap)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f62c438f130&gt;\n\ngp_map_heatmap\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n21.3.1 Radius and blur\nChanging the radius and blur parameters can have a significant impact on the display.\n\nfrom folium import plugins\n\ngp_map_heatmap_2 = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=10,\n    blur=5)\n\nheatmap_layer.add_to(gp_map_heatmap_2)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f62c41fd4e0&gt;\n\ngp_map_heatmap_2\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\nfrom folium import plugins\n\ngp_map_heatmap_3 = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=10,\n    blur=10)\n\nheatmap_layer.add_to(gp_map_heatmap_3)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f62c4f8c790&gt;\n\ngp_map_heatmap_3\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n\n21.3.2 Initial zoom with heatmaps\nAnd zooming out a long way can turn it into a complete mess regardless of your settings!\n\nfrom folium import plugins\n\ngp_map_heatmap_4 = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=5,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=15,\n    blur=5)\n\nheatmap_layer.add_to(gp_map_heatmap_4)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f62c41ff130&gt;\n\ngp_map_heatmap_4\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook",
+    "text": "21.3 Heatmaps\nBy using a Folium plugin, we can create a heatmap from point data.\n\nfrom folium import plugins\n\ngp_map_heatmap = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=15,\n    blur=5)\n\nheatmap_layer.add_to(gp_map_heatmap)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f092215f130&gt;\n\ngp_map_heatmap\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n21.3.1 Radius and blur\nChanging the radius and blur parameters can have a significant impact on the display.\n\nfrom folium import plugins\n\ngp_map_heatmap_2 = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=10,\n    blur=5)\n\nheatmap_layer.add_to(gp_map_heatmap_2)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f0921fc94e0&gt;\n\ngp_map_heatmap_2\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\nfrom folium import plugins\n\ngp_map_heatmap_3 = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=8,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=10,\n    blur=10)\n\nheatmap_layer.add_to(gp_map_heatmap_3)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f0922d15c30&gt;\n\ngp_map_heatmap_3\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n\n21.3.2 Initial zoom with heatmaps\nAnd zooming out a long way can turn it into a complete mess regardless of your settings!\n\nfrom folium import plugins\n\ngp_map_heatmap_4 = folium.Map(\n    location=[50.7, -4.2],\n    zoom_start=5,\n    tiles='openstreetmap',\n    )\n\nheatmap_layer = plugins.HeatMap(\n    geo_df_list,\n    radius=15,\n    blur=5)\n\nheatmap_layer.add_to(gp_map_heatmap_4)\n\n&lt;folium.plugins.heat_map.HeatMap object at 0x7f0921fcb130&gt;\n\ngp_map_heatmap_4\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook",
     "crumbs": [
       "Part 3 - Mapping in Python",
       "<span class='chapter-number'>21</span>  <span class='chapter-title'>Interactive Maps - Point Data</span>"
@@ -1227,6 +1227,61 @@
     ]
   },
   {
+    "objectID": "fl_site_combinations.html",
+    "href": "fl_site_combinations.html",
+    "title": "27  Calculating combinations of sites",
+    "section": "",
+    "text": "27.1 Representing possible combinations of sites\nWe then need to be able to represent these as an integer array\nLet’s say we currently have four locations we deliver routine health screenings from.\nDue to constraints, we’re going to have to cut it down to three.",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
+    ]
+  },
+  {
+    "objectID": "fl_site_combinations.html#representing-possible-combinations-of-sites",
+    "href": "fl_site_combinations.html#representing-possible-combinations-of-sites",
+    "title": "27  Calculating combinations of sites",
+    "section": "",
+    "text": "27.1.1 Translating the problem for a computer\n\nIn our code, we will write this as a list of lists.\n\n\n\n27.1.2 Using the itertools package for calculating combinations\nAnd in fact, we won’t actually write it ourselves at all…\nWe’ll get the combinations function from the itertools package to do that for us - via a custom function.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nn_facilities is the number of candidate locations where you could place facilities (e.g. clinics).\np is the number of clinics to place. This must be less than n_facilities.\nThis will return all possible combinations of clinic indices.\n\n27.1.2.1 How is this function working?\n\n\n\n\n\n\n27.1.3 Larger problems\nIt turns out someone forgot to tell us about one of the practices!\nBut they are still just looking to drop it down to 3 practices.\nSo how many combinations can we get now?\n\nWell, these are all of the possibilities.\n\nLet’s add numeric indices to these for ease.\n\nThat was a bit of a pain to work out… so you can see why it’s really useful to have a function that will work this out for us when we get to bigger numbers of combinations!\nBut just how big can the number of combinations get?",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
+    ]
+  },
+  {
+    "objectID": "fl_site_combinations.html#calculating-the-number-of-combinations",
+    "href": "fl_site_combinations.html#calculating-the-number-of-combinations",
+    "title": "27  Calculating combinations of sites",
+    "section": "27.2 Calculating the number of combinations",
+    "text": "27.2 Calculating the number of combinations\nWe can use the formula below to work out the total number of possible combinations in a scenario where the order of options doesn’t matter and you can’t repeat options in an answer.\n\n\n\n\n\n\n\nTip\n\n\n\nThe ! isn’t just emphasising things here.\nIt is the mathematical symbol for factorial.\nSo if we have 5 options, the top of our fraction is 5!, or 5 factorial.\nThis is 5 x 4 x 3 x 2 x 1\n2! = 2 x 1\n3! = 3 x 2 x 1\n10! = 10 x 9 x 8 x 7 x 6 x 5 x 4 x 3 x 2 x 1",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
+    ]
+  },
+  {
+    "objectID": "fl_site_combinations.html#limitations-of-brute-force-problems",
+    "href": "fl_site_combinations.html#limitations-of-brute-force-problems",
+    "title": "27  Calculating combinations of sites",
+    "section": "27.3 Limitations of brute-force problems",
+    "text": "27.3 Limitations of brute-force problems\nThe key thing to note is that the number of combinations can get out of hand very quickly…\nIf you’re working at the level of a single trust, or with some fairly centralised services for an ICB, you’ll probably be ok.\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nThere are ways to deal with situations where there are too many possibilities to ‘brute force’ - but it’s quite a tricky area to wrap your head around!\nWe’ll briefly cover this concept a bit later today, but we won’t cover how to do it in code or go into much detail about the process.\nHowever, - we will link additional materials if you want to dive into this further - there are some members of the HSMA community with experience in this area if this is a route you need to go down for your HSMA project",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
+    ]
+  },
+  {
+    "objectID": "fl_site_combinations.html#references",
+    "href": "fl_site_combinations.html#references",
+    "title": "27  Calculating combinations of sites",
+    "section": "27.4 References",
+    "text": "27.4 References\nIcons created by Pixel perfect - Flaticon: https://www.flaticon.com/packs/nature-46",
+    "crumbs": [
+      "Part 5 - Facility Location Problems",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
+    ]
+  },
+  {
     "objectID": "fl_problems_coding.html",
     "href": "fl_problems_coding.html",
     "title": "28  Using code to solve facility location problems",
@@ -1268,61 +1323,6 @@
     "crumbs": [
       "Part 5 - Facility Location Problems",
       "<span class='chapter-number'>28</span>  <span class='chapter-title'>Using code to solve facility location problems</span>"
-    ]
-  },
-  {
-    "objectID": "fl_site_combinations.html",
-    "href": "fl_site_combinations.html",
-    "title": "26  Calculating combinations of sites",
-    "section": "",
-    "text": "26.1 Representing possible combinations of sites\nWe then need to be able to represent these as an integer array\nLet’s say we currently have four locations we deliver routine health screenings from.\nDue to constraints, we’re going to have to cut it down to three.",
-    "crumbs": [
-      "Part 5 - Facility Location Problems",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
-    ]
-  },
-  {
-    "objectID": "fl_site_combinations.html#representing-possible-combinations-of-sites",
-    "href": "fl_site_combinations.html#representing-possible-combinations-of-sites",
-    "title": "26  Calculating combinations of sites",
-    "section": "",
-    "text": "26.1.1 Translating the problem for a computer\n\nIn our code, we will write this as a list of lists.\n\n\n\n26.1.2 Using the itertools package for calculating combinations\nAnd in fact, we won’t actually write it ourselves at all…\nWe’ll get the combinations function from the itertools package to do that for us - via a custom function.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nn_facilities is the number of candidate locations where you could place facilities (e.g. clinics).\np is the number of clinics to place. This must be less than n_facilities.\nThis will return all possible combinations of clinic indices.\n\n26.1.2.1 How is this function working?\n\n\n\n\n\n\n26.1.3 Larger problems\nIt turns out someone forgot to tell us about one of the practices!\nBut they are still just looking to drop it down to 3 practices.\nSo how many combinations can we get now?\n\nWell, these are all of the possibilities.\n\nLet’s add numeric indices to these for ease.\n\nThat was a bit of a pain to work out… so you can see why it’s really useful to have a function that will work this out for us when we get to bigger numbers of combinations!\nBut just how big can the number of combinations get?",
-    "crumbs": [
-      "Part 5 - Facility Location Problems",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
-    ]
-  },
-  {
-    "objectID": "fl_site_combinations.html#calculating-the-number-of-combinations",
-    "href": "fl_site_combinations.html#calculating-the-number-of-combinations",
-    "title": "26  Calculating combinations of sites",
-    "section": "26.2 Calculating the number of combinations",
-    "text": "26.2 Calculating the number of combinations\nWe can use the formula below to work out the total number of possible combinations in a scenario where the order of options doesn’t matter and you can’t repeat options in an answer.\n\n\n\n\n\n\n\nTip\n\n\n\nThe ! isn’t just emphasising things here.\nIt is the mathematical symbol for factorial.\nSo if we have 5 options, the top of our fraction is 5!, or 5 factorial.\nThis is 5 x 4 x 3 x 2 x 1\n2! = 2 x 1\n3! = 3 x 2 x 1\n10! = 10 x 9 x 8 x 7 x 6 x 5 x 4 x 3 x 2 x 1",
-    "crumbs": [
-      "Part 5 - Facility Location Problems",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
-    ]
-  },
-  {
-    "objectID": "fl_site_combinations.html#limitations-of-brute-force-problems",
-    "href": "fl_site_combinations.html#limitations-of-brute-force-problems",
-    "title": "26  Calculating combinations of sites",
-    "section": "26.3 Limitations of brute-force problems",
-    "text": "26.3 Limitations of brute-force problems\nThe key thing to note is that the number of combinations can get out of hand very quickly…\nIf you’re working at the level of a single trust, or with some fairly centralised services for an ICB, you’ll probably be ok.\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nThere are ways to deal with situations where there are too many possibilities to ‘brute force’ - but it’s quite a tricky area to wrap your head around!\nWe’ll briefly cover this concept a bit later today, but we won’t cover how to do it in code or go into much detail about the process.\nHowever, - we will link additional materials if you want to dive into this further - there are some members of the HSMA community with experience in this area if this is a route you need to go down for your HSMA project",
-    "crumbs": [
-      "Part 5 - Facility Location Problems",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
-    ]
-  },
-  {
-    "objectID": "fl_site_combinations.html#references",
-    "href": "fl_site_combinations.html#references",
-    "title": "26  Calculating combinations of sites",
-    "section": "26.4 References",
-    "text": "26.4 References\nIcons created by Pixel perfect - Flaticon: https://www.flaticon.com/packs/nature-46",
-    "crumbs": [
-      "Part 5 - Facility Location Problems",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Calculating combinations of sites</span>"
     ]
   }
 ]
