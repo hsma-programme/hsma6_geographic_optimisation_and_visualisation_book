@@ -7,3 +7,762 @@ glossary_setup()
 ```{r, echo = FALSE, results='asis'}
 glossary_setup_style()
 ```
+
+The travel matrix we used in the previous section allowed us to do some great work, but it had a few key limitations:
+
+- It didn’t cover every possible postcode of interest
+- It only looked at journeys by car
+- It assumed there was no traffic
+- It was a few years out of date
+
+To make truly equitable decisions for our service users, we will need to be able to generate appropriate travel time datasets for our analyses.
+
+But can we do this without paying?
+
+:::{.callout-warning}
+This is an area of the internet that seems to change frequently.
+
+Sites which offered free tiers for routing often reduce the number of requests you can make on their free tiers, or remove them entirely.
+
+Information here is accurate as of March 2024.
+:::
+
+## the routingpy library
+
+“routingpy enables easy and consistent access to third-party spatial webservices to request…”
+
+- route directions
+The time taken from one point to another point
+
+![](assets/2024-06-24-15-58-35.png)
+
+- isochrones
+The distance from a given point that can be reached within different periods of time
+
+![](assets/2024-06-24-15-58-56.png)
+
+- or time-distance matrices
+The time/distance from a range of points to a range of other points
+
+![](assets/2024-06-24-15-59-12.png)
+
+[https://pypi.org/project/routingpy/](https://pypi.org/project/routingpy/)
+
+
+### Services supported by routingpy
+
+routingpy currently includes support for the following services:
+
+- Mapbox, either Valhalla or OSRM
+- Openrouteservice
+- Here Maps
+- Google Maps
+- Graphhopper
+- OpenTripPlannerV2
+- Local Valhalla
+- Local OSRM
+
+## Openrouteservice
+
+The free openrouteservice tier allows us to fetch large numbers of travel time source-destination pairs for free.
+
+![](assets/2024-06-24-16-01-27.png)
+
+### Setting up an account
+
+You will need to set up an account with the openrouteservice.
+
+No billing details are required! If you run out of daily requests, you just won’t be able to make any more requests until it resets.
+
+When you have signed up, you will need to request a token.
+
+Choose ‘standard’ from the dropdown and give it any name you like - perhaps “HSMA Training Token”.
+
+![](assets/2024-06-24-16-01-52.png)
+
+From your dashboard you will then need your key.
+
+![](assets/2024-06-24-16-02-12.png)
+
+## Setting up a routingpy instance
+
+Now we can set up a routingpy OpenRouteService (ORS) object that we can then use.
+
+API = Application Programming Interface
+
+Import routingpy using the alias rp
+
+```{python}
+#| label: rp_import
+import routingpy as rp
+```
+
+Store your key from the dashboard as a string.
+
+We'll then create an instance of the ORS API using our API key so we can retrieve travel times.
+
+```{python}
+#| label: api_key_dummy
+ors_api_key = "abc123myreallylongapikey"
+ors_api = rp.ORS(api_key=ors_api_key)
+```
+
+
+### Getting a matrix with routingpy
+
+We will often want to get a travel matrix out of our calls.
+
+This is the sort of thing we were using in the first half of this session - rows of locations people will travel from and columns of places they are travelling to.
+
+This is the most efficient way to gather the data we want for visualising travel times - and working out the optimal configuration for service locations, like we will be doing in the next session.
+
+![](assets/2024-06-24-16-03-48.png)
+
+We will use the matrix method of our ors_api object.
+
+:::{.callout-tip}
+We need to pass it a series of long/lat pairs
+
+(yes - that IS the opposite to normal!)
+
+:::
+
+![](assets/2024-06-24-16-04-07.png)
+
+![](assets/2024-06-24-16-04-45.png)
+
+![](assets/2024-06-24-16-04-54.png)
+
+Our call to routingpy will look something like this.
+
+```{python}
+#| label: real_api_import
+#| echo: False
+with open("routingpy_api_key.txt", "r") as file:
+    ors_api_key = file.read().replace("\n", "")
+```
+
+```{python}
+#| label: example_simple_rp
+import routingpy as rp
+
+ors_api = rp.ORS(api_key=ors_api_key)
+
+example_matrix = ors_api.matrix(
+    locations = [[-0.195439, 50.845107],
+                [-0.133654, 50.844345],
+                [-0.107633, 50.83347],
+                [-0.176522, 50.83075],
+                [-0.119614, 50.865971],
+                [-0.172591, 50.857582],
+                [-0.141603, 50.825428],
+                [-0.138366, 50.826784],
+                [-0.144071, 50.822038],
+                [-0.151026, 50.823046]],
+
+    profile='driving-car',
+
+    sources=[0, 1, 2, 3, 4, 5, 6, 7],
+
+    destinations=[8, 9]
+)
+```
+
+This says the first 8 lists in the list of lists we’ve passed in as our locations should be treated as sources
+(where someone will start travelling from)
+
+The last two should be treated as destinations (where people end up)
+
+We’ve said we want to pull back driving times for a car (as opposed to heavy vehicles like lorries, which may need to take a different route and will drive slower).
+
+And our output is a matrix of travel times in seconds.
+
+:::{.callout-tip}
+Keep an eye on what time unit the output from the different routing services may be in.
+
+Outputs from the OpenRouteService will be in **seconds**.
+:::
+
+![](assets/2024-06-24-16-14-47.png)
+
+
+## Constructing a routingpy request from scratch
+
+But if you’re constructing your list of start and end points from scratch…
+
+- How do you go about getting those start and end points from the kind of datasets you’ll have on hand?
+- And how do you then turn the matrix into a nice reusable dataframe like the one we’ve worked with before?
+
+![](assets/2024-06-24-16-35-51.png)
+
+### Getting midpoints for our sources
+
+What we’ll usually be starting with is a list of LSOA or MSOA objects.
+
+However, routingpy can’t use LSOA names.
+
+I need to have a lat/long coordinate pair for routingpy to work from…
+
+You can get a csv from the ONS that contains the Northing/Easting midpoint of each LSOA.
+
+The ONS like to work in Northings/Eastings (the British National Grid standard)
+
+![](assets/2024-06-24-16-36-44.png)
+
+```{python}
+#| eval: False
+lsoa_centroids = pd.read_csv("https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/england_lsoa_2011_centroids.csv")
+
+# filter lsoa centroid file to just those with 'Brighton and Hove' in the name
+brighton_lsoas_with_coords = lsoa_centroids[lsoa_centroids["name"].str.contains("Brighton and Hove")]
+
+```
+
+And this is the output we get.
+
+x and y are still Northings and Eastings.
+
+But the ‘Geometry’ column is now in lat/long - which we can pull out when we get our list of coordinates for routingpy.
+
+![](assets/2024-06-24-16-37-46.png)
+
+So let’s get that list for routingpy!
+
+:::{.callout-tip}
+list(zip()) is a handy way of joining two lists into a list of tuples.
+
+There's a great explanation of `zip` here if you are interested: [W3schools](https://www.w3schools.com/python/ref_func_zip.asp)
+:::
+
+We may want to also import some additional libraries at this point for our maps and dataframes.
+```{python}
+#| label: imports_packages
+import pandas as pd
+import geopandas
+import matplotlib.pyplot as plt
+import contextily as cx
+```
+
+:::{.callout-note collapse='True'}
+#### Click here to view the code up to now in a code cell
+```{python}
+#| label: up_to_now
+lsoa_boundaries = geopandas.read_file("https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson")
+
+lsoa_centroids = pd.read_csv("https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/england_lsoa_2011_centroids.csv")
+
+# filter lsoa centroid file to just those with 'Brighton and Hove' in the name
+brighton_lsoas_with_coords = lsoa_centroids[lsoa_centroids["name"].str.contains("Brighton and Hove")]
+
+# Turn this into a geodataframe
+brighton_lsoas_with_coords_gdf = geopandas.GeoDataFrame(
+    brighton_lsoas_with_coords,
+    geometry = geopandas.points_from_xy(
+        brighton_lsoas_with_coords['x'],
+        brighton_lsoas_with_coords['y']
+        ),
+    crs = 'EPSG:27700' # as our current dataset is in BNG (northings/eastings)
+    )
+
+# Convert to lat/long from northings/eastings
+brighton_lsoas_with_coords_gdf = brighton_lsoas_with_coords_gdf.to_crs('EPSG:4326')
+```
+
+:::
+
+```{python}
+#| label: show_interim_df
+brighton_lsoas_with_coords_gdf.head()
+```
+
+```{python}
+#| label: source_coords
+source_coord_pairs = list(zip(
+   brighton_lsoas_with_coords_gdf.geometry.x,
+   brighton_lsoas_with_coords_gdf.geometry.y
+   ))
+
+source_coord_pairs
+```
+
+This gives us a list of tuples.
+
+But we want a list of lists…
+
+So let’s just quickly convert that with a list comprehension.
+
+```{python}
+#| label: source_coords_list
+source_coord_pairs_list = [list(coord_tuple) for coord_tuple in source_coord_pairs]
+source_coord_pairs_list
+```
+
+### Site locations
+
+Then, I’ll want a series of site locations that I need to know the travel time to. We might have addresses or postcodes of these, but we need these in lat/long format.
+
+In this case, I used Google Maps to find the Lat/Long of my sites of interest.
+
+If you right click on a location, the coordinates will be given.
+
+![](assets/2024-06-24-17-01-20.png)
+
+Click on them and they will be copied to your clipboard so you can paste them into your code.
+
+
+:::{.callout-tip}
+If we instead had a large number of locations in postcode format, we could use the postcodes.io API to programmatically return the Lat/Long.
+:::
+
+In this case, I've copied my locations from Google maps and formatted them as a list of lists.
+
+```{python}
+#| label: locations_setup_list
+locations = [
+    [50.84510657697442, -0.19543939173180552],
+    [50.844345428338784, -0.13365357930540253],
+    [50.833469545267626, -0.10763304889918592],
+    [50.83075017843111, -0.17652193515449327],
+    [50.865971443211656, -0.11961372476967412],
+    [50.85758221272246, -0.17259077588448932]
+    ]
+```
+
+However, when I copy them in, they will be in the order latitude/longitude - which is the wrong way around for Routingpy.
+
+I could manually swap the order of each, or I could use another list comprehension to do this automatically. This is much more scalable.
+
+```{python}
+#| label: invert_locations_order
+locations_long_lat = [
+    [  x[1], x[0]  ]
+    for x
+    in locations]
+
+print(locations_long_lat)
+```
+
+Now we just need to
+
+- join our two lists into one
+- specify which pairs are
+    - sources (where our people are)
+    - and which are destinations (where our people are going - the sites)
+
+### Joining our source and destination lists into one
+
+```{python}
+#| label: all_coords_list
+# Create an empty list
+all_coordinates = []
+
+# Put our sources (our LSOA centre points) into the list
+all_coordinates.extend(source_coord_pairs_list)
+
+# Put our destinations (our potential sites) into the list
+all_coordinates.extend(locations_long_lat)
+```
+
+### Specifying which pairs are sources and which are destinations
+
+#### Sources
+
+```{python}
+#| label: setup_sources
+sources_indices = [i for i in range(len(source_coord_pairs_list))]
+
+print(sources_indices)
+```
+
+#### Destinations
+
+```{python}
+#| label: setup_destinations
+destinations_indices = [i for i in
+                        range(
+                            # first number in list of indices
+                            # this will be 1 more than the number of sources (which were first in our
+                            # full list of coordinates)
+                            len(source_coord_pairs_list),
+                            # last number in list of indices (remember the last number won't
+                            # actually be included)
+                            len(all_coordinates))
+                            ]
+
+print(destinations_indices)
+```
+
+### Make the call to the ORS API via the routingpy library
+
+And this is our final call to the API!
+
+```{python}
+#| label: get_brighton_matrix
+location_matrix = ors_api.matrix(
+
+    locations = all_coordinates, # remember this is sources first, then destinations
+
+    profile = 'driving-car',
+
+    sources = sources_indices,
+
+    destinations = destinations_indices,
+
+    metrics=["distance", "duration"]
+
+    )
+```
+
+### Exploring the travel matrix outputs
+
+This is the duration output we get.
+
+![](assets/2024-06-24-17-11-26.png)
+
+### Converting the outputs into a dataframe
+
+And then we can convert this to a dataframe like our previous matrices.
+
+![](assets/2024-06-24-17-11-51.png)
+
+:::{.callout-note collapse="True"}
+#### Click here for a copyable code example
+```{python}
+#| label: brighton_matrix_df
+brighton_travel_matrix = pd.DataFrame(
+    location_matrix.durations,
+    columns=[f"Site {i+1}" for i in range(len(destinations_indices))],
+    index=brighton_lsoas_with_coords.name
+    )
+
+brighton_travel_matrix
+```
+:::
+
+We need to create a column to calculate the shortest possible travel time to any of the locations we have retrieved data.
+
+Note that if the LSOA names are a **column** instead of an index, we will get an error as it will try to include the LSOA names when doing the minimum calculation.
+
+This is why we set the LSOA names as the index in the previous step.
+
+```{python}
+#| label: calc_shortest
+brighton_travel_matrix['shortest'] = brighton_travel_matrix.min(axis=1)
+```
+
+We then need to modify this to join it to the *geographic* information (our LSOA boundaries) and convert it from seconds to minutes.
+
+:::{.callout-note}
+We could convert the whole dataset to minutes instead by dividing all of the numeric columns in the dataframe by 60, not just a single column.
+:::
+
+:::{.callout-tip}
+Remember - the output format of the df (geodataframe or standard pandas dataframe) will be determined by the type of the dataframe in the 'left' position.
+:::
+
+```{python}
+#| label: merge_and_minutes
+nearest_site_travel_brighton_gdf = pd.merge(
+    left=lsoa_boundaries,
+    # We use the 'reset_index' method here to make the LSOA names a column again instead of an index
+    # This just makes it a bit easier to do the join
+    right=brighton_travel_matrix.reset_index(),
+    left_on = "LSOA11NM",
+    right_on = "name"
+)
+nearest_site_travel_brighton_gdf["shortest_minutes"] = nearest_site_travel_brighton_gdf["shortest"] / 60
+
+nearest_site_travel_brighton_gdf.head()
+```
+
+### Creating a map of the output
+
+#### Creating a geodataframe of our sites
+
+You might want to create a geodataframe of your sites
+
+This will make it easy to then plot them
+
+```{python}
+#| label: site_gdf
+brighton_sites = geopandas.GeoDataFrame(
+    [f"Site {i+1}" for i in range(len(destinations_indices))],
+    geometry = geopandas.points_from_xy(
+        [i[1] for i in locations],
+        [i[0] for i in locations]
+        ),
+    crs = 'EPSG:4326' # as our current dataset is in BNG (northings/eastings)
+    )
+
+brighton_sites
+```
+
+#### Making the map
+
+```{python}
+#| label: plot_map_1
+nearest_site_travel_brighton_gdf["shortest_minutes"] = nearest_site_travel_brighton_gdf["shortest"] / 60
+
+ax = nearest_site_travel_brighton_gdf.plot(
+    "shortest_minutes",
+    legend=True,
+    cmap="Blues",
+    alpha=0.7,
+    edgecolor="black",
+    linewidth=0.5,
+    figsize=(12,6)
+    )
+hospital_points = (brighton_sites.to_crs('EPSG:27700')).plot(ax=ax, color='magenta', markersize=60)
+
+cx.add_basemap(ax, crs=nearest_site_travel_brighton_gdf.crs.to_string(), zoom=14)
+
+for x, y, label in zip(brighton_sites.to_crs('EPSG:27700').geometry.x,
+                      brighton_sites.to_crs('EPSG:27700').geometry.y,
+                      brighton_sites.to_crs('EPSG:27700')[0]):
+    ax.annotate(label, xy=(x,y), xytext=(10,3), textcoords="offset points", bbox=dict(facecolor='white'))
+
+ax = ax.axis('off')
+
+plt.title("Travel Time (minutes - driving) to nearest proposed site in Brighton")
+```
+
+## Getting different modes of transport with routingpy
+
+By changing the 'profile' parameter, we can pull back travel matrices for different modes of transport.
+
+```{python}
+#| eval: False
+#| label: profile_change_example
+location_matrix = ors_api.matrix(
+    locations = all_coordinates, # remember this is sources first, then destinations
+    profile = 'foot-walking',
+    sources = sources_indices,
+    destinations = destinations_indices,
+    metrics=["distance", "duration"]
+    )
+```
+
+
+:::{.callout-tip}
+You can look in the [documentation](https://routingpy.readthedocs.io/en/latest/#ors) to see the available travel methods.
+You will need to head to the 'matrix' section of the ORS documentation.
+
+Note that the profile names - or the name of the relevant parameter - may vary if you are using a different service (like Google maps) through `routingpy`.
+:::
+
+Here is the same map as before, but produced using the cycling profile.
+
+:::{.callout-tip}
+You could consider writing a **function** so you don't duplicate large amounts of code when changing the profile.
+:::
+
+```{python}
+#| label: cycling_map
+location_matrix = ors_api.matrix(
+    locations = all_coordinates, # remember this is sources first, then destinations
+    profile = 'cycling-regular',
+    sources = sources_indices,
+    destinations = destinations_indices,
+    metrics=["distance", "duration"]
+    )
+
+brighton_travel_matrix = pd.DataFrame(
+    location_matrix.durations,
+    columns=[f"Site {i+1}" for i in range(len(destinations_indices))],
+    index=brighton_lsoas_with_coords.name
+    )
+
+brighton_travel_matrix['shortest'] = brighton_travel_matrix.min(axis=1)
+
+nearest_site_travel_brighton_gdf = pd.merge(
+    lsoa_boundaries,
+    brighton_travel_matrix.reset_index(),
+    left_on = "LSOA11NM",
+    right_on = "name"
+)
+nearest_site_travel_brighton_gdf["shortest_minutes"] = nearest_site_travel_brighton_gdf["shortest"] / 60
+
+ax = nearest_site_travel_brighton_gdf.plot(
+    "shortest_minutes",
+    legend=True,
+    cmap="Blues",
+    alpha=0.7,
+    edgecolor="black",
+    linewidth=0.5,
+    figsize=(12,6)
+    )
+
+hospital_points = (brighton_sites.to_crs('EPSG:27700')).plot(ax=ax, color='magenta', markersize=60)
+
+cx.add_basemap(ax, crs=nearest_site_travel_brighton_gdf.crs.to_string(), zoom=14)
+
+for x, y, label in zip(brighton_sites.to_crs('EPSG:27700').geometry.x,
+                      brighton_sites.to_crs('EPSG:27700').geometry.y,
+                      brighton_sites.to_crs('EPSG:27700')[0]):
+    ax.annotate(label, xy=(x,y), xytext=(10,3), textcoords="offset points", bbox=dict(facecolor='white'))
+
+ax = ax.axis('off')
+
+plt.title("Travel Time (minutes - cycling) to nearest proposed site in Brighton")
+```
+
+## Things to know about routingpy
+
+- If you want to use a different routing service via routingpy, the process will be similar but the parameters may be slightly different.
+Check the docs for the service you’re interested in!
+https://routingpy.readthedocs.io/en/latest/?badge=latest#module-routingpy.routers
+
+- Routingpy is in the process of dropping support for ‘HereMaps’, which is another service with a free tier - and may drop support for more routing services that aren’t open source in the future…
+If something isn’t working, take a look at their github issues to see if it’s a known problem!
+
+- Different routing services will often report different figures for the same journeys…
+
+- ORS doesn’t have support for traffic data at present - so this can limit the accuracy of your outputs, particularly in urban areas.
+In comparison, Google Maps allows you to set the departure time, whether the traffic model is pessimistic, optimistic, etc.
+
+- The Valhalla provider has some level of support for public transport data via the ‘multimodal’ profile
+But it seems to lack rail data, and more investigation is needed to confirm how accurate it is overall.
+
+- One additional plus of routingpy is that you can link it into a local install (i.e. on your machine, or on a server within your organisation) and still use a similar syntax again
+
+## Full code example
+
+The full start-to-finish code for this section is given below, allowing you to modify it for your own use.
+
+:::{.callout-warning}
+If you need to request more than 2500 combinations (e.g. 250 LSOAs * 10 sites, or 100 LSOAs * 25 sites) then you will need to split your requests out into multiple requests to the ORS before rejoining the outputs into a single dataframe.
+:::
+
+```{python}
+import pandas as pd
+import geopandas
+import routingpy as rp
+import contextily as cx
+import matplotlib.pyplot as plt
+
+# This line imports an API key from a .txt file in the same folder as the code that is being run
+# You could instead hard-code the API key by running
+# ors_api_key = "myapikey"
+# replacing this with your actual key, but you should not commit this to version control like Github
+with open("routingpy_api_key.txt", "r") as file:
+    ors_api_key = file.read().replace("\n", "")
+
+ors_api = rp.ORS(api_key=ors_api_key)
+
+lsoa_boundaries = geopandas.read_file("https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson")
+
+lsoa_centroids = pd.read_csv("https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/england_lsoa_2011_centroids.csv")
+
+# filter lsoa centroid file to just those with 'Brighton and Hove' in the name
+brighton_lsoas_with_coords = lsoa_centroids[lsoa_centroids["name"].str.contains("Brighton and Hove")]
+
+# Turn this into a geodataframe
+brighton_lsoas_with_coords_gdf = geopandas.GeoDataFrame(
+    brighton_lsoas_with_coords,
+    geometry = geopandas.points_from_xy(
+        brighton_lsoas_with_coords['x'],
+        brighton_lsoas_with_coords['y']
+        ),
+    crs = 'EPSG:27700' # as our current dataset is in BNG (northings/eastings)
+    )
+
+# Convert to lat/long from northings/eastings
+brighton_lsoas_with_coords_gdf = brighton_lsoas_with_coords_gdf.to_crs('EPSG:4326')
+
+source_coord_pairs = list(zip(
+   brighton_lsoas_with_coords_gdf.geometry.x,
+   brighton_lsoas_with_coords_gdf.geometry.y
+   ))
+
+source_coord_pairs_list = [list(coord_tuple) for coord_tuple in source_coord_pairs]
+
+# Define site locations
+locations = [
+    [50.84510657697442, -0.19543939173180552],
+    [50.844345428338784, -0.13365357930540253],
+    [50.833469545267626, -0.10763304889918592],
+    [50.83075017843111, -0.17652193515449327],
+    [50.865971443211656, -0.11961372476967412],
+    [50.85758221272246, -0.17259077588448932]
+    ]
+
+# Swap site locations into order expected by ORS/routingpy service
+locations_long_lat = [
+    [  x[1], x[0]  ]
+    for x
+    in locations]
+
+# Create empty list to store all source and destination coordinates
+all_coordinates = []
+
+# Put our sources (our LSOA centre points) into the list
+all_coordinates.extend(source_coord_pairs_list)
+
+# Put our destinations (our potential sites) into the list
+all_coordinates.extend(locations_long_lat)
+
+sources_indices = [i for i in range(len(source_coord_pairs_list))]
+
+destinations_indices = [i for i in
+                        range(
+                            # first number in list of indices
+                            # this will be 1 more than the number of sources (which were first in our
+                            # full list of coordinates)
+                            len(source_coord_pairs_list),
+                            # last number in list of indices (remember the last number won't
+                            # actually be included)
+                            len(all_coordinates))
+                            ]
+
+# Request the travel times
+location_matrix = ors_api.matrix(
+    locations = all_coordinates, # remember this is sources first, then destinations
+    profile = 'driving-car',
+    sources = sources_indices,
+    destinations = destinations_indices,
+    metrics=["distance", "duration"]
+    )
+
+brighton_travel_matrix = pd.DataFrame(
+    location_matrix.durations,
+    columns=[f"Site {i+1}" for i in range(len(destinations_indices))],
+    index=brighton_lsoas_with_coords.name
+    )
+
+brighton_travel_matrix['shortest'] = brighton_travel_matrix.min(axis=1)
+
+nearest_site_travel_brighton_gdf = pd.merge(
+    left=lsoa_boundaries,
+    right=brighton_travel_matrix.reset_index(),
+    left_on = "LSOA11NM",
+    right_on = "name"
+)
+nearest_site_travel_brighton_gdf["shortest_minutes"] = nearest_site_travel_brighton_gdf["shortest"] / 60
+
+ax = nearest_site_travel_brighton_gdf.plot(
+    "shortest_minutes",
+    legend=True,
+    cmap="Blues",
+    alpha=0.7,
+    edgecolor="black",
+    linewidth=0.5,
+    figsize=(12,6)
+    )
+
+hospital_points = (brighton_sites.to_crs('EPSG:27700')).plot(ax=ax, color='magenta', markersize=60)
+
+cx.add_basemap(ax, crs=nearest_site_travel_brighton_gdf.crs.to_string(), zoom=14)
+
+for x, y, label in zip(brighton_sites.to_crs('EPSG:27700').geometry.x,
+                      brighton_sites.to_crs('EPSG:27700').geometry.y,
+                      brighton_sites.to_crs('EPSG:27700')[0]):
+    ax.annotate(label, xy=(x,y), xytext=(10,3), textcoords="offset points", bbox=dict(facecolor='white'))
+
+ax = ax.axis('off')
+
+plt.title("Travel Time (minutes - driving) to nearest proposed site in Brighton")
+```
+
+## References
+
+Routing and isochrone images from https://openrouteservice.org/services/
