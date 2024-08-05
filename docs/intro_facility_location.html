@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 26&nbsp; An Introduction to Facility Location Problems</title>
+<title>HSMA - Geographic Modelling and Visualisation - 27&nbsp; An Introduction to Facility Location Problems</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./fl_site_combinations.html" rel="next">
-<link href="./mtt_travel_time_apis.html" rel="prev">
+<link href="./valhalla_api_isochrones.html" rel="prev">
 <link href="./resources/logos/hsma_logo_transparent_background_large.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -110,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./intro_facility_location.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./intro_facility_location.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -333,6 +333,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Lookup Up Travel Times Using APIs</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./valhalla_api_isochrones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Using Other APIs with RoutingPy - Valhalla</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -347,19 +353,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_facility_location.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_site_combinations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fl_problems_coding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Using code to solve facility location problems</span></span></a>
   </div>
 </li>
       </ul>
@@ -374,38 +380,38 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#an-example-sexual-health-clinics-in-hampshire" id="toc-an-example-sexual-health-clinics-in-hampshire" class="nav-link active" data-scroll-target="#an-example-sexual-health-clinics-in-hampshire"><span class="header-section-number">26.1</span> An example: sexual health clinics in Hampshire</a>
+  <li><a href="#an-example-sexual-health-clinics-in-hampshire" id="toc-an-example-sexual-health-clinics-in-hampshire" class="nav-link active" data-scroll-target="#an-example-sexual-health-clinics-in-hampshire"><span class="header-section-number">27.1</span> An example: sexual health clinics in Hampshire</a>
   <ul class="collapse">
-  <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings"><span class="header-section-number">26.1.1</span> Findings</a></li>
-  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">26.1.2</span> Limitations</a></li>
-  <li><a href="#diminishing-returns" id="toc-diminishing-returns" class="nav-link" data-scroll-target="#diminishing-returns"><span class="header-section-number">26.1.3</span> Diminishing returns</a></li>
+  <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings"><span class="header-section-number">27.1.1</span> Findings</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">27.1.2</span> Limitations</a></li>
+  <li><a href="#diminishing-returns" id="toc-diminishing-returns" class="nav-link" data-scroll-target="#diminishing-returns"><span class="header-section-number">27.1.3</span> Diminishing returns</a></li>
   </ul></li>
-  <li><a href="#formulating-location-allocation-problems" id="toc-formulating-location-allocation-problems" class="nav-link" data-scroll-target="#formulating-location-allocation-problems"><span class="header-section-number">26.2</span> Formulating location allocation problems</a>
+  <li><a href="#formulating-location-allocation-problems" id="toc-formulating-location-allocation-problems" class="nav-link" data-scroll-target="#formulating-location-allocation-problems"><span class="header-section-number">27.2</span> Formulating location allocation problems</a>
   <ul class="collapse">
-  <li><a href="#discrete-vs-continuous-models" id="toc-discrete-vs-continuous-models" class="nav-link" data-scroll-target="#discrete-vs-continuous-models"><span class="header-section-number">26.2.1</span> Discrete vs continuous models</a></li>
-  <li><a href="#types-of-location-allocation-problem" id="toc-types-of-location-allocation-problem" class="nav-link" data-scroll-target="#types-of-location-allocation-problem"><span class="header-section-number">26.2.2</span> Types of location allocation problem</a></li>
+  <li><a href="#discrete-vs-continuous-models" id="toc-discrete-vs-continuous-models" class="nav-link" data-scroll-target="#discrete-vs-continuous-models"><span class="header-section-number">27.2.1</span> Discrete vs continuous models</a></li>
+  <li><a href="#types-of-location-allocation-problem" id="toc-types-of-location-allocation-problem" class="nav-link" data-scroll-target="#types-of-location-allocation-problem"><span class="header-section-number">27.2.2</span> Types of location allocation problem</a></li>
   </ul></li>
-  <li><a href="#p-median-problems" id="toc-p-median-problems" class="nav-link" data-scroll-target="#p-median-problems"><span class="header-section-number">26.3</span> p-median problems</a>
+  <li><a href="#p-median-problems" id="toc-p-median-problems" class="nav-link" data-scroll-target="#p-median-problems"><span class="header-section-number">27.3</span> p-median problems</a>
   <ul class="collapse">
-  <li><a href="#understanding-how-p-median-problems-work" id="toc-understanding-how-p-median-problems-work" class="nav-link" data-scroll-target="#understanding-how-p-median-problems-work"><span class="header-section-number">26.3.1</span> Understanding how p-median problems work</a></li>
-  <li><a href="#limitations-of-p-median-problems" id="toc-limitations-of-p-median-problems" class="nav-link" data-scroll-target="#limitations-of-p-median-problems"><span class="header-section-number">26.3.2</span> Limitations of p-median problems</a></li>
+  <li><a href="#understanding-how-p-median-problems-work" id="toc-understanding-how-p-median-problems-work" class="nav-link" data-scroll-target="#understanding-how-p-median-problems-work"><span class="header-section-number">27.3.1</span> Understanding how p-median problems work</a></li>
+  <li><a href="#limitations-of-p-median-problems" id="toc-limitations-of-p-median-problems" class="nav-link" data-scroll-target="#limitations-of-p-median-problems"><span class="header-section-number">27.3.2</span> Limitations of p-median problems</a></li>
   </ul></li>
-  <li><a href="#other-problem-types" id="toc-other-problem-types" class="nav-link" data-scroll-target="#other-problem-types"><span class="header-section-number">26.4</span> Other problem types</a>
+  <li><a href="#other-problem-types" id="toc-other-problem-types" class="nav-link" data-scroll-target="#other-problem-types"><span class="header-section-number">27.4</span> Other problem types</a>
   <ul class="collapse">
-  <li><a href="#location-set-covering-problem" id="toc-location-set-covering-problem" class="nav-link" data-scroll-target="#location-set-covering-problem"><span class="header-section-number">26.4.1</span> Location set covering problem</a></li>
-  <li><a href="#maximal-covering-location-problem" id="toc-maximal-covering-location-problem" class="nav-link" data-scroll-target="#maximal-covering-location-problem"><span class="header-section-number">26.4.2</span> Maximal covering location problem</a></li>
+  <li><a href="#location-set-covering-problem" id="toc-location-set-covering-problem" class="nav-link" data-scroll-target="#location-set-covering-problem"><span class="header-section-number">27.4.1</span> Location set covering problem</a></li>
+  <li><a href="#maximal-covering-location-problem" id="toc-maximal-covering-location-problem" class="nav-link" data-scroll-target="#maximal-covering-location-problem"><span class="header-section-number">27.4.2</span> Maximal covering location problem</a></li>
   </ul></li>
-  <li><a href="#presenting-outputs" id="toc-presenting-outputs" class="nav-link" data-scroll-target="#presenting-outputs"><span class="header-section-number">26.5</span> Presenting outputs</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">26.6</span> References</a></li>
+  <li><a href="#presenting-outputs" id="toc-presenting-outputs" class="nav-link" data-scroll-target="#presenting-outputs"><span class="header-section-number">27.5</span> Presenting outputs</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">27.6</span> References</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./intro_facility_location.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_facility_location.html">Part 5 - Facility Location Problems</a></li><li class="breadcrumb-item"><a href="./intro_facility_location.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></h1>
+<h1 class="title"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">An Introduction to Facility Location Problems</span></h1>
 </div>
 
 
@@ -483,8 +489,8 @@ a.glossary:active .def::after {
 <li><a href="https://doi.org/10.1371/journal.pone.0183942">Meskarian R, Penn ML, Williams S, Monks T (2017)</a></li>
 </ul>
 </blockquote>
-<section id="an-example-sexual-health-clinics-in-hampshire" class="level2" data-number="26.1">
-<h2 data-number="26.1" class="anchored" data-anchor-id="an-example-sexual-health-clinics-in-hampshire"><span class="header-section-number">26.1</span> An example: sexual health clinics in Hampshire</h2>
+<section id="an-example-sexual-health-clinics-in-hampshire" class="level2" data-number="27.1">
+<h2 data-number="27.1" class="anchored" data-anchor-id="an-example-sexual-health-clinics-in-hampshire"><span class="header-section-number">27.1</span> An example: sexual health clinics in Hampshire</h2>
 <p>Meskarian R, Penn ML, Williams S, Monks T (2017) A facility location model for analysis of current and future demand for sexual health services. PLoS ONE 12(8): e0183942.</p>
 <p><a href="https://doi.org/10.1371/journal.pone.0183942">https://doi.org/10.1371/journal.pone.0183942</a></p>
 <p>The project aimed to assist in planning the sexual health service provision in Hampshire.</p>
@@ -497,24 +503,24 @@ a.glossary:active .def::after {
 <p>There were 278 ‘demand points’ where people could be coming from - these were all of the postcode sectors.</p>
 <p><img src="assets/2024-06-24-18-39-28.png" class="img-fluid"></p>
 <p><img src="assets/2024-06-24-18-39-40.png" class="img-fluid"></p>
-<section id="findings" class="level3" data-number="26.1.1">
-<h3 data-number="26.1.1" class="anchored" data-anchor-id="findings"><span class="header-section-number">26.1.1</span> Findings</h3>
+<section id="findings" class="level3" data-number="27.1.1">
+<h3 data-number="27.1.1" class="anchored" data-anchor-id="findings"><span class="header-section-number">27.1.1</span> Findings</h3>
 <p>The clinic locations could be reduced from 28 to 20 and still keep 90% of all patient journeys by public transport (e.g.&nbsp;by bus or train) to a clinic within 30 minutes.</p>
 <p>The number of clinics could be further reduced to 8 if the travel time is based on car travel times within 15 minutes.</p>
 </section>
-<section id="limitations" class="level3" data-number="26.1.2">
-<h3 data-number="26.1.2" class="anchored" data-anchor-id="limitations"><span class="header-section-number">26.1.2</span> Limitations</h3>
+<section id="limitations" class="level3" data-number="27.1.2">
+<h3 data-number="27.1.2" class="anchored" data-anchor-id="limitations"><span class="header-section-number">27.1.2</span> Limitations</h3>
 <p>The public transport analysis assumed everyone would travel by public transport - but this is unrealistic (and census data showed over 85% of the population across the county having access to 1+ cars)</p>
 </section>
-<section id="diminishing-returns" class="level3" data-number="26.1.3">
-<h3 data-number="26.1.3" class="anchored" data-anchor-id="diminishing-returns"><span class="header-section-number">26.1.3</span> Diminishing returns</h3>
+<section id="diminishing-returns" class="level3" data-number="27.1.3">
+<h3 data-number="27.1.3" class="anchored" data-anchor-id="diminishing-returns"><span class="header-section-number">27.1.3</span> Diminishing returns</h3>
 <p><img src="assets/2024-06-24-18-40-05.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="formulating-location-allocation-problems" class="level2" data-number="26.2">
-<h2 data-number="26.2" class="anchored" data-anchor-id="formulating-location-allocation-problems"><span class="header-section-number">26.2</span> Formulating location allocation problems</h2>
-<section id="discrete-vs-continuous-models" class="level3" data-number="26.2.1">
-<h3 data-number="26.2.1" class="anchored" data-anchor-id="discrete-vs-continuous-models"><span class="header-section-number">26.2.1</span> Discrete vs continuous models</h3>
+<section id="formulating-location-allocation-problems" class="level2" data-number="27.2">
+<h2 data-number="27.2" class="anchored" data-anchor-id="formulating-location-allocation-problems"><span class="header-section-number">27.2</span> Formulating location allocation problems</h2>
+<section id="discrete-vs-continuous-models" class="level3" data-number="27.2.1">
+<h3 data-number="27.2.1" class="anchored" data-anchor-id="discrete-vs-continuous-models"><span class="header-section-number">27.2.1</span> Discrete vs continuous models</h3>
 <p>In discrete models, it is assumed that demands can be aggregated to a finite number of discrete points.</p>
 <p>To achieve this, a region could be split up into a series of points (e.g.&nbsp;the central point of postcodes or LSOAs)</p>
 <p>They also assume that there is a finite set of candidate locations where facilities will be placed.</p>
@@ -522,47 +528,47 @@ a.glossary:active .def::after {
 <p>The alternative is continuous models, where locations could be anywhere within a range - we don’t cover this!</p>
 </div>
 </section>
-<section id="types-of-location-allocation-problem" class="level3" data-number="26.2.2">
-<h3 data-number="26.2.2" class="anchored" data-anchor-id="types-of-location-allocation-problem"><span class="header-section-number">26.2.2</span> Types of location allocation problem</h3>
+<section id="types-of-location-allocation-problem" class="level3" data-number="27.2.2">
+<h3 data-number="27.2.2" class="anchored" data-anchor-id="types-of-location-allocation-problem"><span class="header-section-number">27.2.2</span> Types of location allocation problem</h3>
 <p><img src="assets/2024-06-24-18-41-37.png" class="img-fluid"></p>
 <p><img src="assets/2024-06-24-18-41-48.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="p-median-problems" class="level2" data-number="26.3">
-<h2 data-number="26.3" class="anchored" data-anchor-id="p-median-problems"><span class="header-section-number">26.3</span> p-median problems</h2>
+<section id="p-median-problems" class="level2" data-number="27.3">
+<h2 data-number="27.3" class="anchored" data-anchor-id="p-median-problems"><span class="header-section-number">27.3</span> p-median problems</h2>
 <p>A p-median problem is basically just one where we care about</p>
 <p>locating p services (so p could be 1, 2, 3, 5, 25 - whatever!)</p>
 <p>in such a way that the weighted average travel time (or distance) of users is minimized</p>
-<section id="understanding-how-p-median-problems-work" class="level3" data-number="26.3.1">
-<h3 data-number="26.3.1" class="anchored" data-anchor-id="understanding-how-p-median-problems-work"><span class="header-section-number">26.3.1</span> Understanding how p-median problems work</h3>
+<section id="understanding-how-p-median-problems-work" class="level3" data-number="27.3.1">
+<h3 data-number="27.3.1" class="anchored" data-anchor-id="understanding-how-p-median-problems-work"><span class="header-section-number">27.3.1</span> Understanding how p-median problems work</h3>
 <p>First, let’s imagine we have a single hospital site.</p>
 <p><img src="assets/2024-06-24-18-42-40.png" class="img-fluid"></p>
-<section id="simple-averages" class="level4" data-number="26.3.1.1">
-<h4 data-number="26.3.1.1" class="anchored" data-anchor-id="simple-averages"><span class="header-section-number">26.3.1.1</span> Simple averages</h4>
+<section id="simple-averages" class="level4" data-number="27.3.1.1">
+<h4 data-number="27.3.1.1" class="anchored" data-anchor-id="simple-averages"><span class="header-section-number">27.3.1.1</span> Simple averages</h4>
 <p><img src="assets/2024-06-24-18-42-52.png" class="img-fluid"></p>
 <p><img src="assets/2024-06-24-18-43-19.png" class="img-fluid"></p>
 </section>
-<section id="why-weighted-averages" class="level4" data-number="26.3.1.2">
-<h4 data-number="26.3.1.2" class="anchored" data-anchor-id="why-weighted-averages"><span class="header-section-number">26.3.1.2</span> Why weighted averages?</h4>
+<section id="why-weighted-averages" class="level4" data-number="27.3.1.2">
+<h4 data-number="27.3.1.2" class="anchored" data-anchor-id="why-weighted-averages"><span class="header-section-number">27.3.1.2</span> Why weighted averages?</h4>
 <p><img src="assets/2024-06-24-18-43-35.png" class="img-fluid"></p>
 </section>
-<section id="calculating-weighted-averages" class="level4" data-number="26.3.1.3">
-<h4 data-number="26.3.1.3" class="anchored" data-anchor-id="calculating-weighted-averages"><span class="header-section-number">26.3.1.3</span> Calculating weighted averages</h4>
+<section id="calculating-weighted-averages" class="level4" data-number="27.3.1.3">
+<h4 data-number="27.3.1.3" class="anchored" data-anchor-id="calculating-weighted-averages"><span class="header-section-number">27.3.1.3</span> Calculating weighted averages</h4>
 <p><img src="assets/2024-06-24-18-43-59.png" class="img-fluid"></p>
 <p>But what if the demand was distributed differently?</p>
 <p><img src="assets/2024-06-24-18-44-12.png" class="img-fluid"></p>
 <p>If this was the demand distribution instead, then this might not be such a good location for the hospital</p>
 </section>
-<section id="the-impact-of-weighted-averages" class="level4" data-number="26.3.1.4">
-<h4 data-number="26.3.1.4" class="anchored" data-anchor-id="the-impact-of-weighted-averages"><span class="header-section-number">26.3.1.4</span> The impact of weighted averages</h4>
+<section id="the-impact-of-weighted-averages" class="level4" data-number="27.3.1.4">
+<h4 data-number="27.3.1.4" class="anchored" data-anchor-id="the-impact-of-weighted-averages"><span class="header-section-number">27.3.1.4</span> The impact of weighted averages</h4>
 <p>Compare our unweighted average</p>
 <p><img src="assets/2024-06-24-18-43-19.png" class="img-fluid"></p>
 <p>To the weighted averages</p>
 <p><img src="assets/2024-06-24-18-44-34.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="limitations-of-p-median-problems" class="level3" data-number="26.3.2">
-<h3 data-number="26.3.2" class="anchored" data-anchor-id="limitations-of-p-median-problems"><span class="header-section-number">26.3.2</span> Limitations of p-median problems</h3>
+<section id="limitations-of-p-median-problems" class="level3" data-number="27.3.2">
+<h3 data-number="27.3.2" class="anchored" data-anchor-id="limitations-of-p-median-problems"><span class="header-section-number">27.3.2</span> Limitations of p-median problems</h3>
 <p>However - one problem with this approach is that it doesn’t look at the maximum travel time.</p>
 <p>For certain services, like accident and emergency, stroke units, or anything else where being able to get to a service within a certain length of time is crucial, then you may be less concerned about minimizing the average length.</p>
 <p>Instead, you may care more about ensuring that everyone in your catchment area isn’t more than a certain number of miles or minutes away.</p>
@@ -582,8 +588,8 @@ Warning
 </div>
 </section>
 </section>
-<section id="other-problem-types" class="level2" data-number="26.4">
-<h2 data-number="26.4" class="anchored" data-anchor-id="other-problem-types"><span class="header-section-number">26.4</span> Other problem types</h2>
+<section id="other-problem-types" class="level2" data-number="27.4">
+<h2 data-number="27.4" class="anchored" data-anchor-id="other-problem-types"><span class="header-section-number">27.4</span> Other problem types</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -597,12 +603,12 @@ Tip
 <p>We focus on the p-median problem in the course - but it’s useful to know what the other types are.</p>
 </div>
 </div>
-<section id="location-set-covering-problem" class="level3" data-number="26.4.1">
-<h3 data-number="26.4.1" class="anchored" data-anchor-id="location-set-covering-problem"><span class="header-section-number">26.4.1</span> Location set covering problem</h3>
+<section id="location-set-covering-problem" class="level3" data-number="27.4.1">
+<h3 data-number="27.4.1" class="anchored" data-anchor-id="location-set-covering-problem"><span class="header-section-number">27.4.1</span> Location set covering problem</h3>
 <p>What is the minimum number of facilities (and their locations) so that all people have at least one facility within a given maximum distance (or time)</p>
 </section>
-<section id="maximal-covering-location-problem" class="level3" data-number="26.4.2">
-<h3 data-number="26.4.2" class="anchored" data-anchor-id="maximal-covering-location-problem"><span class="header-section-number">26.4.2</span> Maximal covering location problem</h3>
+<section id="maximal-covering-location-problem" class="level3" data-number="27.4.2">
+<h3 data-number="27.4.2" class="anchored" data-anchor-id="maximal-covering-location-problem"><span class="header-section-number">27.4.2</span> Maximal covering location problem</h3>
 <p>How can we locate the facilities in such a way that as few people as possible don’t have a service within the target distance (or time)</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -619,8 +625,8 @@ Tip
 </div>
 </section>
 </section>
-<section id="presenting-outputs" class="level2" data-number="26.5">
-<h2 data-number="26.5" class="anchored" data-anchor-id="presenting-outputs"><span class="header-section-number">26.5</span> Presenting outputs</h2>
+<section id="presenting-outputs" class="level2" data-number="27.5">
+<h2 data-number="27.5" class="anchored" data-anchor-id="presenting-outputs"><span class="header-section-number">27.5</span> Presenting outputs</h2>
 <p>In reality, you might care about all of these to some extent!</p>
 <p>You might find that your best solution to the p-median problem has a really long maximum travel time…</p>
 <p>But your second best solution actually has a much more reasonable maximum travel time.</p>
@@ -630,8 +636,8 @@ Tip
 <p>You could even consider ranking possible combinations by multiple methods and then seeing which has the lowest overall rank (indicating the best performance against multiple objectives)</p>
 <p><img src="assets/2024-06-24-18-47-42.png" class="img-fluid"></p>
 </section>
-<section id="references" class="level2" data-number="26.6">
-<h2 data-number="26.6" class="anchored" data-anchor-id="references"><span class="header-section-number">26.6</span> References</h2>
+<section id="references" class="level2" data-number="27.6">
+<h2 data-number="27.6" class="anchored" data-anchor-id="references"><span class="header-section-number">27.6</span> References</h2>
 <p>Car icons created by fjstudio - Flaticon (https://www.flaticon.com/free-icons/car)</p>
 
 
@@ -1530,13 +1536,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./mtt_travel_time_apis.html" class="pagination-link" aria-label="Lookup Up Travel Times Using APIs">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Lookup Up Travel Times Using APIs</span></span>
+      <a href="./valhalla_api_isochrones.html" class="pagination-link" aria-label="Using Other APIs with RoutingPy - Valhalla">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Using Other APIs with RoutingPy - Valhalla</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./fl_site_combinations.html" class="pagination-link" aria-label="Calculating combinations of sites">
-        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Calculating combinations of sites</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,6 +1,6 @@
 ---
 execute:
-  eval: false
+  eval: true
 ---
 
 # Lookup Up Travel Times Using APIs
@@ -110,6 +110,7 @@ We'll then create an instance of the ORS API using our API key so we can retriev
 
 ```{python}
 #| label: api_key_dummy
+#| eval: False
 ors_api_key = "abc123myreallylongapikey"
 ors_api = rp.ORS(api_key=ors_api_key)
 ```
@@ -147,6 +148,8 @@ Our call to routingpy will look something like this.
 #| echo: False
 with open("routingpy_api_key.txt", "r") as file:
     ors_api_key = file.read().replace("\n", "")
+
+ors_api = rp.ORS(api_key=ors_api_key)
 ```
 
 ```{python}
