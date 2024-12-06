@@ -325,7 +325,7 @@ You may also find that they are input into software with a mixture of gaps betwe
 :::
 
 ::: {.callout-tip}
-[postcodes.io](postcodes.io) is a great website for getting up-to-date information about postcodes and using this to supplement your data.
+[postcodes.io](http://postcodes.io) is a great website for getting up-to-date information about postcodes and using this to supplement your data.
 
 For example, you can find out which LSOA - a grouping we will talk about shortly - a postcode belongs to, which can help with aggregating your data for a different level of detail.
 :::
