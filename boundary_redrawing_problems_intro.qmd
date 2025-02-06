@@ -1,0 +1,46 @@
+---
+title: "Boundary Problems - An Initial Exploration"
+format: html
+---
+
+Problems relating to the redefinition of boundaries are commonly encountered in many settings, including healthcare.
+
+In the following chapters, we are going to work through a problem of increasing complexity relating to the redrawing of dispatch boundaries for a series of ambulance depots.
+
+We will start off with a simplified version of this problem, before adding in additional layers of complexity across subsequent chapters.
+
+:::{.callout-note}
+As with many of the more complex examples we will explore, there are many different ways you could approach the problem, each with their own strengths and weaknesses. This chapter is intended to give you the tools to start tackling your own problem in this space.
+:::
+
+
+
+:::{.callout-warning}
+It's worth returning to the famous quote attributed to George E. P. Box at this point - "All models are wrong, but some are useful"
+
+Your system may be extremely complex - but what simplifications can you make while still making your model a useful decision making tool?
+:::
+
+
+## The problem statement
+
+In this case, we will take an example of an ambulance service that is loking to manage the dispatching of a series of resources.
+
+There are two dispatch centres responsible for the overall control of their respective fleets of ambulances.
+
+Within each dispatch centre, there are a series of dispatchers. Each dispatcher role (which will be fulfilled by multiple dispatchers to give 24/7 coverage) is responsible for a number of ambulances that they are responsible for controlling. For ease, we will just refer to this as a single 'dispatcher'.
+
+In our example, the existing boundaries were drawn some time ago. Over time, as the area has evolved, the number of ambulances - and the number of allocations of these ambulances - each dispatcher is responsible for has begun to vary significantly.
+
+:::{.callout-tip}
+For the early stages of our problem, we will make the assumption that a boundary cannot split a district. In our example, we will be using lower level super output areas (LSOAs), but the principles applied in these chapters would work for any similar kind of area splits, such as postcodes, postcode areas, MSOAs, or something else.
+:::
+
+To begin with, we will explore
+- how to load in and visualise our historical data and boundaries
+- how we can vary the boundaries manually and evaluate a simple solution with one objective
+- how we could manage additional objectives in our solution finding
+- how we can start to vary the boundaries automatically and evaluate the solutions gemerated
+- how we can move from evaluating a series of random solutions to using genetic algorithms to improve our progress towards finding solutions nearer the optimum
+- how we can start to limit the possible boundaries to avoid certain features or configurations
+- how to deal with split boundaries
