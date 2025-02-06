@@ -1,5 +1,5 @@
 ---
-title: "Visualising our historical boundaries"
+title: "(WIP) Loading and Visualising the Historical Boundaries"
 format: html
 ---
 
@@ -113,6 +113,112 @@ This information has been given to us in a dataframe; let's import and inspect t
 
 
 ```{python}
+import pandas as pd
 
+boundary_allocations_df = pd.read_csv("boundary_allocations.csv")
+boundary_allocations_df.head()
+```
+
+If we join this to our boundary data, with the geodataframe on the **left** of the merge, we can then access the data about the dispatchers and centers as variables we can plot.
+
+First, let's do the join and view the resulting dataframer which will have the additional columns. As the original dataframe only contains separate columns for center and dispatcher, we will first create an additional column that joins the two together.
+
+```{python}
+bham_region = pd.merge(
+    bham_region,
+    boundary_allocations_df,
+    left_on="region",
+    right_on="Region",
+    how="left"
+)
+
+bham_region["centre_dispatcher"] = bham_region["Centre"].astype("str") + '-' + bham_region["Dispatcher"].astype("str")
+
+bham_region.head()
+```
+
+Let's first just visualise the split across our dispatching centres by plotting the center column.
+
+```{python}
+ax = bham_region.plot(
+    edgecolor='black',
+    column="Centre",
+    legend=True,
+    legend_kwds={'loc':'center left', 'bbox_to_anchor':(1.2, 0.5)}
+    )
+
+ax.axis('off')
 
 ```
+
+Then we'll visualise the split per dispatcher, using our new column to avoid issues with dispatcher numbers being duplicated across centres.
+
+```{python}
+ax = bham_region.plot(
+    edgecolor='black',
+    column="centre_dispatcher",
+    legend=True,
+    cmap="tab20",
+    legend_kwds={'loc':'center left', 'bbox_to_anchor':(1.2, 0.5)}
+    )
+
+ax.axis('off')
+
+```
+
+Finally, let's demonstrate how we could overlay the plot by dispatcher with something that highlights the per-centre boundary as well.
+
+To do this, we will have to merge all of the polygons into a single large polygon. This will give us a brand new dataframe with just two rows referencing the two large polygons; we will view this at the end.
+
+*GenAI Alert - This code was modified from a suggested approach provided by ChatGPT*
+
+```{python}
+# Group by the specified column
+grouped_centre_gdf = bham_region.groupby('Centre')
+
+# Create a new GeoDataFrame for the boundaries of each group
+boundary_list = []
+
+for group_name, group in grouped_centre_gdf:
+    # Combine the polygons in each group into one geometry
+    combined_geometry = group.unary_union
+
+    # Get the boundary of the combined geometry
+    boundary = combined_geometry.boundary
+
+    # Add the boundary geometry and the group name to the list
+    boundary_list.append({'group': group_name, 'boundary': boundary})
+
+# Create a GeoDataFrame from the list of boundaries
+grouped_centre_gdf_boundary = geopandas.GeoDataFrame(boundary_list, geometry='boundary', crs=bham_region.crs)
+
+grouped_centre_gdf_boundary.head()
+```
+
+Finally, we'll repeat our per-dispatcher
+
+```{python}
+ax = bham_region.plot(
+    edgecolor='black',
+    column="centre_dispatcher",
+    legend=True,
+    cmap="tab20",
+    legend_kwds={'loc':'center left', 'bbox_to_anchor':(1.2, 0.5)}
+    )
+
+grouped_centre_gdf_boundary.plot(
+    edgecolor='red',
+    ax=ax,
+    linewidth=2
+)
+
+ax.axis('off')
+
+```
+
+
+## Bringing in historical demand data
+
+Finally, let's bring in some historical demand data to see if we can spot any obvious issues.
+
+*Placeholder - we will have per-LSOA demand visualised here; a dummy dataset modified of population modified by some random factor. Around it, we will show how we could draw both the centre and dispatcher boundaries.

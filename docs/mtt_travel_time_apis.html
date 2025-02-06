@@ -404,6 +404,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Part 6 - Working with Boundaries</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./boundary_redrawing_problems_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Boundary Problems - An Initial Exploration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./boundary_problems_visualising_historical_boundaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(WIP) Loading and Visualising the Historical Boundaries</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./boundary_problems_varying_evaluating_simple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">(WIP) Boundary Problems - Creating and Evaluating Simple Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -930,17 +959,17 @@ Click here for a copyable code example
 <div class="cell-output cell-output-stdout">
 <pre><code>                         Site 1   Site 2   Site 3   Site 4  Site 5  Site 6
 name                                                                      
-Brighton and Hove 031E   973.13   712.64   323.49   620.28  792.49  806.18
-Brighton and Hove 030B   930.42   660.77   343.71   577.58  740.62  756.79
-Brighton and Hove 031C   977.62   662.58   295.36   636.87  742.44  758.61
-Brighton and Hove 031D  1073.71   643.37   186.55   771.88  723.22  865.38
-Brighton and Hove 010E   690.39   205.64   409.41   621.03  284.81  471.37
+Brighton and Hove 031E   977.70   712.47   322.69   620.28  792.32  818.77
+Brighton and Hove 030B   935.00   660.77   343.71   577.58  740.62  767.07
+Brighton and Hove 031C   994.05   663.40   294.78   636.88  743.25  769.70
+Brighton and Hove 031D  1078.25   642.41   185.75   771.88  722.26  864.58
+Brighton and Hove 010E   694.25   205.64   407.75   619.50  284.52  469.89
 ...                         ...      ...      ...      ...     ...     ...
-Brighton and Hove 025A  1083.34   713.91   279.96  1102.83  793.76  875.01
-Brighton and Hove 006D   212.43   701.92   925.62   451.45  443.24  250.28
-Brighton and Hove 024A   550.43   426.13   436.66   380.98  505.98  331.42
-Brighton and Hove 005A   565.76   882.50  1106.20   663.30  623.82  445.60
-Brighton and Hove 033D  1105.33  1020.23   586.29  1206.97  828.10  897.00
+Brighton and Hove 025A  1089.28   714.34   280.57  1100.54  794.20  875.62
+Brighton and Hove 006D   217.98   703.21   926.92   454.12  444.53  251.57
+Brighton and Hove 024A   555.77   432.37   436.69   380.93  507.96  331.42
+Brighton and Hove 005A   571.01   883.03  1106.73   666.56  624.35  446.13
+Brighton and Hove 033D  1110.69  1020.09   586.31  1208.32  828.12  897.03
 
 [165 rows x 6 columns]</code></pre>
 </div>
@@ -995,11 +1024,11 @@ Tip
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>nearest_site_travel_brighton_gdf.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     FID   LSOA11CD                LSOA11NM  ...  Site 6  shortest  shortest_minutes
-0  16356  E01016849  Brighton and Hove 026A  ...  639.73    232.53          3.875500
-1  16357  E01016850  Brighton and Hove 029A  ...  616.73    294.40          4.906667
-2  16358  E01016851  Brighton and Hove 029B  ...  601.15    268.27          4.471167
-3  16359  E01016852  Brighton and Hove 026B  ...  579.75    256.09          4.268167
-4  16360  E01016853  Brighton and Hove 026C  ...  609.58    211.17          3.519500
+0  16356  E01016849  Brighton and Hove 026A  ...  638.60    232.54          3.875667
+1  16357  E01016850  Brighton and Hove 029A  ...  616.75    294.41          4.906833
+2  16358  E01016851  Brighton and Hove 029B  ...  601.17    268.51          4.475167
+3  16359  E01016852  Brighton and Hove 026B  ...  579.76    256.04          4.267333
+4  16360  E01016853  Brighton and Hove 026C  ...  609.58    211.12          3.518667
 
 [5 rows x 19 columns]</code></pre>
 </div>

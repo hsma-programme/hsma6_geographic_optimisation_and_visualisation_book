@@ -1,25 +1,19 @@
 ---
-title: "Boundary Problems - Creating and evaluating simple solutions"
+title: "(WIP) Boundary Problems - Creating and Evaluating Simple Solutions"
 format: html
 ---
 
-
-
 ## Generating and representing new boundaries
 
-When we come to modifying our existing boundaries,
-
-### Calculating the LSOAs inside our existing boundaries
+When we come to modifying our existing boundaries, we are going to generate a large set of random new boundaries and test them.
 
 :::{.callout-note}
 Remember - in our problem statement, we specified that boundaries in our problem cannot cross through the middle of an LSOA. You would need to apply a different approach if this is not true in your case.
 :::
 
-
-:::{.callout-note}
-Remember -
+:::{.callout-tip}
+If you have a series of pre-selected solutions to try, the code in the following sections can be adapted to use those solutions rather than the randomly-generated solutions.
 :::
-
 
 First, we will define the LSOAs that each LSOA has a continuous boundary with. These will form part of a possible series of solutions. To do this, we'll be using the `.touches` method in geopandas.
 
@@ -27,8 +21,11 @@ In this case, a solution must meet a criteria
 
 - every polygon must be assigned to a dispatcher
 - no polygon can be assigned to more than one dispatcher
--
+- dispatcher boundaries must be continuous; regions belonging to a dispatcher cannot be entirely separated from the rest of their dispatch area
 
+At this point, we are not trying to do anything to balance our objectives like equalising the number of calls they are going to; instead, we are simply coming up with possibilities. We'll actually test them out in the next chapter.
+
+### The Process
 
 To create a solution that scales well to any number of dispatchers, we will have the dispatchers start with a single randomly-selected patch from their existing location.
 
@@ -44,11 +41,10 @@ This is one of many approaches you could take.
 :::
 
 :::{.callout-note}
-When we come to apply a evolutionary or genetic algorithm approach to this problem in a later chapter, we will need to change how we represent our solutions; for now, however, we
+When we come to apply a evolutionary or genetic algorithm approach to this problem in a later chapter, we will need to change how we represent our solutions; for now, however, we can just put together lists of LSOAs that will belong to each dispatcher.
 :::
 
 Let's write and apply this function to generate a series of randomly generated solutions for our problem, which we will subsequently move on to evaluating.
-
 
 
 ```{python}
