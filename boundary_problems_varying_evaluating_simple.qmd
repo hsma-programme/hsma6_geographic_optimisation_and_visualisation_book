@@ -1,0 +1,57 @@
+---
+title: "Boundary Problems - Creating and evaluating simple solutions"
+format: html
+---
+
+
+
+## Generating and representing new boundaries
+
+When we come to modifying our existing boundaries,
+
+### Calculating the LSOAs inside our existing boundaries
+
+:::{.callout-note}
+Remember - in our problem statement, we specified that boundaries in our problem cannot cross through the middle of an LSOA. You would need to apply a different approach if this is not true in your case.
+:::
+
+
+:::{.callout-note}
+Remember -
+:::
+
+
+First, we will define the LSOAs that each LSOA has a continuous boundary with. These will form part of a possible series of solutions. To do this, we'll be using the `.touches` method in geopandas.
+
+In this case, a solution must meet a criteria
+
+- every polygon must be assigned to a dispatcher
+- no polygon can be assigned to more than one dispatcher
+-
+
+
+To create a solution that scales well to any number of dispatchers, we will have the dispatchers start with a single randomly-selected patch from their existing location.
+
+Then, on each 'turn', they will randomly choose another patch from the patches that share a boundary with the first patch. There is a small (adjustable) possibility on each turn that they will not opt to take a turn; this will be part of our strategy to ensure that not every dispatcher ends up with solutions containing exactly the same number
+
+On each subsequent turn, they will randomly select another region that touches any part of their existing region. If the region that is selected is a region that they already have in their 'patch', then
+
+
+:::{.callout-tip}
+Again, this is not the only way we can start to generate solutions here!
+
+This is one of many approaches you could take.
+:::
+
+:::{.callout-note}
+When we come to apply a evolutionary or genetic algorithm approach to this problem in a later chapter, we will need to change how we represent our solutions; for now, however, we
+:::
+
+Let's write and apply this function to generate a series of randomly generated solutions for our problem, which we will subsequently move on to evaluating.
+
+
+
+```{python}
+
+
+```

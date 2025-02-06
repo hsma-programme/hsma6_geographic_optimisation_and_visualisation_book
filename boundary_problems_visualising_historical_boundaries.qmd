@@ -1,0 +1,118 @@
+---
+title: "Visualising our historical boundaries"
+format: html
+---
+
+Let's imagine we've been told that the historical boundaries have been based on groups of LSOAs. We've been given a list of the LSOAs that belong to each dispatcher, but we only have a standard file of all LSOAs in our region. How can we turn our lists of LSOAs and this file into something to help us visualise the boundaries, and later start to alter the boundaries to try out different solutions?
+
+:::{.callout-note}
+There are other ways in which you may get the boundaries.
+
+- You may be able to find a shapefile, geojson or geopackage file defining the boundaries.
+- You may draw the boundaries in another tool, like
+:::
+
+
+
+## Our region
+
+We're going to work with our Birmingham region again. We first worked with this in the section of the book covering travel times; we may return to this travel time data in a later chapter of this part.
+
+To start with, let's just visualise our wider region.
+
+```{python}
+import geopandas
+
+lsoa_geojson_path = 'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'
+
+lsoa_boundaries = geopandas.read_file(lsoa_geojson_path)
+
+```
+
+Let's now filter this down to just our region.
+
+```{python}
+xmin, xmax = 370000, 420000
+ymin, ymax = 250000, 310000
+
+bham_region = lsoa_boundaries.cx[xmin:xmax, ymin:ymax]
+
+bham_region.plot(
+    figsize=(10,7),
+    edgecolor='black',
+    color="cyan"
+    )
+```
+
+:::{.callout-tip}
+There are other ways you could conduct this initial filtering - for example, using a list of LSOAs you need to cover, or a filter
+:::
+
+Straight away we can see that there are a very large number of LSOAs in our problem, with a lot of variation in the area of each LSOA.
+
+We'll start with the split of our LSOAs by their overarching dispatch center.
+
+We've been told that our dispatch centres are split based on the wider region name. Here, we'd visualised these names.
+
+```{python}
+import matplotlib.pyplot as plt
+
+bham_region.head()
+
+bham_region["region"] = bham_region["LSOA11NM"].str[:-5]
+
+fig, ax = plt.subplots(figsize=(10,7))
+
+ax = bham_region.plot(
+    ax=ax,
+    edgecolor='black',
+    column="region",
+    legend=True,
+    cmap="tab20",
+    legend_kwds={'loc':'center left', 'bbox_to_anchor':(1.2, 0.5)}
+    )
+
+# Add a dark background to our plotted region
+ax.set_facecolor('black')
+fig.patch.set_facecolor('black')
+
+# Add a label per region for easier crossreferencing
+# particularly where colours aren't very distinct
+one_row_per_region = bham_region.groupby('region').head(1)
+
+for x, y, label in zip(one_row_per_region.geometry.centroid.x, one_row_per_region.geometry.centroid.y, one_row_per_region.region):
+    ax.annotate(label, xy=(x, y), xytext=(0, 0), textcoords="offset points", color="white",
+    fontweight="bold")
+
+ax.axis('off')
+
+```
+
+
+We've been told that the regions are as follows:
+
+**Centre 1**
+
+*Dispatcher 1*: Telford and Wrekin; Shropshire
+*Dispatcher 2*: Cannock Chase; Lichfield; Tamworth
+*Dispatcher 3*: South Staffordshire; Walsall
+*Dispatcher 4*: Wolverhampton
+*Dispatcher 5*: Dudley; Sandwell
+*Dispatcher 6*: Birmingham
+*Dispatcher 7*: Solihull; North Warwickshire
+
+**Centre 2**
+
+*Dispatcher 1*: Bromsgrove
+*Dispatcher 2*: Wyre Forest
+*Dispatcher 3*: Wychavon; Worcester
+*Dispatcher 4*: Malvern Hills; Herefordshire
+*Dispatcher 5*: Redditch; Stratford-on-Avon; Warwick
+
+This information has been given to us in a dataframe; let's import and inspect this, then join it to our other data.
+
+
+```{python}
+
+
+```

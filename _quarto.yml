@@ -48,6 +48,11 @@ book:
     - intro_facility_location.qmd
     - fl_site_combinations.qmd
     - fl_problems_coding.qmd
+  - part: Part 6 - Working with Boundaries
+    chapters:
+    - boundary_redrawing_problems_intro.qmd
+    - boundary_problems_visualising_historical_boundaries.qmd
+    - boundary_problems_varying_evaluating_simple.qmd
   cover-image: resources/logos/hsma_logo_transparent_background_large.png
   favicon: resources/logos/hsma_logo_transparent_background_large.png
   search: true
