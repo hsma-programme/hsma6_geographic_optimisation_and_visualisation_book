@@ -448,6 +448,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#generating-and-representing-new-boundaries" id="toc-generating-and-representing-new-boundaries" class="nav-link active" data-scroll-target="#generating-and-representing-new-boundaries"><span class="header-section-number">32.1</span> Generating and representing new boundaries</a>
   <ul class="collapse">
   <li><a href="#the-process" id="toc-the-process" class="nav-link" data-scroll-target="#the-process"><span class="header-section-number">32.1.1</span> The Process</a></li>
+  <li><a href="#our-starting-dataframe" id="toc-our-starting-dataframe" class="nav-link" data-scroll-target="#our-starting-dataframe"><span class="header-section-number">32.1.2</span> Our starting dataframe</a></li>
+  <li><a href="#getting-the-neighbours" id="toc-getting-the-neighbours" class="nav-link" data-scroll-target="#getting-the-neighbours"><span class="header-section-number">32.1.3</span> Getting the Neighbours</a></li>
+  <li><a href="#making-a-dictionary-of-the-existing-allocations" id="toc-making-a-dictionary-of-the-existing-allocations" class="nav-link" data-scroll-target="#making-a-dictionary-of-the-existing-allocations"><span class="header-section-number">32.1.4</span> Making a dictionary of the existing allocations</a></li>
+  <li><a href="#generating-starting-allocations" id="toc-generating-starting-allocations" class="nav-link" data-scroll-target="#generating-starting-allocations"><span class="header-section-number">32.1.5</span> Generating starting allocations</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -516,34 +520,9 @@ Tip
 <p>To create a solution that scales well to any number of dispatchers, we will have the dispatchers start with a single randomly-selected patch from their existing location (though we will also code in an option to always start from a single specified point).</p>
 <p>Then, on each ‘turn’, they will randomly choose another patch from the patches that share a boundary with the first patch. There is a small (adjustable) possibility on each turn that they will not opt to take a turn; this will be part of our strategy to ensure that not every dispatcher ends up with solutions containing exactly the same number</p>
 <p>On each subsequent turn, they will randomly select another region that touches any part of their existing region. If the region that is selected is a region that they already have in their ‘patch’, then</p>
-<div id="042d3c16" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_gif(input_folder, output_gif, duration<span class="op">=</span><span class="dv">500</span>):</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get all PNG files from the folder and sort them</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    images <span class="op">=</span> <span class="bu">sorted</span>(</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(input_folder) <span class="cf">if</span> f.endswith(<span class="st">'.png'</span>)],</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        key<span class="op">=</span><span class="kw">lambda</span> x: os.path.getmtime(os.path.join(input_folder, x))</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Open images and convert to a list</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    frames <span class="op">=</span> [Image.<span class="bu">open</span>(os.path.join(input_folder, img)) <span class="cf">for</span> img <span class="kw">in</span> images]</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> frames:</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        frames[<span class="dv">0</span>].save(output_gif, save_all<span class="op">=</span><span class="va">True</span>, append_images<span class="op">=</span>frames[<span class="dv">1</span>:], duration<span class="op">=</span>duration, loop<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"GIF saved as </span><span class="sc">{</span>output_gif<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No PNG images found in the folder."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>Here’s an example of one of our ‘walks’ building up. This only shows the first few steps, but eventually it would continue until the whole patch was covered, following the same pattern.</p>
 <p><img src="images/walk.gif" class="img-fluid"></p>
 <p>This just showed us building up two patches, but more patches could be built with a larger number of ‘players’.</p>
-<div id="dd2805d2" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-stdout">
-<pre><code>GIF saved as images/walk_2.gif</code></pre>
-</div>
-</div>
 <p><img src="images/walk_2.gif" class="img-fluid"></p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -586,52 +565,30 @@ Note
 </div>
 </div>
 <p>Let’s write and apply this function to generate a series of randomly generated solutions for our problem, which we will subsequently move on to evaluating.</p>
+</section>
+<section id="our-starting-dataframe" class="level3" data-number="32.1.2">
+<h3 data-number="32.1.2" class="anchored" data-anchor-id="our-starting-dataframe"><span class="header-section-number">32.1.2</span> Our starting dataframe</h3>
 <p>To start with, let’s load our boundary data back in. Head back to the previous chapter if any of this feels unfamiliar!</p>
-<div id="aeb1bc69" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>lsoa_geojson_path <span class="op">=</span> <span class="st">'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>lsoa_boundaries <span class="op">=</span> geopandas.read_file(lsoa_geojson_path)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>xmin, xmax <span class="op">=</span> <span class="dv">370000</span>, <span class="dv">420000</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ymin, ymax <span class="op">=</span> <span class="dv">250000</span>, <span class="dv">310000</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> lsoa_boundaries.cx[xmin:xmax, ymin:ymax]</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>bham_region.plot(</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>),</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"cyan"</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="boundary_problems_varying_evaluating_simple_files/figure-html/cell-5-output-1.png" width="579" height="559" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Before we start worrying about the allocations, we first want to generate a column that contains a list of all of the neighbours of a given cell. This will be a lot more efficient than trying to calculate the neighbours from scratch each time we want to pick a new one - and it’s not like the neighbours will change.</p>
-<p><em>GenAI Alert - This code was modified from a suggested approach provided by ChatGPT</em></p>
-<div id="bee17436" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_neighbors_column(gdf):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Adds a column to the GeoDataFrame containing lists of indices of neighboring polygons</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">    based on the 'touches' method.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    neighbors <span class="op">=</span> []</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, geom <span class="kw">in</span> gdf.geometry.items():</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        touching <span class="op">=</span> gdf[gdf.geometry.touches(geom)][<span class="st">"LSOA11CD"</span>].tolist()</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        neighbors.append(touching)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    gdf[<span class="st">"neighbors"</span>] <span class="op">=</span> neighbors</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gdf</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> add_neighbors_column(bham_region)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>bham_region[[<span class="st">'LSOA11CD'</span>, <span class="st">'LSOA11NM'</span>, <span class="st">'LSOA11NMW'</span>, <span class="st">'geometry'</span>, <span class="st">'neighbors'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e05a1177" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>lsoa_geojson_path <span class="op">=</span> <span class="st">'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>lsoa_boundaries <span class="op">=</span> geopandas.read_file(lsoa_geojson_path)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>xmin, xmax <span class="op">=</span> <span class="dv">370000</span>, <span class="dv">420000</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ymin, ymax <span class="op">=</span> <span class="dv">250000</span>, <span class="dv">310000</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> lsoa_boundaries.cx[xmin:xmax, ymin:ymax]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>bham_region[<span class="st">"region"</span>] <span class="op">=</span> bham_region[<span class="st">"LSOA11NM"</span>].<span class="bu">str</span>[:<span class="op">-</span><span class="dv">5</span>]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>bham_region.plot(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"cyan"</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/sammi/.local/lib/python3.10/site-packages/geopandas/geodataframe.py:1528: SettingWithCopyWarning:
 
@@ -642,7 +599,38 @@ Try using .loc[row_indexer,col_indexer] = value instead
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
 </code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boundary_problems_varying_evaluating_simple_files/figure-html/cell-5-output-2.png" width="579" height="559" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="getting-the-neighbours" class="level3" data-number="32.1.3">
+<h3 data-number="32.1.3" class="anchored" data-anchor-id="getting-the-neighbours"><span class="header-section-number">32.1.3</span> Getting the Neighbours</h3>
+<p>Before we start worrying about the allocations, we first want to generate a column that contains a list of all of the neighbours of a given cell. This will be a lot more efficient than trying to calculate the neighbours from scratch each time we want to pick a new one - and it’s not like the neighbours will change.</p>
+<p><em>GenAI Alert - This code was modified from a suggested approach provided by ChatGPT</em></p>
+<div id="668d09dc" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_neighbors_column(gdf):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Adds a column to the GeoDataFrame containing lists of indices of neighboring polygons</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">    based on the 'touches' method.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    gdf <span class="op">=</span> gdf.copy()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    neighbors <span class="op">=</span> []</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, geom <span class="kw">in</span> gdf.geometry.items():</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        touching <span class="op">=</span> gdf[gdf.geometry.touches(geom)][<span class="st">"LSOA11CD"</span>].tolist()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        neighbors.append(touching)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    gdf[<span class="st">"neighbors"</span>] <span class="op">=</span> neighbors</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gdf</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> add_neighbors_column(bham_region)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>bham_region[[<span class="st">'LSOA11CD'</span>, <span class="st">'LSOA11NM'</span>, <span class="st">'LSOA11NMW'</span>, <span class="st">'geometry'</span>, <span class="st">'neighbors'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="92">
 <div>
 <div>
 
@@ -706,20 +694,846 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
-<!-- ```{python}
-boundary_allocations_df = pd.read_csv("boundary_allocations.csv")
-boundary_allocations_df.head()
+<div id="9700fc34" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>boundary_allocations_df <span class="op">=</span> pd.read_csv(<span class="st">"boundary_allocations.csv"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>boundary_allocations_df.head()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> pd.merge(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    bham_region,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    boundary_allocations_df,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    left_on<span class="op">=</span><span class="st">"region"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    right_on<span class="op">=</span><span class="st">"Region"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    how<span class="op">=</span><span class="st">"left"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>bham_region[<span class="st">"centre_dispatcher"</span>] <span class="op">=</span> bham_region[<span class="st">"Centre"</span>].astype(<span class="st">"str"</span>) <span class="op">+</span> <span class="st">'-'</span> <span class="op">+</span> bham_region[<span class="st">"Dispatcher"</span>].astype(<span class="st">"str"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>bham_region</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="93">
+<div>
+<div>
 
-bham_region = pd.merge(
-    bham_region,
-    boundary_allocations_df,
-    left_on="region",
-    right_on="Region",
-    how="left"
-)
 
-``` -->
-<p>What we are aiming to get at this point is a dataframe of</p>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">FID</th>
+<th data-quarto-table-cell-role="th">LSOA11CD</th>
+<th data-quarto-table-cell-role="th">LSOA11NM</th>
+<th data-quarto-table-cell-role="th">LSOA11NMW</th>
+<th data-quarto-table-cell-role="th">BNG_E</th>
+<th data-quarto-table-cell-role="th">BNG_N</th>
+<th data-quarto-table-cell-role="th">LONG</th>
+<th data-quarto-table-cell-role="th">LAT</th>
+<th data-quarto-table-cell-role="th">GlobalID</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">region</th>
+<th data-quarto-table-cell-role="th">neighbors</th>
+<th data-quarto-table-cell-role="th">Region</th>
+<th data-quarto-table-cell-role="th">Centre</th>
+<th data-quarto-table-cell-role="th">Dispatcher</th>
+<th data-quarto-table-cell-role="th">centre_dispatcher</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>8649</td>
+<td>E01008881</td>
+<td>Birmingham 067A</td>
+<td>Birmingham 067A</td>
+<td>412690</td>
+<td>285438</td>
+<td>-1.81463</td>
+<td>52.46675</td>
+<td>f79cd8fb-0cf2-4c84-b07c-55bffcf379bb</td>
+<td>POLYGON ((413040.413 285809.794, 413145.440 28...</td>
+<td>Birmingham</td>
+<td>[E01008882, E01008883, E01008885, E01008886, E...</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>8650</td>
+<td>E01008882</td>
+<td>Birmingham 066A</td>
+<td>Birmingham 066A</td>
+<td>411772</td>
+<td>285390</td>
+<td>-1.82814</td>
+<td>52.46634</td>
+<td>e7835311-f105-4c92-acae-ecd5255ce534</td>
+<td>POLYGON ((412233.657 285480.231, 412255.373 28...</td>
+<td>Birmingham</td>
+<td>[E01008881, E01008883, E01008884, E01008898, E...</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>8651</td>
+<td>E01008883</td>
+<td>Birmingham 078A</td>
+<td>Birmingham 078A</td>
+<td>412121</td>
+<td>285001</td>
+<td>-1.82302</td>
+<td>52.46283</td>
+<td>29dbcbc2-4a29-4bb1-addb-42b37d91c647</td>
+<td>POLYGON ((412775.838 285204.808, 412575.845 28...</td>
+<td>Birmingham</td>
+<td>[E01008881, E01008882, E01008884, E01008886, E...</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>8652</td>
+<td>E01008884</td>
+<td>Birmingham 078B</td>
+<td>Birmingham 078B</td>
+<td>411241</td>
+<td>284712</td>
+<td>-1.83598</td>
+<td>52.46025</td>
+<td>df5a2350-a102-4ecc-b028-5a0bbeded198</td>
+<td>POLYGON ((411803.096 284902.674, 411563.054 28...</td>
+<td>Birmingham</td>
+<td>[E01008882, E01008883, E01008887, E01008889, E...</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>8653</td>
+<td>E01008885</td>
+<td>Birmingham 076A</td>
+<td>Birmingham 076A</td>
+<td>413207</td>
+<td>284818</td>
+<td>-1.80704</td>
+<td>52.46116</td>
+<td>13a855fc-fa09-42a5-a05e-947fcd141ce4</td>
+<td>POLYGON ((413417.353 284803.764, 413034.282 28...</td>
+<td>Birmingham</td>
+<td>[E01008881, E01008886, E01008888, E01009521]</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2006</td>
+<td>32722</td>
+<td>E01033646</td>
+<td>Birmingham 031I</td>
+<td>Birmingham 031I</td>
+<td>410257</td>
+<td>291057</td>
+<td>-1.85027</td>
+<td>52.51731</td>
+<td>c7a17445-f800-41bc-86fb-cbeb9cde5d3f</td>
+<td>POLYGON ((410651.278 291571.301, 410562.002 29...</td>
+<td>Birmingham</td>
+<td>[E01009000, E01009007, E01009013, E01009401, E...</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2007</td>
+<td>32723</td>
+<td>E01033647</td>
+<td>Birmingham 058E</td>
+<td>Birmingham 058E</td>
+<td>410473</td>
+<td>286828</td>
+<td>-1.84722</td>
+<td>52.47929</td>
+<td>7d745c12-8e35-404d-b96d-f2b3c3e92896</td>
+<td>POLYGON ((410665.117 286998.178, 410753.991 28...</td>
+<td>Birmingham</td>
+<td>[E01009194, E01009197, E01009198, E01009331, E...</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2008</td>
+<td>32724</td>
+<td>E01033648</td>
+<td>Birmingham 084F</td>
+<td>Birmingham 084F</td>
+<td>408315</td>
+<td>283740</td>
+<td>-1.87907</td>
+<td>52.45157</td>
+<td>ed410ea7-fc12-42bd-8604-4a54fab04b9f</td>
+<td>POLYGON ((408199.966 283979.204, 408378.884 28...</td>
+<td>Birmingham</td>
+<td>[E01009376, E01009377, E01009383, E01009384, E...</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2009</td>
+<td>32725</td>
+<td>E01033649</td>
+<td>Birmingham 058F</td>
+<td>Birmingham 058F</td>
+<td>410530</td>
+<td>287142</td>
+<td>-1.84637</td>
+<td>52.48211</td>
+<td>a8880f7b-a92b-43da-bf8d-b673ed85c526</td>
+<td>POLYGON ((410728.297 287314.945, 410665.117 28...</td>
+<td>Birmingham</td>
+<td>[E01009194, E01009195, E01009197, E01033647]</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2010</td>
+<td>32726</td>
+<td>E01033650</td>
+<td>Birmingham 077F</td>
+<td>Birmingham 077F</td>
+<td>409357</td>
+<td>284898</td>
+<td>-1.86370</td>
+<td>52.46196</td>
+<td>2868f08d-b3bd-4e47-b985-ce8484e582f3</td>
+<td>POLYGON ((409575.733 284753.232, 409442.619 28...</td>
+<td>Birmingham</td>
+<td>[E01009339, E01009363, E01009368, E01009371, E...</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+</tbody>
+</table>
+
+<p>2011 rows × 16 columns</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="making-a-dictionary-of-the-existing-allocations" class="level3" data-number="32.1.4">
+<h3 data-number="32.1.4" class="anchored" data-anchor-id="making-a-dictionary-of-the-existing-allocations"><span class="header-section-number">32.1.4</span> Making a dictionary of the existing allocations</h3>
+<p>First, let’s make ourselves a dictionary. In this dictionary, the keys will be the centre/dispatcher, and the values will be a list of all LSOAs that currently belong to that dispatcher.</p>
+<div id="111a56db" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a list of the unique dispatchers</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dispatchers <span class="op">=</span> bham_region[<span class="st">'centre_dispatcher'</span>].unique()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>dispatchers.sort()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>dispatcher_starting_allocation_dict <span class="op">=</span> {}</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dispatcher <span class="kw">in</span> dispatchers:</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    dispatcher_allocation <span class="op">=</span> bham_region[bham_region[<span class="st">"centre_dispatcher"</span>] <span class="op">==</span> dispatcher]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    dispatcher_starting_allocation_dict[dispatcher] <span class="op">=</span> dispatcher_allocation[<span class="st">"LSOA11CD"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s look at what that looks like for one of the dispatchers. Using this, we can access a full list of their LSOAs whenever we need it.</p>
+<div id="0cd0b6f4" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dispatcher_starting_allocation_dict[<span class="st">'Centre 2-3'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="95">
+<pre><code>array(['E01032279', 'E01032280', 'E01032281', 'E01032282', 'E01032283',
+       'E01032284', 'E01032285', 'E01032286', 'E01032287', 'E01032288',
+       'E01032289', 'E01032290', 'E01032292', 'E01032294', 'E01032295',
+       'E01032296', 'E01032297', 'E01032298', 'E01032299', 'E01032300',
+       'E01032301', 'E01032302', 'E01032303', 'E01032304', 'E01032305',
+       'E01032306', 'E01032307', 'E01032308', 'E01032309', 'E01032310',
+       'E01032311', 'E01032312', 'E01032313', 'E01032314', 'E01032315',
+       'E01032316', 'E01032317', 'E01032318', 'E01032319', 'E01032320',
+       'E01032321', 'E01032322', 'E01032323', 'E01032324', 'E01032325',
+       'E01032326', 'E01032327', 'E01032328', 'E01032329', 'E01032330',
+       'E01032331', 'E01032332', 'E01032333', 'E01032334', 'E01032335',
+       'E01032336', 'E01032337', 'E01032338', 'E01032339', 'E01032345',
+       'E01032346', 'E01032354', 'E01032355', 'E01032357', 'E01032358',
+       'E01032359', 'E01032360', 'E01032361', 'E01032362', 'E01032363',
+       'E01032364', 'E01032365', 'E01032366', 'E01032367', 'E01032368',
+       'E01032369', 'E01032370', 'E01032371', 'E01032386', 'E01032387',
+       'E01032388', 'E01032389', 'E01032390', 'E01032392', 'E01032393',
+       'E01032394', 'E01032395', 'E01032399', 'E01032400', 'E01032401',
+       'E01032402', 'E01032403', 'E01032404', 'E01032410', 'E01032411',
+       'E01032414', 'E01032416', 'E01032417', 'E01033246', 'E01033247',
+       'E01033248', 'E01033249'], dtype=object)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To start with, let’s build up our random walk algorithm step-by-step. At the end of this section, we’ll turn it into a reusable functions with some parameters to make it easier to use. After that, we’ll work on building a reusable function to help us quickly evaluate each solution we generate.</p>
+</div>
+</div>
+</section>
+<section id="generating-starting-allocations" class="level3" data-number="32.1.5">
+<h3 data-number="32.1.5" class="anchored" data-anchor-id="generating-starting-allocations"><span class="header-section-number">32.1.5</span> Generating starting allocations</h3>
+<p>The first step will be to generate an initial starting point for each dispatcher.</p>
+<p>There are a couple of different approaches we could take here - and maybe we’ll give our eventual algorithm the option to pick from several options.</p>
+<p><em>Option 1</em></p>
+<p>We could use our new dictionary to select a random starting LSOA for each of our dispatchers. This will give us plenty of randomness - but we may find ourselves with walks that start very near the edge of our original patch, giving us very different boundaries to what existed before.</p>
+<div id="54249a11" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>random_solution_starting_dict <span class="op">=</span> {}</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> dispatcher_starting_allocation_dict.items():</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    random_solution_starting_dict[key] <span class="op">=</span> random.choice(value)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>random_solution_starting_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="96">
+<pre><code>{'Centre 1-1': 'E01014110',
+ 'Centre 1-2': 'E01029365',
+ 'Centre 1-3': 'E01010285',
+ 'Centre 1-4': 'E01010469',
+ 'Centre 1-5': 'E01009817',
+ 'Centre 1-6': 'E01008928',
+ 'Centre 1-7': 'E01010215',
+ 'Centre 2-1': 'E01032168',
+ 'Centre 2-2': 'E01032443',
+ 'Centre 2-3': 'E01032316',
+ 'Centre 2-4': 'E01032182',
+ 'Centre 2-5': 'E01031203'}</code></pre>
+</div>
+</div>
+<p>Let’s turn this into a reusable function, then visualise its functioning.</p>
+<div id="1711b419" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_random_starting_dict(input_dictionary):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    random_solution_starting_dict <span class="op">=</span> {}</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key, value <span class="kw">in</span> dispatcher_starting_allocation_dict.items():</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        random_solution_starting_dict[key] <span class="op">=</span> random.choice(value)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> random_solution_starting_dict</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>create_random_starting_dict(dispatcher_starting_allocation_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="97">
+<pre><code>{'Centre 1-1': 'E01028836',
+ 'Centre 1-2': 'E01029489',
+ 'Centre 1-3': 'E01010293',
+ 'Centre 1-4': 'E01010468',
+ 'Centre 1-5': 'E01009865',
+ 'Centre 1-6': 'E01009224',
+ 'Centre 1-7': 'E01010221',
+ 'Centre 2-1': 'E01032129',
+ 'Centre 2-2': 'E01032477',
+ 'Centre 2-3': 'E01032416',
+ 'Centre 2-4': 'E01014001',
+ 'Centre 2-5': 'E01032254'}</code></pre>
+</div>
+</div>
+<p>Now, let’s generate some solutions and plot them.</p>
+<p>We’ll also be using a dataframe from the</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click here to see the code for generating our dispatch boundaries dataframe
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="56bbf26d" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by the specified column</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf <span class="op">=</span> bham_region.groupby(<span class="st">"centre_dispatcher"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new GeoDataFrame for the boundaries of each group</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>boundary_list <span class="op">=</span> []</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> group_name, group <span class="kw">in</span> grouped_dispatcher_gdf:</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine the polygons in each group into one geometry</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    combined_geometry <span class="op">=</span> group.unary_union</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the boundary of the combined geometry</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    boundary <span class="op">=</span> combined_geometry.boundary</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the boundary geometry and the group name to the list</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    boundary_list.append({<span class="st">'group'</span>: group_name, <span class="st">'boundary'</span>: boundary})</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a GeoDataFrame from the list of boundaries</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf_boundary <span class="op">=</span> geopandas.GeoDataFrame(boundary_list, geometry<span class="op">=</span><span class="st">'boundary'</span>, crs<span class="op">=</span>bham_region.crs)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf_boundary.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="98">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">group</th>
+<th data-quarto-table-cell-role="th">boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Centre 1-1</td>
+<td>MULTILINESTRING ((368935.969 274516.594, 36824...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Centre 1-2</td>
+<td>LINESTRING (412258.535 300984.197, 411756.668 ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Centre 1-3</td>
+<td>LINESTRING (381775.908 282326.500, 380577.001 ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Centre 1-4</td>
+<td>LINESTRING (388885.341 295185.385, 388630.406 ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Centre 1-5</td>
+<td>LINESTRING (388258.095 285110.427, 388666.258 ...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Some of the regions are quite small, so it may be hard to see them all!</p>
+<div id="16171330" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's plot the outline of our entire region</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> bham_region.plot(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"white"</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's use our new function to generate a series of random starting patches</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> create_random_starting_dict(dispatcher_starting_allocation_dict)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># We can filter our existing dataframe of allocations to just the starting patches</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>random_solution_start <span class="op">=</span> bham_region[bham_region[<span class="st">'LSOA11CD'</span>].isin(sol.values())]</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, we plot those on the same plot, colouring by centre-dispatcher combo</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>random_solution_start.plot(</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    column<span class="op">=</span><span class="st">"centre_dispatcher"</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">True</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's also visualise the historical boundaries</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf_boundary.plot(</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"green"</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boundary_problems_varying_evaluating_simple_files/figure-html/cell-13-output-1.png" width="579" height="559" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Option 2</em></p>
+<p>Another alternative is to start with the most central region of the existing regions for each dispatcher.</p>
+<div id="c9f99f2a" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> Point</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_most_central_polygon(gdf):</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Finds the most central polygon in a GeoDataFrame based on centroid proximity to the mean centroid.</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute centroids of individual polygons</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    gdf[<span class="st">"centroid"</span>] <span class="op">=</span> gdf.geometry.centroid</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the mean centroid (central point)</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    mean_centroid <span class="op">=</span> gdf.geometry.unary_union.centroid</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute distances from each centroid to the mean centroid</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    gdf[<span class="st">"distance_to_mean"</span>] <span class="op">=</span> gdf[<span class="st">"centroid"</span>].distance(mean_centroid)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find the polygon with the minimum distance</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    central_polygon <span class="op">=</span> gdf.loc[gdf[<span class="st">"distance_to_mean"</span>].idxmin()]</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> central_polygon</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_central_polygon_per_group(gdf, grouping_col):</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gdf.groupby(grouping_col, group_keys<span class="op">=</span><span class="va">False</span>).<span class="bu">apply</span>(find_most_central_polygon).drop(columns<span class="op">=</span>[<span class="st">"centroid"</span>, <span class="st">"distance_to_mean"</span>])</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>most_central <span class="op">=</span> get_central_polygon_per_group(bham_region, <span class="st">"centre_dispatcher"</span>)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>most_central</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="100">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">FID</th>
+<th data-quarto-table-cell-role="th">LSOA11CD</th>
+<th data-quarto-table-cell-role="th">LSOA11NM</th>
+<th data-quarto-table-cell-role="th">LSOA11NMW</th>
+<th data-quarto-table-cell-role="th">BNG_E</th>
+<th data-quarto-table-cell-role="th">BNG_N</th>
+<th data-quarto-table-cell-role="th">LONG</th>
+<th data-quarto-table-cell-role="th">LAT</th>
+<th data-quarto-table-cell-role="th">GlobalID</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">region</th>
+<th data-quarto-table-cell-role="th">neighbors</th>
+<th data-quarto-table-cell-role="th">Region</th>
+<th data-quarto-table-cell-role="th">Centre</th>
+<th data-quarto-table-cell-role="th">Dispatcher</th>
+<th data-quarto-table-cell-role="th">centre_dispatcher</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">centre_dispatcher</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 1-1</td>
+<td>28095</td>
+<td>E01028832</td>
+<td>Shropshire 033A</td>
+<td>Shropshire 033A</td>
+<td>372082</td>
+<td>293080</td>
+<td>-2.41300</td>
+<td>52.53487</td>
+<td>945b5cd8-45bd-4f3a-8834-88082caa2473</td>
+<td>POLYGON ((372799.246 293568.354, 372202.351 29...</td>
+<td>Shropshire</td>
+<td>[E01028828, E01028830, E01028833, E01028834, E...</td>
+<td>Shropshire</td>
+<td>Centre 1</td>
+<td>1</td>
+<td>Centre 1-1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 1-2</td>
+<td>28764</td>
+<td>E01029518</td>
+<td>Lichfield 007D</td>
+<td>Lichfield 007D</td>
+<td>411232</td>
+<td>307750</td>
+<td>-1.83534</td>
+<td>52.66736</td>
+<td>421455c3-c4b7-4505-880d-8412aa14c957</td>
+<td>POLYGON ((412402.657 308666.999, 412311.329 30...</td>
+<td>Lichfield</td>
+<td>[E01029488, E01029512, E01029519, E01029520, E...</td>
+<td>Lichfield</td>
+<td>Centre 1</td>
+<td>2</td>
+<td>Centre 1-2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 1-3</td>
+<td>28875</td>
+<td>E01029631</td>
+<td>South Staffordshire 009E</td>
+<td>South Staffordshire 009E</td>
+<td>388142</td>
+<td>301842</td>
+<td>-2.17656</td>
+<td>52.61423</td>
+<td>6d0e4c4c-bf69-4f68-a086-46d1a80854d9</td>
+<td>POLYGON ((387776.111 302749.666, 388831.796 30...</td>
+<td>South Staffordshire</td>
+<td>[E01010544, E01010546, E01029613, E01029615, E...</td>
+<td>South Staffordshire</td>
+<td>Centre 1</td>
+<td>3</td>
+<td>Centre 1-3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 1-4</td>
+<td>10215</td>
+<td>E01010521</td>
+<td>Wolverhampton 020F</td>
+<td>Wolverhampton 020F</td>
+<td>391688</td>
+<td>299252</td>
+<td>-2.12412</td>
+<td>52.59101</td>
+<td>5966f7f1-af15-4226-9d1e-6316101606b5</td>
+<td>POLYGON ((391805.204 300349.956, 392207.285 29...</td>
+<td>Wolverhampton</td>
+<td>[E01010426, E01010443, E01010463, E01010464, E...</td>
+<td>Wolverhampton</td>
+<td>Centre 1</td>
+<td>4</td>
+<td>Centre 1-4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 1-5</td>
+<td>9743</td>
+<td>E01010043</td>
+<td>Sandwell 025B</td>
+<td>Sandwell 025B</td>
+<td>395995</td>
+<td>288750</td>
+<td>-2.06041</td>
+<td>52.49665</td>
+<td>3be670e2-fde7-4251-ad24-56335b4c30df</td>
+<td>POLYGON ((396648.514 288801.684, 396670.147 28...</td>
+<td>Sandwell</td>
+<td>[E01009843, E01009871, E01009888, E01009890, E...</td>
+<td>Sandwell</td>
+<td>Centre 1</td>
+<td>5</td>
+<td>Centre 1-5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 1-6</td>
+<td>8940</td>
+<td>E01009204</td>
+<td>Birmingham 052E</td>
+<td>Birmingham 052E</td>
+<td>408607</td>
+<td>287498</td>
+<td>-1.87467</td>
+<td>52.48535</td>
+<td>e1aaf4f1-f7a4-4e98-9d74-855033a27584</td>
+<td>POLYGON ((409131.178 287204.736, 408353.160 28...</td>
+<td>Birmingham</td>
+<td>[E01009199, E01009201, E01009203, E01033561, E...</td>
+<td>Birmingham</td>
+<td>Centre 1</td>
+<td>6</td>
+<td>Centre 1-6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 1-7</td>
+<td>9809</td>
+<td>E01010109</td>
+<td>Solihull 009A</td>
+<td>Solihull 009A</td>
+<td>418665</td>
+<td>283710</td>
+<td>-1.72677</td>
+<td>52.45104</td>
+<td>d03080c8-368a-46af-9fed-b27cc051518e</td>
+<td>POLYGON ((419807.904 285425.582, 419899.498 28...</td>
+<td>Solihull</td>
+<td>[E01009318, E01009320, E01010108, E01010110, E...</td>
+<td>Solihull</td>
+<td>Centre 1</td>
+<td>7</td>
+<td>Centre 1-7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 2-1</td>
+<td>31345</td>
+<td>E01032149</td>
+<td>Bromsgrove 006D</td>
+<td>Bromsgrove 006D</td>
+<td>399455</td>
+<td>274007</td>
+<td>-2.00941</td>
+<td>52.36413</td>
+<td>3b13e41d-e470-47c0-9830-cd654e36a32e</td>
+<td>POLYGON ((399816.607 273656.656, 400092.197 27...</td>
+<td>Bromsgrove</td>
+<td>[E01032143, E01032144, E01032148, E01032150, E...</td>
+<td>Bromsgrove</td>
+<td>Centre 2</td>
+<td>1</td>
+<td>Centre 2-1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 2-2</td>
+<td>31667</td>
+<td>E01032477</td>
+<td>Wyre Forest 008D</td>
+<td>Wyre Forest 008D</td>
+<td>381330</td>
+<td>275610</td>
+<td>-2.27568</td>
+<td>52.37821</td>
+<td>4f0cf516-7c4b-4b61-a4da-da4423304f43</td>
+<td>POLYGON ((381780.507 275809.361, 381793.089 27...</td>
+<td>Wyre Forest</td>
+<td>[E01032451, E01032470, E01032471, E01032476, E...</td>
+<td>Wyre Forest</td>
+<td>Centre 2</td>
+<td>2</td>
+<td>Centre 2-2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 2-3</td>
+<td>31535</td>
+<td>E01032345</td>
+<td>Wychavon 007A</td>
+<td>Wychavon 007A</td>
+<td>393387</td>
+<td>259105</td>
+<td>-2.09823</td>
+<td>52.23011</td>
+<td>b7f03ca0-aac0-4e29-b86c-95dd4a796fce</td>
+<td>POLYGON ((396864.091 258452.893, 396188.712 25...</td>
+<td>Wychavon</td>
+<td>[E01032346, E01032360, E01032361, E01032362, E...</td>
+<td>Wychavon</td>
+<td>Centre 2</td>
+<td>3</td>
+<td>Centre 2-3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 2-4</td>
+<td>31391</td>
+<td>E01032199</td>
+<td>Malvern Hills 002C</td>
+<td>Malvern Hills 002C</td>
+<td>376434</td>
+<td>260160</td>
+<td>-2.34652</td>
+<td>52.23913</td>
+<td>c4525de8-e8d8-4d8b-9610-d887d58dbabb</td>
+<td>POLYGON ((378353.003 262294.903, 378414.904 26...</td>
+<td>Malvern Hills</td>
+<td>[E01014001, E01032179, E01032181, E01032182, E...</td>
+<td>Malvern Hills</td>
+<td>Centre 2</td>
+<td>4</td>
+<td>Centre 2-4</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 2-5</td>
+<td>30398</td>
+<td>E01031187</td>
+<td>Stratford-on-Avon 007A</td>
+<td>Stratford-on-Avon 007A</td>
+<td>414464</td>
+<td>258742</td>
+<td>-1.78965</td>
+<td>52.22670</td>
+<td>679c1798-8095-4712-a9b9-c495cca9dadd</td>
+<td>POLYGON ((416799.690 260453.800, 416633.500 25...</td>
+<td>Stratford-on-Avon</td>
+<td>[E01031188, E01031195, E01031204, E01031208, E...</td>
+<td>Stratford-on-Avon</td>
+<td>Centre 2</td>
+<td>5</td>
+<td>Centre 2-5</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Let’s plot this.</p>
+<div id="4fe88a64" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's plot the outline of our entire region</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> bham_region.plot(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"white"</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot those on the same plot, colouring by centre-dispatcher combo</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>most_central.plot(</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    column<span class="op">=</span><span class="st">"centre_dispatcher"</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">True</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's also visualise the historical boundaries</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf_boundary.plot(</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"green"</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boundary_problems_varying_evaluating_simple_files/figure-html/cell-15-output-1.png" width="579" height="559" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can see that in some regions the most central point can still be on a boundary, even</p>
+<p><em>Note - when we get to the end, can we give a list of good solutions, but prioritise the solutions that are most similar to the starting solution?</em></p>
 
 
 </section>

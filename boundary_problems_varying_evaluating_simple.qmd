@@ -31,11 +31,11 @@ To create a solution that scales well to any number of dispatchers, we will have
 
 Then, on each 'turn', they will randomly choose another patch from the patches that share a boundary with the first patch. There is a small (adjustable) possibility on each turn that they will not opt to take a turn; this will be part of our strategy to ensure that not every dispatcher ends up with solutions containing exactly the same number
 
-
-
 On each subsequent turn, they will randomly select another region that touches any part of their existing region. If the region that is selected is a region that they already have in their 'patch', then
 
 ```{python}
+#| echo: false
+# *GenAI Alert - This code was modified from a suggested approach provided by ChatGPT*
 from PIL import Image
 import os
 
@@ -93,6 +93,8 @@ When we come to apply a evolutionary or genetic algorithm approach to this probl
 
 Let's write and apply this function to generate a series of randomly generated solutions for our problem, which we will subsequently move on to evaluating.
 
+### Our starting dataframe
+
 To start with, let's load our boundary data back in. Head back to the previous chapter if any of this feels unfamiliar!
 
 ```{python}
@@ -108,12 +110,16 @@ ymin, ymax = 250000, 310000
 
 bham_region = lsoa_boundaries.cx[xmin:xmax, ymin:ymax]
 
+bham_region["region"] = bham_region["LSOA11NM"].str[:-5]
+
 bham_region.plot(
     figsize=(10,7),
     edgecolor='black',
     color="cyan"
     )
 ```
+
+### Getting the Neighbours
 
 Before we start worrying about the allocations, we first want to generate a column that contains a list of all of the neighbours of a given cell. This will be a lot more efficient than trying to calculate the neighbours from scratch each time we want to pick a new one - and it's not like the neighbours will change.
 
@@ -125,6 +131,7 @@ def add_neighbors_column(gdf):
     Adds a column to the GeoDataFrame containing lists of indices of neighboring polygons
     based on the 'touches' method.
     """
+    gdf = gdf.copy()
     neighbors = []
     for idx, geom in gdf.geometry.items():
         touching = gdf[gdf.geometry.touches(geom)]["LSOA11CD"].tolist()
@@ -139,9 +146,10 @@ bham_region[['LSOA11CD', 'LSOA11NM', 'LSOA11NMW', 'geometry', 'neighbors']].head
 ```
 
 
-<!-- ```{python}
+```{python}
 boundary_allocations_df = pd.read_csv("boundary_allocations.csv")
 boundary_allocations_df.head()
+
 
 bham_region = pd.merge(
     bham_region,
@@ -151,6 +159,205 @@ bham_region = pd.merge(
     how="left"
 )
 
-``` -->
+bham_region["centre_dispatcher"] = bham_region["Centre"].astype("str") + '-' + bham_region["Dispatcher"].astype("str")
 
-What we are aiming to get at this point is a dataframe of
+bham_region
+
+```
+
+### Making a dictionary of the existing allocations
+
+First, let's make ourselves a dictionary. In this dictionary, the keys will be the centre/dispatcher, and the values will be a list of all LSOAs that currently belong to that dispatcher.
+
+```{python}
+
+# Get a list of the unique dispatchers
+dispatchers = bham_region['centre_dispatcher'].unique()
+dispatchers.sort()
+
+dispatcher_starting_allocation_dict = {}
+
+for dispatcher in dispatchers:
+    dispatcher_allocation = bham_region[bham_region["centre_dispatcher"] == dispatcher]
+
+    dispatcher_starting_allocation_dict[dispatcher] = dispatcher_allocation["LSOA11CD"].unique()
+```
+
+Let's look at what that looks like for one of the dispatchers. Using this, we can access a full list of their LSOAs whenever we need it.
+
+```{python}
+dispatcher_starting_allocation_dict['Centre 2-3']
+```
+
+:::{.callout-note}
+To start with, let's build up our random walk algorithm step-by-step. At the end of this section, we'll turn it into a reusable functions with some parameters to make it easier to use. After that, we'll work on building a reusable function to help us quickly evaluate each solution we generate.
+:::
+
+### Generating starting allocations
+
+The first step will be to generate an initial starting point for each dispatcher.
+
+There are a couple of different approaches we could take here - and maybe we'll give our eventual algorithm the option to pick from several options.
+
+*Option 1*
+
+We could use our new dictionary to select a random starting LSOA for each of our dispatchers.
+This will give us plenty of randomness - but we may find ourselves with walks that start very near the edge of our original patch, giving us very different boundaries to what existed before.
+
+```{python}
+import random
+
+random_solution_starting_dict = {}
+
+for key, value in dispatcher_starting_allocation_dict.items():
+
+    random_solution_starting_dict[key] = random.choice(value)
+
+random_solution_starting_dict
+
+```
+
+Let's turn this into a reusable function, then visualise its functioning.
+
+```{python}
+
+def create_random_starting_dict(input_dictionary):
+    random_solution_starting_dict = {}
+
+    for key, value in dispatcher_starting_allocation_dict.items():
+
+        random_solution_starting_dict[key] = random.choice(value)
+
+    return random_solution_starting_dict
+
+create_random_starting_dict(dispatcher_starting_allocation_dict)
+
+```
+
+Now, let's generate some solutions and plot them.
+
+We'll also be using a dataframe from the
+
+:::{.callout-tip collapse="true"}
+# Click here to see the code for generating our dispatch boundaries dataframe
+```{python}
+# Group by the specified column
+grouped_dispatcher_gdf = bham_region.groupby("centre_dispatcher")
+
+# Create a new GeoDataFrame for the boundaries of each group
+boundary_list = []
+
+for group_name, group in grouped_dispatcher_gdf:
+    # Combine the polygons in each group into one geometry
+    combined_geometry = group.unary_union
+
+    # Get the boundary of the combined geometry
+    boundary = combined_geometry.boundary
+
+    # Add the boundary geometry and the group name to the list
+    boundary_list.append({'group': group_name, 'boundary': boundary})
+
+# Create a GeoDataFrame from the list of boundaries
+grouped_dispatcher_gdf_boundary = geopandas.GeoDataFrame(boundary_list, geometry='boundary', crs=bham_region.crs)
+
+grouped_dispatcher_gdf_boundary.head()
+```
+:::
+
+Some of the regions are quite small, so it may be hard to see them all!
+
+```{python}
+
+# First, let's plot the outline of our entire region
+ax = bham_region.plot(
+    figsize=(10,7),
+    edgecolor='black',
+    linewidth=0.5,
+    color="white"
+    )
+
+# Let's use our new function to generate a series of random starting patches
+sol = create_random_starting_dict(dispatcher_starting_allocation_dict)
+
+# We can filter our existing dataframe of allocations to just the starting patches
+random_solution_start = bham_region[bham_region['LSOA11CD'].isin(sol.values())]
+
+# Finally, we plot those on the same plot, colouring by centre-dispatcher combo
+random_solution_start.plot(
+    ax=ax,
+    column="centre_dispatcher",
+    legend=True
+)
+
+# Let's also visualise the historical boundaries
+grouped_dispatcher_gdf_boundary.plot(
+    ax=ax,
+    linewidth=2,
+    edgecolor="green"
+)
+
+```
+
+
+*Option 2*
+
+Another alternative is to start with the most central region of the existing regions for each dispatcher.
+
+```{python}
+from shapely.geometry import Point
+
+def find_most_central_polygon(gdf):
+    """
+    Finds the most central polygon in a GeoDataFrame based on centroid proximity to the mean centroid.
+    """
+    # Compute centroids of individual polygons
+    gdf["centroid"] = gdf.geometry.centroid
+
+    # Calculate the mean centroid (central point)
+    mean_centroid = gdf.geometry.unary_union.centroid
+
+    # Compute distances from each centroid to the mean centroid
+    gdf["distance_to_mean"] = gdf["centroid"].distance(mean_centroid)
+
+    # Find the polygon with the minimum distance
+    central_polygon = gdf.loc[gdf["distance_to_mean"].idxmin()]
+
+    return central_polygon
+
+def get_central_polygon_per_group(gdf, grouping_col):
+    return gdf.groupby(grouping_col, group_keys=False).apply(find_most_central_polygon).drop(columns=["centroid", "distance_to_mean"])
+
+most_central = get_central_polygon_per_group(bham_region, "centre_dispatcher")
+most_central
+```
+
+Let's plot this.
+
+```{python}
+# First, let's plot the outline of our entire region
+ax = bham_region.plot(
+    figsize=(10,7),
+    edgecolor='black',
+    linewidth=0.5,
+    color="white"
+    )
+
+# Plot those on the same plot, colouring by centre-dispatcher combo
+most_central.plot(
+    ax=ax,
+    column="centre_dispatcher",
+    legend=True
+)
+
+# Let's also visualise the historical boundaries
+grouped_dispatcher_gdf_boundary.plot(
+    ax=ax,
+    linewidth=2,
+    edgecolor="green"
+)
+
+```
+
+You can see that in some regions the most central point can still be on a boundary, even
+
+*Note - when we get to the end, can we give a list of good solutions, but prioritise the solutions that are most similar to the starting solution?*
