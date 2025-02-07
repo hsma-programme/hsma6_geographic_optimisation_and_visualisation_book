@@ -315,6 +315,9 @@ grouped_by_dispatcher['difference_from_mean'] = (grouped_by_dispatcher['demand']
 grouped_by_dispatcher
 ```
 
+```{python}
+print(f"The average difference from the mean across all regions is {abs(grouped_by_dispatcher['difference_from_mean']).mean():.1f}")
+```
 
 ```{python}
 import plotly.express as px
