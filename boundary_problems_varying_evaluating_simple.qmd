@@ -573,7 +573,7 @@ We'll create a function to do this.
 
 ```{python}
 def evaluate_solution(gdf, allocation_column='centre_dispatcher_NEW', demand_column="demand"):
-    grouped_by_dispatcher = bham_region.groupby(allocation_column)[[demand_column]].sum()
+    grouped_by_dispatcher = gdf.groupby(allocation_column)[[demand_column]].sum()
     mean_demand = grouped_by_dispatcher['demand'].mean()
 
     grouped_by_dispatcher['difference_from_mean'] = (grouped_by_dispatcher['demand'] - mean_demand).astype('int')
@@ -586,8 +586,20 @@ And now let's try this out on our original and new solutions
 
 ```{python}
 
-print(f"Original Allocation: {}")
-print(f"Random Solution 1: {}")
+demand = pd.read_csv("demand_pop_bham.csv")
+
+random_allocation_test = random_allocation_test.merge(demand, on="LSOA11CD")
+
+original_result = evaluate_solution(random_allocation_test, allocation_column='centre_dispatcher')
+new_result = evaluate_solution(random_allocation_test, allocation_column='centre_dispatcher_NEW')
+
+print(f"Original Allocation: {original_result}")
+print(f"Random Solution 1: {new_result}")
+
+if original_result > new_result:
+    print("The randomly generated solution gives a more even allocation of events than the original dispatcher allocations")
+else:
+    print("The randomly generated solution is worse than the original dispatcher allocations")
 
 ```
 
