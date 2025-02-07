@@ -1,5 +1,5 @@
 ---
-title: "(WIP) Loading and Visualising the Historical Boundaries"
+title: "Loading and Visualising the Historical Boundaries"
 format: html
 ---
 
@@ -93,21 +93,21 @@ We've been told that the regions are as follows:
 
 **Centre 1**
 
-*Dispatcher 1*: Telford and Wrekin; Shropshire
-*Dispatcher 2*: Cannock Chase; Lichfield; Tamworth
-*Dispatcher 3*: South Staffordshire; Walsall
-*Dispatcher 4*: Wolverhampton
-*Dispatcher 5*: Dudley; Sandwell
-*Dispatcher 6*: Birmingham
-*Dispatcher 7*: Solihull; North Warwickshire
+- *Dispatcher 1*: Telford and Wrekin; Shropshire
+- *Dispatcher 2*: Cannock Chase; Lichfield; Tamworth
+- *Dispatcher 3*: South Staffordshire; Walsall
+- *Dispatcher 4*: Wolverhampton
+- *Dispatcher 5*: Dudley; Sandwell
+- *Dispatcher 6*: Birmingham
+- *Dispatcher 7*: Solihull; North Warwickshire
 
 **Centre 2**
 
-*Dispatcher 1*: Bromsgrove
-*Dispatcher 2*: Wyre Forest
-*Dispatcher 3*: Wychavon; Worcester
-*Dispatcher 4*: Malvern Hills; Herefordshire
-*Dispatcher 5*: Redditch; Stratford-on-Avon; Warwick
+- *Dispatcher 1*: Bromsgrove
+- *Dispatcher 2*: Wyre Forest
+- *Dispatcher 3*: Wychavon; Worcester
+- *Dispatcher 4*: Malvern Hills; Herefordshire
+- *Dispatcher 5*: Redditch; Stratford-on-Avon; Warwick
 
 This information has been given to us in a dataframe; let's import and inspect this, then join it to our other data.
 
@@ -221,4 +221,109 @@ ax.axis('off')
 
 Finally, let's bring in some historical demand data to see if we can spot any obvious issues.
 
-*Placeholder - we will have per-LSOA demand visualised here; a dummy dataset modified of population modified by some random factor. Around it, we will show how we could draw both the centre and dispatcher boundaries.
+First, so we can overlay both the centre boundaries and the per-dispatcher boundaries, we'll repeat our earlier process to create a geodataframe with a single row and a single polygon per dispatcher.
+
+```{python}
+# Group by the specified column
+grouped_dispatcher_gdf = bham_region.groupby("centre_dispatcher")
+
+# Create a new GeoDataFrame for the boundaries of each group
+boundary_list = []
+
+for group_name, group in grouped_dispatcher_gdf:
+    # Combine the polygons in each group into one geometry
+    combined_geometry = group.unary_union
+
+    # Get the boundary of the combined geometry
+    boundary = combined_geometry.boundary
+
+    # Add the boundary geometry and the group name to the list
+    boundary_list.append({'group': group_name, 'boundary': boundary})
+
+# Create a GeoDataFrame from the list of boundaries
+grouped_dispatcher_gdf_boundary = geopandas.GeoDataFrame(boundary_list, geometry='boundary', crs=bham_region.crs)
+
+grouped_dispatcher_gdf_boundary.head()
+```
+
+
+
+```{python}
+#| echo: false
+#| eval: false
+# Generate a 'demand' dataset
+import pandas as pd
+import random
+pop = pd.read_csv("pop_table_SAPE20DT1_mid2017_population_estimates.csv")
+pop["All Ages"] = pop["All Ages"].str.replace(",", "").astype('int')
+pop['demand'] = pop["All Ages"].apply(lambda x: x * random.uniform(0.03, 0.17))
+pop['demand'] = pop['demand'].astype('int')
+full_df = bham_region.merge(pop, left_on="LSOA11CD", right_on="Area Codes", how="left")
+#full_df[["LSOA11CD", "All Ages", "demand"]].rename(columns={"All Ages": "population"}).to_csv("demand_pop_bham.csv",  index=False)
+```
+
+```{python}
+demand = pd.read_csv("demand_pop_bham.csv")
+
+bham_region = bham_region.merge(demand, on="LSOA11CD")
+
+ax = bham_region.plot(
+    edgecolor='black',
+    column="demand",
+    cmap="Blues",
+    legend=True,
+    linewidth=0.3
+    )
+
+grouped_dispatcher_gdf_boundary.plot(
+    edgecolor='purple',
+    ax=ax,
+    linewidth=1.5
+)
+
+grouped_centre_gdf_boundary.plot(
+    edgecolor='red',
+    ax=ax,
+    linewidth=2.5
+)
+
+ax.axis('off')
+```
+
+## Looking at the current balance of incidents across the region
+
+The demand dataset provided gives us the total number of incidents our dispatchers have dealt with per region per year. Let's do a bit of merging and exploratory data analysis to see how this varied historically, and so we can start to think about what would be a target level of demand for each region.
+
+First let's look at the per-centre rates.
+
+```{python}
+grouped_by_centre = bham_region.groupby('Centre')[['demand']].sum()
+grouped_by_centre['difference_from_average'] = (grouped_by_centre['demand'] - grouped_by_centre['demand'].mean()).astype('int')
+grouped_by_centre
+```
+
+And now by dispatcher
+
+```{python}
+grouped_by_dispatcher = bham_region.groupby('centre_dispatcher')[['demand']].sum()
+mean_demand = grouped_by_dispatcher['demand'].mean()
+print(f"The demand, averaged across {len(bham_region['centre_dispatcher'].unique())} regions, is {mean_demand:.0f} incidents per year")
+```
+
+```{python}
+grouped_by_dispatcher['difference_from_mean'] = (grouped_by_dispatcher['demand'] - mean_demand).astype('int')
+grouped_by_dispatcher
+```
+
+
+```{python}
+import plotly.express as px
+
+px.bar(grouped_by_dispatcher.reset_index(), x="centre_dispatcher", y="difference_from_mean")
+```
+
+No wonder our dispatchers are struggling - there are huge discrepancies in the demand they have been responsible for.
+
+So what are we going to do about it?
+
+Unlike in our travel time location work in the location allocation chapter, where we initially focussed on minimize the average travel time or population-weighted travel time, here we instead want to minimize the **difference** between the demand for each region going forward - so let's move onto the next chapter and explore how we will do that.

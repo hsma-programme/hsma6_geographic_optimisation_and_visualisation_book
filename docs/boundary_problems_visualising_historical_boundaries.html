@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HSMA - Geographic Modelling and Visualisation - 31&nbsp; (WIP) Loading and Visualising the Historical Boundaries</title>
+<title>HSMA - Geographic Modelling and Visualisation - 31&nbsp; Loading and Visualising the Historical Boundaries</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,6 +108,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+if (typeof require !== 'undefined') {
+require.undef("plotly");
+requirejs.config({
+    paths: {
+        'plotly': ['https://cdn.plot.ly/plotly-2.32.0.min']
+    }
+});
+require(['plotly'], function(Plotly) {
+    window._Plotly = Plotly;
+});
+}
+</script>
+
 
 
 <link rel="stylesheet" href="include/webex.css">
@@ -147,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./boundary_redrawing_problems_intro.html">Part 6 - Working with Boundaries</a></li><li class="breadcrumb-item"><a href="./boundary_problems_visualising_historical_boundaries.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(WIP) Loading and Visualising the Historical Boundaries</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./boundary_redrawing_problems_intro.html">Part 6 - Working with Boundaries</a></li><li class="breadcrumb-item"><a href="./boundary_problems_visualising_historical_boundaries.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Loading and Visualising the Historical Boundaries</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -425,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./boundary_problems_visualising_historical_boundaries.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(WIP) Loading and Visualising the Historical Boundaries</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Loading and Visualising the Historical Boundaries</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -448,15 +464,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#our-region" id="toc-our-region" class="nav-link active" data-scroll-target="#our-region"><span class="header-section-number">31.1</span> Our region</a></li>
   <li><a href="#bringing-in-historical-demand-data" id="toc-bringing-in-historical-demand-data" class="nav-link" data-scroll-target="#bringing-in-historical-demand-data"><span class="header-section-number">31.2</span> Bringing in historical demand data</a></li>
+  <li><a href="#looking-at-the-current-balance-of-incidents-across-the-region" id="toc-looking-at-the-current-balance-of-incidents-across-the-region" class="nav-link" data-scroll-target="#looking-at-the-current-balance-of-incidents-across-the-region"><span class="header-section-number">31.3</span> Looking at the current balance of incidents across the region</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./boundary_redrawing_problems_intro.html">Part 6 - Working with Boundaries</a></li><li class="breadcrumb-item"><a href="./boundary_problems_visualising_historical_boundaries.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(WIP) Loading and Visualising the Historical Boundaries</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./boundary_redrawing_problems_intro.html">Part 6 - Working with Boundaries</a></li><li class="breadcrumb-item"><a href="./boundary_problems_visualising_historical_boundaries.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Loading and Visualising the Historical Boundaries</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(WIP) Loading and Visualising the Historical Boundaries</span></h1>
+<h1 class="title"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Loading and Visualising the Historical Boundaries</span></h1>
 </div>
 
 
@@ -495,7 +512,7 @@ Note
 <h2 data-number="31.1" class="anchored" data-anchor-id="our-region"><span class="header-section-number">31.1</span> Our region</h2>
 <p>We’re going to work with our Birmingham region again. We first worked with this in the section of the book covering travel times; we may return to this travel time data in a later chapter of this part.</p>
 <p>To start with, let’s just visualise our wider region.</p>
-<div id="c14f0cf1" class="cell" data-execution_count="1">
+<div id="1885c530" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lsoa_geojson_path <span class="op">=</span> <span class="st">'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'</span></span>
@@ -503,7 +520,7 @@ Note
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>lsoa_boundaries <span class="op">=</span> geopandas.read_file(lsoa_geojson_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s now filter this down to just our region.</p>
-<div id="eea6d5d4" class="cell" data-execution_count="2">
+<div id="7750ca37" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>xmin, xmax <span class="op">=</span> <span class="dv">370000</span>, <span class="dv">420000</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ymin, ymax <span class="op">=</span> <span class="dv">250000</span>, <span class="dv">310000</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -538,7 +555,7 @@ Tip
 <p>Straight away we can see that there are a very large number of LSOAs in our problem, with a lot of variation in the area of each LSOA.</p>
 <p>We’ll start with the split of our LSOAs by their overarching dispatch center.</p>
 <p>We’ve been told that our dispatch centres are split based on the wider region name. Here, we’d visualised these names.</p>
-<div id="876611c1" class="cell" data-execution_count="3">
+<div id="c5a5b394" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>bham_region.head()</span>
@@ -589,16 +606,30 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <p>We’ve been told that the regions are as follows:</p>
 <p><strong>Centre 1</strong></p>
-<p><em>Dispatcher 1</em>: Telford and Wrekin; Shropshire <em>Dispatcher 2</em>: Cannock Chase; Lichfield; Tamworth <em>Dispatcher 3</em>: South Staffordshire; Walsall <em>Dispatcher 4</em>: Wolverhampton <em>Dispatcher 5</em>: Dudley; Sandwell <em>Dispatcher 6</em>: Birmingham <em>Dispatcher 7</em>: Solihull; North Warwickshire</p>
+<ul>
+<li><em>Dispatcher 1</em>: Telford and Wrekin; Shropshire</li>
+<li><em>Dispatcher 2</em>: Cannock Chase; Lichfield; Tamworth</li>
+<li><em>Dispatcher 3</em>: South Staffordshire; Walsall</li>
+<li><em>Dispatcher 4</em>: Wolverhampton</li>
+<li><em>Dispatcher 5</em>: Dudley; Sandwell</li>
+<li><em>Dispatcher 6</em>: Birmingham</li>
+<li><em>Dispatcher 7</em>: Solihull; North Warwickshire</li>
+</ul>
 <p><strong>Centre 2</strong></p>
-<p><em>Dispatcher 1</em>: Bromsgrove <em>Dispatcher 2</em>: Wyre Forest <em>Dispatcher 3</em>: Wychavon; Worcester <em>Dispatcher 4</em>: Malvern Hills; Herefordshire <em>Dispatcher 5</em>: Redditch; Stratford-on-Avon; Warwick</p>
+<ul>
+<li><em>Dispatcher 1</em>: Bromsgrove</li>
+<li><em>Dispatcher 2</em>: Wyre Forest</li>
+<li><em>Dispatcher 3</em>: Wychavon; Worcester</li>
+<li><em>Dispatcher 4</em>: Malvern Hills; Herefordshire</li>
+<li><em>Dispatcher 5</em>: Redditch; Stratford-on-Avon; Warwick</li>
+</ul>
 <p>This information has been given to us in a dataframe; let’s import and inspect this, then join it to our other data.</p>
-<div id="2dc235e8" class="cell" data-execution_count="4">
+<div id="5d66740c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>boundary_allocations_df <span class="op">=</span> pd.read_csv(<span class="st">"boundary_allocations.csv"</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>boundary_allocations_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="45">
 <div>
 <div>
 
@@ -652,7 +683,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <p>If we join this to our boundary data, with the geodataframe on the <strong>left</strong> of the merge, we can then access the data about the dispatchers and centers as variables we can plot.</p>
 <p>First, let’s do the join and view the resulting dataframer which will have the additional columns. As the original dataframe only contains separate columns for center and dispatcher, we will first create an additional column that joins the two together.</p>
-<div id="73d19f70" class="cell" data-execution_count="5">
+<div id="7ee1df84" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> pd.merge(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    bham_region,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    boundary_allocations_df,</span>
@@ -664,7 +695,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>bham_region[<span class="st">"centre_dispatcher"</span>] <span class="op">=</span> bham_region[<span class="st">"Centre"</span>].astype(<span class="st">"str"</span>) <span class="op">+</span> <span class="st">'-'</span> <span class="op">+</span> bham_region[<span class="st">"Dispatcher"</span>].astype(<span class="st">"str"</span>)</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>bham_region.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="46">
 <div>
 <div>
 
@@ -789,7 +820,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>Let’s first just visualise the split across our dispatching centres by plotting the center column.</p>
-<div id="521d0047" class="cell" data-execution_count="6">
+<div id="aa2498f4" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> bham_region.plot(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    column<span class="op">=</span><span class="st">"Centre"</span>,</span>
@@ -807,7 +838,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>Then we’ll visualise the split per dispatcher, using our new column to avoid issues with dispatcher numbers being duplicated across centres.</p>
-<div id="f01693c8" class="cell" data-execution_count="7">
+<div id="0b046ebe" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> bham_region.plot(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    column<span class="op">=</span><span class="st">"centre_dispatcher"</span>,</span>
@@ -828,7 +859,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <p>Finally, let’s demonstrate how we could overlay the plot by dispatcher with something that highlights the per-centre boundary as well.</p>
 <p>To do this, we will have to merge all of the polygons into a single large polygon. This will give us a brand new dataframe with just two rows referencing the two large polygons; we will view this at the end.</p>
 <p><em>GenAI Alert - This code was modified from a suggested approach provided by ChatGPT</em></p>
-<div id="4c4b3099" class="cell" data-execution_count="8">
+<div id="4745d9e3" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by the specified column</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>grouped_centre_gdf <span class="op">=</span> bham_region.groupby(<span class="st">'Centre'</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -849,7 +880,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>grouped_centre_gdf_boundary <span class="op">=</span> geopandas.GeoDataFrame(boundary_list, geometry<span class="op">=</span><span class="st">'boundary'</span>, crs<span class="op">=</span>bham_region.crs)</span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>grouped_centre_gdf_boundary.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="49">
 <div>
 <div>
 
@@ -881,7 +912,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <p>Finally, we’ll repeat our per-dispatcher</p>
-<div id="ddbd3747" class="cell" data-execution_count="9">
+<div id="9e66e18f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> bham_region.plot(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    column<span class="op">=</span><span class="st">"centre_dispatcher"</span>,</span>
@@ -909,7 +940,286 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <section id="bringing-in-historical-demand-data" class="level2" data-number="31.2">
 <h2 data-number="31.2" class="anchored" data-anchor-id="bringing-in-historical-demand-data"><span class="header-section-number">31.2</span> Bringing in historical demand data</h2>
 <p>Finally, let’s bring in some historical demand data to see if we can spot any obvious issues.</p>
-<p>*Placeholder - we will have per-LSOA demand visualised here; a dummy dataset modified of population modified by some random factor. Around it, we will show how we could draw both the centre and dispatcher boundaries.</p>
+<p>First, so we can overlay both the centre boundaries and the per-dispatcher boundaries, we’ll repeat our earlier process to create a geodataframe with a single row and a single polygon per dispatcher.</p>
+<div id="e4d785c9" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by the specified column</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf <span class="op">=</span> bham_region.groupby(<span class="st">"centre_dispatcher"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new GeoDataFrame for the boundaries of each group</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>boundary_list <span class="op">=</span> []</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> group_name, group <span class="kw">in</span> grouped_dispatcher_gdf:</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine the polygons in each group into one geometry</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    combined_geometry <span class="op">=</span> group.unary_union</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the boundary of the combined geometry</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    boundary <span class="op">=</span> combined_geometry.boundary</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the boundary geometry and the group name to the list</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    boundary_list.append({<span class="st">'group'</span>: group_name, <span class="st">'boundary'</span>: boundary})</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a GeoDataFrame from the list of boundaries</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf_boundary <span class="op">=</span> geopandas.GeoDataFrame(boundary_list, geometry<span class="op">=</span><span class="st">'boundary'</span>, crs<span class="op">=</span>bham_region.crs)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf_boundary.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">group</th>
+<th data-quarto-table-cell-role="th">boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Centre 1-1</td>
+<td>MULTILINESTRING ((368935.969 274516.594, 36824...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Centre 1-2</td>
+<td>LINESTRING (412258.535 300984.197, 411756.668 ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Centre 1-3</td>
+<td>LINESTRING (381775.908 282326.500, 380577.001 ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Centre 1-4</td>
+<td>LINESTRING (388885.341 295185.385, 388630.406 ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Centre 1-5</td>
+<td>LINESTRING (388258.095 285110.427, 388666.258 ...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="a3b531bc" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>demand <span class="op">=</span> pd.read_csv(<span class="st">"demand_pop_bham.csv"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> bham_region.merge(demand, on<span class="op">=</span><span class="st">"LSOA11CD"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> bham_region.plot(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    column<span class="op">=</span><span class="st">"demand"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.3</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf_boundary.plot(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'purple'</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">1.5</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>grouped_centre_gdf_boundary.plot(</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'red'</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">2.5</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">'off'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boundary_problems_visualising_historical_boundaries_files/figure-html/cell-13-output-1.png" width="450" height="389" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="looking-at-the-current-balance-of-incidents-across-the-region" class="level2" data-number="31.3">
+<h2 data-number="31.3" class="anchored" data-anchor-id="looking-at-the-current-balance-of-incidents-across-the-region"><span class="header-section-number">31.3</span> Looking at the current balance of incidents across the region</h2>
+<p>The demand dataset provided gives us the total number of incidents our dispatchers have dealt with per region per year. Let’s do a bit of merging and exploratory data analysis to see how this varied historically, and so we can start to think about what would be a target level of demand for each region.</p>
+<p>First let’s look at the per-centre rates.</p>
+<div id="61c37045" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>grouped_by_centre <span class="op">=</span> bham_region.groupby(<span class="st">'Centre'</span>)[[<span class="st">'demand'</span>]].<span class="bu">sum</span>()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>grouped_by_centre[<span class="st">'difference_from_average'</span>] <span class="op">=</span> (grouped_by_centre[<span class="st">'demand'</span>] <span class="op">-</span> grouped_by_centre[<span class="st">'demand'</span>].mean()).astype(<span class="st">'int'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>grouped_by_centre</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">demand</th>
+<th data-quarto-table-cell-role="th">difference_from_average</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Centre</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 1</td>
+<td>277146</td>
+<td>110663</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 2</td>
+<td>55820</td>
+<td>-110663</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>And now by dispatcher</p>
+<div id="98f463d7" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>grouped_by_dispatcher <span class="op">=</span> bham_region.groupby(<span class="st">'centre_dispatcher'</span>)[[<span class="st">'demand'</span>]].<span class="bu">sum</span>()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mean_demand <span class="op">=</span> grouped_by_dispatcher[<span class="st">'demand'</span>].mean()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The demand, averaged across </span><span class="sc">{</span><span class="bu">len</span>(bham_region[<span class="st">'centre_dispatcher'</span>].unique())<span class="sc">}</span><span class="ss"> regions, is </span><span class="sc">{</span>mean_demand<span class="sc">:.0f}</span><span class="ss"> incidents per year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The demand, averaged across 12 regions, is 27747 incidents per year</code></pre>
+</div>
+</div>
+<div id="223d7f14" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>grouped_by_dispatcher[<span class="st">'difference_from_mean'</span>] <span class="op">=</span> (grouped_by_dispatcher[<span class="st">'demand'</span>] <span class="op">-</span> mean_demand).astype(<span class="st">'int'</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>grouped_by_dispatcher</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="55">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">demand</th>
+<th data-quarto-table-cell-role="th">difference_from_mean</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">centre_dispatcher</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 1-1</td>
+<td>7600</td>
+<td>-20147</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 1-2</td>
+<td>12825</td>
+<td>-14922</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 1-3</td>
+<td>36084</td>
+<td>8336</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 1-4</td>
+<td>26690</td>
+<td>-1057</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 1-5</td>
+<td>63379</td>
+<td>35631</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 1-6</td>
+<td>109387</td>
+<td>81639</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 1-7</td>
+<td>21181</td>
+<td>-6566</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 2-1</td>
+<td>9630</td>
+<td>-18117</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 2-2</td>
+<td>9429</td>
+<td>-18318</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 2-3</td>
+<td>16699</td>
+<td>-11048</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Centre 2-4</td>
+<td>4217</td>
+<td>-23530</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Centre 2-5</td>
+<td>15845</td>
+<td>-11902</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="f0a8d75c" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>px.bar(grouped_by_dispatcher.reset_index(), x<span class="op">=</span><span class="st">"centre_dispatcher"</span>, y<span class="op">=</span><span class="st">"difference_from_mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>                            <div id="b65ae0bc-a7d6-4d38-b0bb-7977451863bd" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("b65ae0bc-a7d6-4d38-b0bb-7977451863bd")) {                    Plotly.newPlot(                        "b65ae0bc-a7d6-4d38-b0bb-7977451863bd",                        [{"alignmentgroup":"True","hovertemplate":"centre_dispatcher=%{x}\u003cbr\u003edifference_from_mean=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Centre 1-1","Centre 1-2","Centre 1-3","Centre 1-4","Centre 1-5","Centre 1-6","Centre 1-7","Centre 2-1","Centre 2-2","Centre 2-3","Centre 2-4","Centre 2-5"],"xaxis":"x","y":[-20147,-14922,8336,-1057,35631,81639,-6566,-18117,-18318,-11048,-23530,-11902],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"centre_dispatcher"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"difference_from_mean"}},"legend":{"tracegroupgap":0},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('b65ae0bc-a7d6-4d38-b0bb-7977451863bd');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+<p>No wonder our dispatchers are struggling - there are huge discrepancies in the demand they have been responsible for.</p>
+<p>So what are we going to do about it?</p>
+<p>Unlike in our travel time location work in the location allocation chapter, where we initially focussed on minimize the average travel time or population-weighted travel time, here we instead want to minimize the <strong>difference</strong> between the demand for each region going forward - so let’s move onto the next chapter and explore how we will do that.</p>
 
 
 </section>
