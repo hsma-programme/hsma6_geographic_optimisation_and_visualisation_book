@@ -20,10 +20,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,6 +104,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="include/webex.css">
@@ -387,7 +424,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./boundary_problems_visualising_historical_boundaries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(WIP) Loading and Visualising the Historical Boundaries</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Loading and Visualising the Historical Boundaries</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -476,9 +513,51 @@ Tip
 <p>At this point, we are not trying to do anything to balance our objectives like equalising the number of calls they are going to; instead, we are simply coming up with possibilities. We’ll actually test them out in the next chapter.</p>
 <section id="the-process" class="level3" data-number="32.1.1">
 <h3 data-number="32.1.1" class="anchored" data-anchor-id="the-process"><span class="header-section-number">32.1.1</span> The Process</h3>
-<p>To create a solution that scales well to any number of dispatchers, we will have the dispatchers start with a single randomly-selected patch from their existing location.</p>
+<p>To create a solution that scales well to any number of dispatchers, we will have the dispatchers start with a single randomly-selected patch from their existing location (though we will also code in an option to always start from a single specified point).</p>
 <p>Then, on each ‘turn’, they will randomly choose another patch from the patches that share a boundary with the first patch. There is a small (adjustable) possibility on each turn that they will not opt to take a turn; this will be part of our strategy to ensure that not every dispatcher ends up with solutions containing exactly the same number</p>
 <p>On each subsequent turn, they will randomly select another region that touches any part of their existing region. If the region that is selected is a region that they already have in their ‘patch’, then</p>
+<div id="042d3c16" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_gif(input_folder, output_gif, duration<span class="op">=</span><span class="dv">500</span>):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get all PNG files from the folder and sort them</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    images <span class="op">=</span> <span class="bu">sorted</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(input_folder) <span class="cf">if</span> f.endswith(<span class="st">'.png'</span>)],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        key<span class="op">=</span><span class="kw">lambda</span> x: os.path.getmtime(os.path.join(input_folder, x))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Open images and convert to a list</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    frames <span class="op">=</span> [Image.<span class="bu">open</span>(os.path.join(input_folder, img)) <span class="cf">for</span> img <span class="kw">in</span> images]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> frames:</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        frames[<span class="dv">0</span>].save(output_gif, save_all<span class="op">=</span><span class="va">True</span>, append_images<span class="op">=</span>frames[<span class="dv">1</span>:], duration<span class="op">=</span>duration, loop<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"GIF saved as </span><span class="sc">{</span>output_gif<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No PNG images found in the folder."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here’s an example of one of our ‘walks’ building up. This only shows the first few steps, but eventually it would continue until the whole patch was covered, following the same pattern.</p>
+<p><img src="images/walk.gif" class="img-fluid"></p>
+<p>This just showed us building up two patches, but more patches could be built with a larger number of ‘players’.</p>
+<div id="dd2805d2" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>GIF saved as images/walk_2.gif</code></pre>
+</div>
+</div>
+<p><img src="images/walk_2.gif" class="img-fluid"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember - due to the randomness we will introduce, each generated solution will be slightly different.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -507,6 +586,140 @@ Note
 </div>
 </div>
 <p>Let’s write and apply this function to generate a series of randomly generated solutions for our problem, which we will subsequently move on to evaluating.</p>
+<p>To start with, let’s load our boundary data back in. Head back to the previous chapter if any of this feels unfamiliar!</p>
+<div id="aeb1bc69" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>lsoa_geojson_path <span class="op">=</span> <span class="st">'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>lsoa_boundaries <span class="op">=</span> geopandas.read_file(lsoa_geojson_path)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>xmin, xmax <span class="op">=</span> <span class="dv">370000</span>, <span class="dv">420000</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ymin, ymax <span class="op">=</span> <span class="dv">250000</span>, <span class="dv">310000</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> lsoa_boundaries.cx[xmin:xmax, ymin:ymax]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>bham_region.plot(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"cyan"</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="boundary_problems_varying_evaluating_simple_files/figure-html/cell-5-output-1.png" width="579" height="559" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Before we start worrying about the allocations, we first want to generate a column that contains a list of all of the neighbours of a given cell. This will be a lot more efficient than trying to calculate the neighbours from scratch each time we want to pick a new one - and it’s not like the neighbours will change.</p>
+<p><em>GenAI Alert - This code was modified from a suggested approach provided by ChatGPT</em></p>
+<div id="bee17436" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_neighbors_column(gdf):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Adds a column to the GeoDataFrame containing lists of indices of neighboring polygons</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">    based on the 'touches' method.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    neighbors <span class="op">=</span> []</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, geom <span class="kw">in</span> gdf.geometry.items():</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        touching <span class="op">=</span> gdf[gdf.geometry.touches(geom)][<span class="st">"LSOA11CD"</span>].tolist()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        neighbors.append(touching)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    gdf[<span class="st">"neighbors"</span>] <span class="op">=</span> neighbors</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gdf</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> add_neighbors_column(bham_region)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>bham_region[[<span class="st">'LSOA11CD'</span>, <span class="st">'LSOA11NM'</span>, <span class="st">'LSOA11NMW'</span>, <span class="st">'geometry'</span>, <span class="st">'neighbors'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/sammi/.local/lib/python3.10/site-packages/geopandas/geodataframe.py:1528: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">LSOA11CD</th>
+<th data-quarto-table-cell-role="th">LSOA11NM</th>
+<th data-quarto-table-cell-role="th">LSOA11NMW</th>
+<th data-quarto-table-cell-role="th">geometry</th>
+<th data-quarto-table-cell-role="th">neighbors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8648</td>
+<td>E01008881</td>
+<td>Birmingham 067A</td>
+<td>Birmingham 067A</td>
+<td>POLYGON ((413040.413 285809.794, 413145.440 28...</td>
+<td>[E01008882, E01008883, E01008885, E01008886, E...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8649</td>
+<td>E01008882</td>
+<td>Birmingham 066A</td>
+<td>Birmingham 066A</td>
+<td>POLYGON ((412233.657 285480.231, 412255.373 28...</td>
+<td>[E01008881, E01008883, E01008884, E01008898, E...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8650</td>
+<td>E01008883</td>
+<td>Birmingham 078A</td>
+<td>Birmingham 078A</td>
+<td>POLYGON ((412775.838 285204.808, 412575.845 28...</td>
+<td>[E01008881, E01008882, E01008884, E01008886, E...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8651</td>
+<td>E01008884</td>
+<td>Birmingham 078B</td>
+<td>Birmingham 078B</td>
+<td>POLYGON ((411803.096 284902.674, 411563.054 28...</td>
+<td>[E01008882, E01008883, E01008887, E01008889, E...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8652</td>
+<td>E01008885</td>
+<td>Birmingham 076A</td>
+<td>Birmingham 076A</td>
+<td>POLYGON ((413417.353 284803.764, 413034.282 28...</td>
+<td>[E01008881, E01008886, E01008888, E01009521]</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<!-- ```{python}
+boundary_allocations_df = pd.read_csv("boundary_allocations.csv")
+boundary_allocations_df.head()
+
+bham_region = pd.merge(
+    bham_region,
+    boundary_allocations_df,
+    left_on="region",
+    right_on="Region",
+    how="left"
+)
+
+``` -->
+<p>What we are aiming to get at this point is a dataframe of</p>
 
 
 </section>
@@ -1405,8 +1618,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./boundary_problems_visualising_historical_boundaries.html" class="pagination-link" aria-label="(WIP) Loading and Visualising the Historical Boundaries">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">(WIP) Loading and Visualising the Historical Boundaries</span></span>
+      <a href="./boundary_problems_visualising_historical_boundaries.html" class="pagination-link" aria-label="Loading and Visualising the Historical Boundaries">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Loading and Visualising the Historical Boundaries</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

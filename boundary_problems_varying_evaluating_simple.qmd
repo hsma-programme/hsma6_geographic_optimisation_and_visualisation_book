@@ -27,11 +27,58 @@ At this point, we are not trying to do anything to balance our objectives like e
 
 ### The Process
 
-To create a solution that scales well to any number of dispatchers, we will have the dispatchers start with a single randomly-selected patch from their existing location.
+To create a solution that scales well to any number of dispatchers, we will have the dispatchers start with a single randomly-selected patch from their existing location (though we will also code in an option to always start from a single specified point).
 
 Then, on each 'turn', they will randomly choose another patch from the patches that share a boundary with the first patch. There is a small (adjustable) possibility on each turn that they will not opt to take a turn; this will be part of our strategy to ensure that not every dispatcher ends up with solutions containing exactly the same number
 
+
+
 On each subsequent turn, they will randomly select another region that touches any part of their existing region. If the region that is selected is a region that they already have in their 'patch', then
+
+```{python}
+from PIL import Image
+import os
+
+def create_gif(input_folder, output_gif, duration=500):
+    # Get all PNG files from the folder and sort them
+    images = sorted(
+        [f for f in os.listdir(input_folder) if f.endswith('.png')],
+        key=lambda x: os.path.getmtime(os.path.join(input_folder, x))
+    )
+
+    # Open images and convert to a list
+    frames = [Image.open(os.path.join(input_folder, img)) for img in images]
+
+    if frames:
+        frames[0].save(output_gif, save_all=True, append_images=frames[1:], duration=duration, loop=0)
+        print(f"GIF saved as {output_gif}")
+    else:
+        print("No PNG images found in the folder.")
+```
+
+```{python}
+#| echo: false
+#| eval: false
+create_gif("animations/walk_animation_1", "images/walk.gif", duration=500)
+```
+
+Here's an example of one of our 'walks' building up. This only shows the first few steps, but eventually it would continue until the whole patch was covered, following the same pattern.
+
+![](images/walk.gif)
+
+This just showed us building up two patches, but more patches could be built with a larger number of 'players'.
+
+```{python}
+#| echo: false
+#| eval: false
+create_gif("animations/walk_animation_2", "images/walk_2.gif", duration=500)
+```
+
+![](images/walk_2.gif)
+
+:::{.callout-tip}
+Remember - due to the randomness we will introduce, each generated solution will be slightly different.
+:::
 
 
 :::{.callout-tip}
@@ -46,8 +93,64 @@ When we come to apply a evolutionary or genetic algorithm approach to this probl
 
 Let's write and apply this function to generate a series of randomly generated solutions for our problem, which we will subsequently move on to evaluating.
 
+To start with, let's load our boundary data back in. Head back to the previous chapter if any of this feels unfamiliar!
 
 ```{python}
+import pandas as pd
+import geopandas
 
+lsoa_geojson_path = 'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'
 
+lsoa_boundaries = geopandas.read_file(lsoa_geojson_path)
+
+xmin, xmax = 370000, 420000
+ymin, ymax = 250000, 310000
+
+bham_region = lsoa_boundaries.cx[xmin:xmax, ymin:ymax]
+
+bham_region.plot(
+    figsize=(10,7),
+    edgecolor='black',
+    color="cyan"
+    )
 ```
+
+Before we start worrying about the allocations, we first want to generate a column that contains a list of all of the neighbours of a given cell. This will be a lot more efficient than trying to calculate the neighbours from scratch each time we want to pick a new one - and it's not like the neighbours will change.
+
+*GenAI Alert - This code was modified from a suggested approach provided by ChatGPT*
+
+```{python}
+def add_neighbors_column(gdf):
+    """
+    Adds a column to the GeoDataFrame containing lists of indices of neighboring polygons
+    based on the 'touches' method.
+    """
+    neighbors = []
+    for idx, geom in gdf.geometry.items():
+        touching = gdf[gdf.geometry.touches(geom)]["LSOA11CD"].tolist()
+        neighbors.append(touching)
+
+    gdf["neighbors"] = neighbors
+    return gdf
+
+bham_region = add_neighbors_column(bham_region)
+
+bham_region[['LSOA11CD', 'LSOA11NM', 'LSOA11NMW', 'geometry', 'neighbors']].head()
+```
+
+
+<!-- ```{python}
+boundary_allocations_df = pd.read_csv("boundary_allocations.csv")
+boundary_allocations_df.head()
+
+bham_region = pd.merge(
+    bham_region,
+    boundary_allocations_df,
+    left_on="region",
+    right_on="Region",
+    how="left"
+)
+
+``` -->
+
+What we are aiming to get at this point is a dataframe of
