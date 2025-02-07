@@ -35,6 +35,144 @@ To start with, let's load our random solutions from the last chapter back in.
 import pandas as pd
 
 initial_solution_df = pd.read_pickle('solutions_example.pkl')
+
+initial_solution_df.to_csv('solutions_example.csv')
+```
+
+Let's write a quick function to pull out the allocations from our solutions file, and turn that back into a dataframe we can work with.
+
+```{python}
+def extract_allocation_df_from_solution_df(df, solution_rank, allocation_col_name, territory_col_name):
+    row_of_interest = df[df['rank'] == solution_rank]
+    owned_territory_dict = row_of_interest['allocations'].values[0]
+
+    owned_territory_df = pd.DataFrame(
+            [(key, value) for key, values in owned_territory_dict.items() for value in values],
+            columns=[allocation_col_name, territory_col_name])
+    return owned_territory_df
+```
+
+Let's now try this out to pull back and visualise our best solution.
+
+```{python}
+best_solution = extract_allocation_df_from_solution_df(
+    initial_solution_df,
+    solution_rank=1,
+    allocation_col_name="centre_dispatcher_NEW",
+    territory_col_name="LSOA11CD"
+    )
+
+best_solution
+```
+
+:::{.callout-note collapse="true"}
+### Click here to view code from previous chapters for importing our historical boundary and demand data
+
+```{python}
+import geopandas
+
+lsoa_geojson_path = 'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'
+
+lsoa_boundaries = geopandas.read_file(lsoa_geojson_path)
+
+xmin, xmax = 370000, 420000
+ymin, ymax = 250000, 310000
+
+bham_region = lsoa_boundaries.cx[xmin:xmax, ymin:ymax]
+
+bham_region["region"] = bham_region["LSOA11NM"].str[:-5]
+
+boundary_allocations_df = pd.read_csv("boundary_allocations.csv")
+
+bham_region = pd.merge(
+    bham_region,
+    boundary_allocations_df,
+    left_on="region",
+    right_on="Region",
+    how="left"
+)
+
+bham_region["centre_dispatcher"] = bham_region["Centre"].astype("str") + '-' + bham_region["Dispatcher"].astype("str")
+
+demand = pd.read_csv("demand_pop_bham.csv")
+
+bham_region = bham_region.merge(demand, on="LSOA11CD")
+
+# Create df of original boundaries
+grouped_dispatcher_gdf = bham_region.groupby("centre_dispatcher")
+
+# Create a new GeoDataFrame for the boundaries of each group
+boundary_list = []
+
+for group_name, group in grouped_dispatcher_gdf:
+    # Combine the polygons in each group into one geometry
+    combined_geometry = group.unary_union
+
+    # Get the boundary of the combined geometry
+    boundary = combined_geometry.boundary
+
+    # Add the boundary geometry and the group name to the list
+    boundary_list.append({'group': group_name, 'boundary': boundary})
+
+# Create a GeoDataFrame from the list of boundaries
+grouped_dispatcher_gdf_boundary = geopandas.GeoDataFrame(boundary_list, geometry='boundary', crs=bham_region.crs)
+
+```
+:::
+
+```{python}
+ax=bham_region.merge(best_solution, on="LSOA11CD").plot(column="centre_dispatcher_NEW")
+
+# Visualise the historical boundaries
+grouped_dispatcher_gdf_boundary.plot(
+    ax=ax,
+    linewidth=2,
+    edgecolor="black"
+)
+```
+
+And let's compare this with our worst-performing solution.
+
+:::{.callout-tip collapse="true"}
+### Click here to see the code
+```{python}
+#| eval: false
+worst_solution = extract_allocation_df_from_solution_df(
+    initial_solution_df,
+    solution_rank=20,
+    allocation_col_name="centre_dispatcher_NEW",
+    territory_col_name="LSOA11CD"
+    )
+
+ax=bham_region.merge(worst_solution, on="LSOA11CD").plot(column="centre_dispatcher_NEW")
+
+# Visualise the historical boundaries
+grouped_dispatcher_gdf_boundary.plot(
+    ax=ax,
+    linewidth=2,
+    edgecolor="black"
+)
+```
+:::
+
+```{python}
+#| echo: false
+#| eval: true
+worst_solution = extract_allocation_df_from_solution_df(
+    initial_solution_df,
+    solution_rank=20,
+    allocation_col_name="centre_dispatcher_NEW",
+    territory_col_name="LSOA11CD"
+    )
+
+ax=bham_region.merge(worst_solution, on="LSOA11CD").plot(column="centre_dispatcher_NEW")
+
+# Visualise the historical boundaries
+grouped_dispatcher_gdf_boundary.plot(
+    ax=ax,
+    linewidth=2,
+    edgecolor="black"
+)
 ```
 
 :::{.callout-tip}

@@ -586,7 +586,7 @@ Note
 <section id="our-starting-dataframe" class="level3" data-number="32.1.2">
 <h3 data-number="32.1.2" class="anchored" data-anchor-id="our-starting-dataframe"><span class="header-section-number">32.1.2</span> Our starting dataframe</h3>
 <p>To start with, let’s load our boundary data back in. Head back to the previous chapter if any of this feels unfamiliar!</p>
-<div id="40664b32" class="cell" data-execution_count="4">
+<div id="a93fecfa" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -629,7 +629,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <h3 data-number="32.1.3" class="anchored" data-anchor-id="getting-the-neighbours"><span class="header-section-number">32.1.3</span> Getting the Neighbours</h3>
 <p>Before we start worrying about the allocations, we first want to generate a column that contains a list of all of the neighbours of a given cell. This will be a lot more efficient than trying to calculate the neighbours from scratch each time we want to pick a new one - and it’s not like the neighbours will change.</p>
 <p><em>GenAI Alert - This code was modified from a suggested approach provided by ChatGPT</em></p>
-<div id="dbc40032" class="cell" data-execution_count="5">
+<div id="cd7b221c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_neighbors_column(gdf):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Adds a column to the GeoDataFrame containing lists of indices of neighboring polygons</span></span>
@@ -711,7 +711,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
-<div id="1955eb3c" class="cell" data-execution_count="6">
+<div id="b2d370cf" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>boundary_allocations_df <span class="op">=</span> pd.read_csv(<span class="st">"boundary_allocations.csv"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>boundary_allocations_df.head()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -976,7 +976,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <section id="making-a-dictionary-of-the-existing-allocations" class="level3" data-number="32.1.4">
 <h3 data-number="32.1.4" class="anchored" data-anchor-id="making-a-dictionary-of-the-existing-allocations"><span class="header-section-number">32.1.4</span> Making a dictionary of the existing allocations</h3>
 <p>First, let’s make ourselves a dictionary. In this dictionary, the keys will be the centre/dispatcher, and the values will be a list of all LSOAs that currently belong to that dispatcher.</p>
-<div id="998cf8ba" class="cell" data-execution_count="7">
+<div id="e2763d0b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a list of the unique dispatchers</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dispatchers <span class="op">=</span> bham_region[<span class="st">'centre_dispatcher'</span>].unique()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>dispatchers.sort()</span>
@@ -989,7 +989,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    dispatcher_starting_allocation_dict[dispatcher] <span class="op">=</span> dispatcher_allocation[<span class="st">"LSOA11CD"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s look at what that looks like for one of the dispatchers. Using this, we can access a full list of their LSOAs whenever we need it.</p>
-<div id="a29a0204" class="cell" data-execution_count="8">
+<div id="5b0fb09f" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dispatcher_starting_allocation_dict[<span class="st">'Centre 2-3'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>array(['E01032279', 'E01032280', 'E01032281', 'E01032282', 'E01032283',
@@ -1035,7 +1035,7 @@ Note
 <p>There are a couple of different approaches we could take here - and maybe we’ll give our eventual algorithm the option to pick from several options.</p>
 <p><em>Option 1</em></p>
 <p>We could use our new dictionary to select a random starting LSOA for each of our dispatchers. This will give us plenty of randomness - but we may find ourselves with walks that start very near the edge of our original patch, giving us very different boundaries to what existed before.</p>
-<div id="adefdf66" class="cell" data-execution_count="9">
+<div id="925f2894" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>random_solution_starting_dict <span class="op">=</span> {}</span>
@@ -1046,22 +1046,22 @@ Note
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>random_solution_starting_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>{'Centre 1-1': 'E01014191',
- 'Centre 1-2': 'E01029503',
- 'Centre 1-3': 'E01010343',
- 'Centre 1-4': 'E01010520',
- 'Centre 1-5': 'E01009978',
- 'Centre 1-6': 'E01033564',
- 'Centre 1-7': 'E01010146',
- 'Centre 2-1': 'E01032174',
- 'Centre 2-2': 'E01032459',
- 'Centre 2-3': 'E01032295',
- 'Centre 2-4': 'E01032205',
- 'Centre 2-5': 'E01032266'}</code></pre>
+<pre><code>{'Centre 1-1': 'E01028859',
+ 'Centre 1-2': 'E01029524',
+ 'Centre 1-3': 'E01010269',
+ 'Centre 1-4': 'E01010455',
+ 'Centre 1-5': 'E01009877',
+ 'Centre 1-6': 'E01009494',
+ 'Centre 1-7': 'E01010210',
+ 'Centre 2-1': 'E01032135',
+ 'Centre 2-2': 'E01032427',
+ 'Centre 2-3': 'E01032355',
+ 'Centre 2-4': 'E01032212',
+ 'Centre 2-5': 'E01031202'}</code></pre>
 </div>
 </div>
 <p>Let’s turn this into a reusable function, then visualise its functioning.</p>
-<div id="0598cb73" class="cell" data-execution_count="10">
+<div id="6ca64b7e" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_random_starting_dict(input_dictionary):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    random_solution_starting_dict <span class="op">=</span> {}</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1073,22 +1073,22 @@ Note
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>create_random_starting_dict(dispatcher_starting_allocation_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>{'Centre 1-1': 'E01028841',
- 'Centre 1-2': 'E01029491',
- 'Centre 1-3': 'E01010273',
- 'Centre 1-4': 'E01010513',
- 'Centre 1-5': 'E01010100',
- 'Centre 1-6': 'E01009168',
- 'Centre 1-7': 'E01010121',
- 'Centre 2-1': 'E01032142',
- 'Centre 2-2': 'E01032451',
- 'Centre 2-3': 'E01032287',
- 'Centre 2-4': 'E01014001',
- 'Centre 2-5': 'E01032266'}</code></pre>
+<pre><code>{'Centre 1-1': 'E01028835',
+ 'Centre 1-2': 'E01029476',
+ 'Centre 1-3': 'E01010317',
+ 'Centre 1-4': 'E01010465',
+ 'Centre 1-5': 'E01010081',
+ 'Centre 1-6': 'E01008918',
+ 'Centre 1-7': 'E01010109',
+ 'Centre 2-1': 'E01033060',
+ 'Centre 2-2': 'E01032446',
+ 'Centre 2-3': 'E01032392',
+ 'Centre 2-4': 'E01032199',
+ 'Centre 2-5': 'E01032226'}</code></pre>
 </div>
 </div>
 <p>Now, let’s generate some solutions and plot them.</p>
-<p>We’ll also be using a dataframe from the</p>
+<p>We’ll also be using a dataframe from the previous chapter - the code for this can be found in the expander if you want to revisit this.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1101,7 +1101,7 @@ Click here to see the code for generating our dispatch boundaries dataframe
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="72fcece1" class="cell" data-execution_count="11">
+<div id="bd018f0f" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by the specified column</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf <span class="op">=</span> bham_region.groupby(<span class="st">"centre_dispatcher"</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1172,7 +1172,7 @@ Click here to see the code for generating our dispatch boundaries dataframe
 </div>
 </div>
 <p>Some of the regions are quite small, so it may be hard to see them all!</p>
-<div id="9312ee7d" class="cell" data-execution_count="12">
+<div id="13367a66" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's plot the outline of our entire region</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> bham_region.plot(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>),</span>
@@ -1210,7 +1210,7 @@ Click here to see the code for generating our dispatch boundaries dataframe
 </div>
 <p><em>Option 2</em></p>
 <p>Another alternative is to start with the most central region of the existing regions for each dispatcher.</p>
-<div id="10421fa9" class="cell" data-execution_count="13">
+<div id="1f4c632f" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> Point</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_most_central_polygon(gdf):</span>
@@ -1519,7 +1519,7 @@ Click here to see the code for generating our dispatch boundaries dataframe
 </div>
 </div>
 <p>Let’s plot this.</p>
-<div id="f782b253" class="cell" data-execution_count="14">
+<div id="43066f9c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's plot the outline of our entire region</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> bham_region.plot(</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>),</span>
@@ -1564,7 +1564,7 @@ Click here to see the code for generating our dispatch boundaries dataframe
 <p>So let’s start coding this!</p>
 <p>First, let’s work on the logic for selecting a territory from their existing list. We’ll just do this with a single dispatcher for now.</p>
 <p>We’ll filter down to this and remind ourselves what the available data on neighbouring territory looks like.</p>
-<div id="98009c31" class="cell" data-execution_count="15">
+<div id="d14825ff" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll start with dispatcher 5 from centre 2, and we'll use the most central point of their existing territory</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>dispatcher <span class="op">=</span> <span class="st">"Centre 2-5"</span></span>
@@ -1579,7 +1579,7 @@ Name: neighbors, dtype: object</code></pre>
 </div>
 </div>
 <p>Let’s now pick a random neighbour, and work out a way to store the new allocations so we can ensure we know who owns what territory, and we don’t end up with a situation where two dispatchers own the same territory.</p>
-<div id="f528c2e8" class="cell" data-execution_count="16">
+<div id="2d75c5e3" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>owned_territory_dict <span class="op">=</span> {}</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>owned_territory_dict[dispatcher] <span class="op">=</span> [starting_point[<span class="st">'LSOA11CD'</span>].values[<span class="dv">0</span>]]</span>
@@ -1589,25 +1589,25 @@ Name: neighbors, dtype: object</code></pre>
 <pre><code>{'Centre 2-5': ['E01031187']}</code></pre>
 </div>
 </div>
-<div id="115f4ae5" class="cell" data-execution_count="17">
+<div id="a9c0eb4b" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>selected_territory <span class="op">=</span> random.choice(starting_point[<span class="st">'neighbors'</span>].values[<span class="dv">0</span>])</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>selected_territory</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
-<pre><code>'E01031208'</code></pre>
+<pre><code>'E01031188'</code></pre>
 </div>
 </div>
-<div id="6d4f3fa2" class="cell" data-execution_count="18">
+<div id="b70473a1" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>owned_territory_dict[dispatcher].append(selected_territory)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>owned_territory_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>{'Centre 2-5': ['E01031187', 'E01031208']}</code></pre>
+<pre><code>{'Centre 2-5': ['E01031187', 'E01031188']}</code></pre>
 </div>
 </div>
 <p>Fantastic! We now have a simple way to get and store this.</p>
 <p>Let’s have a go at giving another dispatcher a turn to grab territory.</p>
-<div id="888e9f32" class="cell" data-execution_count="19">
+<div id="2f6c85ea" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dispatcher <span class="op">=</span> <span class="st">"Centre 1-1"</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>starting_point <span class="op">=</span> most_central[most_central[<span class="st">"centre_dispatcher"</span>] <span class="op">==</span> dispatcher]</span>
@@ -1622,20 +1622,20 @@ Name: neighbors, dtype: object</code></pre>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>owned_territory_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
-<pre><code>{'Centre 2-5': ['E01031187', 'E01031208'],
- 'Centre 1-1': ['E01028832', 'E01028859']}</code></pre>
+<pre><code>{'Centre 2-5': ['E01031187', 'E01031188'],
+ 'Centre 1-1': ['E01028832', 'E01028835']}</code></pre>
 </div>
 </div>
 <p>This is a good step, and for now we’re unlikely to run into the issue of different dispatchers owning the same territory - though it’s not impossible! So let’s add in another dispatcher, but this time we’ll check first that it’s not owned by anyone.</p>
 <p>First, let’s pull back the full list of owned territories from our dict.</p>
-<div id="5ec8f556" class="cell" data-execution_count="20">
+<div id="0cca6844" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(owned_territory_dict.values())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code>[['E01031187', 'E01031208'], ['E01028832', 'E01028859']]</code></pre>
+<pre><code>[['E01031187', 'E01031188'], ['E01028832', 'E01028835']]</code></pre>
 </div>
 </div>
 <p>We’ll need to convert this into a single list. We could use a for loop, or a list comprehension.</p>
-<div id="175b0adb" class="cell" data-execution_count="21">
+<div id="9a4f6146" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>territory_list <span class="op">=</span> [element <span class="cf">for</span> sub_list <span class="kw">in</span> <span class="bu">list</span>(owned_territory_dict.values()) <span class="cf">for</span> element <span class="kw">in</span> sub_list]</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># By using set, then list on the result of that, we get a list of unique values</span></span>
@@ -1643,11 +1643,11 @@ Name: neighbors, dtype: object</code></pre>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>territory_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>['E01031208', 'E01031187', 'E01028832', 'E01028859']</code></pre>
+<pre><code>['E01028835', 'E01031188', 'E01028832', 'E01031187']</code></pre>
 </div>
 </div>
 <p>Now we can use this in our checks.</p>
-<div id="0c99ab18" class="cell" data-execution_count="22">
+<div id="1dd7140d" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dispatcher <span class="op">=</span> <span class="st">"Centre 1-5"</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>starting_point <span class="op">=</span> most_central[most_central[<span class="st">"centre_dispatcher"</span>] <span class="op">==</span> dispatcher]</span>
@@ -1662,9 +1662,9 @@ Name: neighbors, dtype: object</code></pre>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>owned_territory_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
-<pre><code>{'Centre 2-5': ['E01031187', 'E01031208'],
- 'Centre 1-1': ['E01028832', 'E01028859'],
- 'Centre 1-5': ['E01010043', 'E01009890']}</code></pre>
+<pre><code>{'Centre 2-5': ['E01031187', 'E01031188'],
+ 'Centre 1-1': ['E01028832', 'E01028835'],
+ 'Centre 1-5': ['E01010043', 'E01010078']}</code></pre>
 </div>
 </div>
 </section>
@@ -1672,7 +1672,7 @@ Name: neighbors, dtype: object</code></pre>
 <h3 data-number="32.1.7" class="anchored" data-anchor-id="writing-the-function"><span class="header-section-number">32.1.7</span> Writing the function</h3>
 <p>That’s most of the key elements of our function written now - so let’s actually turn it into a function that will continue to run until all of the territory has been allocated.</p>
 <p>For clarity and ease of use, we’ll set up our defaults to relate to our current objects - but for a more reusable function, it may be better to avoid defaults but be very clear in the docstring what is expected as an input, and add in some error handling to manage cases that don’t match.</p>
-<div id="5f86ce87" class="cell" data-execution_count="23">
+<div id="8024617d" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_random_territory_allocation(</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    gdf<span class="op">=</span>bham_region,</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    territory_unit_column<span class="op">=</span><span class="st">"LSOA11CD"</span>,</span>
@@ -1707,29 +1707,30 @@ Name: neighbors, dtype: object</code></pre>
 <span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">len</span>(owned_territory_list) <span class="op">&lt;</span> <span class="bu">len</span>(gdf[territory_unit_column].unique()):</span>
 <span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Go around all individuals</span></span>
 <span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> player <span class="kw">in</span> player_list:</span>
-<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Select a random existing territory from the list of owned territories</span></span>
-<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>            chosen_owned_territory <span class="op">=</span> random.choice(owned_territory_dict[player])</span>
-<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Then find the neighbours</span></span>
-<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>            neighbors <span class="op">=</span> gdf[gdf[territory_unit_column] <span class="op">==</span> chosen_owned_territory][neighbor_column].values[<span class="dv">0</span>]</span>
-<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Choose a random neighbour and update the list of owned territories...</span></span>
-<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>            selected_territory <span class="op">=</span> random.choice(neighbors)</span>
-<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>            <span class="co">#... if not already owned</span></span>
-<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> selected_territory <span class="kw">not</span> <span class="kw">in</span> owned_territory_list:</span>
-<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>                owned_territory_dict[player].append(selected_territory)</span>
-<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>                owned_territory_list.append(selected_territory)</span>
-<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> random.random() <span class="op">&gt;</span> skipgo_chance:</span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Select a random existing territory from the list of owned territories</span></span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>                chosen_owned_territory <span class="op">=</span> random.choice(owned_territory_dict[player])</span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Then find the neighbours</span></span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>                neighbors <span class="op">=</span> gdf[gdf[territory_unit_column] <span class="op">==</span> chosen_owned_territory][neighbor_column].values[<span class="dv">0</span>]</span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Choose a random neighbour and update the list of owned territories...</span></span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>                selected_territory <span class="op">=</span> random.choice(neighbors)</span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>                <span class="co">#... if not already owned</span></span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> selected_territory <span class="kw">not</span> <span class="kw">in</span> owned_territory_list:</span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>                    owned_territory_dict[player].append(selected_territory)</span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>                    owned_territory_list.append(selected_territory)</span>
 <span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> return_df:</span>
-<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>        owned_territory_df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>            [(key, value) <span class="cf">for</span> key, values <span class="kw">in</span> owned_territory_dict.items() <span class="cf">for</span> value <span class="kw">in</span> values],</span>
-<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>            columns<span class="op">=</span>[<span class="ss">f"</span><span class="sc">{</span>player_column<span class="sc">}</span><span class="ss">_NEW"</span>, territory_unit_column])</span>
-<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.merge(gdf, owned_territory_df, on<span class="op">=</span>territory_unit_column, how<span class="op">=</span><span class="st">"left"</span>)</span>
-<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> owned_territory_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> return_df:</span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>        owned_territory_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>            [(key, value) <span class="cf">for</span> key, values <span class="kw">in</span> owned_territory_dict.items() <span class="cf">for</span> value <span class="kw">in</span> values],</span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>            columns<span class="op">=</span>[<span class="ss">f"</span><span class="sc">{</span>player_column<span class="sc">}</span><span class="ss">_NEW"</span>, territory_unit_column])</span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.merge(gdf, owned_territory_df, on<span class="op">=</span>territory_unit_column, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> owned_territory_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s try our new function out and see what it returns.</p>
-<div id="caad4ac3" class="cell" data-execution_count="24">
+<div id="71f8265c" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>random_allocation_test <span class="op">=</span> generate_random_territory_allocation()</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>random_allocation_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1840,7 +1841,7 @@ Name: neighbors, dtype: object</code></pre>
 <td>Centre 1</td>
 <td>6</td>
 <td>Centre 1-6</td>
-<td>Centre 1-7</td>
+<td>Centre 1-6</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
@@ -1991,7 +1992,7 @@ Name: neighbors, dtype: object</code></pre>
 </div>
 </div>
 <p>Let’s see how much this differs from the original allocation.</p>
-<div id="8606595b" class="cell" data-execution_count="25">
+<div id="182a62bb" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the new boundaries using colours</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> random_allocation_test.plot(</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    column<span class="op">=</span><span class="st">"centre_dispatcher_NEW"</span></span>
@@ -2001,7 +2002,7 @@ Name: neighbors, dtype: object</code></pre>
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>grouped_dispatcher_gdf_boundary.plot(</span>
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"green"</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"black"</span></span>
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -2017,7 +2018,7 @@ Name: neighbors, dtype: object</code></pre>
 <p>For now, we’re going to judge a solution on a single criteria - the average absolute difference in demand across</p>
 <p>This is calculated by calculating the difference in total demand experiences by one dispatcher from the average across all dispatchers. We then take the absolute value - i.e.&nbsp;if the difference is negative (the dispatcher received fewer calls than the average), we will turn it into a postive. Finally, we take the average across these values.</p>
 <p>We’ll create a function to do this.</p>
-<div id="4eec9c73" class="cell" data-execution_count="26">
+<div id="5defab07" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_solution(gdf, allocation_column<span class="op">=</span><span class="st">'centre_dispatcher_NEW'</span>, demand_column<span class="op">=</span><span class="st">"demand"</span>):</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    grouped_by_dispatcher <span class="op">=</span> gdf.groupby(allocation_column)[[demand_column]].<span class="bu">sum</span>()</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    mean_demand <span class="op">=</span> grouped_by_dispatcher[<span class="st">'demand'</span>].mean()</span>
@@ -2027,7 +2028,7 @@ Name: neighbors, dtype: object</code></pre>
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">abs</span>(grouped_by_dispatcher[<span class="st">'difference_from_mean'</span>]).mean().<span class="bu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And now let’s try this out on our original and new solutions</p>
-<div id="23839a5c" class="cell" data-execution_count="27">
+<div id="a6b4abab" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>demand <span class="op">=</span> pd.read_csv(<span class="st">"demand_pop_bham.csv"</span>)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>random_allocation_test <span class="op">=</span> random_allocation_test.merge(demand, on<span class="op">=</span><span class="st">"LSOA11CD"</span>)</span>
@@ -2044,7 +2045,7 @@ Name: neighbors, dtype: object</code></pre>
 <span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"The randomly generated solution is worse than the original dispatcher allocations"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Original Allocation: 20934.4
-Random Solution 1: 11374.4
+Random Solution 1: 9856.7
 The randomly generated solution gives a more even allocation of events than the original dispatcher allocations</code></pre>
 </div>
 </div>
@@ -2053,7 +2054,7 @@ The randomly generated solution gives a more even allocation of events than the 
 <section id="trying-this-out-for-more-solutions" class="level2" data-number="32.2">
 <h2 data-number="32.2" class="anchored" data-anchor-id="trying-this-out-for-more-solutions"><span class="header-section-number">32.2</span> Trying this out for more solutions</h2>
 <p>Let’s now run this for 20 different solutions and store the results.</p>
-<div id="e05c6c51" class="cell" data-execution_count="28">
+<div id="103ef837" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_solution_dict(solution_dict, gdf, allocation_column<span class="op">=</span><span class="st">'centre_dispatcher'</span>, demand_column<span class="op">=</span><span class="st">"demand"</span>, territory_unit_column<span class="op">=</span><span class="st">"LSOA11CD"</span>):</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    owned_territory_df <span class="op">=</span> pd.DataFrame(</span>
@@ -2068,28 +2069,196 @@ The randomly generated solution gives a more even allocation of events than the 
 <span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">abs</span>(grouped_by_dispatcher[<span class="st">'difference_from_mean'</span>]).mean().<span class="bu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ff66eba8" class="cell" data-execution_count="29">
+<div id="c03c206c" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure our dataframe has the demand column</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> bham_region.merge(demand, on<span class="op">=</span><span class="st">"LSOA11CD"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> copy</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>solutions <span class="op">=</span> []</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>bham_region <span class="op">=</span> bham_region.merge(demand, on<span class="op">=</span><span class="st">"LSOA11CD"</span>)</span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>):</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    allocations <span class="op">=</span> generate_random_territory_allocation(return_df<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    allocation_evaluation <span class="op">=</span> evaluate_solution_dict(solution_dict<span class="op">=</span>allocations, gdf<span class="op">=</span>bham_region)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    solutions.append({</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'solution'</span>: i<span class="op">+</span><span class="dv">1</span>,</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'allocations'</span>: allocations,</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'result'</span>: allocation_evaluation</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>solution_df <span class="op">=</span> pd.DataFrame(solutions)</span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>solution_df[<span class="st">'rank'</span>] <span class="op">=</span> solution_df[<span class="st">'result'</span>].rank(method<span class="op">=</span><span class="st">'max'</span>)</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>solution_df.to_pickle(<span class="st">'solutions_example.pkl'</span>)</span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>solution_df.sort_values(<span class="st">'rank'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>solutions <span class="op">=</span> []</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>):</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    allocations <span class="op">=</span> generate_random_territory_allocation(return_df<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    allocation_evaluation <span class="op">=</span> evaluate_solution_dict(solution_dict<span class="op">=</span>allocations, gdf<span class="op">=</span>bham_region)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    solutions.append({</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'solution'</span>: i<span class="op">+</span><span class="dv">1</span>,</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># We can't just pass the dictionary here due to the way python handles dictionaries</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># We need to explicitly take a copy of the dictionary</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'allocations'</span>: copy.deepcopy(allocations),</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'result'</span>: allocation_evaluation</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>solution_df <span class="op">=</span> pd.DataFrame(solutions)</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>solution_df[<span class="st">'rank'</span>] <span class="op">=</span> solution_df[<span class="st">'result'</span>].rank(method<span class="op">=</span><span class="st">'max'</span>)</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>solution_df.to_pickle(<span class="st">'solutions_example.pkl'</span>)</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>solution_df.sort_values(<span class="st">'rank'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">solution</th>
+<th data-quarto-table-cell-role="th">allocations</th>
+<th data-quarto-table-cell-role="th">result</th>
+<th data-quarto-table-cell-role="th">rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9</td>
+<td>10</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031195', 'E01...</td>
+<td>9651.1</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>6</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031218', 'E01...</td>
+<td>9842.8</td>
+<td>2.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>15</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031208', 'E01...</td>
+<td>10811.3</td>
+<td>3.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">6</td>
+<td>7</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031218', 'E01...</td>
+<td>10869.2</td>
+<td>4.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>11</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>11043.4</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8</td>
+<td>9</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031208', 'E01...</td>
+<td>11218.6</td>
+<td>6.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17</td>
+<td>18</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031195', 'E01...</td>
+<td>11401.2</td>
+<td>7.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>8</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031218', 'E01...</td>
+<td>12088.3</td>
+<td>8.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>12226.2</td>
+<td>9.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>12399.0</td>
+<td>10.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031195', 'E01...</td>
+<td>12418.8</td>
+<td>11.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
+<td>12567.1</td>
+<td>12.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15</td>
+<td>16</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
+<td>12831.8</td>
+<td>13.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">16</td>
+<td>17</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031208', 'E01...</td>
+<td>13103.8</td>
+<td>14.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">19</td>
+<td>20</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031195', 'E01...</td>
+<td>13126.5</td>
+<td>15.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">18</td>
+<td>19</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031213', 'E01...</td>
+<td>13196.2</td>
+<td>16.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">13</td>
+<td>14</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031218', 'E01...</td>
+<td>13443.9</td>
+<td>17.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>12</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
+<td>13632.6</td>
+<td>18.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>13</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>13954.4</td>
+<td>19.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>14735.8</td>
+<td>20.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="98c5e080" class="cell" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="28">
 <div>
 <div>
 
@@ -2108,142 +2277,142 @@ The randomly generated solution gives a more even allocation of events than the 
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>1</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>9278.5</td>
-<td>1.0</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>14735.8</td>
+<td>20.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>11</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>10678.9</td>
-<td>2.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>4</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>10935.3</td>
-<td>3.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>8</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>11040.1</td>
-<td>4.0</td>
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>12226.2</td>
+<td>9.0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>3</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>11321.8</td>
-<td>5.0</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031195', 'E01...</td>
+<td>12418.8</td>
+<td>11.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>13</td>
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
 <td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>11334.8</td>
-<td>6.0</td>
+<td>12567.1</td>
+<td>12.0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>5</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>11391.7</td>
-<td>7.0</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>12399.0</td>
+<td>10.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>6</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031218', 'E01...</td>
+<td>9842.8</td>
+<td>2.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>7</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031218', 'E01...</td>
+<td>10869.2</td>
+<td>4.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>8</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031218', 'E01...</td>
+<td>12088.3</td>
+<td>8.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>9</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031208', 'E01...</td>
+<td>11218.6</td>
+<td>6.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>10</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>11708.2</td>
-<td>8.0</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031195', 'E01...</td>
+<td>9651.1</td>
+<td>1.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2</td>
+<td data-quarto-table-cell-role="th">10</td>
+<td>11</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>11043.4</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>12</td>
 <td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>12512.2</td>
-<td>9.0</td>
+<td>13632.6</td>
+<td>18.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>13</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031204', 'E01...</td>
+<td>13954.4</td>
+<td>19.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>14</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031218', 'E01...</td>
+<td>13443.9</td>
+<td>17.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>15</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031208', 'E01...</td>
+<td>10811.3</td>
+<td>3.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">15</td>
 <td>16</td>
 <td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>12513.8</td>
-<td>10.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">14</td>
-<td>15</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>12863.8</td>
-<td>11.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">13</td>
-<td>14</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>12917.0</td>
-<td>12.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">18</td>
-<td>19</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>13009.1</td>
+<td>12831.8</td>
 <td>13.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">19</td>
-<td>20</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>13138.1</td>
-<td>14.0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">16</td>
 <td>17</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>13341.1</td>
-<td>15.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>6</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>13411.6</td>
-<td>16.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>12</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>13661.0</td>
-<td>17.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>9</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>13799.6</td>
-<td>18.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>7</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>13891.6</td>
-<td>19.0</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031208', 'E01...</td>
+<td>13103.8</td>
+<td>14.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">17</td>
 <td>18</td>
-<td>{'Centre 2-5': ['E01031187', 'E01031188', 'E01...</td>
-<td>14538.4</td>
-<td>20.0</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031195', 'E01...</td>
+<td>11401.2</td>
+<td>7.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>19</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031213', 'E01...</td>
+<td>13196.2</td>
+<td>16.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>20</td>
+<td>{'Centre 2-5': ['E01031187', 'E01031195', 'E01...</td>
+<td>13126.5</td>
+<td>15.0</td>
 </tr>
 </tbody>
 </table>

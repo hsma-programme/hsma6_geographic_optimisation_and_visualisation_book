@@ -236,7 +236,7 @@ create_random_starting_dict(dispatcher_starting_allocation_dict)
 
 Now, let's generate some solutions and plot them.
 
-We'll also be using a dataframe from the
+We'll also be using a dataframe from the previous chapter - the code for this can be found in the expander if you want to revisit this.
 
 :::{.callout-tip collapse="true"}
 # Click here to see the code for generating our dispatch boundaries dataframe
@@ -514,17 +514,18 @@ def generate_random_territory_allocation(
     while len(owned_territory_list) < len(gdf[territory_unit_column].unique()):
         # Go around all individuals
         for player in player_list:
-            # Select a random existing territory from the list of owned territories
-            chosen_owned_territory = random.choice(owned_territory_dict[player])
-            # Then find the neighbours
-            neighbors = gdf[gdf[territory_unit_column] == chosen_owned_territory][neighbor_column].values[0]
-            # Choose a random neighbour and update the list of owned territories...
-            selected_territory = random.choice(neighbors)
+            if random.random() > skipgo_chance:
+                # Select a random existing territory from the list of owned territories
+                chosen_owned_territory = random.choice(owned_territory_dict[player])
+                # Then find the neighbours
+                neighbors = gdf[gdf[territory_unit_column] == chosen_owned_territory][neighbor_column].values[0]
+                # Choose a random neighbour and update the list of owned territories...
+                selected_territory = random.choice(neighbors)
 
-            #... if not already owned
-            if selected_territory not in owned_territory_list:
-                owned_territory_dict[player].append(selected_territory)
-                owned_territory_list.append(selected_territory)
+                #... if not already owned
+                if selected_territory not in owned_territory_list:
+                    owned_territory_dict[player].append(selected_territory)
+                    owned_territory_list.append(selected_territory)
 
 
     if return_df:
@@ -558,7 +559,7 @@ ax = random_allocation_test.plot(
 grouped_dispatcher_gdf_boundary.plot(
     ax=ax,
     linewidth=2,
-    edgecolor="green"
+    edgecolor="black"
 )
 ```
 
@@ -627,7 +628,10 @@ def evaluate_solution_dict(solution_dict, gdf, allocation_column='centre_dispatc
 ```
 
 ```{python}
+#| eval: false
 # Ensure our dataframe has the demand column
+import copy
+
 bham_region = bham_region.merge(demand, on="LSOA11CD")
 
 solutions = []
@@ -637,7 +641,9 @@ for i in range(20):
     allocation_evaluation = evaluate_solution_dict(solution_dict=allocations, gdf=bham_region)
     solutions.append({
         'solution': i+1,
-        'allocations': allocations,
+        # We can't just pass the dictionary here due to the way python handles dictionaries
+        # We need to explicitly take a copy of the dictionary
+        'allocations': copy.deepcopy(allocations),
         'result': allocation_evaluation
     })
 
@@ -647,4 +653,12 @@ solution_df['rank'] = solution_df['result'].rank(method='max')
 solution_df.to_pickle('solutions_example.pkl')
 
 solution_df.sort_values('rank', ascending=True)
+```
+
+```{python}
+#| echo: false
+
+initial_solution_df = pd.read_pickle('solutions_example.pkl')
+
+initial_solution_df
 ```
