@@ -360,4 +360,118 @@ grouped_dispatcher_gdf_boundary.plot(
 
 You can see that in some regions the most central point can still be on a boundary, even
 
+
+### Generating our new regions
+
+As a recap, what we want to do now is introduce a number of 'players' who will play a territory-grabbing game. Our 'players' - the dispatchers - will each have a single turn, pass control to the next dispatcher, and so on.
+
+On each turn, they will be presented with a long list of the regions that share a boundary with any of their existing territories. They will then choose a territory at random from that list.
+
+However, this doesn't mean their territory will expand on every turn.
+
+- The territory that they choose could be one of their existing territories (as we are checking for a boundary with *any* of their existing territories on a per-territory basis - not the outer boundary of their entire territory)
+- There will also be a random chance introduced that they just don't take a go
+- They may also try to take a territory that is already owned by a different dispatcher, in which case they will not gain anything on the turn - though we could always add in an option like them 'battling' for the territory
+
+So let's start coding this!
+
+First, let's work on the logic for selecting a territory from their existing list. We'll just do this with a single dispatcher for now.
+
+We'll filter down to this and remind ourselves what the available data on neighbouring territory looks like.
+
+```{python}
+
+# We'll start with dispatcher 5 from centre 2, and we'll use the most central point of their existing territory
+
+dispatcher = "Centre 2-5"
+
+starting_point = most_central[most_central["centre_dispatcher"] == dispatcher]
+
+starting_point['neighbors']
+```
+
+Let's now pick a random neighbour, and work out a way to store the new allocations so we can ensure we know who owns what territory, and we don't end up with a situation where two dispatchers own the same territory.
+
+```{python}
+owned_territory_dict = {}
+
+owned_territory_dict[dispatcher] = [starting_point['LSOA11CD'].values[0]]
+
+owned_territory_dict
+```
+
+```{python}
+selected_territory = random.choice(starting_point['neighbors'].values[0])
+
+selected_territory
+```
+
+```{python}
+owned_territory_dict[dispatcher].append(selected_territory)
+
+owned_territory_dict
+```
+
+Fantastic! We now have a simple way to get and store this.
+
+Let's have a go at giving another dispatcher a turn to grab territory.
+
+```{python}
+dispatcher = "Centre 1-1"
+
+starting_point = most_central[most_central["centre_dispatcher"] == dispatcher]
+
+# This time we add to the existing dict rather than setting it up anew
+owned_territory_dict[dispatcher] = [starting_point['LSOA11CD'].values[0]]
+
+# Now we do our random selection
+selected_territory = random.choice(starting_point['neighbors'].values[0])
+
+owned_territory_dict[dispatcher].append(selected_territory)
+
+owned_territory_dict
+```
+
+This is a good step, and for now we're unlikely to run into the issue of different dispatchers owning the same territory - though it's not impossible! So let's add in another dispatcher, but this time we'll check first that it's not owned by anyone.
+
+First, let's pull back the full list of owned territories from our dict.
+
+```{python}
+list(owned_territory_dict.values())
+```
+
+We'll need to convert this into a single list. We could use a for loop, or a list comprehension.
+
+```{python}
+territory_list = [element for sub_list in list(owned_territory_dict.values()) for element in sub_list]
+
+# By using set, then list on the result of that, we get a list of unique values
+territory_list = list(set(territory_list))
+
+territory_list
+```
+
+
+Now we can use this in our checks.
+
+
+```{python}
+dispatcher = "Centre 1-5"
+
+starting_point = most_central[most_central["centre_dispatcher"] == dispatcher]
+
+owned_territory_dict[dispatcher] = [starting_point['LSOA11CD'].values[0]]
+
+selected_territory = random.choice(starting_point['neighbors'].values[0])
+
+# Only add the territory if it's not already in the list of owned territory
+if selected_territory not in territory_list:
+    owned_territory_dict[dispatcher].append(selected_territory)
+
+owned_territory_dict
+```
+
+
+That's most of the key elements of our function written now - so let's actually turn it into a function that will continue to run until all of the territory has been allocated.
+
 *Note - when we get to the end, can we give a list of good solutions, but prioritise the solutions that are most similar to the starting solution?*
