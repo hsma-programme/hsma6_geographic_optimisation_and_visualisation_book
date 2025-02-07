@@ -492,8 +492,7 @@ def generate_random_territory_allocation(
     ):
 
     # Initialise the territory list as the starting territories
-    allocated_territory_list = list(starting_territories[territory_unit_column].unique())
-
+    owned_territory_list = list(starting_territories[territory_unit_column].unique())
 
     # Set up the starting territory for each individual and have each player have their first go
     for player in player_list:
@@ -504,15 +503,15 @@ def generate_random_territory_allocation(
         selected_territory = random.choice(starting_point['neighbors'].values[0])
 
         # Only add the territory if it's not already in the list of owned territory
-        if selected_territory not in allocated_territory_list:
+        if selected_territory not in owned_territory_list:
             owned_territory_dict[player].append(selected_territory)
             # As we're now going to be iterating and checking throughout, we can just
             # maintain the owned territory list as we go along, which is a bit easier and
             # more efficient than generating it from the territory dict each time
-            allocated_territory_list.append(selected_territory)
+            owned_territory_list.append(selected_territory)
 
     # Keep going through the following process until all territory has been allocated
-    while len(allocated_territory_list) < len(gdf[territory_unit_column].unique()):
+    while len(owned_territory_list) < len(gdf[territory_unit_column].unique()):
         # Go around all individuals
         for player in player_list:
             # Select a random existing territory from the list of owned territories
@@ -523,9 +522,9 @@ def generate_random_territory_allocation(
             selected_territory = random.choice(neighbors)
 
             #... if not already owned
-            if selected_territory not in allocated_territory_list:
+            if selected_territory not in owned_territory_list:
                 owned_territory_dict[player].append(selected_territory)
-                allocated_territory_list.append(selected_territory)
+                owned_territory_list.append(selected_territory)
 
 
     if return_df:
@@ -535,17 +534,18 @@ def generate_random_territory_allocation(
         return pd.merge(gdf, owned_territory_df, on=territory_unit_column, how="left")
     else:
         return owned_territory_dict
+```
 
+Let's try our new function out and see what it returns.
 
-
+```{python}
 random_allocation_test = generate_random_territory_allocation()
 
 random_allocation_test
 
 ```
 
-
-Let's see how much this differs from the original allocation
+Let's see how much this differs from the original allocation.
 
 ```{python}
 
@@ -554,7 +554,7 @@ ax = random_allocation_test.plot(
     column="centre_dispatcher_NEW"
 )
 
-# Bisualise the historical boundaries
+# Visualise the historical boundaries
 grouped_dispatcher_gdf_boundary.plot(
     ax=ax,
     linewidth=2,
@@ -565,5 +565,30 @@ grouped_dispatcher_gdf_boundary.plot(
 
 ### Comparing a new solution to the current allocation
 
+For now, we're going to judge a solution on a single criteria - the average absolute difference in demand across
+
+This is calculated by calculating the difference in total demand experiences by one dispatcher from the average across all dispatchers. We then take the absolute value - i.e. if the difference is negative (the dispatcher received fewer calls than the average), we will turn it into a postive. Finally, we take the average across these values.
+
+We'll create a function to do this.
+
+```{python}
+def evaluate_solution(gdf, allocation_column='centre_dispatcher_NEW', demand_column="demand"):
+    grouped_by_dispatcher = bham_region.groupby(allocation_column)[[demand_column]].sum()
+    mean_demand = grouped_by_dispatcher['demand'].mean()
+
+    grouped_by_dispatcher['difference_from_mean'] = (grouped_by_dispatcher['demand'] - mean_demand).astype('int')
+
+    return abs(grouped_by_dispatcher['difference_from_mean']).mean().round(1)
+```
+
+
+And now let's try this out on our original and new solutions
+
+```{python}
+
+print(f"Original Allocation: {}")
+print(f"Random Solution 1: {}")
+
+```
 
 *Note - when we get to the end, can we give a list of good solutions, but prioritise the solutions that are most similar to the starting solution?*

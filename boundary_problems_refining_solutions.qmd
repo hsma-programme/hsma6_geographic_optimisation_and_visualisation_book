@@ -1,3 +1,7 @@
+---
+title: "(WIP) Boundary Problems - Refining Solutions"
+format: html
+---
 
 
 ### Evolving a solution
