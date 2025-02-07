@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -394,7 +428,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./boundary_problems_varying_evaluating_simple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">(WIP) Boundary Problems - Creating and Evaluating Simple Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Boundary Problems - Creating and Evaluating Simple Solutions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -449,10 +483,23 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="evolving-a-solution" class="level3" data-number="33.0.1">
 <h3 data-number="33.0.1" class="anchored" data-anchor-id="evolving-a-solution"><span class="header-section-number">33.0.1</span> Evolving a solution</h3>
-<p>The sheer number of possible solutionss makes this a tricky problem to solve!</p>
-<p>We could keep generating a very large number of random solutions, and this may work well, but</p>
+<p>The sheer number of possible solutions makes this a tricky problem to solve!</p>
+<p>We could keep generating a very large number of random solutions, and this may work to eventually find a near-optimal solution, but could be extremely time-consuming and resource-intensive, requiring many hours of compute power.</p>
 <p>Instead, let’s try <strong>evolving</strong> our solutions until they are as good as can be.</p>
-<p>What will this process look like?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Due to the requirements for solutions to follow certain rules, evolving our solutions is somewhat more complex than in the case of our location allocation problem, where any combination of centres was theoretically ‘valid’. In that instance, we could randomly permute or mix solutions with no concerns surrounding what the output looked like beyond not being an exact duplicate of an already-evaluated solution. Here, with a need to generate a solution that conforms to rules like the dispatcher’s patch being continuous,</p>
+</div>
+</div>
+<p>So what will the process look like in this case?</p>
 <ul>
 <li>We will generate a new random solution using our function from the previous</li>
 <li>We will evaluate that solution</li>
@@ -463,10 +510,32 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>we will then assess the performance of this solution</li>
 </ul></li>
-<li>we will continue this until there has been no improvement for several rounds of attempts</li>
+<li>we will continue this until there has been no improvement for several rounds of attempts (which will be a parameter we can vary)
+<ul>
+<li>as the evaluation of solutions is much quicker than generating brand new solutions with the method we developed in the previous round, we should see much faster movement towards a ‘good’ solution</li>
+</ul></li>
 </ul></li>
 <li>We will then store the performance of this solution, then start with a new random solution and continue</li>
 </ul>
+<p>To start with, let’s load our random solutions from the last chapter back in.</p>
+<div id="c0aae60a" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>initial_solution_df <span class="op">=</span> pd.read_pickle(<span class="st">'solutions_example.pkl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Code coming soon!</p>
+</div>
+</div>
 
 
 </section>
@@ -1364,8 +1433,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./boundary_problems_varying_evaluating_simple.html" class="pagination-link" aria-label="(WIP) Boundary Problems - Creating and Evaluating Simple Solutions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">(WIP) Boundary Problems - Creating and Evaluating Simple Solutions</span></span>
+      <a href="./boundary_problems_varying_evaluating_simple.html" class="pagination-link" aria-label="Boundary Problems - Creating and Evaluating Simple Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Boundary Problems - Creating and Evaluating Simple Solutions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -1,5 +1,5 @@
 ---
-title: "(WIP) Boundary Problems - Creating and Evaluating Simple Solutions"
+title: "Boundary Problems - Creating and Evaluating Simple Solutions"
 format: html
 ---
 
@@ -603,4 +603,48 @@ else:
 
 ```
 
-*Note - when we get to the end, can we give a list of good solutions, but prioritise the solutions that are most similar to the starting solution?*
+
+
+## Trying this out for more solutions
+
+Let's now run this for 20 different solutions and store the results.
+
+```{python}
+
+def evaluate_solution_dict(solution_dict, gdf, allocation_column='centre_dispatcher', demand_column="demand", territory_unit_column="LSOA11CD"):
+
+    owned_territory_df = pd.DataFrame(
+            [(key, value) for key, values in solution_dict.items() for value in values],
+            columns=[f"{allocation_column}_NEW", territory_unit_column])
+    gdf = pd.merge(gdf, owned_territory_df, on=territory_unit_column, how="left")
+
+    grouped_by_dispatcher = gdf.groupby(f"{allocation_column}_NEW")[[demand_column]].sum()
+    mean_demand = grouped_by_dispatcher['demand'].mean()
+
+    grouped_by_dispatcher['difference_from_mean'] = (grouped_by_dispatcher['demand'] - mean_demand).astype('int')
+
+    return abs(grouped_by_dispatcher['difference_from_mean']).mean().round(1)
+```
+
+```{python}
+# Ensure our dataframe has the demand column
+bham_region = bham_region.merge(demand, on="LSOA11CD")
+
+solutions = []
+
+for i in range(20):
+    allocations = generate_random_territory_allocation(return_df=False)
+    allocation_evaluation = evaluate_solution_dict(solution_dict=allocations, gdf=bham_region)
+    solutions.append({
+        'solution': i+1,
+        'allocations': allocations,
+        'result': allocation_evaluation
+    })
+
+solution_df = pd.DataFrame(solutions)
+solution_df['rank'] = solution_df['result'].rank(method='max')
+
+solution_df.to_pickle('solutions_example.pkl')
+
+solution_df.sort_values('rank', ascending=True)
+```

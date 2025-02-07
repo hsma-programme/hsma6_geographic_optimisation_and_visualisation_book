@@ -2,3 +2,13 @@
 title: "(Coming Soon) Boundary Problems - Evaluating Solutions on Multiple Metrics"
 format: html
 ---
+
+So far, we have just been evaluating our solutions on a single critiera - the balance of a
+
+However, we will often want to evaluate our solutions on multiple metrics. Some of these may be more important to us than others, so we will want a way to *weight* the resulting values when considering the overall score of a solution.
+
+First, we'll explore building some additional metrics into our current example, and then we will move on to building functions that allow us to evaluate a solution flexibly based on some or all of these metrics.
+
+:::{.callout-tip}
+Code coming soon!
+:::

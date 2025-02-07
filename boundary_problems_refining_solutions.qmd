@@ -6,13 +6,17 @@ format: html
 
 ### Evolving a solution
 
-The sheer number of possible solutionss makes this a tricky problem to solve!
+The sheer number of possible solutions makes this a tricky problem to solve!
 
-We could keep generating a very large number of random solutions, and this may work well, but
+We could keep generating a very large number of random solutions, and this may work to eventually find a near-optimal solution, but could be extremely time-consuming and resource-intensive, requiring many hours of compute power.
 
 Instead, let's try **evolving** our solutions until they are as good as can be.
 
-What will this process look like?
+:::{.callout-note}
+Due to the requirements for solutions to follow certain rules, evolving our solutions is somewhat more complex than in the case of our location allocation problem, where any combination of centres was theoretically 'valid'. In that instance, we could randomly permute or mix solutions with no concerns surrounding what the output looked like beyond not being an exact duplicate of an already-evaluated solution. Here, with a need to generate a solution that conforms to rules like the dispatcher's patch being continuous,
+:::
+
+So what will the process look like in this case?
 
 - We will generate a new random solution using our function from the previous
 - We will evaluate that solution
@@ -20,5 +24,19 @@ What will this process look like?
 - If this solution is better than the current status quo, we will then start to evolve this solution
     - for each 'player' (in this case, our dispatchers), we will randomly add or remove one of their regions and allocate it to one of the other players for whom it would be valid territory (i.e. they share a boundary with the territory in question)
         - we will then assess the performance of this solution
-    - we will continue this until there has been no improvement for several rounds of attempts
+    - we will continue this until there has been no improvement for several rounds of attempts (which will be a parameter we can vary)
+        - as the evaluation of solutions is much quicker than generating brand new solutions with the method we developed in the previous round, we should see much faster movement towards a 'good' solution
 - We will then store the performance of this solution, then start with a new random solution and continue
+
+
+To start with, let's load our random solutions from the last chapter back in.
+
+```{python}
+import pandas as pd
+
+initial_solution_df = pd.read_pickle('solutions_example.pkl')
+```
+
+:::{.callout-tip}
+Code coming soon!
+:::
