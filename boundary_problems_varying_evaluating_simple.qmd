@@ -487,11 +487,13 @@ def generate_random_territory_allocation(
     player_column="centre_dispatcher",
     starting_territories=most_central,
     neighbor_column='neighbors',
+    skipgo_chance=0.03,
     return_df=True
     ):
 
     # Initialise the territory list as the starting territories
-    territory_list = list(starting_territories[territory_unit_column].unique())
+    allocated_territory_list = list(starting_territories[territory_unit_column].unique())
+
 
     # Set up the starting territory for each individual and have each player have their first go
     for player in player_list:
@@ -502,32 +504,35 @@ def generate_random_territory_allocation(
         selected_territory = random.choice(starting_point['neighbors'].values[0])
 
         # Only add the territory if it's not already in the list of owned territory
-        if selected_territory not in territory_list:
+        if selected_territory not in allocated_territory_list:
             owned_territory_dict[player].append(selected_territory)
             # As we're now going to be iterating and checking throughout, we can just
             # maintain the owned territory list as we go along, which is a bit easier and
             # more efficient than generating it from the territory dict each time
-            territory_list.append(selected_territory)
+            allocated_territory_list.append(selected_territory)
 
     # Keep going through the following process until all territory has been allocated
-    while len(territory_list) < len(gdf[territory_unit_column].unique()):
-    #while len(territory_list) < 100:
+    while len(allocated_territory_list) < len(gdf[territory_unit_column].unique()):
         # Go around all individuals
         for player in player_list:
             # Select a random existing territory from the list of owned territories
             chosen_owned_territory = random.choice(owned_territory_dict[player])
             # Then find the neighbours
             neighbors = gdf[gdf[territory_unit_column] == chosen_owned_territory][neighbor_column].values[0]
-            # Choose a random neighbour and update the list of owned territories
+            # Choose a random neighbour and update the list of owned territories...
             selected_territory = random.choice(neighbors)
-            owned_territory_dict[player].append(selected_territory)
-            territory_list.append(selected_territory)
+
+            #... if not already owned
+            if selected_territory not in allocated_territory_list:
+                owned_territory_dict[player].append(selected_territory)
+                allocated_territory_list.append(selected_territory)
+
 
     if return_df:
         owned_territory_df = pd.DataFrame(
             [(key, value) for key, values in owned_territory_dict.items() for value in values],
             columns=[f"{player_column}_NEW", territory_unit_column])
-        return pd.merge(gdf, owned_territory_df, on=territory_unit_column)
+        return pd.merge(gdf, owned_territory_df, on=territory_unit_column, how="left")
     else:
         return owned_territory_dict
 
@@ -556,5 +561,9 @@ grouped_dispatcher_gdf_boundary.plot(
     edgecolor="green"
 )
 ```
+
+
+### Comparing a new solution to the current allocation
+
 
 *Note - when we get to the end, can we give a list of good solutions, but prioritise the solutions that are most similar to the starting solution?*

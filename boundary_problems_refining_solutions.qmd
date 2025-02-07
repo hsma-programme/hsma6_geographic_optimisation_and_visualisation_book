@@ -1,0 +1,20 @@
+
+
+### Evolving a solution
+
+The sheer number of possible solutionss makes this a tricky problem to solve!
+
+We could keep generating a very large number of random solutions, and this may work well, but
+
+Instead, let's try **evolving** our solutions until they are as good as can be.
+
+What will this process look like?
+
+- We will generate a new random solution using our function from the previous
+- We will evaluate that solution
+- If this solution is worse than the current status quo, we will generate a new random solution (and keep doing so until we find a solution that performs 'better' than the current status quo)
+- If this solution is better than the current status quo, we will then start to evolve this solution
+    - for each 'player' (in this case, our dispatchers), we will randomly add or remove one of their regions and allocate it to one of the other players for whom it would be valid territory (i.e. they share a boundary with the territory in question)
+        - we will then assess the performance of this solution
+    - we will continue this until there has been no improvement for several rounds of attempts
+- We will then store the performance of this solution, then start with a new random solution and continue
