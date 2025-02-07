@@ -472,6 +472,89 @@ owned_territory_dict
 ```
 
 
+### Writing the function
+
 That's most of the key elements of our function written now - so let's actually turn it into a function that will continue to run until all of the territory has been allocated.
+
+For clarity and ease of use, we'll set up our defaults to relate to our current objects - but for a more reusable function, it may be better to avoid defaults but be very clear in the docstring what is expected as an input, and add in some error handling to manage cases that don't match.
+
+```{python}
+
+def generate_random_territory_allocation(
+    gdf=bham_region,
+    territory_unit_column="LSOA11CD",
+    player_list=bham_region["centre_dispatcher"].unique(),
+    player_column="centre_dispatcher",
+    starting_territories=most_central,
+    neighbor_column='neighbors',
+    return_df=True
+    ):
+
+    # Initialise the territory list as the starting territories
+    territory_list = list(starting_territories[territory_unit_column].unique())
+
+    # Set up the starting territory for each individual and have each player have their first go
+    for player in player_list:
+        starting_point = starting_territories[starting_territories[player_column] == player]
+
+        owned_territory_dict[player] = [starting_point[territory_unit_column].values[0]]
+
+        selected_territory = random.choice(starting_point['neighbors'].values[0])
+
+        # Only add the territory if it's not already in the list of owned territory
+        if selected_territory not in territory_list:
+            owned_territory_dict[player].append(selected_territory)
+            # As we're now going to be iterating and checking throughout, we can just
+            # maintain the owned territory list as we go along, which is a bit easier and
+            # more efficient than generating it from the territory dict each time
+            territory_list.append(selected_territory)
+
+    # Keep going through the following process until all territory has been allocated
+    while len(territory_list) < len(gdf[territory_unit_column].unique()):
+    #while len(territory_list) < 100:
+        # Go around all individuals
+        for player in player_list:
+            # Select a random existing territory from the list of owned territories
+            chosen_owned_territory = random.choice(owned_territory_dict[player])
+            # Then find the neighbours
+            neighbors = gdf[gdf[territory_unit_column] == chosen_owned_territory][neighbor_column].values[0]
+            # Choose a random neighbour and update the list of owned territories
+            selected_territory = random.choice(neighbors)
+            owned_territory_dict[player].append(selected_territory)
+            territory_list.append(selected_territory)
+
+    if return_df:
+        owned_territory_df = pd.DataFrame(
+            [(key, value) for key, values in owned_territory_dict.items() for value in values],
+            columns=[f"{player_column}_NEW", territory_unit_column])
+        return pd.merge(gdf, owned_territory_df, on=territory_unit_column)
+    else:
+        return owned_territory_dict
+
+
+
+random_allocation_test = generate_random_territory_allocation()
+
+random_allocation_test
+
+```
+
+
+Let's see how much this differs from the original allocation
+
+```{python}
+
+# Plot the new boundaries using colours
+ax = random_allocation_test.plot(
+    column="centre_dispatcher_NEW"
+)
+
+# Bisualise the historical boundaries
+grouped_dispatcher_gdf_boundary.plot(
+    ax=ax,
+    linewidth=2,
+    edgecolor="green"
+)
+```
 
 *Note - when we get to the end, can we give a list of good solutions, but prioritise the solutions that are most similar to the starting solution?*
