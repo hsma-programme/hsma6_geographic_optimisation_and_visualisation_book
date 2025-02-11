@@ -17,23 +17,58 @@ This is a big part of the field of operational research, with certain algorithms
 :::
 
 :::{.callout-note}
-Due to the requirements for solutions to follow certain rules, evolving our solutions is somewhat more complex than in the case of our location allocation problem, where any combination of centres was theoretically 'valid'. In that instance, we could randomly permute or mix solutions with no concerns surrounding what the output looked like beyond not being an exact duplicate of an already-evaluated solution. Here, with a need to generate a solution that conforms to rules like the dispatcher's patch being continuous,
+Due to the requirements for solutions to follow certain rules, evolving our solutions is somewhat more complex than in the case of our location allocation problem, where any combination of centres was theoretically 'valid'. In that instance, we could randomly permute or mix solutions with no concerns surrounding what the output looked like beyond not being an exact duplicate of an already-evaluated solution. Here, with a need to generate a solution that conforms to rules like the dispatcher's patch being continuous and all regions being allocated to one (and only one) dispatcher.
 :::
 
 So what will the process look like in this case?
 
-- We will generate a new random solution using our function from the previous
+- We will generate a new random solution using our function from the previous section
 - We will evaluate that solution
+    - While we will initially be evaluating this solution against a single metric, the same approach could be applied when scoring against multiple metrics
 - If this solution is worse than the current status quo, we will generate a new random solution (and keep doing so until we find a solution that performs 'better' than the current status quo)
 - If this solution is better than the current status quo, we will then start to evolve this solution
-    - for each 'player' (in this case, our dispatchers), we will randomly add or remove one of their regions and allocate it to one of the other players for whom it would be valid territory (i.e. they share a boundary with the territory in question)
-        - we will then assess the performance of this solution
-    - we will continue this until there has been no improvement for several rounds of attempts (which will be a parameter we can vary)
-        - as the evaluation of solutions is much quicker than generating brand new solutions with the method we developed in the previous round, we should see much faster movement towards a 'good' solution
-- We will then store the performance of this solution, then start with a new random solution and continue
+    - for each 'player' (in this case, our dispatchers), we will randomly add or remove a small number of their regions and allocate it to one of the other players for whom it would be valid territory (i.e. they share a boundary with the territory in question)
+        - we will generate many of these variants per round
+        - we will then assess the performance of each of these solutions
+        - several of the best solutions (a parameter we will be able to vary) will be retained at this point, going on to form a new population of solutions we can continue to loop through, tweak, and recheck the performance of
+            - rather than the 'child' solutions replacing the 'parents', we will keep both at each stage, evaluating them all on their merits rather than always assuming the 'child' strategies will be better
+            - note that general recommendations are that 𝝺 - the population size - should be at least 10 times larger than μ - the number of solutions we keep in each generation
+            - it's also recommended that 𝝺 / μ should leave no remainder
+    - we will continue this process until there has been no improvement for several rounds of attempts
+        - the number of rounds for which there is no improvement will be a parameter we can vary
+- We will then store the performance of this solution, then start with a new random solution and repeat this for a certain number of solutions or period of time
 
+:::{.callout-tip}
+As the minor variation and evaluation of solutions is much quicker than generating brand new solutions with the method we developed in the previous chapter, we should see much faster movement towards a 'good' solution. This approach should therefore be more efficient than if we were to use the same amount of computational time generating and evaluating random solutions (though there is a small chance we land on a great solution at random!).
+
+However, it should also be remembered that there is something to be said for a simple approach...
+
+> “Experience shows that if the stakeholders (users of the model) can easily understand the methods used, they are more likely to trust the solution and use the model more confidently in the decision making processes” - Meskarian R, Penn ML, Williams S, Monks T (2017)[^trustquote]
+
+:::
+
+[^trustquote]: Meskarian R, Penn ML, Williams S, Monks T (2017) A facility location model for analysis of current and future demand for sexual health services. PLoS ONE 12(8): e0183942. https://doi.org/10.1371/journal.pone.0183942
+
+
+## Local and Global Optima
+
+![](assets/2025-02-11-10-35-43.png)[^imglocaloptima]
+
+[^imglocaloptima]: A genetic algorithm for calculating minimum distance between convex and concave bodies - Scientific Figure on ResearchGate. Available from: https://www.researchgate.net/figure/Local-versus-global-optimum_fig1_228563694 [accessed 9 Apr, 2024]
+
+Evolutionary algorithms can have the issue of getting stuck in local optima - where they reach a 'good' solution and small tweaks in any direction lead to worse scores. However, outside of the 'sight' of the algorithm, there may be a better overall solution that exists.
+
+While there are a range of ways this issue can be tackled, here we'll mainly be approaching it by working with several different random starting positions.
+
+## Loading Previous Solutions
 
 To start with, let's load our random solutions from the last chapter back in.
+
+:::{.callout-warning}
+Pickle is a convenient file format for storing dataframes and reloading them with important information like column types retained. This is important in situations like this where one of our columns is a more complex datatype that may not transfer well into a csv.
+
+However, pickle is not particularly secure and you should only unpickle files from sources you trust as there is a risk of malicious code being injected and then executing on unpickling. Alternative formats such as [Feather](https://arrow.apache.org/docs/python/feather.html) and [Parquet](https://arrow.apache.org/docs/python/parquet.html) are generally regarded as more secure.
+:::
 
 ```{python}
 import pandas as pd
@@ -178,6 +213,8 @@ grouped_dispatcher_gdf_boundary.plot(
     edgecolor="black"
 )
 ```
+
+## Writing our evolutionary algorithm
 
 :::{.callout-tip}
 Code coming soon!

@@ -29,9 +29,9 @@ At this point, we are not trying to do anything to balance our objectives like e
 
 To create a solution that scales well to any number of dispatchers, we will have the dispatchers start with a single randomly-selected patch from their existing location (though we will also code in an option to always start from a single specified point).
 
-Then, on each 'turn', they will randomly choose another patch from the patches that share a boundary with the first patch. There is a small (adjustable) possibility on each turn that they will not opt to take a turn; this will be part of our strategy to ensure that not every dispatcher ends up with solutions containing exactly the same number
+Then, on each 'turn', they will randomly choose another patch from the patches that share a boundary with the first patch. There is a small (adjustable) possibility on each turn that they will not opt to take a turn; this will be part of our strategy to ensure that not every dispatcher ends up with solutions containing exactly the same number of regions.
 
-On each subsequent turn, they will randomly select another region that touches any part of their existing region. If the region that is selected is a region that they already have in their 'patch', then
+On each subsequent turn, they will randomly select another region that touches any part of their existing region. If the region that is selected is a region that they already have in their 'patch', or a region that is already 'owned' by another 'player', then their 'go' ends without them gaining any additional territory. However, if they have randomly selected an 'unowned' spot, this is then added to their
 
 ```{python}
 #| echo: false
@@ -64,9 +64,11 @@ create_gif("animations/walk_animation_1", "images/walk.gif", duration=500)
 
 Here's an example of one of our 'walks' building up. This only shows the first few steps, but eventually it would continue until the whole patch was covered, following the same pattern.
 
+Here, player 1's patches are red, and player 2's are purple. Light blue patches are those not yet owned by either player.
+
 ![](images/walk.gif)
 
-This just showed us building up two patches, but more patches could be built with a larger number of 'players'.
+This just showed us building up two patches, but more patches could be built with a larger number of 'players', with a third player being represented in yellow here.
 
 ```{python}
 #| echo: false
@@ -77,7 +79,7 @@ create_gif("animations/walk_animation_2", "images/walk_2.gif", duration=500)
 ![](images/walk_2.gif)
 
 :::{.callout-tip}
-Remember - due to the randomness we will introduce, each generated solution will be slightly different.
+Remember - due to the randomness we will introduce in multiple ways, each generated solution will be slightly different.
 :::
 
 
@@ -203,7 +205,6 @@ There are a couple of different approaches we could take here - and maybe we'll 
 - *Option 1* - Use our new dictionary to select a random starting LSOA for each of our dispatchers from within their existing territories.
 - *Option 2* - Start with the most central region of the existing regions for each dispatcher.
 - *Option 3* - Provide each dispatcher with an entirely random starting point, regardless of the historical boundaries.
-    - This could work nicely if we try to avoid
 
 *Option 1*
 

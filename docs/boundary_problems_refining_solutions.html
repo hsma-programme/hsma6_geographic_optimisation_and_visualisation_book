@@ -459,6 +459,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#evolving-a-solution" id="toc-evolving-a-solution" class="nav-link active" data-scroll-target="#evolving-a-solution"><span class="header-section-number">33.0.1</span> Evolving a solution</a></li>
+  <li><a href="#local-and-global-optima" id="toc-local-and-global-optima" class="nav-link" data-scroll-target="#local-and-global-optima"><span class="header-section-number">33.1</span> Local and Global Optima</a></li>
+  <li><a href="#loading-previous-solutions" id="toc-loading-previous-solutions" class="nav-link" data-scroll-target="#loading-previous-solutions"><span class="header-section-number">33.2</span> Loading Previous Solutions</a></li>
+  <li><a href="#writing-our-evolutionary-algorithm" id="toc-writing-our-evolutionary-algorithm" class="nav-link" data-scroll-target="#writing-our-evolutionary-algorithm"><span class="header-section-number">33.3</span> Writing our evolutionary algorithm</a></li>
   </ul>
 </nav>
     </div>
@@ -512,29 +515,79 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Due to the requirements for solutions to follow certain rules, evolving our solutions is somewhat more complex than in the case of our location allocation problem, where any combination of centres was theoretically ‘valid’. In that instance, we could randomly permute or mix solutions with no concerns surrounding what the output looked like beyond not being an exact duplicate of an already-evaluated solution. Here, with a need to generate a solution that conforms to rules like the dispatcher’s patch being continuous,</p>
+<p>Due to the requirements for solutions to follow certain rules, evolving our solutions is somewhat more complex than in the case of our location allocation problem, where any combination of centres was theoretically ‘valid’. In that instance, we could randomly permute or mix solutions with no concerns surrounding what the output looked like beyond not being an exact duplicate of an already-evaluated solution. Here, with a need to generate a solution that conforms to rules like the dispatcher’s patch being continuous and all regions being allocated to one (and only one) dispatcher.</p>
 </div>
 </div>
 <p>So what will the process look like in this case?</p>
 <ul>
-<li>We will generate a new random solution using our function from the previous</li>
-<li>We will evaluate that solution</li>
+<li>We will generate a new random solution using our function from the previous section</li>
+<li>We will evaluate that solution
+<ul>
+<li>While we will initially be evaluating this solution against a single metric, the same approach could be applied when scoring against multiple metrics</li>
+</ul></li>
 <li>If this solution is worse than the current status quo, we will generate a new random solution (and keep doing so until we find a solution that performs ‘better’ than the current status quo)</li>
 <li>If this solution is better than the current status quo, we will then start to evolve this solution
 <ul>
-<li>for each ‘player’ (in this case, our dispatchers), we will randomly add or remove one of their regions and allocate it to one of the other players for whom it would be valid territory (i.e.&nbsp;they share a boundary with the territory in question)
+<li>for each ‘player’ (in this case, our dispatchers), we will randomly add or remove a small number of their regions and allocate it to one of the other players for whom it would be valid territory (i.e.&nbsp;they share a boundary with the territory in question)
 <ul>
-<li>we will then assess the performance of this solution</li>
-</ul></li>
-<li>we will continue this until there has been no improvement for several rounds of attempts (which will be a parameter we can vary)
+<li>we will generate many of these variants per round</li>
+<li>we will then assess the performance of each of these solutions</li>
+<li>several of the best solutions (a parameter we will be able to vary) will be retained at this point, going on to form a new population of solutions we can continue to loop through, tweak, and recheck the performance of
 <ul>
-<li>as the evaluation of solutions is much quicker than generating brand new solutions with the method we developed in the previous round, we should see much faster movement towards a ‘good’ solution</li>
+<li>rather than the ‘child’ solutions replacing the ‘parents’, we will keep both at each stage, evaluating them all on their merits rather than always assuming the ‘child’ strategies will be better</li>
+<li>note that general recommendations are that 𝝺 - the population size - should be at least 10 times larger than μ - the number of solutions we keep in each generation</li>
+<li>it’s also recommended that 𝝺 / μ should leave no remainder</li>
 </ul></li>
 </ul></li>
-<li>We will then store the performance of this solution, then start with a new random solution and continue</li>
+<li>we will continue this process until there has been no improvement for several rounds of attempts
+<ul>
+<li>the number of rounds for which there is no improvement will be a parameter we can vary</li>
+</ul></li>
+</ul></li>
+<li>We will then store the performance of this solution, then start with a new random solution and repeat this for a certain number of solutions or period of time</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As the minor variation and evaluation of solutions is much quicker than generating brand new solutions with the method we developed in the previous chapter, we should see much faster movement towards a ‘good’ solution. This approach should therefore be more efficient than if we were to use the same amount of computational time generating and evaluating random solutions (though there is a small chance we land on a great solution at random!).</p>
+<p>However, it should also be remembered that there is something to be said for a simple approach…</p>
+<blockquote class="blockquote">
+<p>“Experience shows that if the stakeholders (users of the model) can easily understand the methods used, they are more likely to trust the solution and use the model more confidently in the decision making processes” - Meskarian R, Penn ML, Williams S, Monks T (2017)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="local-and-global-optima" class="level2" data-number="33.1">
+<h2 data-number="33.1" class="anchored" data-anchor-id="local-and-global-optima"><span class="header-section-number">33.1</span> Local and Global Optima</h2>
+<p><img src="assets/2025-02-11-10-35-43.png" class="img-fluid"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Evolutionary algorithms can have the issue of getting stuck in local optima - where they reach a ‘good’ solution and small tweaks in any direction lead to worse scores. However, outside of the ‘sight’ of the algorithm, there may be a better overall solution that exists.</p>
+<p>While there are a range of ways this issue can be tackled, here we’ll mainly be approaching it by working with several different random starting positions.</p>
+</section>
+<section id="loading-previous-solutions" class="level2" data-number="33.2">
+<h2 data-number="33.2" class="anchored" data-anchor-id="loading-previous-solutions"><span class="header-section-number">33.2</span> Loading Previous Solutions</h2>
 <p>To start with, let’s load our random solutions from the last chapter back in.</p>
-<div id="239978ae" class="cell" data-execution_count="1">
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pickle is a convenient file format for storing dataframes and reloading them with important information like column types retained. This is important in situations like this where one of our columns is a more complex datatype that may not transfer well into a csv.</p>
+<p>However, pickle is not particularly secure and you should only unpickle files from sources you trust as there is a risk of malicious code being injected and then executing on unpickling. Alternative formats such as <a href="https://arrow.apache.org/docs/python/feather.html">Feather</a> and <a href="https://arrow.apache.org/docs/python/parquet.html">Parquet</a> are generally regarded as more secure.</p>
+</div>
+</div>
+<div id="f134ddad" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>initial_solution_df <span class="op">=</span> pd.read_pickle(<span class="st">'solutions_example.pkl'</span>)</span>
@@ -542,7 +595,7 @@ Note
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>initial_solution_df.to_csv(<span class="st">'solutions_example.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s write a quick function to pull out the allocations from our solutions file, and turn that back into a dataframe we can work with.</p>
-<div id="e39217e3" class="cell" data-execution_count="2">
+<div id="969c275a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_allocation_df_from_solution_df(df, solution_rank, allocation_col_name, territory_col_name):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    row_of_interest <span class="op">=</span> df[df[<span class="st">'rank'</span>] <span class="op">==</span> solution_rank]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    owned_territory_dict <span class="op">=</span> row_of_interest[<span class="st">'allocations'</span>].values[<span class="dv">0</span>]</span>
@@ -553,7 +606,7 @@ Note
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> owned_territory_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s now try this out to pull back and visualise our best solution.</p>
-<div id="d2b1cefc" class="cell" data-execution_count="3">
+<div id="24163fb8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>best_solution <span class="op">=</span> extract_allocation_df_from_solution_df(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    initial_solution_df,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    solution_rank<span class="op">=</span><span class="dv">1</span>,</span>
@@ -640,7 +693,7 @@ Note
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -649,9 +702,9 @@ Click here to view code from previous chapters for importing our historical boun
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="9f62d584" class="cell" data-execution_count="4">
+<div id="aea0c8b0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>lsoa_geojson_path <span class="op">=</span> <span class="st">'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'</span></span>
@@ -713,7 +766,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
-<div id="495db7b5" class="cell" data-execution_count="5">
+<div id="4e8b3519" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ax<span class="op">=</span>bham_region.merge(best_solution, on<span class="op">=</span><span class="st">"LSOA11CD"</span>).plot(column<span class="op">=</span><span class="st">"centre_dispatcher_NEW"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualise the historical boundaries</span></span>
@@ -732,7 +785,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <p>And let’s compare this with our worst-performing solution.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -741,9 +794,9 @@ Click here to see the code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="9762f90f" class="cell" data-execution_count="6">
+<div id="7d15dd6a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>worst_solution <span class="op">=</span> extract_allocation_df_from_solution_df(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    initial_solution_df,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    solution_rank<span class="op">=</span><span class="dv">20</span>,</span>
@@ -763,7 +816,7 @@ Click here to see the code
 </div>
 </div>
 </div>
-<div id="e0c9610e" class="cell" data-execution_count="7">
+<div id="0b13f44c" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -772,6 +825,9 @@ Click here to see the code
 </div>
 </div>
 </div>
+</section>
+<section id="writing-our-evolutionary-algorithm" class="level2" data-number="33.3">
+<h2 data-number="33.3" class="anchored" data-anchor-id="writing-our-evolutionary-algorithm"><span class="header-section-number">33.3</span> Writing our evolutionary algorithm</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -787,6 +843,13 @@ Tip
 </div>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Meskarian R, Penn ML, Williams S, Monks T (2017) A facility location model for analysis of current and future demand for sexual health services. PLoS ONE 12(8): e0183942. https://doi.org/10.1371/journal.pone.0183942<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>A genetic algorithm for calculating minimum distance between convex and concave bodies - Scientific Figure on ResearchGate. Available from: https://www.researchgate.net/figure/Local-versus-global-optimum_fig1_228563694 [accessed 9 Apr, 2024]<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
