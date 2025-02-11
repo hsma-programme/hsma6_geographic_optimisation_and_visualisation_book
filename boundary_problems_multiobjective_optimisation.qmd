@@ -1,14 +1,198 @@
 ---
-title: "(Coming Soon) Boundary Problems - Evaluating Solutions on Multiple Metrics"
-format: html
+title: "(WIP) Boundary Problems - Evaluating Solutions on Multiple Metrics"
+format:
+    html:
+        other-links:
+        - text: Multi-objective optimisation example - hyper-acute stroke unit (HASU) provision
+          href: https://doi.org/10.1136/bmjopen-2017-018143
+        - text: HASU paper supplementary material - more details
+          href: https://github.com/MichaelAllen1966/stroke_unit_location/blob/master/bmj_open_paper/bmj_open_stroke_unit_location_paper_supplementary_material-1.pdf
+        - text: Multi-objective optimisation example - consultant-led childbirth rate maximisation
+          href: https://doi.org/10.1136/bmjopen-2019-034830
+        code-links:
+        - text: HASU Paper Repository (site location)
+          href: https://github.com/MichaelAllen1966/stroke_unit_location
+        - text: Maternal Birth Unit Repository (site location)
+          href: https://github.com/MichaelAllen1966/1901_birth_centre_location
+        - text: Generalised Multi-objective Genetic Algorithm Repository (site location)
+          href: https://github.com/MichaelAllen1966/1807_acute_healthcare_location_effect_of_boundaries
 ---
 
 So far, we have just been evaluating our solutions on a single critiera - the balance of a
 
-However, we will often want to evaluate our solutions on multiple metrics. Some of these may be more important to us than others, so we will want a way to *weight* the resulting values when considering the overall score of a solution.
+However, we will often want to evaluate our solutions on multiple metrics.
+
+In addition, some of these may be more important to us than others, so we may want a way to *weight* the resulting values when considering the overall score of a solution.
 
 First, we'll explore building some additional metrics into our current example, and then we will move on to building functions that allow us to evaluate a solution flexibly based on some or all of these metrics.
 
-:::{.callout-tip}
-Code coming soon!
+
+## Defining a score function
+
+Let's start building ourselves an adaptable function that we can build on to gradually add more objectives to.
+
+:::{.callout-note}
+This approach is inspired by the work undertaken here by [Mike Allen, Kerry Pearn, Emma Villeneuve, Thomas Monks, Ken Stein and Martin James](https://github.com/MichaelAllen1966/stroke_unit_location/blob/master/pyf_ga05_functions_170406.py)
 :::
+
+:::{.callout-tip}
+Note that here we've defined some scores that are specifically applicable to the problem we are targeting. However, the function could be adapted to use as many or as few of these, or as many other scoring criteria, as you wish. Take a look at the example linked above to see how you could bring some other criteria in, such as travel times.
+:::
+
+### Determining whether a solution is better or worse than another solution.
+
+It's also worth mentioning at this point the criteria that we will be using for determining whether a solution is 'better' than another as we progressively test multiple solutions.
+
+This is a bit more complex to define than with a single-objective problem, where we could simply define whether a higher or lower score was better in the given context.
+
+Instead, here we will use the idea of 'dominance'.
+
+Let's visualise our scores as a list of numbers, with each number representing the. In this example, we'll assume a higher score is always better.
+
+**Solution 1**: `[1   6   8]`
+
+**Solution 2**: `[2   6   9]`
+
+:::{.callout-note}
+
+The technical definition of dominance in this context is
+
+> "A vector `a` of the objective space **dominates** another vector `b` if all criteria of `a` are better or equal to criteria of `b` and `a≠b`"[^1]
+
+This simply means that
+
+- the outputs are not identical
+- every score has to be **better than** or *at least equal to* the solution we are comparing against
+
+A solution is non-dominated if
+- the score for one criteria is **better than** at least one score in another solution
+- all remaining scores are at least equal to the other scores
+
+After evaluating multiple solutions, you will end up with a series of non-dominated solutions that form the **Pareto Front**.
+
+:::
+
+[^1]: Zhou A, Qu B-Y, Li H, et al. Multiobjective evolutionary algorithms: A survey of the state of the art. Swarm Evol Comput 2011;1:32–49. doi:10.1016/j.swevo.2011.03.001
+
+So in this case, solution 2 would be better than solution 1 as it is no worse than solution 1 in any respect, and better in some respects.
+
+### Trade-offs
+
+It's also worth considering that when we start to look at solutions to multi-objective problems, we will generally be unable to find a single 'best' solution that performs optimally across every single objective.
+
+There will usually be some level of trade-off to be had, with some solutions performing better in one aspect than in others. Generating, evaluating and capturing a wide range of solutions and their scores can help us to start understanding - and visualising - what this trade-off looks like.
+
+
+
+### Code for the scoring function
+
+:::{.callout-tip}
+Optimizing on every score at once can be slow; it's a good idea to build the ability into your function to turn the scoring of objectives on and off.
+:::
+
+```{python}
+import numpy as np
+
+def score(dispatcher_allocations, pareto_include, weighting=None, calc_all=False):
+    """
+    Evaluates a population of proposed boundaries based on multiple performance metrics.
+
+    This function calculates a variety of metrics related to.
+
+    Parameters that are scored on are:
+    1. Total number of calls per dispatcher
+        (minimise DIFFERENCE between total calls per dispatcher across all dispatchers in the solution)
+    2. Maximum number of calls controlled by a single dispatcher
+        (minimise - we want no individual dispatchers to be receiving an unusually low number of calls compared to other dispatchers)
+    3. Minimum number of calls controlled by a single dispatcher
+        (maximise - we want no individual dispatchers to be receiving an unusually high number of calls compared to other dispatchers)
+    4. Total number of resources controlled per dispatcher
+        (minimise DIFFERENCE between the number of resources controlled by each dispatcher in the solution)
+
+    It supports Pareto-based evaluation, computing only the necessary metrics unless CALC_ALL is set to True, in which case all metrics are calculated.
+
+
+    Parameters
+    ----------
+    dispatcher_allocations: dict
+
+    pareto_include: list
+        List of booleans relating to the objectives
+        e.g. evaluating objectives 1 and 4 only would require the list [True, False, False, True]
+
+    weighting: opt, list
+        List of weights for the objectives. Weights should be positive.
+        If None, it will be assumed that all objectives are equally important (have equal weighting).
+        If passed, length must be equal to the number of pareto objectives.
+
+    calc_all: boolean
+        If true, pareto_include will be ignored and all metrics will be used for calculations
+    """
+
+    # CODER HERE TO CALCULATE THE
+
+    return (score_matrix, call_matrix, resource_allocation_matrix)
+
+
+
+
+def normalise_score(score_matrix, norm_matrix):
+    """
+    Normalises a 'score matrix' with reference to 'norm matrix' which gives scores that produce zero or one
+
+    Notes
+    -----
+
+    Based on the approach in [GitHub Link](https://github.com/MichaelAllen1966/stroke_unit_location/blob/master/pyf_ga05_functions_170406.py)
+    The referenced code is licensed under Apache 2.0.
+    """
+
+    norm_score=np.zeros(np.shape(score_matrix)) # create normlaises score matrix with same dimensions as original scores
+    number_of_scores=len(score_matrix[0,:]) # number of different scores
+    for col in range(number_of_scores): # normaise for each score in turn
+        score_zero=norm_matrix[col,0]
+        score_one=norm_matrix[col,1]
+        score_range=score_one-score_zero
+        norm_score[:,col]=(score_matrix[:,col]-score_zero)/score_range
+    return norm_score
+
+def pareto(scores):
+    """
+    This function takes an array or list of 'scores' and returns a Boolean numpy array identifying which rows of the array 'scores' are non-dominated (the Pareto front).
+
+    Scores should be normalised so that higher values dominate lower values.
+
+    The method is based on assuming everything starts on Pareto front, and then dominated points are recorded
+
+    Parameters
+    ----------
+    scores: list or numpy array
+
+    Returns
+    -------
+    numpy array
+        returns a Boolean numpy array identifying which rows of the array 'scores' are non-dominated (the Pareto front). Dominated scores are identified with a 0.
+
+    Notes
+    -----
+
+    Based on the approach in [GitHub Link](https://github.com/MichaelAllen1966/stroke_unit_location/blob/master/pyf_ga05_functions_170406.py)
+    The referenced code is licensed under Apache 2.0.
+    """
+    if isinstance(scores, np.ndarray):
+        pop_size=len(scores[:,0])
+    elif type(scores) == 'list':
+        pop_size=len(scores)
+
+    pareto_front=np.ones(pop_size, dtype=bool)
+
+    for i in range(pop_size):
+        for j in range(pop_size):
+            if all (scores[j]>=scores[i]) and any (scores[j]>scores[i]):
+                # j dominates i
+                pareto_front[i]=0
+                break
+
+    return pareto_front
+
+```

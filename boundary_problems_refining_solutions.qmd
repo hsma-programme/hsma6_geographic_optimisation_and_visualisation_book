@@ -10,7 +10,11 @@ The sheer number of possible solutions makes this a tricky problem to solve!
 
 We could keep generating a very large number of random solutions, and this may work to eventually find a near-optimal solution, but could be extremely time-consuming and resource-intensive, requiring many hours of compute power.
 
-Instead, let's try **evolving** our solutions until they are as good as can be.
+Instead, let's try taking some inspiration from the natural world and **evolving** our solutions until they are as good as can be.
+
+:::{.callout-tip}
+This is a big part of the field of operational research, with certain algorithms like NSGA-II being well-known and defined, and implemented in libraries that you can reuse. However, you can also create your own genetic algorithms or modify approaches like NSGA-II, as done in [Allen et al. and their work on hyperacute stroke unit modelling](https://github.com/MichaelAllen1966/stroke_unit_location/blob/master/bmj_open_paper/bmj_open_stroke_unit_location_paper_supplementary_material-1.pdf).
+:::
 
 :::{.callout-note}
 Due to the requirements for solutions to follow certain rules, evolving our solutions is somewhat more complex than in the case of our location allocation problem, where any combination of centres was theoretically 'valid'. In that instance, we could randomly permute or mix solutions with no concerns surrounding what the output looked like beyond not being an exact duplicate of an already-evaluated solution. Here, with a need to generate a solution that conforms to rules like the dispatcher's patch being continuous,

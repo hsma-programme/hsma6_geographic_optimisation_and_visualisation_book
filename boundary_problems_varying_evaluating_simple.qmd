@@ -199,9 +199,15 @@ The first step will be to generate an initial starting point for each dispatcher
 
 There are a couple of different approaches we could take here - and maybe we'll give our eventual algorithm the option to pick from several options.
 
+
+- *Option 1* - Use our new dictionary to select a random starting LSOA for each of our dispatchers from within their existing territories.
+- *Option 2* - Start with the most central region of the existing regions for each dispatcher.
+- *Option 3* - Provide each dispatcher with an entirely random starting point, regardless of the historical boundaries.
+    - This could work nicely if we try to avoid
+
 *Option 1*
 
-We could use our new dictionary to select a random starting LSOA for each of our dispatchers.
+We could use our new dictionary to select a random starting LSOA for each of our dispatchers from within their existing territories.
 This will give us plenty of randomness - but we may find ourselves with walks that start very near the edge of our original patch, giving us very different boundaries to what existed before.
 
 ```{python}
