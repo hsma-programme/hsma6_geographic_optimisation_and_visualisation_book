@@ -1,0 +1,15 @@
+{
+  "hash": "fb50c2ef23002adbc16a630a560f9fab",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Filtering Data in QGIS\n\n::: {.cell}\n\n:::\n\n<style>\na.glossary {\n  color: #8A1E1E;\n  text-decoration: underline;\n  cursor: help;\n  position: relative;\n}\n\n/* only needed for popup = \"click\" */\n/* popup-definition */\na.glossary .def {\n  display: none;\n  position: absolute;\n  z-index: 1;\n  width: 200px;\n  bottom: 100%;\n  left: 50%;\n  margin-left: -100px;\n  background-color: #333;\n  color: white;\n  padding: 5px;\n  border-radius: 6px;\n}\n/* show on click */\na.glossary:active .def {\n  display: inline-block;\n}\n/* triangle arrow */\na.glossary:active .def::after {\n  content: ' ';\n  position: absolute;\n  top: 100%;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px;\n  border-style: solid;\n  border-color: #333 transparent transparent transparent;\n}\n</style>\n\n\n## Working out what we have available to filter by\n\nTo work out what you want to filter by, it might be helpful to look at the attribute table for your layer.\n\nRight click on the layer in the 'layers' panel and choose 'open attribute table'.\n\n![](assets/2024-06-18-23-35-27.png)\n\nThis will show you the full dataset within QGIS.\n\n![](assets/2024-06-18-23-36-00.png)\n\nHowever, while you can build a filter from within here, it’s not the easiest way.\n\n## Building a filter\n\nRight click on the layer you are interested in in the 'layers' panel and choose ‘Filter’\n\n![](assets/2024-06-18-23-37-09.png)\n\nThis will bring up a ‘Query Builder’ page\n\n![](assets/2024-06-18-23-37-34.png)\n\nTo see what values exist for a column, click the column name in the ‘Fields’ list, then choose ‘All’ to see every category.\n\n![](assets/2024-06-18-23-38-07.png)\n\nYou can then build your filter clause\n\nDouble click on the column name in the ‘Fields’ to add that\n\nThen choose an operator\n\nThen choose a value from the ‘Values’ box by double clicking on it\n\n![](assets/2024-06-18-23-38-31.png)\n\nYou can click ‘test’ to see how many rows will remain in your dataset once the filter has been applied\n\n![](assets/2024-06-18-23-39-03.png)\n\nWhen you’re happy, click ‘OK’ and the dataset will be filtered.\n\n![](assets/2024-06-18-23-39-22.png)\n\n## Spotting filters\n\nYou can tell if a layer has been filtered by the icon at the end of its name in the filter panel.\n\n![](assets/2024-06-18-23-40-46.png)\n\n## Clearing the filter\n\nTo remove the filter, open up the Filter options again (by right clicking on the layer in the layers panel and choosing 'Filter'), choose ‘Clear’, then ‘OK’.\n\n![](assets/2024-06-18-23-40-13.png)\n\n![](assets/2024-06-18-23-40-26.png)\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

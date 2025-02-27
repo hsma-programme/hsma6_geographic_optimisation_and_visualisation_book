@@ -3,6 +3,13 @@ project:
   output-dir: docs
 book:
   title: HSMA - Geographic Modelling and Visualisation
+  google-analytics:
+    tracking-id: "G-EV5H9J3SSF"
+    anonymize-ip: true
+  cookie-consent:
+    type: express
+    style: simple
+    palette: dark
   author: Sammi Rosser
   date: 17/01/2024
   chapters:
@@ -75,6 +82,8 @@ book:
 bibliography: references.bib
 format:
   html:
+    execute:
+      freeze: auto
     css: include/webex.css
     include-after-body: include/webex.js
     theme:

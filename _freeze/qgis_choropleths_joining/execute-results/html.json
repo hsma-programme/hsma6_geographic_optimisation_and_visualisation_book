@@ -1,0 +1,15 @@
+{
+  "hash": "bc336510c4d5b32fa438ac6134e8872a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Choropleths in QGIS - Joining Data\n\n::: {.cell}\n\n:::\n\n<style>\na.glossary {\n  color: #8A1E1E;\n  text-decoration: underline;\n  cursor: help;\n  position: relative;\n}\n\n/* only needed for popup = \"click\" */\n/* popup-definition */\na.glossary .def {\n  display: none;\n  position: absolute;\n  z-index: 1;\n  width: 200px;\n  bottom: 100%;\n  left: 50%;\n  margin-left: -100px;\n  background-color: #333;\n  color: white;\n  padding: 5px;\n  border-radius: 6px;\n}\n/* show on click */\na.glossary:active .def {\n  display: inline-block;\n}\n/* triangle arrow */\na.glossary:active .def::after {\n  content: ' ';\n  position: absolute;\n  top: 100%;\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px;\n  border-style: solid;\n  border-color: #333 transparent transparent transparent;\n}\n</style>\n\n\n> “But the data in my organisation isn’t just sitting around in geopackage files…”\n\n1. Load in a shapefile, geojson or geopkg of area boundaries (e.g. MSOA or LSOA boundaries)\nThese can be downloaded from the ONS, the government, or other organisations.\n\n2. Load in a .csv (delimited text layer) of counts using the same level of detail (e.g. if your shapefiles are for MSOA, you’ll need MSOA-level data at this point too)\n\n![](assets/2024-06-18-23-02-37.png)\n\nThis time, choose ‘No geometry’ in the geometry definition section.\n\n![](assets/2024-06-18-23-02-56.png)\n\n3. Right click on the MSOA shapefile layer in the layer tab and click ‘Properties…’\n\n![](assets/2024-06-18-23-03-33.png)\n\n4. Choose ‘Joins’ and then the plus button\n\n![](assets/2024-06-18-23-04-05.png)\n\n5. Tell QGIS the layer to join to (our csv layer) and the names of the columns that should match in our two datasets\n\nIn this example the names are identical, but they can be different! It just matters whether the contents will have matching data.\n\n![](assets/2024-06-18-23-04-42.png)\n\nNow, when you select the layer that contains your area boundaries and head to the layer styling panel, you will be able to select the relevant value fields when creating a choropleth from this data (i.e. when you click into the 'values' dropdown).\n\n![](assets/2024-06-18-23-05-07.png)\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
