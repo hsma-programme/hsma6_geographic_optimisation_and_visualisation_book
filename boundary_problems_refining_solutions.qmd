@@ -4,7 +4,7 @@ format: html
 ---
 
 
-### Evolving a solution
+## Evolving a solution
 
 The sheer number of possible solutions makes this a tricky problem to solve!
 
@@ -71,6 +71,8 @@ However, pickle is not particularly secure and you should only unpickle files fr
 :::
 
 ```{python}
+#| label: read-solutions-example
+
 import pandas as pd
 
 initial_solution_df = pd.read_pickle('solutions_example.pkl')
@@ -81,6 +83,8 @@ initial_solution_df.to_csv('solutions_example.csv')
 Let's write a quick function to pull out the allocations from our solutions file, and turn that back into a dataframe we can work with.
 
 ```{python}
+#| label: define-extract-allocations-df-function
+
 def extract_allocation_df_from_solution_df(df, solution_rank, allocation_col_name, territory_col_name):
     row_of_interest = df[df['rank'] == solution_rank]
     owned_territory_dict = row_of_interest['allocations'].values[0]
@@ -94,6 +98,8 @@ def extract_allocation_df_from_solution_df(df, solution_rank, allocation_col_nam
 Let's now try this out to pull back and visualise our best solution.
 
 ```{python}
+#| label: extract-best-solution
+
 best_solution = extract_allocation_df_from_solution_df(
     initial_solution_df,
     solution_rank=1,
@@ -108,6 +114,8 @@ best_solution
 ### Click here to view code from previous chapters for importing our historical boundary and demand data
 
 ```{python}
+#| label: import-historical-boundaries-demand-repeat-earlier-chapter
+
 import geopandas
 
 lsoa_geojson_path = 'https://github.com/hsma-programme/h6_3c_interactive_plots_travel/raw/main/h6_3c_interactive_plots_travel/example_code/LSOA_2011_Boundaries_Super_Generalised_Clipped_BSC_EW_V4.geojson'
@@ -160,6 +168,8 @@ grouped_dispatcher_gdf_boundary = geopandas.GeoDataFrame(boundary_list, geometry
 :::
 
 ```{python}
+#| label: visualise-historical-boundaries-and-best-sol
+
 ax=bham_region.merge(best_solution, on="LSOA11CD").plot(column="centre_dispatcher_NEW")
 
 # Visualise the historical boundaries
@@ -175,6 +185,7 @@ And let's compare this with our worst-performing solution.
 :::{.callout-tip collapse="true"}
 ### Click here to see the code
 ```{python}
+#| label: visualise-worst-performing-solution
 #| eval: false
 worst_solution = extract_allocation_df_from_solution_df(
     initial_solution_df,
@@ -238,6 +249,8 @@ We're also going to reuse our 'add_neighbours_column()' function from before.
 :::{.callout-note collapse="true"}
 ### Click here to view the add_neighbours_column() function from the previous chapter
 ```{python}
+#| label: define-add-neighbours-column-function
+
 def add_neighbors_column(gdf):
     """
     Adds a column to the GeoDataFrame containing lists of indices of neighboring polygons
@@ -257,6 +270,7 @@ def add_neighbors_column(gdf):
 
 
 ```{python}
+#| label: define-permutation-functions
 
 import random
 
@@ -275,10 +289,31 @@ def find_border_dispatchers(row, df, allocation_colname='centre_dispatcher_NEW')
 
     return border_dispatchers if border_dispatchers else []
 
+def is_solution_continuous(solution_gdf):
+    """
+    Checks if all dispatcher's regions in the given GeoDataFrame are spatially contiguous.
+
+    Args:
+        solution_gdf (GeoDataFrame): The GeoDataFrame representing the solution.
+
+    Returns:
+        bool: True if all regions are continuous, False otherwise.
+    """
+    # Merge LSOAs within the same dispatcher into single polygons
+    dissolved = solution_gdf.dissolve(by="centre_dispatcher_evolved")
+
+    # If any dispatcher has multiple disjoint parts, return False
+    return not dissolved.geometry.apply(lambda geom: geom.geom_type == "MultiPolygon").any()
+```
+
+```{python}
+#| label: define-initial-evolutionary-function
 def create_evolved_solutions(
-    initial_solution_df, geodataframe, join_col_left, join_col_right,
+    initial_solution_df, geodataframe,
+    join_col_left, join_col_right,
     original_allocation_colname='centre_dispatcher',
-    random_solution_allocation_colname='centre_dispatcher_NEW', new_allocation_colname='centre_dispatcher_evolved',
+    random_solution_allocation_colname='centre_dispatcher_NEW',
+    new_allocation_colname='centre_dispatcher_evolved',
     border_colname='border_dispatchers',
     permutation_chance_per_border=0.2,
     population_size=1
@@ -301,7 +336,7 @@ def create_evolved_solutions(
 
     new_allocation_dfs = []
 
-    simplified_allocation_df = initial_solution_gdf[[random_solution_allocation_colname, 	'LSOA11CD', border_colname]]
+    simplified_allocation_df = initial_solution_gdf[[random_solution_allocation_colname, 'LSOA11CD', border_colname, "geometry"]]
 
     def assign_new_dispatcher(row):
         if not row[border_colname]:  # If no bordering dispatchers, keep the original
@@ -313,9 +348,14 @@ def create_evolved_solutions(
                 return row[random_solution_allocation_colname]
 
     for i in range(population_size):
+        #continuous_solution = False
+
+        #while not continuous_solution:
         evolved_df = simplified_allocation_df.copy(deep=True)
 
-        evolved_df[new_allocation_colname] = evolved_df.apply(assign_new_dispatcher, axis=1)
+        evolved_df[new_allocation_colname] = simplified_allocation_df.apply(assign_new_dispatcher, axis=1)
+
+        #continuous_solution = is_solution_continuous(evolved_df)
 
         new_allocation_dfs.append(evolved_df.copy(deep=True))
 
@@ -327,12 +367,14 @@ def create_evolved_solutions(
 
 
 ```{python}
+#| label: generate-one-solution
 
 solution = create_evolved_solutions(
     best_solution,
     bham_region,
     join_col_left="LSOA11CD",
-    join_col_right="LSOA11CD"
+    join_col_right="LSOA11CD",
+    population_size=1
 )
 
 solution[0]
@@ -340,27 +382,37 @@ solution[0]
 ```
 
 
+Let's try generating more.
+
 ```{python}
+#| label: generate-fifty-solutions
 
 solution = create_evolved_solutions(
     best_solution,
     bham_region,
     join_col_left="LSOA11CD",
     join_col_right="LSOA11CD",
-    population_size=100
+    population_size=50
 )
 
-solution[99]
+solution[35]
 
 ```
 
+### Confirming solutions are distinct
+
+Let's confirm these solutions are distinct!
 
 ```{python}
+#| label: check-distinct-solutions
+
 print(f"There are {len(solution)} solutions generated")
+
+import pandas as pd
 
 def remove_duplicate_dataframes(df_list):
     """
-    Removes duplicate dataframes from a list of dataframes.
+    Removes duplicate dataframes from a list using hashing.
 
     Args:
         df_list (list of pd.DataFrame): List of pandas DataFrames.
@@ -368,10 +420,13 @@ def remove_duplicate_dataframes(df_list):
     Returns:
         list of pd.DataFrame: List with duplicates removed.
     """
+    seen_hashes = set()
     unique_dfs = []
 
     for df in df_list:
-        if not any(df.equals(existing_df) for existing_df in unique_dfs):
+        df_hash = pd.util.hash_pandas_object(df[['LSOA11CD','centre_dispatcher_evolved']], index=True).values.tobytes()  # Ensure a hashable type
+        if df_hash not in seen_hashes:
+            seen_hashes.add(df_hash)
             unique_dfs.append(df)
 
     return unique_dfs
@@ -380,8 +435,133 @@ print(f"There are {len(remove_duplicate_dataframes(solution))} unique solutions 
 
 ```
 
+We will first create a df showing the boundaries of our plots in our original solution.
+
+```{python}
+#| label: get-starter-solution-boundaries
+
+# Create df of original boundaries
+grouped_dispatcher_gdf_starting_solution = bham_region.merge(best_solution, on="LSOA11CD").groupby("centre_dispatcher_NEW")
+
+# Create a new GeoDataFrame for the boundaries of each group
+boundary_list = []
+
+for group_name, group in grouped_dispatcher_gdf_starting_solution:
+    # Combine the polygons in each group into one geometry
+    combined_geometry = group.unary_union
+
+    # Get the boundary of the combined geometry
+    boundary = combined_geometry.boundary
+
+    # Add the boundary geometry and the group name to the list
+    boundary_list.append({'group': group_name, 'boundary': boundary})
+
+# Create a GeoDataFrame from the list of boundaries
+grouped_dispatcher_gdf_starting_solution = geopandas.GeoDataFrame(boundary_list, geometry='boundary', crs=bham_region.crs)
+```
+
+Let's plot a random solution.
+
+```{python}
+#| label: plot-single-solution
+
+ax = solution[25].plot(column="centre_dispatcher_evolved", legend=True)
+
+# Plot historical boundaries
+grouped_dispatcher_gdf_starting_solution.plot(ax=ax, linewidth=2, edgecolor="black")
+
+ax.axis("off")  # Hide axes for better visualization
+```
+
+Let's now plot each of these solutions to confirm they are valid.
+
+Now let's plot 10 of the solutions
+
+```{python}
+#| label: plot-ten-solutions
+import matplotlib.pyplot as plt
+
+fig, axes = plt.subplots(5, 2, figsize=(15, 20))  # Adjust figure size
+axes = axes.flatten()  # Flatten in case of a 2D array of axes
+
+for i, df in enumerate(solution[:10]):
+    ax = axes[i]
+
+    df.plot(column="centre_dispatcher_evolved",
+                                              ax=ax, legend=False)
+
+    # Plot historical boundaries
+    grouped_dispatcher_gdf_starting_solution.plot(ax=ax, linewidth=2, edgecolor="black")
+
+    ax.set_title(f"Solution {i+1}")
+    ax.axis("off")  # Hide axes for better visualization
+
+# Hide any unused subplots
+for j in range(i + 1, len(axes)):
+    fig.delaxes(axes[j])
+
+plt.tight_layout()
+plt.show()
+```
 
 Now let's evaluate our evolved solutions.
+
+:::{.callout-note collapse="true"}
+### Click here to view our 'evaluate_solution()' function from the previous chapter
+
+```{python}
+#| label: define-evaluation-functions
+def evaluate_solution(gdf, allocation_column='centre_dispatcher_NEW',
+                      demand_column="demand"):
+    grouped_by_dispatcher = gdf.groupby(allocation_column)[[demand_column]].sum()
+    mean_demand = grouped_by_dispatcher['demand'].mean()
+
+    grouped_by_dispatcher['difference_from_mean'] = (grouped_by_dispatcher['demand'] - mean_demand).astype('int')
+
+    return abs(grouped_by_dispatcher['difference_from_mean']).mean().round(1)
+
+def evaluate_solution_dict(solution_dict, gdf,
+                            allocation_column='centre_dispatcher',
+                            demand_column="demand", territory_unit_column="LSOA11CD"):
+
+    owned_territory_df = pd.DataFrame(
+            [(key, value) for key, values in solution_dict.items() for value in values],
+            columns=[f"{allocation_column}_NEW", territory_unit_column])
+    gdf = pd.merge(gdf, owned_territory_df, on=territory_unit_column, how="left")
+
+    grouped_by_dispatcher = gdf.groupby(f"{allocation_column}_NEW")[[demand_column]].sum()
+    mean_demand = grouped_by_dispatcher['demand'].mean()
+
+    grouped_by_dispatcher['difference_from_mean'] = (grouped_by_dispatcher['demand'] - mean_demand).astype('int')
+
+    return abs(grouped_by_dispatcher['difference_from_mean']).mean().round(1)
+```
+
+:::
+
+:::{.callout-tip}
+Coming soon!
+:::
+
+We will now take a specified portion of these solutions, evolve them, evaluate them again, and continue.
+
+We will also start tracking how good the best solution we are achieving is after each evolution.
+
+We will repeat this 1000 times, plotting the value for our best solution over time to see how much better we can make the solution with sufficient permutations.
+
+:::{.callout-tip}
+Coming soon!
+:::
+
+Let's plot what we started with versus our best 10 solutions at the end of the process.
+
+
+
+
+
+
+
+Here is our final start-to-finish code for generating and evaluating the solutions.
 
 :::{.callout-tip}
 Coming soon!
