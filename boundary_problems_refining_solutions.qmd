@@ -216,6 +216,173 @@ grouped_dispatcher_gdf_boundary.plot(
 
 ## Writing our evolutionary algorithm
 
+:::{.callout-tip collapse="true"}
+### Click here for a reminder of what we are trying to code in our evolutionary algorithm
+
+- If this solution is better than the current status quo, we will then start to evolve this solution
+    - for each 'player' (in this case, our dispatchers), we will randomly add or remove a small number of their regions and allocate it to one of the other players for whom it would be valid territory (i.e. they share a boundary with the territory in question)
+        - we will generate many of these variants per round
+        - we will then assess the performance of each of these solutions
+        - several of the best solutions (a parameter we will be able to vary) will be retained at this point, going on to form a new population of solutions we can continue to loop through, tweak, and recheck the performance of
+            - rather than the 'child' solutions replacing the 'parents', we will keep both at each stage, evaluating them all on their merits rather than always assuming the 'child' strategies will be better
+            - note that general recommendations are that 𝝺 - the population size - should be at least 10 times larger than μ - the number of solutions we keep in each generation
+            - it's also recommended that 𝝺 / μ should leave no remainder
+    - we will continue this process until there has been no improvement for several rounds of attempts
+        - the number of rounds for which there is no improvement will be a parameter we can vary
+- We will then store the performance of this solution, then start with a new random solution and repeat this for a certain number of solutions or period of time
+:::
+
+
+We're also going to reuse our 'add_neighbours_column()' function from before.
+
+:::{.callout-note collapse="true"}
+### Click here to view the add_neighbours_column() function from the previous chapter
+```{python}
+def add_neighbors_column(gdf):
+    """
+    Adds a column to the GeoDataFrame containing lists of indices of neighboring polygons
+    based on the 'touches' method.
+    """
+    gdf = gdf.copy()
+    neighbors = []
+    for idx, geom in gdf.geometry.items():
+        touching = gdf[gdf.geometry.touches(geom)]["LSOA11CD"].tolist()
+        neighbors.append(touching)
+
+    gdf["neighbors"] = neighbors
+    return gdf
+```
+
+:::
+
+
+```{python}
+
+import random
+
+def find_border_dispatchers(row, df, allocation_colname='centre_dispatcher_NEW'):
+    current_dispatcher = row[allocation_colname]
+    neighbors = row['neighbors']
+
+    # Get dispatchers of neighboring LSOAs
+    neighboring_dispatchers = {
+        df.loc[df['LSOA11CD'] == neighbor, allocation_colname].values[0]
+        for neighbor in neighbors if not df[df['LSOA11CD'] == neighbor].empty
+    }
+
+    # Filter to only different dispatchers
+    border_dispatchers = list(neighboring_dispatchers - {current_dispatcher})
+
+    return border_dispatchers if border_dispatchers else []
+
+def create_evolved_solutions(
+    initial_solution_df, geodataframe, join_col_left, join_col_right,
+    original_allocation_colname='centre_dispatcher',
+    random_solution_allocation_colname='centre_dispatcher_NEW', new_allocation_colname='centre_dispatcher_evolved',
+    border_colname='border_dispatchers',
+    permutation_chance_per_border=0.2,
+    population_size=1
+    ):
+    """
+    Docstring here
+    """
+
+    # First, let's join the initial solution dataframe to our geodataframe that contains
+    # the geographic locations of data
+
+    # Use the geodataframe as the base df so that the output df is a geodataframe, not
+    # a standard pandas dataframe
+    initial_solution_gdf = geodataframe.merge(initial_solution_df, left_on=join_col_left, right_on=join_col_right)
+
+    initial_solution_gdf = add_neighbors_column(initial_solution_gdf)
+
+    # Apply function to create new column
+    initial_solution_gdf[border_colname] = initial_solution_gdf.apply(find_border_dispatchers, axis=1, df=initial_solution_gdf)
+
+    new_allocation_dfs = []
+
+    simplified_allocation_df = initial_solution_gdf[[random_solution_allocation_colname, 	'LSOA11CD', border_colname]]
+
+    def assign_new_dispatcher(row):
+        if not row[border_colname]:  # If no bordering dispatchers, keep the original
+            return row[random_solution_allocation_colname]
+        else:
+            if random.uniform(0.0,1.0) < permutation_chance_per_border:
+                return random.choice(row[border_colname]) # Randomly pick from border dispatchers
+            else:
+                return row[random_solution_allocation_colname]
+
+    for i in range(population_size):
+        evolved_df = simplified_allocation_df.copy(deep=True)
+
+        evolved_df[new_allocation_colname] = evolved_df.apply(assign_new_dispatcher, axis=1)
+
+        new_allocation_dfs.append(evolved_df.copy(deep=True))
+
+        del evolved_df
+
+    return new_allocation_dfs
+
+```
+
+
+```{python}
+
+solution = create_evolved_solutions(
+    best_solution,
+    bham_region,
+    join_col_left="LSOA11CD",
+    join_col_right="LSOA11CD"
+)
+
+solution[0]
+
+```
+
+
+```{python}
+
+solution = create_evolved_solutions(
+    best_solution,
+    bham_region,
+    join_col_left="LSOA11CD",
+    join_col_right="LSOA11CD",
+    population_size=100
+)
+
+solution[99]
+
+```
+
+
+```{python}
+print(f"There are {len(solution)} solutions generated")
+
+def remove_duplicate_dataframes(df_list):
+    """
+    Removes duplicate dataframes from a list of dataframes.
+
+    Args:
+        df_list (list of pd.DataFrame): List of pandas DataFrames.
+
+    Returns:
+        list of pd.DataFrame: List with duplicates removed.
+    """
+    unique_dfs = []
+
+    for df in df_list:
+        if not any(df.equals(existing_df) for existing_df in unique_dfs):
+            unique_dfs.append(df)
+
+    return unique_dfs
+
+print(f"There are {len(remove_duplicate_dataframes(solution))} unique solutions generated")
+
+```
+
+
+Now let's evaluate our evolved solutions.
+
 :::{.callout-tip}
-Code coming soon!
+Coming soon!
 :::
