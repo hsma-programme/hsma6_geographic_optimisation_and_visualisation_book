@@ -273,6 +273,7 @@ def add_neighbors_column(gdf):
 #| label: define-permutation-functions
 
 import random
+from shapely.strtree import STRtree
 
 def find_border_dispatchers(row, df, allocation_colname='centre_dispatcher_NEW'):
     current_dispatcher = row[allocation_colname]
@@ -289,80 +290,108 @@ def find_border_dispatchers(row, df, allocation_colname='centre_dispatcher_NEW')
 
     return border_dispatchers if border_dispatchers else []
 
-def is_solution_continuous(solution_gdf):
+def is_solution_continuous(solution_gdf, tree, new_allocation_colname):
     """
-    Checks if all dispatcher's regions in the given GeoDataFrame are spatially contiguous.
-
-    Args:
-        solution_gdf (GeoDataFrame): The GeoDataFrame representing the solution.
-
-    Returns:
-        bool: True if all regions are continuous, False otherwise.
+    Uses spatial indexing to quickly check if dispatchers have disjoint regions.
     """
-    # Merge LSOAs within the same dispatcher into single polygons
-    dissolved = solution_gdf.dissolve(by="centre_dispatcher_evolved")
 
-    # If any dispatcher has multiple disjoint parts, return False
-    return not dissolved.geometry.apply(lambda geom: geom.geom_type == "MultiPolygon").any()
+    # Get geometries grouped by dispatcher
+    dispatcher_groups = solution_gdf.dissolve(by=new_allocation_colname)
+
+    for geom in dispatcher_groups.geometry:
+        neighbors = tree.query(geom)  # Get intersecting geometries
+        if len(neighbors) > 1 and geom.geom_type == "MultiPolygon":
+            return False  # Found disjoint regions
+
+    return True
+
+def is_continuous_after_swap(solution_gdf, lsoa, new_dispatcher, new_allocation_colname, tree):
+    """
+    Checks if assigning 'lsoa' to 'new_dispatcher' maintains contiguous regions.
+    This version avoids making a full DataFrame copy.
+    """
+    original_dispatcher = solution_gdf.loc[solution_gdf["LSOA11CD"] == lsoa, new_allocation_colname].values[0]
+
+    # Temporarily assign new dispatcher
+    solution_gdf.loc[solution_gdf["LSOA11CD"] == lsoa, new_allocation_colname] = new_dispatcher
+
+    # Check continuity
+    is_valid = is_solution_continuous(solution_gdf, tree, new_allocation_colname)
+
+    # Revert change immediately (avoiding full copy overhead)
+    solution_gdf.loc[solution_gdf["LSOA11CD"] == lsoa, new_allocation_colname] = original_dispatcher
+
+    #return is_valid
+    return True
+
+def assign_new_dispatcher(row, solution_gdf, border_colname, permutation_chance_per_border, new_allocation_colname, tree):
+        """
+        Attempts to assign a new dispatcher while keeping the solution continuous.
+        """
+        if not row[border_colname]:  # If no bordering dispatchers, keep the original
+            return row[new_allocation_colname]
+
+        elif random.uniform(0.0, 1.0) < permutation_chance_per_border:
+            random_dispatcher = random.choice(row[border_colname])  # Randomly select from border dispatchers
+
+            # Check if assigning this dispatcher keeps the solution contiguous
+            if is_continuous_after_swap(solution_gdf, row["LSOA11CD"], random_dispatcher, new_allocation_colname, tree):
+                print(f"Swapped {row['LSOA11CD']} to {random_dispatcher}")
+                return random_dispatcher
+            else:
+                return row[new_allocation_colname]  # Default to original allocation
+        else:
+            return row[new_allocation_colname]
+
 ```
 
 ```{python}
 #| label: define-initial-evolutionary-function
+
 def create_evolved_solutions(
-    initial_solution_df, geodataframe,
-    join_col_left, join_col_right,
-    original_allocation_colname='centre_dispatcher',
-    random_solution_allocation_colname='centre_dispatcher_NEW',
-    new_allocation_colname='centre_dispatcher_evolved',
-    border_colname='border_dispatchers',
-    permutation_chance_per_border=0.2,
-    population_size=1
+        initial_solution_df, geodataframe,
+        join_col_left, join_col_right,
+        original_allocation_colname='centre_dispatcher',
+        random_solution_allocation_colname='centre_dispatcher_NEW',
+        new_allocation_colname='centre_dispatcher_evolved',
+        border_colname='border_dispatchers',
+        permutation_chance_per_border=0.2,
+        population_size=1
     ):
     """
-    Docstring here
+    Generates evolved dispatcher allocations while ensuring that all regions remain contiguous.
     """
 
-    # First, let's join the initial solution dataframe to our geodataframe that contains
-    # the geographic locations of data
-
-    # Use the geodataframe as the base df so that the output df is a geodataframe, not
-    # a standard pandas dataframe
+    # Merge initial solution with geodataframe to keep it as a geodataframe
     initial_solution_gdf = geodataframe.merge(initial_solution_df, left_on=join_col_left, right_on=join_col_right)
 
+    # Compute neighbors and border dispatchers
     initial_solution_gdf = add_neighbors_column(initial_solution_gdf)
-
-    # Apply function to create new column
     initial_solution_gdf[border_colname] = initial_solution_gdf.apply(find_border_dispatchers, axis=1, df=initial_solution_gdf)
+
+    # Build an R-tree for fast spatial searches
+    tree = STRtree(initial_solution_gdf.geometry)
 
     new_allocation_dfs = []
 
-    simplified_allocation_df = initial_solution_gdf[[random_solution_allocation_colname, 'LSOA11CD', border_colname, "geometry"]]
-
-    def assign_new_dispatcher(row):
-        if not row[border_colname]:  # If no bordering dispatchers, keep the original
-            return row[random_solution_allocation_colname]
-        else:
-            if random.uniform(0.0,1.0) < permutation_chance_per_border:
-                return random.choice(row[border_colname]) # Randomly pick from border dispatchers
-            else:
-                return row[random_solution_allocation_colname]
+    # Include new_allocation_colname from the start
+    simplified_allocation_df = initial_solution_gdf[[random_solution_allocation_colname, 'LSOA11CD', border_colname, "geometry"]].copy()
+    simplified_allocation_df[new_allocation_colname] = simplified_allocation_df[random_solution_allocation_colname]
 
     for i in range(population_size):
-        #continuous_solution = False
-
-        #while not continuous_solution:
         evolved_df = simplified_allocation_df.copy(deep=True)
 
-        evolved_df[new_allocation_colname] = simplified_allocation_df.apply(assign_new_dispatcher, axis=1)
+        evolved_df[new_allocation_colname] = evolved_df.apply(lambda row: assign_new_dispatcher(row, evolved_df, border_colname, permutation_chance_per_border, new_allocation_colname, tree), axis=1)
 
-        #continuous_solution = is_solution_continuous(evolved_df)
+        #for idx, row in evolved_df.iterrows():
+        #    new_dispatcher = assign_new_dispatcher(row, evolved_df, border_colname, permutation_chance_per_border, new_allocation_colname, tree)
+        #    evolved_df.at[idx, new_allocation_colname] = new_dispatcher
 
         new_allocation_dfs.append(evolved_df.copy(deep=True))
 
         del evolved_df
 
     return new_allocation_dfs
-
 ```
 
 
@@ -385,17 +414,17 @@ solution[0]
 Let's try generating more.
 
 ```{python}
-#| label: generate-fifty-solutions
+#| label: generate-thirty-solutions
 
 solution = create_evolved_solutions(
     best_solution,
     bham_region,
     join_col_left="LSOA11CD",
     join_col_right="LSOA11CD",
-    population_size=50
+    population_size=30
 )
 
-solution[35]
+solution[25]
 
 ```
 
@@ -407,8 +436,6 @@ Let's confirm these solutions are distinct!
 #| label: check-distinct-solutions
 
 print(f"There are {len(solution)} solutions generated")
-
-import pandas as pd
 
 def remove_duplicate_dataframes(df_list):
     """
@@ -435,6 +462,8 @@ print(f"There are {len(remove_duplicate_dataframes(solution))} unique solutions 
 
 ```
 
+### Confirming solutions are valid
+
 We will first create a df showing the boundaries of our plots in our original solution.
 
 ```{python}
@@ -460,6 +489,8 @@ for group_name, group in grouped_dispatcher_gdf_starting_solution:
 grouped_dispatcher_gdf_starting_solution = geopandas.GeoDataFrame(boundary_list, geometry='boundary', crs=bham_region.crs)
 ```
 
+#### One Solution
+
 Let's plot a random solution.
 
 ```{python}
@@ -473,6 +504,8 @@ grouped_dispatcher_gdf_starting_solution.plot(ax=ax, linewidth=2, edgecolor="bla
 ax.axis("off")  # Hide axes for better visualization
 ```
 
+#### Many solutions
+
 Let's now plot each of these solutions to confirm they are valid.
 
 Now let's plot 10 of the solutions
@@ -481,10 +514,10 @@ Now let's plot 10 of the solutions
 #| label: plot-ten-solutions
 import matplotlib.pyplot as plt
 
-fig, axes = plt.subplots(5, 2, figsize=(15, 20))  # Adjust figure size
+fig, axes = plt.subplots(5, 3, figsize=(15, 15))  # Adjust figure size
 axes = axes.flatten()  # Flatten in case of a 2D array of axes
 
-for i, df in enumerate(solution[:10]):
+for i, df in enumerate(solution[:15]):
     ax = axes[i]
 
     df.plot(column="centre_dispatcher_evolved",
