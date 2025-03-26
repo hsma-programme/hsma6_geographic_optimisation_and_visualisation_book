@@ -18,7 +18,7 @@ format:
           href: https://github.com/MichaelAllen1966/1807_acute_healthcare_location_effect_of_boundaries
 ---
 
-So far, we have just been evaluating our solutions on a single critiera - the balance of a
+So far, we have just been evaluating our solutions on a single critiera - the average absolute difference in demand across the region.
 
 However, we will often want to evaluate our solutions on multiple metrics.
 
