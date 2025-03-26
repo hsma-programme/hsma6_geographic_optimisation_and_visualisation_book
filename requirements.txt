@@ -14,3 +14,4 @@ xlrd==2.0.1
 matplotlib_scalebar==0.8.1
 plotly==5.22.0
 jupyter==1.1.1
+networkx

@@ -290,23 +290,40 @@ def find_border_dispatchers(row, df, allocation_colname='centre_dispatcher_NEW')
 #| label: define-permutation-functions
 
 import random
+import networkx as nx
 from shapely.geometry import MultiPolygon
+from shapely.ops import unary_union
 
 def is_solution_continuous(solution_gdf, allocation_col):
     """
-    Uses spatial indexing to quickly check if dispatchers have disjoint regions.
+    Checks if all dispatcher-assigned regions are contiguous.
     """
 
     # Dissolve regions by dispatcher
     dispatcher_groups = solution_gdf.dissolve(by=allocation_col)
 
     for geom in dispatcher_groups.geometry:
-        if isinstance(geom, MultiPolygon):
-            # Check if all parts of MultiPolygon touch each other
-            parts = list(geom.geoms)  # Extract individual polygons
-            for i in range(len(parts)):
-                if not any(parts[i].touches(parts[j]) for j in range(len(parts)) if i != j):
-                    return False  # Found a fully disconnected part
+        # If the region is a single Polygon, it's already contiguous
+        if not isinstance(geom, MultiPolygon):
+            continue  # No need to check further
+
+        # Build a connectivity graph
+        G = nx.Graph()
+        parts = list(geom.geoms)  # Extract individual polygons
+
+        # Add polygons as nodes
+        for i in range(len(parts)):
+            G.add_node(i)
+
+        # Connect nodes if polygons overlap or touch
+        for i in range(len(parts)):
+            for j in range(i + 1, len(parts)):
+                if parts[i].intersects(parts[j]):  # Stronger than .touches()
+                    G.add_edge(i, j)
+
+        # Check if all polygons form one connected component
+        if nx.number_connected_components(G) > 1:
+            return False  # Found disconnected parts
 
     return True
 
