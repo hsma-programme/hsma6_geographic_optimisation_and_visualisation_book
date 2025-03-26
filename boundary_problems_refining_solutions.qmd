@@ -206,6 +206,7 @@ grouped_dispatcher_gdf_boundary.plot(
 :::
 
 ```{python}
+#| label: plot-worst-performing-solution
 #| echo: false
 #| eval: true
 worst_solution = extract_allocation_df_from_solution_df(
@@ -264,16 +265,6 @@ def add_neighbors_column(gdf):
 
     gdf["neighbors"] = neighbors
     return gdf
-```
-
-:::
-
-
-```{python}
-#| label: define-permutation-functions
-
-import random
-from shapely.strtree import STRtree
 
 def find_border_dispatchers(row, df, allocation_colname='centre_dispatcher_NEW'):
     current_dispatcher = row[allocation_colname]
@@ -290,63 +281,98 @@ def find_border_dispatchers(row, df, allocation_colname='centre_dispatcher_NEW')
 
     return border_dispatchers if border_dispatchers else []
 
-def is_solution_continuous(solution_gdf, tree, new_allocation_colname):
+```
+
+:::
+
+
+```{python}
+#| label: define-permutation-functions
+
+import random
+from shapely.geometry import MultiPolygon
+
+def is_solution_continuous(solution_gdf, allocation_col):
     """
     Uses spatial indexing to quickly check if dispatchers have disjoint regions.
     """
 
-    # Get geometries grouped by dispatcher
-    dispatcher_groups = solution_gdf.dissolve(by=new_allocation_colname)
+    # Dissolve regions by dispatcher
+    dispatcher_groups = solution_gdf.dissolve(by=allocation_col)
 
     for geom in dispatcher_groups.geometry:
-        neighbors = tree.query(geom)  # Get intersecting geometries
-        if len(neighbors) > 1 and geom.geom_type == "MultiPolygon":
-            return False  # Found disjoint regions
+        if isinstance(geom, MultiPolygon):
+            # Check if all parts of MultiPolygon touch each other
+            parts = list(geom.geoms)  # Extract individual polygons
+            for i in range(len(parts)):
+                if not any(parts[i].touches(parts[j]) for j in range(len(parts)) if i != j):
+                    return False  # Found a fully disconnected part
 
     return True
 
-def is_continuous_after_swap(solution_gdf, lsoa, new_dispatcher, new_allocation_colname, tree):
+def is_continuous_after_swap(solution_gdf, lsoa,
+                             current_dispatcher,
+                             proposed_dispatcher,
+                             allocation_col):
     """
     Checks if assigning 'lsoa' to 'new_dispatcher' maintains contiguous regions.
     This version avoids making a full DataFrame copy.
     """
-    original_dispatcher = solution_gdf.loc[solution_gdf["LSOA11CD"] == lsoa, new_allocation_colname].values[0]
-
     # Temporarily assign new dispatcher
-    solution_gdf.loc[solution_gdf["LSOA11CD"] == lsoa, new_allocation_colname] = new_dispatcher
+    solution_gdf.loc[solution_gdf["LSOA11CD"] == lsoa, allocation_col] = proposed_dispatcher
 
     # Check continuity
-    is_valid = is_solution_continuous(solution_gdf, tree, new_allocation_colname)
+    is_valid = is_solution_continuous(solution_gdf, allocation_col)
 
     # Revert change immediately (avoiding full copy overhead)
-    solution_gdf.loc[solution_gdf["LSOA11CD"] == lsoa, new_allocation_colname] = original_dispatcher
+    solution_gdf.loc[solution_gdf["LSOA11CD"] == lsoa, allocation_col] = current_dispatcher
 
-    #return is_valid
-    return True
+    return is_valid
+    #return True
 
-def assign_new_dispatcher(row, solution_gdf, border_colname, permutation_chance_per_border, new_allocation_colname, tree):
+def assign_new_dispatcher(row,
+                          solution_gdf,
+                          border_colname,
+                          permutation_chance_per_border,
+                          new_allocation_colname
+                          ):
         """
         Attempts to assign a new dispatcher while keeping the solution continuous.
         """
-        if not row[border_colname]:  # If no bordering dispatchers, keep the original
+
+        # If no bordering dispatchers, keep the original
+        if not row[border_colname]:
+            #print(f'No borders in {row["LSOA11CD"]}')
             return row[new_allocation_colname]
 
+        # If some bordering dispatchers, then randomly sample whether we will try to permute it
         elif random.uniform(0.0, 1.0) < permutation_chance_per_border:
-            random_dispatcher = random.choice(row[border_colname])  # Randomly select from border dispatchers
+
+            # Randomly select from border dispatchers
+            current_dispatcher = row[new_allocation_colname]
+            random_dispatcher = random.choice(row[border_colname])
 
             # Check if assigning this dispatcher keeps the solution contiguous
-            if is_continuous_after_swap(solution_gdf, row["LSOA11CD"], random_dispatcher, new_allocation_colname, tree):
-                print(f"Swapped {row['LSOA11CD']} to {random_dispatcher}")
+            if is_continuous_after_swap(solution_gdf,
+                                        lsoa = row["LSOA11CD"],
+                                        current_dispatcher=current_dispatcher,
+                                        proposed_dispatcher=random_dispatcher,
+                                        allocation_col=new_allocation_colname):
+                #print(f"*** Swapped {row['LSOA11CD']} to {random_dispatcher} ***")
                 return random_dispatcher
             else:
+                #print(f":( Tried{row['LSOA11CD']} from {current_dispatcher} to {random_dispatcher}")
                 return row[new_allocation_colname]  # Default to original allocation
         else:
+            #print(f"Not trying to permute {row['LSOA11CD']}")
             return row[new_allocation_colname]
 
 ```
 
 ```{python}
 #| label: define-initial-evolutionary-function
+
+from joblib import Parallel, delayed
 
 def create_evolved_solutions(
         initial_solution_df, geodataframe,
@@ -367,36 +393,67 @@ def create_evolved_solutions(
 
     # Compute neighbors and border dispatchers
     initial_solution_gdf = add_neighbors_column(initial_solution_gdf)
-    initial_solution_gdf[border_colname] = initial_solution_gdf.apply(find_border_dispatchers, axis=1, df=initial_solution_gdf)
+    initial_solution_gdf[border_colname] = initial_solution_gdf.apply(
+        find_border_dispatchers, axis=1, df=initial_solution_gdf
+        )
 
-    # Build an R-tree for fast spatial searches
-    tree = STRtree(initial_solution_gdf.geometry)
-
-    new_allocation_dfs = []
+    # new_allocation_dfs = []
 
     # Include new_allocation_colname from the start
-    simplified_allocation_df = initial_solution_gdf[[random_solution_allocation_colname, 'LSOA11CD', border_colname, "geometry"]].copy()
-    simplified_allocation_df[new_allocation_colname] = simplified_allocation_df[random_solution_allocation_colname]
+    simplified_allocation_df = (
+        initial_solution_gdf[
+            [random_solution_allocation_colname, 'LSOA11CD', border_colname, "geometry"]
+            ].copy()
+            )
 
-    for i in range(population_size):
+    simplified_allocation_df[new_allocation_colname] = (
+        simplified_allocation_df[random_solution_allocation_colname]
+        )
+
+    def process_iteration(i, simplified_allocation_df, border_colname,
+                     permutation_chance_per_border, new_allocation_colname):
+
+        # for i in range(population_size):
         evolved_df = simplified_allocation_df.copy(deep=True)
 
-        evolved_df[new_allocation_colname] = evolved_df.apply(lambda row: assign_new_dispatcher(row, evolved_df, border_colname, permutation_chance_per_border, new_allocation_colname, tree), axis=1)
+        # Separate out the cols with and without borders
+        non_borders_df = evolved_df[evolved_df[border_colname].apply(len) == 0]
+        borders_df = evolved_df[evolved_df[border_colname].apply(len) > 0]
+        print(f"{len(non_borders_df)} regions without borders and {len(borders_df)} with borders")
 
-        #for idx, row in evolved_df.iterrows():
-        #    new_dispatcher = assign_new_dispatcher(row, evolved_df, border_colname, permutation_chance_per_border, new_allocation_colname, tree)
-        #    evolved_df.at[idx, new_allocation_colname] = new_dispatcher
+        borders_df[new_allocation_colname] = borders_df.apply(
+            lambda row: assign_new_dispatcher(
+                row, borders_df,
+                border_colname,
+                permutation_chance_per_border,
+                new_allocation_colname
+                ), axis=1)
 
-        new_allocation_dfs.append(evolved_df.copy(deep=True))
+        return pd.concat([non_borders_df, borders_df], ignore_index=True)
 
-        del evolved_df
+        # evolved_df = pd.concat([non_borders_df, borders_df], ignore_index=True)
 
-    return new_allocation_dfs
+        #new_allocation_dfs.append(evolved_df.copy(deep=True))
+
+        del evolved_df, non_borders_df, borders_df
+
+    return Parallel(n_jobs=-1, verbose=10)(
+            delayed(process_iteration)(
+                i,
+                simplified_allocation_df,
+                border_colname,
+                permutation_chance_per_border,
+                new_allocation_colname
+            )
+            for i in range(population_size)
+        )
+
 ```
 
 
 ```{python}
 #| label: generate-one-solution
+#| warning: false
 
 solution = create_evolved_solutions(
     best_solution,
@@ -410,59 +467,9 @@ solution[0]
 
 ```
 
-
-Let's try generating more.
-
-```{python}
-#| label: generate-thirty-solutions
-
-solution = create_evolved_solutions(
-    best_solution,
-    bham_region,
-    join_col_left="LSOA11CD",
-    join_col_right="LSOA11CD",
-    population_size=30
-)
-
-solution[25]
-
-```
-
-### Confirming solutions are distinct
-
-Let's confirm these solutions are distinct!
-
-```{python}
-#| label: check-distinct-solutions
-
-print(f"There are {len(solution)} solutions generated")
-
-def remove_duplicate_dataframes(df_list):
-    """
-    Removes duplicate dataframes from a list using hashing.
-
-    Args:
-        df_list (list of pd.DataFrame): List of pandas DataFrames.
-
-    Returns:
-        list of pd.DataFrame: List with duplicates removed.
-    """
-    seen_hashes = set()
-    unique_dfs = []
-
-    for df in df_list:
-        df_hash = pd.util.hash_pandas_object(df[['LSOA11CD','centre_dispatcher_evolved']], index=True).values.tobytes()  # Ensure a hashable type
-        if df_hash not in seen_hashes:
-            seen_hashes.add(df_hash)
-            unique_dfs.append(df)
-
-    return unique_dfs
-
-print(f"There are {len(remove_duplicate_dataframes(solution))} unique solutions generated")
-
-```
-
 ### Confirming solutions are valid
+
+Let's now visualise this.
 
 We will first create a df showing the boundaries of our plots in our original solution.
 
@@ -489,42 +496,95 @@ for group_name, group in grouped_dispatcher_gdf_starting_solution:
 grouped_dispatcher_gdf_starting_solution = geopandas.GeoDataFrame(boundary_list, geometry='boundary', crs=bham_region.crs)
 ```
 
-#### One Solution
-
-Let's plot a random solution.
+Then we can plot the solution, comparing it with the boundaries prior to evolution.
 
 ```{python}
 #| label: plot-single-solution
 
-ax = solution[25].plot(column="centre_dispatcher_evolved", legend=True)
+ax = solution[0].plot(column="centre_dispatcher_evolved", legend=True,
+                      legend_kwds={'bbox_to_anchor': (1.4, 1)})
 
 # Plot historical boundaries
-grouped_dispatcher_gdf_starting_solution.plot(ax=ax, linewidth=2, edgecolor="black")
+grouped_dispatcher_gdf_starting_solution.plot(ax=ax, linewidth=1, edgecolor="black")
 
 ax.axis("off")  # Hide axes for better visualization
 ```
 
-#### Many solutions
+### Generating multiple solutions at once
 
-Let's now plot each of these solutions to confirm they are valid.
+Let's try generating more.
 
-Now let's plot 10 of the solutions
+We now see benefits to having a solution with multiple outputs.
 
 ```{python}
-#| label: plot-ten-solutions
+#| label: generate-thirty-solutions
+#| warning: false
+
+solution = create_evolved_solutions(
+    best_solution,
+    bham_region,
+    join_col_left="LSOA11CD",
+    join_col_right="LSOA11CD",
+    population_size=30
+)
+
+solution[25]
+
+```
+
+### Confirming solutions are distinct
+
+Let's confirm these solutions are distinct!
+
+```{python}
+#| label: check-distinct-solutions
+
+def remove_duplicate_dataframes(df_list):
+    """
+    Removes duplicate dataframes from a list using hashing.
+
+    Args:
+        df_list (list of pd.DataFrame): List of pandas DataFrames.
+
+    Returns:
+        list of pd.DataFrame: List with duplicates removed.
+    """
+    seen_hashes = set()
+    unique_dfs = []
+
+    for df in df_list:
+        df_hash = pd.util.hash_pandas_object(df[['LSOA11CD','centre_dispatcher_evolved']], index=True).values.tobytes()  # Ensure a hashable type
+        if df_hash not in seen_hashes:
+            seen_hashes.add(df_hash)
+            unique_dfs.append(df)
+
+    return unique_dfs
+
+print(f"There are {len(solution)} solutions generated")
+
+print(f"There are {len(remove_duplicate_dataframes(solution))} unique solutions generated")
+
+```
+
+### Plotting Multiple Solutions
+
+Now let's plot 20 of the solutions to confirm they are valid.
+
+```{python}
+#| label: plot-mult-solutions
 import matplotlib.pyplot as plt
 
-fig, axes = plt.subplots(5, 3, figsize=(15, 15))  # Adjust figure size
+fig, axes = plt.subplots(5, 4, figsize=(15, 15))  # Adjust figure size
 axes = axes.flatten()  # Flatten in case of a 2D array of axes
 
-for i, df in enumerate(solution[:15]):
+for i, df in enumerate(solution[:20]):
     ax = axes[i]
 
     df.plot(column="centre_dispatcher_evolved",
                                               ax=ax, legend=False)
 
     # Plot historical boundaries
-    grouped_dispatcher_gdf_starting_solution.plot(ax=ax, linewidth=2, edgecolor="black")
+    grouped_dispatcher_gdf_starting_solution.plot(ax=ax, linewidth=0.5, edgecolor="black")
 
     ax.set_title(f"Solution {i+1}")
     ax.axis("off")  # Hide axes for better visualization
@@ -537,14 +597,52 @@ plt.tight_layout()
 plt.show()
 ```
 
-Now let's evaluate our evolved solutions.
+:::{.callout-warning}
+Many of thse solutions may perform better against the demand balancing criteria, but suffer from being shapes that are suboptimal in the real world.
+
+We will explore how we may tackle that in future sections. We may choose to prioritise solutions that perform well on measures of [compactness](https://web.stevenson.edu/mbranson/m4tp/version1/gerrymandering-math-topic-compactness.html), for example. A wide range of compactness metrics exist, such as the Polsby-Popper score and the Reock score, among others.
+
+Additional options are the indentation score (convex hull comparison) and the area to perimeter ratio to check for regions with long, thin corridors.
+
+We can also look at measures of connectivity like the edge cut score, which looks at how many border connections would be required to cut off a region's connectivity.
+
+
+:::: {.columns}
+
+For example, the light blue region on the left here would require very little change to cut it off from itself.
+
+::: {.column width='50%'}
+
+[](assets/2025-03-26-12-31-11.png)
+
+
+:::
+
+::: {.column width='50%'}
+
+This would be better.
+
+[](assets/2025-03-26-12-33-57.png)
+
+:::
+
+::::
+
+As we bring in additional metrics like real-world travel times into our scoring in subsequent chapters, we may naturally begin to develop 'better' regions.
+
+:::
+
+### Evaluating the solutions against the demand
+
+Let's initially evaluate our evolved solutions based on our original single metric, which is how well each solution balances demand across the regions (minimizing the difference in demand per region, looking at historical demand data).
 
 :::{.callout-note collapse="true"}
 ### Click here to view our 'evaluate_solution()' function from the previous chapter
 
 ```{python}
 #| label: define-evaluation-functions
-def evaluate_solution(gdf, allocation_column='centre_dispatcher_NEW',
+def evaluate_solution(gdf,
+                      allocation_column='centre_dispatcher_NEW',
                       demand_column="demand"):
     grouped_by_dispatcher = gdf.groupby(allocation_column)[[demand_column]].sum()
     mean_demand = grouped_by_dispatcher['demand'].mean()
@@ -572,9 +670,63 @@ def evaluate_solution_dict(solution_dict, gdf,
 
 :::
 
-:::{.callout-tip}
-Coming soon!
-:::
+```{python}
+#| label: evaluate-evolved-solutions
+import copy
+
+evaluations_evolved_solutions = []
+
+for i, sol in enumerate(solution):
+    allocation_evaluation = evaluate_solution(sol.merge(demand, on="LSOA11CD"), allocation_column="centre_dispatcher_evolved")
+
+    evaluations_evolved_solutions.append({
+        'solution': f"e{i+1}",
+        # We can't just pass the dictionary here due to the way python handles dictionaries
+        # We need to explicitly take a copy of the dictionary
+        'allocations': copy.deepcopy(sol.groupby('centre_dispatcher_evolved')['LSOA11CD'].apply(list).to_dict()),
+        'result': allocation_evaluation
+    })
+
+evolution_solution_df = pd.DataFrame(evaluations_evolved_solutions)
+evolution_solution_df['rank'] = evolution_solution_df['result'].rank(method='max')
+
+evolution_solution_df.sort_values('rank')
+```
+
+Let's add the original random solutions into our ranking table.
+
+```{python}
+#| label: add-original-solutions-eval-vals
+initial_solution_df['what'] = 'random'
+evolution_solution_df['what'] = 'evolved'
+
+full_sol_df = pd.concat([initial_solution_df, evolution_solution_df])
+full_sol_df['rank'] = full_sol_df['result'].rank(method='max')
+full_sol_df.sort_values('rank')
+```
+
+```{python}
+#| label: generate-plot-solution-ranking-all
+import plotly.express as px
+
+# Sort by 'result' to ensure correct order
+full_sol_df = full_sol_df.sort_values("result", ascending=True)
+
+# Convert 'solution' to a string (if it's not already)
+full_sol_df["solution"] = full_sol_df["solution"].astype(str)
+
+# Create the plot and enforce sorted order
+fig = px.bar(
+    full_sol_df,
+    x="solution",
+    y="result",
+    color="what",
+    category_orders={"solution": full_sol_df["solution"].tolist()}  # Enforce order
+)
+
+fig.show()
+
+```
 
 We will now take a specified portion of these solutions, evolve them, evaluate them again, and continue.
 
@@ -587,12 +739,6 @@ Coming soon!
 :::
 
 Let's plot what we started with versus our best 10 solutions at the end of the process.
-
-
-
-
-
-
 
 Here is our final start-to-finish code for generating and evaluating the solutions.
 
